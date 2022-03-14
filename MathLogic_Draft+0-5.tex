@@ -1,0 +1,768 @@
+% *******                   Logic Textbook                         *******
+% *******  by Richard Grandy & Michael Barkasi & Joshua Reagan       *******
+%Note: \raggedbottom is set right before ch 1
+\documentclass[11pt,fleqn,twoside,openright]{report}%leqno   
+%\includeonly{ch1,ch4}  
+\usepackage{etex}
+%\usepackage{leading}
+%\leading{15pt} % with caslon, use 14.4 (or 14.7)pt, use 15pt for Palatino and cardo
+%\usepackage[firstpage]{draftwatermark}
+% % % % % XeTeX and other font stuff:
+\usepackage{amsmath,amssymb} 
+\usepackage{fontspec} 
+\setmainfont[
+Ligatures = {Required, Common, Contextual},
+Numbers = {Monospaced}, %Proportional, OldStyle
+SlantedFont = {* Slanted},
+Scale = 1.00,
+Mapping=tex-text
+]{Latin Modern Roman} 
+\setsansfont[
+Scale=MatchLowercase, %=MatchLowercase, =1.00
+BoldFont = Source Sans Pro Semibold,
+Mapping=tex-text
+]{Source Sans Pro} 
+\usepackage{unicode-math}
+\setmathfont[math-style=TeX]{Latin Modern Math}
+%unicode-math
+\usepackage[factor=600]{microtype}
+\newcommand{\uppercasespacing}[1]{{\addfontfeature{LetterSpace=2.0}#1}} 
+\renewcommand{\textsc}[1]{\uppercasespacing{\MakeUppercase{#1}}}
+\newcommand{\textSC}[1]{{\addfontfeatures{Letters={UppercaseSmallCaps,SmallCaps}}#1}}
+\newcommand{\osf}[1]{{\addfontfeatures{Numbers={OldStyle}}{#1}}}
+\newcommand{\proportional}[1]{{\addfontfeatures{Numbers={Proportional}}{#1}}}
+\newcommand{\tabluarnumbers}[1]{{\addfontfeatures{Numbers=Monospaced}#1}}
+\usepackage{realscripts}
+   % gives commands: 
+      % \textsuperscript
+	  % \textsubscript
+	  % \textsubsuperscript
+	  % \setlength\supsupersep{2pt}
+   % But if the font has the right features but not the full set of glyphs, need:
+      % \textsuperscript*
+	  % \textsubscript*
+   % which use the ``fake'' versions
+\newcommand{\smallfaction}[1]{{\addfontfeatures{Fractions=On}#1}} 
+   % Note: just type in fraction with slash, e.g.
+      % \smallfaction{1/2}
+\newcommand{\textfaction}[2]{%
+    {\addfontfeatures{VerticalPosition={Numerator}}#1}{/}%
+	{\addfontfeatures{VerticalPosition={Denominator}}#2}}
+% %\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
+%% \rfrac is a command to allow slanted fractions, here used only sparingly in the many-valued logic section.
+\usepackage{xfrac}
+\newcommand{\rfrac}[2]{\sfrac{#1}{#2}}
+% % % % 
+\usepackage{turnstile}
+%for shorter turnstiles:
+\renewcommand{\makever}[4]
+{\ifthenelse{\equal{#1}{s}}{\rule[-0.4#3]{#2}{.8#3}}{}
+\ifthenelse{\equal{#1}{d}}{\rule[-0.5#3]{#2}{#3}
+\hspace{#4}
+\rule[-0.5#3]{#2}{#3}}{}
+\ifthenelse{\equal{#1}{t}}{\rule[-0.5#3]{#2}{#3}
+\hspace{#4}
+\rule[-0.5#3]{#2}{#3}
+\hspace{#4}
+\rule[-0.5#3]{#2}{#3}}{}}%   
+\usepackage{multicol}
+\usepackage{relsize}
+\usepackage{makeidx}
+\makeindex   
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{DarkBlue}{HTML}{000090} % Some of these defined colors may not actually be used below
+\definecolor{DDarkBlue}{HTML}{003399}
+\definecolor{RRed}{HTML}{812811}
+\definecolor{LightGray}{HTML}{444444}               
+\usepackage[font=sf]{caption}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{varioref}
+\usepackage{marginnote}
+\usepackage[noload]{qtree}
+\usepackage{tikz}
+\usepackage{tikz-qtree-compat}
+\usepackage[splitrule,bottom]{footmisc} % "hang" is another option to use 
+   %\setlength{\footnotemargin}{0.65em}       %Manually set footnote margin, use with "hang"
+%These next new commands are to define the arrows used in a few examples in chapter two that point from variables to the quantifiers that bind them.
+\newcommand{\NextLineRef}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-1ex,-0.25ex) to (-5.75ex,-0.75ex);
+}
+\newcommand{\NextLineRefB}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-1ex,-0.25ex) to (-13.5ex,-1.5ex);
+}
+\newcommand{\NextLineRefC}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-0.5ex,1.75ex) to (-9.1ex,2ex); %(-11.5ex,2ex);
+}
+\newcommand{\NextLineRefD}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-1ex,-0.75ex) to (-7.25ex,-0.75ex);
+}
+\newcommand{\NextLineRefE}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-1ex,-0.25ex) to (-17ex,-0.5ex); %(-18.5ex,-0.5ex);
+}
+\newcommand{\NextLineRefF}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-1ex,1.75ex) to (-14.8ex,2ex); %(-17ex,2ex);
+}
+\newcommand{\NextLineRefG}[1][]{%
+    \tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+        (-1ex,-0.25ex) to (-21ex,-0.5ex);
+}
+\newcommand{\NextLineRefH}[1][]{%
+	\tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+	(-1ex,-0.25ex) to (-15.3ex,-0.5ex); %(-18.5ex,-0.5ex);
+}
+\newcommand{\NextLineRefI}[1][]{%
+	\tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+	(-1ex,-0.25ex) to (-19ex,-0.5ex);
+}
+\newcommand{\NextLineRefJ}[1][]{%
+	\tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+	(-1ex,-0.25ex) to (-6.75ex,-0.75ex);
+}
+\newcommand{\NextLineRefK}[1][]{%
+	\tikz [overlay,remember picture] \draw [->, out=-10, in=20, distance=0.25cm, thick, #1] 
+	(-1ex,-0.25ex) to (-4.75ex,-0.75ex);
+}
+
+\usepackage{eso-pic}
+%The package above and the new commands below define what's needed for the upper right-hand pictures near the chapter headings.
+\newcommand\BackgroundPicA{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vspace{1.5in}
+\hfill
+\includegraphics[width=.38\paperwidth,height=\paperheight,%
+keepaspectratio]{CLF3.png}\hspace*{1.43in}%
+\vfill
+}}}
+\newcommand\BackgroundPicB{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vspace{1.5in}
+\hfill
+\includegraphics[width=.38\paperwidth,height=\paperheight,%
+keepaspectratio]{fj2.png}\hspace*{1.43in}%
+\vfill
+}}}
+\newcommand\BackgroundPicC{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vspace{1.5in}
+\hfill
+\includegraphics[width=.38\paperwidth,height=\paperheight,%
+keepaspectratio]{Tur.png}\hspace*{1.43in}%
+\vfill
+}}}
+\usepackage{wallpaper}
+\usepackage[inline]{enumitem}  % for control over lists
+\labelformat{enumi}{#1} %{(#1)}
+%These commands define the custom running lists/counters used for many of the examples.
+\newenvironment{smenumerate}{%
+\begin{enumerate}[series=m, itemsep=0em]% 
+}{%
+\end{enumerate}%
+}
+\newenvironment{menumerate}{%
+\begin{enumerate}[resume*=m]%,start=1
+}{%
+\end{enumerate}%
+}
+\newenvironment{RESTARTmenumerate}{%
+\begin{enumerate}[resume*=m,start=1]%
+}{%
+\end{enumerate}%
+}
+% For self-contained lists, like clauses in a definition
+\newenvironment{cenumerate}{%
+\begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
+labelindent=.35\parindent, labelsep=*, itemsep=0pt]%,start=1, parsep=0pt
+}{%
+\end{enumerate}%
+}
+%These define some things for the in-text citations
+\renewcommand{\reftextfaceafter}{on the \reftextvario{next}{next} page}%
+\renewcommand{\reftextfacebefore}{on the \reftextvario{previous}{previous} page}%
+\renewcommand{\reftextbefore}{on the \reftextvario{previous}{previous} page}%
+%\renewcommand{\reftextfaraway}[1]{p. \pageref{#1}}
+%Some custom commands for intra-text hyperreferences
+\newcommand{\mvref}[1]{\ref{#1} (\vpageref*{#1})}
+\newcommand{\pmvref}[1]{\ref{#1}, \vpageref{#1}}
+\newcommand{\pncmvref}[1]{\ref{#1} \vpageref{#1}}
+%These control the header
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\CAPS}[1]{\uppercasespacing{\MakeUppercase{#1}}}% % %
+% Any changes to the command \CAPS must manually be made to the title of the section "DNF and the TFE Replacement Theorem"
+% was: {\textls[20]{#1}} % % % This controls the (extra) spacing between strings of capital letters, like TFT and QT
+%\expandafter\index\expandafter{\CAPS}
+%some custom commands (used to get these from the local "philosophy" package): 
+\newcommand{\df}[1]{\textit{#1}\index{#1|textbf}}
+\newcommand{\underdf}[2]{\emph{#1}\index{#2!#1|textbf}}
+\newcommand{\nidf}[1]{\textit{#1}}
+\newcommand{\mention}[1]{`#1'}
+\newcommand{\Iff}{iff }
+\newcommand{\IFF}{if, and only if, }
+%Makes it easier to change some of the fonts on the definition/theorem/example enivornments: 
+\newcommand{\descriptionfont}{\bfseries\sffamily} 
+\newcommand{\theoremfont}{\bfseries\sffamily}
+\newcommand{\definitionfont}{\bfseries\sffamily}
+\newcommand{\examplefont}{\bfseries\sffamily}
+\newcommand{\prooffont}{\bfseries\sffamily}
+\setlist[description]{font=\descriptionfont{}}  % this command is part of enumitem; control look of description label.
+\newcommand{\idf}[1]{\emph{#1}\index{#1|textbf}} % informal, or in-line, definition
+\newcommand{\seealsoidf}[2]{\emph{#1}\index{#1|seealso{#2}}}
+\newcommand{\underidf}[2]{\emph{#1}\index{#2!#1|textbf}}
+\newcommand{\niidf}[1]{\textit{#1}}
+\newcommand{\Rule}[1]{\textsl{#1}}  % for names of inference rules, was using \textsc{#1}
+\newcommand{\sq}[1]{{``}#1{''}}
+\newcommand{\distinction}[2]{#1/#2}
+\newcommand{\q}[1]{{``}#1{''}}
+%The counter for the definition/theorem/example environments
+\newcounter{DefThm}[chapter]
+\renewcommand\theDefThm{\thechapter.\arabic{DefThm}} % \arabic{chapter}.\arabic{DefThm}
+\newcommand{\DC}[1]{\refstepcounter{DefThm}(Definition \arabic{DefThm}\label{#1})}
+\newcommand{\TC}[1]{\refstepcounter{DefThm}(Theorem \arabic{DefThm}\label{#1})}
+\newcommand{\EC}[1]{\refstepcounter{DefThm}(Example \arabic{DefThm}\label{#1})}
+\newcommand{\npDC}[1]{\refstepcounter{DefThm}\arabic{DefThm}\label{#1}}
+\newcommand{\npTC}[1]{\refstepcounter{DefThm}\arabic{DefThm}\label{#1}}
+\newcommand{\npEC}[1]{\refstepcounter{DefThm}\arabic{DefThm}\label{#1}}
+\newcommand{\LnpDC}[1]{\refstepcounter{DefThm}{\definitionfont{}Definition \theDefThm.\label{#1}}}
+\newcommand{\LnpTC}[1]{\refstepcounter{DefThm}{\theoremfont{}Theorem \theDefThm.\label{#1}}}
+\newcommand{\LnpEC}[1]{\refstepcounter{DefThm}{\examplefont{}Example \theDefThm.\label{#1}}}
+% This package for setting page geometry and layout
+\usepackage[paper=letterpaper,heightrounded=true,inner=1.43in,outer=1.43in,top=1.5in,bottom=1.5in]{geometry} %useful options not loaded: showcrop, showframe, marginparwidth=3.5cm, marginparsep=-3.5cm,
+% Some other new environments used below:
+\newenvironment{major}[1]
+{
+
+\medskip
+\noindent{{#1}:}}%
+{
+
+\medskip}
+\newenvironment{majorIL}[1]
+{
+
+\medskip
+\noindent{{#1}:}}%
+{ }
+\newenvironment{majorILnc}[1]
+{
+
+\medskip
+\noindent{\sffamily\bfseries{}#1}}%
+{
+
+\medskip}
+\newenvironment{PROOF}
+{
+
+\medskip
+\noindent{\prooffont{}Proof:}}%
+{\hfill \ensuremath{\blacksquare}
+
+\medskip}
+\newenvironment{PROOFOF}[1]
+{
+
+\medskip
+\noindent{\prooffont{}Proof of #1:}}%
+{\hfill \ensuremath{\blacksquare}
+
+\medskip}
+\newenvironment{SUBPROOF}
+{
+
+\medskip
+\noindent{\prooffont{}Subproof:}}%
+{\hfill \ensuremath{\blacksquare} %\;\blacksquare}
+
+\medskip}
+\newenvironment{THEOREM}[1]
+{
+
+\medskip
+\noindent{#1}\itshape{}}%
+{ %\hfill \ensuremath{\blacktriangleleft}
+
+\medskip}
+\newenvironment{minor}[1]
+{\emph{{#1}:}}%
+{\par}
+% Section Heading Controls:
+\usepackage[toctitles,nobottomtitles*]{titlesec}
+\renewcommand{\bottomtitlespace}{.05\textheight}
+\titleformat{\chapter}[display]{\huge\sffamily\bfseries}{\huge{}\sffamily\bfseries\color{DDarkBlue}Chapter \thechapter}{.1em}{\vspace{.075em}}[]
+\titlespacing{\chapter}{0pt}{-.27in}{1.27in}
+\titleformat{\section}[hang]{\Large\bf\sffamily\color{DDarkBlue}}{\thesection}{1em}{}[{\color{Black}\titlerule}]
+\titlespacing*{\section}{0pt}{20pt}{0.2cm}
+\titleformat{\subsection}[hang]{\large\bf\sffamily}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{10pt}{0.2cm}
+\titleformat{\subsubsection}[runin]{\bf}{\thesubsubsection}{1em}{}
+\titlespacing{\subsubsection}{0pt}{1em}{1em}
+%\renewcommand\thesection{\arabic{section}}%   %this command redefines the representation of the section counter so it doesn't display the chapter number before the section number.
+  \newcommand{\notocsubsection}[2]{%
+    \refstepcounter{subsection}%
+    \subsection*{\thesubsection \quad #1}\label{#2}}% 
+% Table of Content Controls:
+\usepackage{tocloft}%
+\setcounter{tocdepth}{1}%                                         %Table of Contents depth
+\renewcommand{\cfttoctitlefont}{\huge\sffamily\bfseries}% %make sure this matches chapter heading space
+\renewcommand{\cftaftertoctitle}{}
+\renewcommand{\cftchapfont}{\large\bfseries\sffamily\selectfont{}}
+\renewcommand{\cftchappagefont}{\large\bfseries\sffamily\selectfont{}}
+\renewcommand{\cftsecfont}{\normalsize}
+\renewcommand{\cftsecpagefont}{\normalsize}
+\renewcommand{\cftsubsecfont}{\normalsize}
+\renewcommand{\cftsubsecpagefont}{\normalsize}
+\setlength{\cftaftertoctitleskip}{1in}
+\setlength{\cftchapindent}{0in}
+\setlength{\cftsecindent}{0in} 
+\setlength{\cftsubsecindent}{.15in} 
+\setlength{\cftbeforesecskip}{0in} 
+%this command is for doublepage clears with a blank page:
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+%this might cause problems, but should be okay:
+\let\cleardoublepage\clearemptydoublepage
+% This is the start of the big "logic2" style file:
+\usepackage[
+%propositional constants
+A=A,
+B=B,
+C=C,
+D=D,
+E=E,
+F=F,
+G=G,
+H=H,
+I=I,
+J=J,
+K=K,
+L=L,
+M=M,
+N=N,
+O=O,
+P=P,
+Q=Q,
+R=R,
+S=S,
+T=T,
+U=U,
+V=V,
+W=W,
+X=X,
+Y=Y,
+Z=Z,
+%perdicate letters%%%%%%%%%%%%%%
+predparL=,
+predparR=,
+%PredArgComma=2, %1=comma, 2=no comma
+Ap=A, %\text{A},
+Bp=B, %\text{B},
+Cp=C, %\text{C},
+Dp=D, %\text{D},
+Ep=E, %\text{E},
+Fp=F, %\text{F},
+Gp=G, %\text{G},
+Hp=H, %\text{H},
+Ip=I, %\text{I},
+Jp=J, %\text{J},
+Kp=K, %\text{K},
+Lp=L, %\text{L},
+Mp=M, %\text{M},
+Np=N, %\text{N},
+Op=O, %\text{O},
+Pp=P, %\text{P},
+Qp=Q, %\text{Q},
+Rp=R, %\text{R},
+Sp=S, %\text{S},
+Tp=T, %\text{T},
+Up=U, %\text{U},
+Vp=V, %\text{V},
+Wp=W, %\text{W},
+Xp=X, %\text{X},
+Yp=Y, %\text{Y},
+Zp=Z, %\text{Z},
+%object language variables%%%%%%%%%%%
+w=w,
+x=x,
+y=y,
+z=z,
+%metalanguage constants for formula
+alpha=\alpha,   %use macro \ALPHA, \BETA, etc
+beta=\beta,
+chi=\chi,
+delta=\delta,
+epsilon=\epsilon,
+phi=\Phi,
+gamma=\gamma,
+eta=\eta,
+iota=\iota,
+kappa=\kappa,
+lambda=\lambda,
+mu=\mu,
+nu=\nu,
+Greeko=o,
+pi=\pi,
+theta=\Theta,
+rho=\rho,
+sigma=\sigma,
+tau=\tau,
+upsilon=\upsilon,
+omega=\omega,
+xi=\xi,
+psi=\Psi,
+zeta=\zeta,
+capalpha=A,  %use macro \CAPALPHA, \CAPBETA, etc
+capbeta=B,
+capchi=X,
+capdelta=\Delta,
+capepsilon=E,
+capphi=\phi,
+capgamma=\Gamma,
+capeta=H,
+capiota=I,
+capkappa=K,
+caplambda=\Lambda,
+capmu=M,
+capnu=N,
+capGreeko=O,
+cappi=\Pi,
+captheta=\theta,
+caprho=P,
+capsigma=\Sigma,
+captau=T,
+capupsilon=\Upsilon,
+capomega=\Omega,
+capxi=\Xi,
+cappsi=\psi,
+capzeta=Z,
+%connectives  use macros \disjunction,\conjunction,\negation,\horseshoe, and \triplebar (plus
+quantifierparL={},%  the proper number of arguments; affix as prefixs par, bpar, or cpar (i.e.
+quantifierparR={},%  \pardisjunction to wrap in parentheses.
+manybrackets=1, %1=yes, 2=no
+IntA={I},
+True=\text{true},
+False=\text{false}
+]{logic2}
+%\usepackage{eucal} %changes \mathcal, so interpretations look better
+%\usepackage{eufrak} %changes \mathfrak, so stuff looks better (TeX says redundant if amsfonts used?)
+\newcommand{\constant}[1]{\mathrm{#1}} % for object-lang constants
+\newcommand{\variable}[1]{#1} % for object-lang variables
+\newcommand{\integer}[1]{#1}
+%\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\world}[1]{\mathit{#1}}
+\newcommand{\TrueB}{\mathsf{T}}
+\newcommand{\FalseB}{\mathsf{F}}
+\renewcommand{\IntA}{\mathfrak{m}}
+\newcommand{\LP}{\text{LP}}
+\newcommand{\HHH}{\text{AR}}
+\newcommand{\ORD}[1]{\text{ORD}#1}
+\newcommand{\Derivation}[1]{\mathit{#1}}
+\newcommand{\e}{\text{e}}
+\newcommand{\As}[2]{\mathfrak{m^{\mathrm{#1}}_{\mathrm{#2}}}}
+%\newcommand{\As}{\mathfrak{a}}
+\newcommand{\PosIntEM}[2]{Pos Int^{#1+}_{\mathit{#2}}}
+\newcommand{\BWEDGE}{\mathlarger{\mathlarger{\WEDGE}}}
+%\renewcommand{\baselinestretch}{1.5}
+\newcommand{\BOX}{\ensuremath \raisebox{-.95pt}{$\Box\,$}} %.75pt
+\newcommand{\DIAMOND}{\ensuremath \raisebox{-.6pt}{$\Diamond\,$}} %.75pt
+\newcommand{\GSL}{\textsc{sl}} %{GSL} %
+\newcommand{\GQL}{\textsc{ql}} %{GQL} %
+\newcommand{\SL}{\textsc{sl}} %{SL} %
+\newcommand{\QL}{\textsc{ql}} %{QL} %
+\newcommand{\PL}{\textsc{pl}} %{QL} %
+\newcommand{\MGSL}{\textsc{msl}} %
+\newcommand{\GQLI}{\textsc{qli}} %
+\newcommand{\GSD}{\textsc{sd}} %{GSD} %
+\newcommand{\GSDP}{\textsc{sd}$^+$} %{GSD} %
+\newcommand{\GQD}{\textsc{qd}} %{GQD}%
+\newcommand{\GQDP}{\textsc{qd}$^+$} %{GQD} %
+\newcommand{\GQDPP}{\textsc{qd}$^+_{m}$} %
+\newcommand{\GQDI}{\textsc{qdi}} %{GQDI} %
+\newcommand{\GQDIP}{\textsc{qdi}$^+$} %{GQDI} %
+\newcommand{\SF}{$S5$}
+\newcommand{\SFP}{$S5^+$}
+\newcommand{\SO}{$S1$}
+\newcommand{\Language}[1]{#1}
+\newcommand{\DerivationSystem}[1]{#1}
+%\renewcommand{\underline}[1]{{\color{Green}#1}}
+%\usepackage{endnotes}
+%\let\footnote=\endnote
+\renewcommand{\v}{\variable{v}}
+\renewcommand{\u}{\variable{u}}
+\renewcommand{\a}{\constant{a}}
+\renewcommand{\b}{\constant{b}}
+\renewcommand{\c}{\constant{c}}
+\renewcommand{\d}{\constant{d}}
+% More Bib stuff:
+\newcommand{\ICP}{;} %should match "\setcitestyle{citesep={;}}"
+\usepackage[round]{natbib}
+\setcitestyle{notesep={: }}% %punctuation seperating year from pages
+\setcitestyle{aysep={}}% %punctuation seperating author and year
+\setcitestyle{yysep={,}}% %punctuation seperating years for multiple
+                               %%% works from same author
+\setcitestyle{citesep={\ICP{}}}% %punctuation between citations
+\def\bibfont{\normalsize }
+\renewcommand{\bibname}{Works Cited}
+%Examples:
+%\citet{refname}   author, (year)
+%\citep{refname}  (author, year)
+%\citep[p.~5]{refname}   (author, year, p. 5)
+%\citeyearpar{refname}  (year)
+%\citetext{\citealp[24--26]{Burge1986}; \citeyear[68,~98--99]{Burge2010}}  
+                        %(Burge, 1986: 24--25; 2010: 68, 98--99)
+\usepackage[%
+unicode,pdfencoding=auto,
+    pagebackref=false,%
+    linktoc=page,%
+    pdfnewwindow=true,%               % links in new window
+    colorlinks=true,%                 % false: boxed links; true: colored links
+    linkcolor=Blue,%                   % color of internal links
+    citecolor=Blue,%                  % color of links to bibliography
+    filecolor=Black,%magenta,               % color of file links
+    urlcolor=Black%cyan                    % color of external links
+%    unicode,
+%    pdfencoding=auto
+]{hyperref}%
+\begin{document}
+\pagenumbering{roman} % Roman numerals
+\setcounter{page}{1}%
+\pagestyle{empty}
+%\restoregeometry
+
+\vspace*{.8in}
+%\noindent{\makebox[4.75in][s]{\Huge\sffamily{}M a t h e m a t i c a l L o g i c}}
+\noindent{\sffamily\fontsize{35}{35}\selectfont{}\color{DDarkBlue}{\color{Gray}Mathematical}Logic} %\textls[30]
+
+%\medskip
+%\noindent{\LARGE{}\fontencoding{T1}\sffamily\fontseries{b}\fontshape{it}\selectfont{}\textls[30]{***A subtitle would go here, if we had one***}}
+
+\vspace{1.25in}
+\noindent{}{\LARGE\sffamily\selectfont{}Richard Grandy}
+
+\vspace*{12pt}
+\noindent{}{\LARGE\sffamily\selectfont{}Michael Barkasi}
+
+\vspace*{12pt}
+\noindent{}{\LARGE\sffamily\selectfont{}Joshua Reagan}
+%Cover Art and Typesetting by Michael Barkasi\\
+
+\vfill
+\noindent{\LARGE{}\sffamily\selectfont{}{Draft 0.71}} % could use \textls[30] for effect
+
+\newpage
+\pagestyle{empty}
+
+\vspace*{.25in}
+%\begin{center} % We can center this material, but my preference is to keep it ragged-right (mb)
+{\small 
+\noindent{}Copyright \textcopyright{} 2021 Richard Grandy, Michael Barkasi, and Joshua Reagan
+
+\bigskip
+\noindent{}This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License. 
+
+\noindent{}To view a copy of the license, visit http://creativecommons.org/licenses/by-nc-nd/3.0/.
+
+\bigskip
+\noindent{}You are free {to Share} -- to copy, distribute and transmit the work, 
+
+\noindent{}under the following conditions: 
+
+\noindent{}{Attribution} -- You must attribute the work to the authors (but not in any way that suggests that they endorse you or your use of the work); 
+
+\noindent{}{Noncommercial} -- You may not use this work for commercial purposes;
+
+\noindent{}{No Derivative Works} -- You may not alter, transform, or build upon this work.
+
+\vfill
+\noindent{}This book is set in Latin Modern (for text and math fonts, released under the GUST Font License) and Adobe Source Sans Pro (for headings, released by Adobe under the OFL). 
+
+\bigskip
+\noindent{}Edition 0.7 (draft), 2020
+}
+%\end{center}
+
+\newpage%
+\clearemptydoublepage
+\pagestyle{plain}
+\tableofcontents
+
+\newpage%
+\clearemptydoublepage
+\pagestyle{plain}
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\section*{What is mathematical logic?}
+
+Logic is the study of logical consequence and, by extension, logical truth.
+Logical consequence is a relation between a sentence $\PHI$ and a set of sentences $\Delta$. 
+A common way to define logical consequence, modeled on Aristotle's discussion of syllogisms, is:
+\begin{quote}
+$\PHI$ is a \df{logical consequence} of $\Delta$ if and only if it is not possible for the members of $\Delta$ to be true and $\PHI$ to be false.
+\end{quote}
+Likewise, a sentence $\PHI$ is a logical truth if and only if it cannot possibly be false.
+We can think of logical truth\index{logical!truth} as a special case: a sentence $\PHI$ is a \niidf{logical truth} if and only if it is a logical consequence of the empty set; so, i.e., $\Delta=\emptyset$.
+However, the sense of \mention{possible} at work in this definition needs clarification.  Usually it's thought that a logical consequence holds in virtue of the meaning of \sq{logical} terms and the overall form of the sentences. 
+For example, \mention{Fran is a Wallaby} is a logical consequence of \mention{If Fran was born last year, then Fran is a Wallaby} and \mention{Fran was born last year}.  That's because, in virtue of the meaning of \mention{If $\ldots$ then}, any sentence $\PSI$ must be true whenever both of the sentences \mention{If $\PHI$ then $\PSI$,} and $\PHI$ are true.  Because \mention{meaning} is a notoriously difficult concept to define precisely, we use a formal semantics, giving an exact specification for logical terms. 
+
+In \emph{mathematical} logic\index{mathematical logic} we use mathematical methods to study logical consequence and logical truth. 
+In this textbook in particular, we define abstract, formal languages which have as sentences strings of basic symbols.
+For sentences of these formal languages, we define (i) the relation of entailment and (ii) formal derivation systems. 
+Put roughly, both entailment and formal derivations provide a mathematical approximation of logical consequence.
+The goal of this textbook is simply to give the reader an introduction to those mathematical methods.  
+Questions about how logical consequence relates to entailment and derivation are largely set aside. 
+
+
+
+\section*{What material is covered here?}
+The main subject of this text is classical first-order logic (or as we call it, quantificational logic), with sentential logic (sometimes called \mention{propositional} logic) introduced first. 
+We focus mostly on a quantificational logic that doesn't include identity and function symbols.  
+Our conjunction and disjunction operators are of arbitrary (but finite) arity because that more closely mirrors typical English use.  
+Many-valued logic, modal logic, and the identity operator are briefly introduced in the last chapter.  The main purpose there is to show how sentential and quantificational logic can be extended to treat other logical operators and to cover a wider range of applications. 
+
+The main goal of the text is to prove that for quantificational logic, whether one uses formal derivations or proofs of logical entailment, one always gets the same results. 
+There are various ways to define the semantics for quantificational logic.\footnote{For example, game-theoretic semantics and substitutional quantifiers; see \citealp{Dunn1968}, \citealp{Stevenson1973}, \citealp{Hintikka1996}, \citealp{Leblanc2001}, \citealp{Westerstahl2001}, \citealp{Jacquette2002}.}  We use Benson Mates' modification of the standard Tarskian model-theoretic semantics.\footnote{\citealp{Mates1972}} 
+The derivation system in this text is a natural deduction style system.\footnote{This style of system was first developed by Gentzen in \citeyearpar{Gentzen1934}, \citealt[26]{Hodges2001}. If you are curious, derivation systems roughly divide into four types: natural deduction, Hilbert-style axiomatic systems, Gentzen-style sequent calculi, and proof tableaux; see \citealt[24]{Hodges2001b} for an overview.} 
+In the system used here only conditional elimination can discharge assumptions; this tends to make the other rules simpler. 
+We use Fitch-style derivations,\footnote{\citealt{Fitch1952}} but following Donald Kalish and Richard Montague\footnote{\citealp{Kalish1964}} we discharge assumptions by drawing a box around each completed subproof.
+Rather than using the more commonly found Henkin-style proofs\footnote{\citealt{Henkin1949}. For one of many modern treatments, see \citealp[ch.~11.4]{Bergmann2003}.} to prove strong completeness, we prove it constructively. We believe this makes the connection between syntactic and semantic methods more intuitive.  In Chapter \ref{completenesschapter} we provide an algorithm (``The Method'') which, for any sentence $\PHI$ entailed by some set of sentences $\Delta$, produces a derivation of $\PHI$ from $\Delta$. 
+The proof used here owes much to Willard Quine's completeness proof.\footnote{\citealp{Quine1982}}
+
+\section*{How can I effectively use this book?}
+
+Reading mathematical texts is difficult, especially for those not accustomed to the style of prose typical of the genre.
+Following a mathematical argument requires significant cognitive effort and concentration, so prepare yourself.
+The most fruitful way to approach this text is with pencil and paper. 
+As you read, work out the examples, write the proofs, and find counterexamples on your own.
+There's no reason to stick to the text---look for your own proofs and work out new examples. 
+Effective use of the text requires active engagement. 
+
+We have tried our best to prepare a helpful and clear text.
+A large stock of examples is included and most intratext references include a page number.
+Many of the proofs in the text, especially the recursive proofs, leave steps for the reader to complete.
+These are always steps (or whole proofs) for which the reader will have seen something similar before.  
+Many of the examples have been worked through in detail.
+Our hope is that the examples show clearly all the ``moving parts''---that they show how the answers to problems follow directly from the definitions and theorems. 
+You probably won't learn much logic by reading the text once or twice, so work through the examples and theorems. 
+
+\section*{Issues in the Philosophy of Logic}\label{issuesinphillogic}
+ 
+In mathematical logic, one begins with rigorous mathematical definitions of ``sentence'', truth, logical truth, entailment, and derivation and then proves theorems about them.
+A primary concern in logic is how to make sense of reasoning in natural languages and the notion of logical consequence. 
+How the two---the rigorously defined mathematical concepts like entailment and ``pretheoretic'' concepts like logical consequence---relate is a natural question, and one that's received a great deal of attention by philosophers.\footnote{See Blanchette's \citeyearpar{Blanchette2001} and Shapiro's \citeyearpar{Shapiro2005c} for an introduction.}
+
+Because the aim of this text is to introduce mathematical logic and not philosophical logic, we largely set these questions aside. 
+In some places, usually for the sake of exposition or motivation, we make claims that raise issues squarely in the domain of philosophy of logic.\footnote{For example, we say in section \ref{Formal Languages} that formal languages can be thought of as models of natural languages; and much of the discussion on identity in section \ref{Sec:Quantifier Logic with Identity} raises issues as well.} 
+Given the aims and scope of this text, however, we aren't able to point out all the relevant philosophical concerns, let alone do much to motivate our potentially contentious claims.
+
+\section*{History of Logic}
+
+Logic has a long history going back to Aristotle. 
+Aristotle claims that he was the first to work out any systematic treatment of logical consequence (\emph{Sophistical Refutations}, 34, 183b34--36; citation from \citealp[27]{Smith1995}), and as Robin Smith notes, ``we have no reason to dispute this'' \citeyearpar[27]{Smith1995}.
+Aristotle's work gave rise to a tradition of work in logic that extends through the Stoics, Byzantine commentators, early Islamic philosophy, and European Scholasticism. 
+Modern mathematical logic has roots in this Aristotelian tradition as well (though it has roots elsewhere too, e.g. foundational work in mathematics). 
+However, the Aristotelian tradition is beyond the expertise the authors, and so we have not attempted to cite relevant work from it. 
+
+\newpage%
+\clearemptydoublepage
+%\thispagestyle{empty}
+
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+
+\noindent{}This book began as a series of a lecture handouts written for the yearly mathematical logic class in the philosophy department at Rice University. 
+The handouts were primarily written by Prof. Richard Grandy from 2007 to 2011, with both Stan Husi and Jacob Mills (TAs for the class during that time) contributing. 
+Michael Barkasi began the process of typesetting these handouts in \LaTeX{} for the fall of 2012 (at which time he was the TA).
+By next summer he finished this process, and over the next year he compiled and reorganized the handouts into a draft textbook, adding in material as needed. 
+Joshua Reagan (TA from 2014-17) has been collaborating with Prof. Grandy since that time, significantly revising and adding new material to the text.
+
+As with most other textbooks, no theorems are original and their presentation is, for the most part, what you'll find elsewhere. 
+The proofs for all the theorems---along with the actual writing and presentation---have been done from scratch by one or more of the authors; 
+but the general methods and approaches used are just those the authors learned from others. 
+Thus this textbook owes just as much to previous work in logic as most other modern textbooks. It passes on to students a body of results and a general conceptual framework developed by many logicians over the years. 
+It does so in roughly the style and presentation in which those results were passed to the authors themselves, with some changes they think are improvements. 
+We will note these as they come up. 
+
+A few more specific acknowledgments are called for. 
+At the time the first author was preparing the original handouts he was using Merrie Bergmann, James Moor, and Jack Nelson's textbook \emph{The Logic Book} \citeyearpar{Bergmann2003}; hence some of the terminology and organization in this book reflects that. 
+Benson Mates' classic \emph{Elementary Logic} \citeyearpar{Mates1972}, the previous text, and Church's \emph{Introduction to Elementary Logic} \citeyearpar{Church1956} also influenced the first author's approach. 
+The second author has relied heavily on Wilfred Hodges's rich survey article ``Elementary Predicate Logic'' \citeyearpar{Hodges2001} for historical citations. 
+The name ``Dragnet'' for theorem \ref{The Dragnet Theorem} comes from Michael Smith, another former TA for the first author. 
+The problems in exercise \mvref{ex:English to GSL Translations 2} comes from Howard Pospesel \& David Marans, \emph{Arguments: Deductive Logic Exercises} \citeyearpar{Pospesel1978}, which Pospesel and Marans have generously released to the public.   
+
+
+\newpage
+\clearemptydoublepage
+\pagestyle{headings}
+\pagestyle{myheadings}
+\markright{ }
+
+% % % % % % % % Raggedbottom!!! HERE
+\raggedbottom
+% % % % % % % %
+%Controls for fancy headers, if used.
+\pagestyle{fancy}
+%\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }                       % can only redefine 2 of the 3 "marks"
+\renewcommand{\sectionmark}[1]{ \markboth{}{\thesection. #1} }
+\renewcommand{\subsectionmark}[1]{ \markboth{}{\thesubsection. #1} }
+\fancyhf{}
+\chead{\sffamily\rightmark}
+\fancyhead[LE]{\sffamily\thepage}
+\fancyhead[RO]{\sffamily\thepage}
+%\rhead{\thepage}
+
+\pagenumbering{arabic} % Roman numerals
+\setcounter{page}{1}
+
+\include{ch1}
+\include{ch2}
+\include{ch3}
+\include{ch4}
+\include{ch5}
+\include{ch6}
+\include{ch7}
+\include{ch8}
+\include{AppA}
+\include{AppB}
+
+\clearemptydoublepage
+\addcontentsline{toc}{chapter}{Works Cited}
+%\fancyhead[RE,LO]{\sffamily{}Works Cited}
+\chead{\sffamily{}Works Cited}
+\fancyhead[LE,RO]{\sffamily{}\thepage}
+\setcounter{section}{0}
+%\bibliography{C:/Users/Michael/Documents/writings/papers_and_books/annotated_bib/Bibliography}{}
+\bibliography{Bibliography}{}
+\bibliographystyle{philreview-m}
+%bibstyle options (in usual directory): kluwer, agms, dcu, plainnat, chicago, astron
+%my bibstyle options (must be placed in directory with tex file): 
+    %analysis (styled used in journal analysis)
+    %philreview (style used in journal phil review)
+    %philreview-m (my modified version, this is prefered)
+    %plainnat2 (my modified version of plainnat, this is 2nd choice)
+
+\clearemptydoublepage
+\addcontentsline{toc}{chapter}{Index}
+%\fancyhead[RE,LO]{\sffamily{}Index}
+\chead{\sffamily{}Index}
+\fancyhead[LE,RO]{\sffamily{}\thepage}
+\setcounter{section}{0}
+\printindex
+
+\end{document}
+

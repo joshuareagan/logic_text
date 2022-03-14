@@ -1,0 +1,571 @@
+\begin{thebibliography}{99}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Anderson and Johnstone(1962)}]{Anderson1962}
+Anderson, J.~M. and Johnstone, H.~W. 1962.
+\newblock \emph{Natural Deduction: The Logical Basis of Axiom Systems}.
+\newblock Wadsworth.
+
+\bibitem[{Arl\'{o}-Costa and Pacuit(2006)}]{ArloCosta2006}
+Arl\'{o}-Costa, Horacio and Pacuit, Eric. 2006.
+\newblock \enquote{First-Order Classical Modal Logic}.
+\newblock \emph{Studia Logica} 84 (Special Issue Ways of Worlds II. On Possible
+  Worlds and Related Notions):171--210.
+
+\bibitem[{Ballarin(2010)}]{Ballarin2010}
+Ballarin, Roberta. 2010.
+\newblock \enquote{Modern Origins of Modal Logic}.
+\newblock In Edward~N. Zalta (ed.), \emph{The Stanford Encyclopedia of
+  Philosophy}. Winter 2010 edition.
+\newblock
+  \url{http://plato.stanford.edu/archives/win2010/entries/logic-modal-origins/}.
+
+\bibitem[{Barwise and Etchemendy(1987)}]{Barwise1987}
+Barwise, Jon and Etchemendy, John. 1987.
+\newblock \emph{The Liar: an Essay on Truth and Circularity}.
+\newblock New York: Oxford University Press.
+
+\bibitem[{Bealer(1998)}]{Bealer1998b}
+Bealer, George. 1998.
+\newblock \enquote{Propositions}.
+\newblock \emph{Mind} 107:1--32.
+
+\bibitem[{Beall and van Fraassen(2003)}]{Beall2003}
+Beall, J.C. and van Fraassen, Bas. 2003.
+\newblock \emph{Possibilities and Paradox: an Introduction to Modal and
+  Many-Valued Logic}.
+\newblock Oxford New York: Oxford University Press.
+
+\bibitem[{Bergmann et~al.(2003)Bergmann, Moor, and Nelson}]{Bergmann2003}
+Bergmann, Merrie, Moor, James, and Nelson, Jack. 2003.
+\newblock \emph{The logic book}.
+\newblock New York London: McGraw-Hill Higher Education McGraw-Hill, 4 edition.
+
+\bibitem[{Blanchette(2001)}]{Blanchette2001}
+Blanchette, Patricia. 2001.
+\newblock \enquote{Logical Consequence}.
+\newblock In Lou Goble (ed.), \emph{The Blackwell Guide to Philosophical
+  Logic}. Blackwell, 115--135.
+
+\bibitem[{Boole(1854)}]{Boole1854}
+Boole, George. 1854.
+\newblock \emph{An Investigation of The Laws of Thought on Which are Founded
+  the Mathematical Theories of Logic and Probabilities}.
+\newblock Originally published by Macmillan.
+\newblock Reprint by Dover, 1958.
+
+\bibitem[{Borkowski(1970)}]{Borkowski1970}
+Borkowski, L. 1970.
+\newblock \emph{Jan Lukasiewicz: Selected Works}.
+\newblock North-Holland Publishing Company.
+
+\bibitem[{Bull and Segerberg(2001)}]{Bull2001}
+Bull, R.~A. and Segerberg, K. 2001.
+\newblock \enquote{Basic Modal Logic}.
+\newblock In Dov~M. Gabbay and Franz Guenthner (eds.), \emph{Handbook of
+  Philosophical Logic}, volume~3. Kluwer Academic Publishers, 1--82.
+
+\bibitem[{Carnap(1946)}]{Carnap1946}
+Carnap, Rudolf. 1946.
+\newblock \enquote{Modalities and Quantification}.
+\newblock \emph{Journal of Symbolic Logic} 11:33--64.
+
+\bibitem[{Carnap(1947)}]{Carnap1947}
+------. 1947.
+\newblock \emph{Meaning and Necessity: A Study in Semantics and Modal Logic}.
+\newblock The University of Chicago Press.
+
+\bibitem[{Chomsky(2002 [1957])}]{Chomsky1957}
+Chomsky, Noam. 2002 [1957].
+\newblock \emph{Syntactic Structures}.
+\newblock Mouton de Gruyer (formerly Mouton, The Hague).
+
+\bibitem[{Church(1956)}]{Church1956}
+Church, Alonzo. 1956.
+\newblock \emph{Introduction to Mathematical Logic}, volume~1.
+\newblock Princeton University Press.
+
+\bibitem[{Cocchiarella and Freund(2008)}]{Cocchiarella2008modal}
+Cocchiarella, Nino and Freund, Max. 2008.
+\newblock \emph{Modal Logic: an Introduction to its Syntax and Semantics}.
+\newblock Oxford New York: Oxford University Press.
+
+\bibitem[{Cresswell(2001)}]{Cresswell2001}
+Cresswell, M.~J. 2001.
+\newblock \enquote{Modal Logic}.
+\newblock In Lou Goble (ed.), \emph{The Blackwell Guide to Philosophical
+  Logic}. Blackwell, 136--158.
+
+\bibitem[{{De Morgan}(1847)}]{DeMorgan1847}
+{De Morgan}, Augustus. 1847.
+\newblock \emph{Formal Logic: or The Calculus of Inference}.
+\newblock Taylor \& Walton.
+
+\bibitem[{{De Morgan}(1860)}]{DeMorgan1860}
+------. 1860.
+\newblock \emph{Syllabus of a Proposed System of Logic}.
+\newblock Walton \& Malbery.
+
+\bibitem[{Demopoulos and Clark(2005)}]{Demopoulos2005}
+Demopoulos, William and Clark, Peter. 2005.
+\newblock \enquote{The Logicism of Frege, Dedekind, and Russell}.
+\newblock In Stewart Shapiro (ed.), \emph{The Oxford Handbook of Philosophy of
+  Mathematics and Logic}. Oxford University Press, 129--165.
+
+\bibitem[{Dipert(1984)}]{Dipert1984}
+Dipert, Randall. 1984.
+\newblock \enquote{Studies in Logic by Members of the Johns Hopkins University
+  by Charles S. Peirce: Max H. Fisch; Achim Eschbach (Review)}.
+\newblock \emph{Transactions of the Charles S. Peirce Society} 20:469--472.
+
+\bibitem[{Dunn and Belnap(1968)}]{Dunn1968}
+Dunn, J~M and Belnap, N~D. 1968.
+\newblock \enquote{The Substitution Interpretation of the Quantifiers}.
+\newblock \emph{No\^us} 2:177--185.
+
+\bibitem[{Ebbinghaus(1985)}]{Ebbinghaus1985}
+Ebbinghaus, H.~D. 1985.
+\newblock \enquote{Extended Logics: The General Framework}.
+\newblock In J.~Barwise and S.~Feferman (eds.), \emph{Model-Theoretic Logics},
+  Perspectives ini Mathematical Logic. Springer-Verlag, 25--76.
+
+\bibitem[{Enderton(2010)}]{Enderton2010}
+Enderton, Herbert~B. 2010.
+\newblock \emph{Computability Theory: An Introduction to Recursion Theory}.
+\newblock Academic Press (Elsevier Science).
+
+\bibitem[{Fitch(1952)}]{Fitch1952}
+Fitch, Frederic. 1952.
+\newblock \emph{Symbolic Logic}.
+\newblock Ronald Press.
+
+\bibitem[{Frege(1879)}]{Frege1879}
+Frege, Gottlob. 1879.
+\newblock \emph{Begriffsschrift, eine der arithmetischen nachgebildete
+  Formelsprache des reinen Denkens}.
+\newblock Halle.
+\newblock Trans. ``Concept Script, a formal language of pure thought modelled
+  upon that of arithmetic''.
+
+\bibitem[{Frege(1892)}]{Frege1892}
+------. 1892.
+\newblock \enquote{\"{U}ber Sinn und Bedeutung}.
+\newblock \emph{Zeitschrift f\"{u}r Philosophie und philosophische Kritik}
+  100:25--50.
+\newblock Trans. ``On Sense and Reference'', available in Martinich, A. P.
+  (ed.), 2001, \emph{The Philosophy of Language}, Oxford: Oxford University
+  Press, 4th edition and in Peter Geach and Max Black (eds.), 1966,
+  \emph{Translations from the Philosophical Writings of Gottlob Frege}, Basil
+  Blackwel, 2nd edition.
+
+\bibitem[{Frege(1893/1903)}]{Frege1893}
+------. 1893/1903.
+\newblock \emph{Grundgesetze der Arithmetik}.
+\newblock Jena: Verlag Hermann Pohle.
+\newblock Trans. ``The Basic Laws of Arithmetic''.
+
+\bibitem[{Frege(1966 [1891])}]{Frege1891}
+------. 1966 [1891].
+\newblock \enquote{Function and Concept (Funktion und Begriff)}.
+\newblock In \emph{Translations from the Philosophical Writings of Gottlob
+  Frege}. Basil Blackwell.
+\newblock Orig. title ``Funktion und Begriff''.
+
+\bibitem[{Garson(2001)}]{Garson2001}
+Garson, J. 2001.
+\newblock \enquote{Quantification in Modal Logic}.
+\newblock In Dov~M. Gabbay and Franz Guenthner (eds.), \emph{Handbook of
+  Philosophical Logic}, volume~3. Kluwer Academic Publishers, 267--324.
+
+\bibitem[{Gentzen(1934)}]{Gentzen1934}
+Gentzen, Gerhard. 1934.
+\newblock \enquote{Untersuchungen \"uber das Logishe Schliessen}.
+\newblock \emph{Math Zeitschrift} 39:176--210 and 405--431.
+
+\bibitem[{Gleitman(1965)}]{Gleitman1965}
+Gleitman, Lila~R. 1965.
+\newblock \enquote{Coordinating Conjunction in English}.
+\newblock \emph{Language} 41:260--293.
+
+\bibitem[{G\"odel(1929)}]{Godel1929}
+G\"odel, Kurt. 1929.
+\newblock \emph{\"Uber die Vollst\"andigkeit des Logikkalk\"uls}.
+\newblock Ph.D. thesis, University Of Vienna.
+
+\bibitem[{G\"odel(1930)}]{Godel1930}
+------. 1930.
+\newblock \enquote{Die Vollst\"andigkeit der Axiome des logischen
+  Funktionenkalk\"uls}.
+\newblock \emph{Monatshefte f\"ur Mathematik und Physik} 37:349--360.
+
+\bibitem[{Goldblatt(2006)}]{Goldblatt2006}
+Goldblatt, Rob. 2006.
+\newblock \enquote{Mathematical Modal Logic: A View of its Evolution}.
+\newblock In Dov~M. Gabbay and John Woods (eds.), \emph{Handbook of the History
+  of Logic}, volume~7. Elsevier, 1--98.
+
+\bibitem[{Grandy(1993)}]{Grandy1993}
+Grandy, Richard. 1993.
+\newblock \enquote{What do `Q' and `R' Stand for Anyway?}
+\newblock In R.I.G. Hughes (ed.), \emph{A Philosophical Companion to
+  First-Order Logic}. Hackett, 50--61.
+
+\bibitem[{Gupta(2001)}]{Gupta2001}
+Gupta, Anil. 2001.
+\newblock \enquote{Truth}.
+\newblock In Lou Goble (ed.), \emph{The Blackwell Guide to Philosophical
+  Logic}. Blackwell, 90--114.
+
+\bibitem[{Henkin(1949)}]{Henkin1949}
+Henkin, Leon. 1949.
+\newblock \enquote{The Completeness of the First-Order Functional Calculus}.
+\newblock \emph{Journal of Symbolic Logic} 14:159--166.
+
+\bibitem[{Hilbert and Ackermann(1928)}]{Hilbert1928}
+Hilbert, David and Ackermann, Wilhelm. 1928.
+\newblock \emph{Grundz\"uge der theoretischen Logik}.
+\newblock Springer-Verlag.
+
+\bibitem[{Hintikka(1961)}]{Hintikka1961}
+Hintikka, Jaakko. 1961.
+\newblock \enquote{Modalities and Quantification}.
+\newblock \emph{Theoria} 27:119--28.
+
+\bibitem[{Hintikka(1996)}]{Hintikka1996}
+------. 1996.
+\newblock \emph{The principles of mathematics revisited}.
+\newblock Cambridge New York: Cambridge University Press.
+
+\bibitem[{Hodges(1997)}]{Hodges1997}
+Hodges, Wilfrid. 1997.
+\newblock \emph{A shorter model theory}.
+\newblock Cambridge New York: Cambridge University Press.
+
+\bibitem[{Hodges(2001{\natexlab{a}})}]{Hodges2001b}
+------. 2001{\natexlab{a}}.
+\newblock \enquote{Classical Logic I: First-Order Logic}.
+\newblock In Lou Goble (ed.), \emph{The Blackwell Guide to Philosophical
+  Logic}. Blackwell, 9--32.
+
+\bibitem[{Hodges(2001{\natexlab{b}})}]{Hodges2001}
+------. 2001{\natexlab{b}}.
+\newblock \enquote{Elementary Predicate Logic}.
+\newblock In Dov~M. Gabbay and Franz Guenthner (eds.), \emph{Handbook of
+  Philosophical Logic}, volume~1. Kluwer Academic Publishers, 1--129.
+
+\bibitem[{Hughes and Cresswell(1996)}]{Hughes1996}
+Hughes, G. and Cresswell, M.J. 1996.
+\newblock \emph{A New Introduction to Modal Logic}.
+\newblock London New York: Routledge.
+
+\bibitem[{Jacquette(2002)}]{Jacquette2002}
+Jacquette, Dale (ed.). 2002.
+\newblock \emph{Philosophy of Logic: an anthology}.
+\newblock Blackwell Philosophy Anthologies. Malden, Mass: Blackwell Publishers.
+
+\bibitem[{Kalish and Montague(1964)}]{Kalish1964}
+Kalish, Donald and Montague, Richard. 1964.
+\newblock \emph{Logic: Techniques of Formal Reasoning}.
+\newblock Harcourt, Brace and World.
+
+\bibitem[{Kanger(1957)}]{Kanger1957}
+Kanger, Stig. 1957.
+\newblock \enquote{Provability in Logic}.
+\newblock In \emph{Acta Universitatis Stockholmiensis}, volume~1 of
+  \emph{Stockholm Studies in Philosophy}. Almqvist and Wiksell.
+
+\bibitem[{King(2007)}]{King2007}
+King, Jeffrey~C. 2007.
+\newblock \emph{The Nature and Structure of Content}.
+\newblock Oxford University Press.
+
+\bibitem[{Kleene(2002 [1967])}]{Kleene1967}
+Kleene, Stephen. 2002 [1967].
+\newblock \emph{Mathematical logic}.
+\newblock Mineola, N.Y: Dover Publications.
+
+\bibitem[{Kripke(1959)}]{Kripke1959}
+Kripke, Saul. 1959.
+\newblock \enquote{A Completeness Theorem in Modal Logic}.
+\newblock \emph{Journal of Symbolic Logic} 24:1--14.
+
+\bibitem[{Kripke(1963{\natexlab{a}})}]{Kripke1963}
+------. 1963{\natexlab{a}}.
+\newblock \enquote{Semantical Analysis of Modal Logic I: Normal Modal
+  Propositional Calculi}.
+\newblock \emph{Zeitschrift f\"{u}r Mathematische Logik und Grundlagen der
+  Mathematik} 9:67--96.
+
+\bibitem[{Kripke(1963{\natexlab{b}})}]{Kripke1963b}
+------. 1963{\natexlab{b}}.
+\newblock \enquote{Semantical Considerations on Modal Logic}.
+\newblock \emph{Acta Philosophica Fennica} 16:83--94.
+
+\bibitem[{Kripke(1965)}]{Kripke1965}
+------. 1965.
+\newblock \enquote{Semantical Analysis of Modal Logic II. Non-normal Modal
+  Propositional Calculi}.
+\newblock In J.~W. Addison, L.~Henkin, and A.~Tarski (eds.), \emph{Symposium on
+  the Theory of Models}. Amsterdam: North-Holland, 206--220.
+
+\bibitem[{Kripke(1975)}]{Kripke1975}
+------. 1975.
+\newblock \enquote{An Outline of a Theory of Truth}.
+\newblock \emph{Journal of Philosophy} 72:690--716.
+
+\bibitem[{Ladd-Franklin(1883)}]{LaddFranklin1883}
+Ladd-Franklin, Christine. 1883.
+\newblock \enquote{On the Algebra of Logic}.
+\newblock In C.~S. Peirce (ed.), \emph{Studies in Logic}. Little, Brown and Co,
+  17--71.
+
+\bibitem[{Leblanc(2001)}]{Leblanc2001}
+Leblanc, Hugues. 2001.
+\newblock \enquote{Alternative to Standard First-order Semantics}.
+\newblock In Dov~M. Gabbay and Franz Guenthner (eds.), \emph{Handbook of
+  Philosophical Logic}, volume~2. Kluwer Academic Publishers, 53--132.
+
+\bibitem[{Lemmon(1965)}]{Lemmon1965}
+Lemmon, E.~J. 1965.
+\newblock \emph{Beginning Logic}.
+\newblock Nelson.
+
+\bibitem[{Lewis and Langford(1932)}]{Lewis1932}
+Lewis, C.~I. and Langford, Cooper~H. 1932.
+\newblock \emph{Symbolic Logic}.
+\newblock London: Century.
+\newblock 2nd edition 1959, New York: Dover.
+
+\bibitem[{L\"owenheim(1915)}]{Lowenheim1915}
+L\"owenheim, Leopold. 1915.
+\newblock \enquote{\"Uber M\"oglichkeiten im Relativkallk\"ul}.
+\newblock \emph{Math Annalen} 76:447--470.
+
+\bibitem[{Marcus(1946{\natexlab{a}})}]{Marcus1946b}
+Marcus, Ruth~Barcan. 1946{\natexlab{a}}.
+\newblock \enquote{The Deduction Theorem in a Functional Calculus of First
+  Order Based on Strict Implication}.
+\newblock \emph{Journal of Symbolic Logic} 11:115--118.
+
+\bibitem[{Marcus(1946{\natexlab{b}})}]{Marcus1946}
+------. 1946{\natexlab{b}}.
+\newblock \enquote{A Functional Calculus of First Order Based on Strict
+  Implication}.
+\newblock \emph{Journal of Symbolic Logic} 11:1--16.
+
+\bibitem[{Marcus(1947)}]{Marcus1947}
+------. 1947.
+\newblock \enquote{The Identity of Individuals in a Strict Functional Calculus
+  of Second Order}.
+\newblock \emph{Journal of Symbolic Logic} 12:12--15.
+
+\bibitem[{Marcus(1993)}]{Marcus1993}
+------. 1993.
+\newblock \emph{Modalities: Philosophical Essays}.
+\newblock Oxford University Press.
+
+\bibitem[{Mates(1972)}]{Mates1972}
+Mates, Benson. 1972.
+\newblock \emph{Elementary Logic}.
+\newblock Oxford University Press, 2 edition.
+
+\bibitem[{Mitchell(1883)}]{Mitchell1883}
+Mitchell, O~H. 1883.
+\newblock \enquote{On a New Algebra of Logic}.
+\newblock In C.~S. Peirce (ed.), \emph{Studies in Logic}. Little, Brown and Co,
+  72--106.
+
+\bibitem[{Montague(1960)}]{Montague1960}
+Montague, Richard. 1960.
+\newblock \enquote{Logical Necessity, Physical Necessity, Ethics, and
+  Quantifiers}.
+\newblock \emph{Inquiry} 3:259--269.
+
+\bibitem[{Montague(1970)}]{Montague1970}
+------. 1970.
+\newblock \enquote{Universal Grammar}.
+\newblock \emph{Theoria} 36:373--98.
+
+\bibitem[{Peirce(1883)}]{Peirce1883}
+Peirce, C.S. 1883.
+\newblock \enquote{A Theory of Probable Inference. Note B. The Logic of
+  Relatives}.
+\newblock In Boston Members of~the Johns Hopkins~University (ed.),
+  \emph{Studies in Logic}. Little, Brown and Co.
+
+\bibitem[{Peirce(1902)}]{Peirce1902}
+------. 1902.
+\newblock \enquote{The Simplest Mathematics}.
+\newblock In {C Hartshorne et al} (ed.), \emph{Collected Papers of Charles
+  Sanders Peirce}, volume~IV. Harvard University Press, 189--262.
+
+\bibitem[{Pospesel and Marans(1978)}]{Pospesel1978}
+Pospesel, Howard and Marans, David. 1978.
+\newblock \emph{Arguments: Deductive Logic Exercises}.
+\newblock Pearson Education, Inc, 2 edition.
+
+\bibitem[{Post(1921)}]{Post1921}
+Post, Emil. 1921.
+\newblock \enquote{Introduction to a General Theory of Elementary
+  Propositions}.
+\newblock \emph{American Journal of Mathematics} 43:163--185.
+
+\bibitem[{Prawitz(1965)}]{Prawitz1965}
+Prawitz, Dag. 1965.
+\newblock \emph{Natural Deduction: a Proof-theoretical Study}.
+\newblock Almqvist and Wiksell.
+
+\bibitem[{Prior(1957)}]{Prior1957}
+Prior, A.N. 1957.
+\newblock \emph{Time and Modality}.
+\newblock Clarendon Press.
+
+\bibitem[{Quine(1950)}]{Quine1950}
+Quine, Willard Van~Orman. 1950.
+\newblock \emph{Methods of Logic}.
+\newblock Holt.
+
+\bibitem[{Quine(1982)}]{Quine1982}
+------. 1982.
+\newblock \emph{Methods of Logic}.
+\newblock Harvard University Press, 4 edition.
+
+\bibitem[{Quine(1986)}]{Quine1986}
+------. 1986.
+\newblock \emph{Philosophy of logic}.
+\newblock Cambridge, Mass: Harvard University Press, 2 edition.
+
+\bibitem[{Russell(1996 [1903])}]{Russell1903}
+Russell, Bertrand. 1996 [1903].
+\newblock \emph{The Principles of Mathematics}.
+\newblock New York: W.W. Norton \& Company.
+
+\bibitem[{Schiffer(1987)}]{Schiffer1987}
+Schiffer, Stephen. 1987.
+\newblock \emph{Remnants of Meaning}.
+\newblock The MIT Press.
+
+\bibitem[{Scott(1970)}]{Scott1970}
+Scott, Dana. 1970.
+\newblock \enquote{Advice in Modal Logic}.
+\newblock In K.~Lambert (ed.), \emph{Philosophical Problems in Logic}.
+  Dordrecht, Netherlands: Reidel, 143--73.
+
+\bibitem[{Shapiro(2005)}]{Shapiro2005c}
+Shapiro, Stewart. 2005.
+\newblock \enquote{Logical Consequence, Proof Theory, and Modal Theory}.
+\newblock In Stewart Shapiro (ed.), \emph{The Oxford Handbook of Philosophy of
+  Mathematics and Logic}. Oxford University Press, 651--670.
+
+\bibitem[{Skolem(1920)}]{Skolem1920}
+Skolem, Thoralf. 1920.
+\newblock \enquote{Logisch-kombinatorische Untersuchungen \"uber die
+  Erf\"ullbarkeit oder Beweisbarkeit Mathematischer S\"atze nebst einem
+  Theoreme \"uber dichte Mengen}.
+\newblock \emph{Videnskapsselskapets Skrifter, I. Matem.-Naturv. Klasse} 4.
+
+\bibitem[{Skolem(1922)}]{Skolem1922}
+------. 1922.
+\newblock \enquote{Einige Bemerkungen zur axiomatischen Bergr\"undung der
+  Mengenlehre}.
+\newblock \emph{Matematikerkongressen i Helsingfors den 4--7 Juli 1922} .
+
+\bibitem[{Skolem(1967 [1928])}]{Skolem1928}
+------. 1967 [1928].
+\newblock \enquote{On mathematical logic}.
+\newblock In Jean van Heijenoort (ed.), \emph{From Frege to G\"odel: A Source
+  Book in Mathematical Logic, 1879 to 1931}. Harvard University Press,
+  508--524.
+
+\bibitem[{Smith(2012)}]{Smith2012}
+Smith, Nicholas~J.J. 2012.
+\newblock \emph{Logic: The Laws of Truth}.
+\newblock Princeton University Press.
+
+\bibitem[{Smith(1995)}]{Smith1995}
+Smith, Robin. 1995.
+\newblock \enquote{Logic}.
+\newblock In Jonathan Barnes (ed.), \emph{The Cambridge Companion to
+  Aristotle}. Cambridge University Press, 27--65.
+
+\bibitem[{Smullyan and Fitting(2010)}]{Smullyan2010}
+Smullyan, Raymond~M. and Fitting, Melvin. 2010.
+\newblock \emph{Set Theory and the Continuum Problem}.
+\newblock Dover.
+\newblock Originally published in 1996, Oxford University Press.
+
+\bibitem[{Soames(2010)}]{Soames2010}
+Soames, Scott. 2010.
+\newblock \emph{What is Meaning?}
+\newblock Soochow University Lectures in Philosophy. Princeton University
+  Press.
+
+\bibitem[{Stevenson(1973)}]{Stevenson1973}
+Stevenson, L. 1973.
+\newblock \enquote{Frege's Two Definitions of Quantification}.
+\newblock \emph{Philosophical Quarterly} 23:207--223.
+
+\bibitem[{Suppes(1957)}]{Suppes1957}
+Suppes, Patrick. 1957.
+\newblock \emph{Introduction to Logic}.
+\newblock Van Nostrand.
+
+\bibitem[{Tarski(1944)}]{Tarski1944}
+Tarski, Alfred. 1944.
+\newblock \enquote{The Semantic Conception of Truth and the Foundations of
+  Semantics}.
+\newblock \emph{Philosophy and Phenomenological Research} 4:341--375.
+\newblock Available in Martinich, A. P. (ed.), 2001, \emph{The Philosophy of
+  Language}, Oxford: Oxford University Press, 4th edition.
+
+\bibitem[{Tarski(1983 [1933])}]{Tarski1983}
+------. 1983 [1933].
+\newblock \enquote{The Concept of Truth in Formalized Languages}.
+\newblock In John Corcoran (ed.), \emph{Logic, Semantics, Metamathematics:
+  Papers from 1923 to 1938}. Hackett Publishing, 152--278.
+
+\bibitem[{Tarski and Vaught(1956)}]{Tarski1956}
+Tarski, Alfred and Vaught, R.~L. 1956.
+\newblock \enquote{Arithmetical Extensions of Relational Systems}.
+\newblock \emph{Compositio Math} 13:81--102.
+
+\bibitem[{Tennant(1978)}]{Tennant1978}
+Tennant, Neil. 1978.
+\newblock \emph{Natural Logic}.
+\newblock Edinburgh University Press.
+
+\bibitem[{Thomason(1970)}]{Thomason1970}
+Thomason, R.~H. 1970.
+\newblock \emph{Symbolic Logic, An Introduction}.
+\newblock Macmillan.
+
+\bibitem[{van Dalen(1980)}]{Dalen1980}
+van Dalen, Dirk. 1980.
+\newblock \emph{Logic and Structure}.
+\newblock Springer.
+
+\bibitem[{Vaught(1974)}]{Vaught1974}
+Vaught, R.~L. 1974.
+\newblock \enquote{Model Theory before 1945}.
+\newblock In {L. Henkin et al} (ed.), \emph{Proceedings of the Tarski
+  Symposium}. AMS, 153--172.
+
+\bibitem[{Westerst\aa{}hl(2001)}]{Westerstahl2001}
+Westerst\aa{}hl, Dag. 2001.
+\newblock \enquote{Quantifiers}.
+\newblock In Lou Goble (ed.), \emph{The Blackwell Guide to Philosophical
+  Logic}. Blackwell, 437--460.
+
+\bibitem[{Zakharyaschev et~al.(2001)Zakharyaschev, Wolter, and
+  Chagrov}]{Zakharyaschev2001}
+Zakharyaschev, M., Wolter, F., and Chagrov, A. 2001.
+\newblock \enquote{Advanced Modal Logic}.
+\newblock In Dov~M. Gabbay and Franz Guenthner (eds.), \emph{Handbook of
+  Philosophical Logic}, volume~3. Kluwer Academic Publishers, 83--266.
+
+\end{thebibliography}

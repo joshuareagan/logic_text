@@ -1,0 +1,918 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quantifier Logic II}\label{quantifierlogic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \AddToShipoutPicture*{\BackgroundPicB}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Language \GQL{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\setcounter{DefThm}{0}
+
+\subsection{Symbols}\label{Sec:GQLSymbols}
+In this chapter we extend our language to include many-place predicates.  The resulting language is \GQL{}, and its development was a significant event in the history of logic.\footnote{%
+	The development of \GQL{} goes back to Gottlob Frege \citeyearpar{Frege1879,Frege1891,Frege1893}, O. H. Mitchell \citeyearpar{Mitchell1883} and Charles S. Peirce \citeyearpar{Peirce1883}, with Frege's work being independent of and unknown to the latter two. See \citealp[288]{Church1956} and \citealp[34]{Hodges2001}.  %
+ Although it's probably safe to say that Frege and Peirce/Mitchell developed quantificational logic independently, the extent to which Peirce and his students (like Mitchell) knew of Frege's work is a matter of debate.
+It's clear they at least knew of Frege.
+E.g., Ladd-Franklin \citeyearpar{LaddFranklin1883} cites Frege's \citeyearpar{Frege1879} through a review of it by Ernst Schr\"oder. 
+See \citep{Dipert1984} for a brief discussion on the situation.}
+The 2-place predicates correspond roughly to what you get if you take an English sentence and remove two names, leaving blanks, e.g.:
+
+\begin{RESTARTmenumerate}
+	\item \mention{Goliath is taller than David} $\Rightarrow$ \mention{\_\_\_\_\_\_ is taller than \_\_\_\_\_\_}
+\end{RESTARTmenumerate}
+
+\noindent{}We may think of 2-place predicates is as expressing a 2-place \emph{relation}.  In the above example, we have the \mention{taller than} relation.  This relation holds between two objects when one is taller than the other.  Another 2-place relation is \mention{loves}:
+
+\begin{menumerate}
+		\item \mention{Juliet Capulet loves Romeo Montague} $\Rightarrow$ \mention{\_\_\_\_\_\_ loves \_\_\_\_\_\_}
+\end{menumerate}
+
+\noindent{}The \mention{loves} relation holds when one person---or object of whatever kind---loves another.  We may understand 3-place predicates in a similar way.  For example:
+
+\begin{menumerate}
+	\item \mention{Three is between two and four} $\Rightarrow$ \mention{\_\_\_\_\_\_ is between \_\_\_\_\_\_ and \_\_\_\_\_\_}
+\end{menumerate}
+
+For any $n\geq2$, an $n$-place predicate can mirror a corresponding $n$-place relation.  The introduction of many-place predicates significantly increases the power of our formal language.  Consider the following argument:
+
+\begin{menumerate}
+\item Socrates is older than Plato.
+\item Plato is older than Aristotle.
+
+Therefore,
+
+\item Socrates is older than Aristotle.
+\end{menumerate}
+
+\noindent{}This argument is a good one, but we cannot represent it as an entailment in \GQL{}1.  The full language of \GQL{} can handle such arguments because it can simulate the \mention{older than} relation with a 2-place predicate.  One caveat is necessary---the last sentence isn't a logical consequence of the first two.  The first two sentences only entail the third if we also assume that the \mention{older than} relation is transitive.  Roughly, the way to express this transitivity would be as follows:
+
+\begin{center}
+For any $x$, $y$, and $z$ such that $x$ is older than $y$ and $y$ is older than $z$, \\ $x$ is older than $z$.
+\end{center}
+
+\noindent{}Thankfully, we can express this in \GQL{}, using quantifiers and 2-place predicates.
+
+\GQL{} has all the basic symbols of \GQL{}1, plus predicate letters for $n$-placed predicates, for every integer $n$ such that $n\geq2$. 
+\begin{majorILnc}{\LnpDC{Symbols of GQL}}
+The \df{basic symbols} of \GQL{} are:
+\begin{cenumerate}
+\item Logical Connectives, Punctuation Symbols, Sentence Letters, Individual Constants, Individual Variables: same as \GQL{}1
+\item 1-Place Predicates: $\Ap{'}$, $\Bp{'}$, $\ldots$, $\Tp{'}$, $\Ap{'}_1$, $\Bp{'}_1$, $\ldots$, $\Tp{'}_1$, $\Ap{'}_2$, $\Bp{'}_2$, $\ldots$
+\item 2-Place Predicates: $\Ap{''}$, $\Bp{''}$, $\ldots$, $\Tp{''}$, $\Ap{''}_1$, $\Bp{''}_1$, $\ldots$, $\Tp{''}_1$, $\Ap{''}_2$, $\Bp{''}_2$, $\ldots$
+\item 3-Place Predicates: $\Ap{'''}$, $\Bp{'''}$, $\ldots$
+\item[] \hspace{.5in} . . . and so on for all positive integers.
+\end{cenumerate}
+\end{majorILnc}
+
+The only difference in appearance between 1-place and 2-place predicates is that the former have only one prime mark and the latter have two. 
+Like their 1-place counterparts, 2-place predicates go from \mention{$\Ap{''}$} to \mention{$\Tp{''}$}.  And the same also goes for every $n$-place predicate.
+
+The superscript prime marks play the significant logical role of marking the arity, or number of places, of the predicate, while the subscripts play the lesser role of making sure we have enough predicates.  For every integer $\integer{n}$, \GQL{} contains an infinite number of $\integer{n}$-place predicates. 
+
+\subsection{Formulas of \GQL{}}\label{Formulas of GQL}
+Our ultimate interest is in sentences of \GQL{}, but as with \GQL{}1 we must first define formulas.\index{formulas} The second base clause expands the definition from the \GQL{}1 definition of formula.
+\begin{majorILnc}{\LnpDC{Definition of Formula of GQL}} The \nidf{formulas} \underdf{of \GQL{}}{formulas} are given by the following recursive definition:
+\begin{description}
+\item[Base Clauses:] \hfill{}
+\begin{cenumerate}
+\item A sentence letter (atomic sentence of \GSL{}) is a formula.
+\item An $\integer{n}$-place predicate followed by $\integer{n}$ occurrences (tokens) of individual constants or variables is a formula.
+\end{cenumerate}
+\item[Generating Clauses:] \hfill{}
+\begin{cenumerate}
+\item If $\CAPPHI$ is a formula, then so is $\negation{\CAPPHI}$.
+\item If $\CAPPHI$ and $\CAPTHETA$ are formulas, then so are $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\partriplebar{\CAPPHI}{\CAPTHETA}$.
+\item If all of $\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\CAPPHI_4,\ldots,\CAPPHI_{\integer{n}}$ are formulas (the list must include at least two formulas and be finite), then so are $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\conjunction{\CAPPHI_4}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ and $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\CAPPHI_3}{\disjunction{\CAPPHI_4}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$.
+\item If $\CAPPHI$ is a formula and it does not contain an expression of the form $\universal{\ALPHA}$ or $\existential{\ALPHA}$ for some \GQL{} variable $\ALPHA$, then $\universal{\ALPHA}\CAPPHI$ and $\existential{\ALPHA}\CAPPHI$ are formulas.
+\end{cenumerate}
+\item[Closure Clause:] A string of symbols is a formula \Iff it can be generated by the clauses above.
+\end{description}
+\end{majorILnc}
+\noindent{}$\App{'}{\constant{b}}$ is a formula (an atomic one, to be specific), as is $\Appp{''}{\variable{x}}{\constant{a}}$. 
+But $\Bpp{''}{\variable{x}}$ is not a formula, because it has a 2-place predicate followed only by one individual variable. 
+To determine whether some string is a formula, we must count \emph{tokens} of variables and constants. 
+For example, $\Cppp{'''}{\variable{x}}{\variable{x}\variable{x}}$ is a formula because it has a 3-place predicate followed by three tokens of an individual variable.
+
+From base clause 2 we know that $\Gppp{''}{\variable{x}}{\variable{y}}$ is a formula, and so from clause 4 we know that the following are also formulas. 
+(The list is not exhaustive.) 
+\begin{multicols}{2}
+\begin{menumerate}
+\item $\universal{\variable{x}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+\item $\existential{\variable{x}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+%\item $\universal{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+%\item $\existential{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+%\item $\universal{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+\item $\existential{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$
+\item $\existential{\variable{y}}\universal{\variable{x}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+%\item $\existential{\variable{x}}\universal{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+%\item $\universal{\variable{x}}\universal{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+\item $\universal{\variable{x}}\existential{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+\item $\universal{\variable{x}}\universal{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
+%\item $\universal{\variable{x}}\existential{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$
+\end{menumerate}
+\end{multicols}
+\noindent{}But $\universal{\variable{x}}\universal{\x}\Gppp{''}{\variable{x}}{\variable{y}}$ is \emph{not} a formula, because it's of the form $\universal{\variable{x}}\CAPPHI$ where $\CAPPHI$ is a formula that contains the expression $\universal{\variable{x}}$.
+
+As in \GSL{} and \GQL{}1, we have unofficial formulas too.
+\begin{majorILnc}{\LnpDC{Unofficial Formula of GQL}}
+A string of symbols is an \nidf{unofficial} formula\index{formulas!unofficial|textbf} \Iff we can obtain it from an official formula by
+\begin{cenumerate}
+\item deleting outer parentheses,
+\item replacing official parentheses ( ) with square brackets [ ] or curly brackets \{ \}, or
+\item omitting primes $'$ on a predicate letter.
+\end{cenumerate}
+\end{majorILnc}
+
+\subsection{Other Properties of Formulas}\label{Other Properties of Formulas} 
+The concepts of subformula, order, main connective, and construction tree for formulas of \GQL{} are the same as in \GQL{}1.\footnote{See section \ref{Other Properties of Formulas1} of the last chapter.} 
+\begin{majorILnc}{\LnpEC{GQLSubformulaPropertiesExampleC}}
+Consider the formula $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\App{'}{\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$.
+This is a disjunction; its main connective is vee, $\VEE$.
+It has eleven subformulas:
+\begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
+labelindent=.35\parindent, labelsep=*, itemsep=0pt]%,start=1
+\item $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\Ap{'\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$
+\end{enumerate}
+\vspace*{-.5cm}
+\begin{multicols}{2}
+\begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
+labelindent=.35\parindent, labelsep=*, itemsep=0pt, start=2]%,start=1
+\item $\existential{\variable{x}}\parconjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\Ap{'\variable{x}}}$
+\item $\conjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\Ap{'\variable{x}}}$
+\item $\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}$
+\item $\Ap{'\variable{x}}$
+\item $\Eppp{''}{\variable{x}}{\variable{y}}$
+\item $\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$
+\item $\horseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$
+\item $\existential{\variable{y}}\Hp{'\constant{a}}$
+\item $\Gp{'\variable{x}}$
+\item $\Hp{'\constant{a}}$
+\end{enumerate}
+\end{multicols}
+The construction tree of the formula is:
+\begin{center}
+\begin{tikzpicture}[grow=up]
+\tikzset{level distance=50pt}
+\tikzset{level 1/.style={level distance=65pt}}
+\tikzset{sibling distance=40pt}
+\tikzset{every tree node/.style={align=center,anchor=north}}
+	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
+[.{$\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\Ap{'\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$}
+  [.{$\horseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$\\ $\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$}
+       [.{$\text{ }$\\ $\Gp{'\variable{x}}$}
+       ]    
+       [.{$\Hp{'\constant{a}}$\\ $\existential{\variable{y}}\Hp{'\constant{a}}$}
+       ]
+  ]
+  [.{$\conjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\Ap{'\variable{x}}}$\\ $\existential{\variable{x}}\parconjunction{\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}}{\Ap{'\variable{x}}}$} %!{\qsetw{3in}}
+       [.{$\text{ }$\\ $\Ap{'\variable{x}}$}
+       ]    
+       [.{$\Eppp{''}{\variable{x}}{\variable{y}}$\\ $\universal{y}\Eppp{''}{\variable{x}}{\variable{y}}$}
+       ] 
+  ]
+]%
+	%\caption{Example formula tree}
+	%\label{fig:ExampleFormulaTree}
+\end{tikzpicture}
+\end{center}
+As you can see from the construction tree, the order of the formula is 5. 
+\end{majorILnc}
+
+\subsection{Sentences of \GQL{}}\label{Sentences of GQL} 
+Sentences, atomic sentences, and unofficial sentences of \GQL{} are defined exactly as in \GQL{}1.\footnote{See section \ref{Sentences of GQL1} of the last chapter.} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Models}\label{GQL Interpretations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Models in \GQL{}}\label{Interpretations in GQL}
+As you can imagine, models in \GQL{} are very similar to models of \GQL{}1 except that they accommodate many-place predicates.
+
+\begin{majorILnc}{\LnpDC{GQL Interpretation}} 
+	A \df{model} for $\CAPPHI$, $\IntA$, consists of:
+	\begin{cenumerate}
+		\item an assignment of a truth value $\TrueB$ or $\FalseB$ to each sentence letter in $\CAPPHI$; 
+		\item a non-empty set $\integer{U}$, called the \df{universe} or \df{domain};
+		\item an assignment of an object from $\integer{U}$ to each individual constant in $\CAPPHI$;
+		\item an assignment of a subset of $\integer{U}$ to each 1-place predicate in $\CAPPHI$;
+		\item an assignment of a set of ordered $\integer{n}$-tuples to each $\integer{n}$-place predicate in $\CAPPHI$.  The objects in each $\integer{n}$-tuple are members of $\integer{U}$.\footnote{For a reminder on what an $\integer{n}$-tuple is, see section \ref{orderedpairs} of Chapter \ref{introduction}.}
+	\end{cenumerate}
+\end{majorILnc}
+
+\noindent{}The only new part of the definition of model for $\CAPPHI$ in \GQL{} is clause (5).  
+Given an $\integer{n}$-place predicate, like $\Bp{'''}$, we let $\IntA(\Bp{'''})$ be the set of ordered $\integer{n}$-tuples (in this case, $3$-tuples) assigned to $\Bp{'''}$ by $\IntA$. 
+For an illustration, imagine a model $\IntA$ on which $\Bp{'''}$ stands for the \mention{between} relation for positive integers from $1$ to $4$; i.e., such that the first member of each ordered $3$-tuple is a number between the second and third members.  The $3$-tuple $\langle 2, 1, 3\rangle$ is one example.  The model $\IntA$ would assign all such $3$-tuples to $\Bp{'''}$ as follows:
+
+\bigskip
+\noindent{}$\IntA(\Bp{'''})=\{\langle 2, 1, 3\rangle, \langle 2, 1, 4\rangle, \langle 3, 1, 4\rangle, \l\langle 3, 2, 4\rangle\}$ 
+\bigskip
+
+For a second illustration, consider these three people: Jack, Jill, and Bill.  Let's say that Jack is taller than Jill, and Jill is taller than Bill.  Let $\IntA$ be a model on which $\IntA(\Ap{''})$ is the \mention{taller than} relation.  The assignment to $\Ap{''}$ would be the following set of ordered pairs:
+
+\bigskip
+\noindent{}$\IntA(\Ap{''})=\{\langle$Jack, Jill$\rangle, \langle$Jill, Bill$\rangle, \langle$Jack, Bill$\rangle\}$ 
+\bigskip
+
+\subsection{Truth in a Model}\label{GQL Truth in an Interpretation}
+
+The definition of truth in a model for \GQL{} is exactly the same as in \GQL{}1 except with an additional clause for many-place predicates.
+
+\begin{majorILnc}{\LnpDC{Truth for GQL Sentence}}
+The following clauses fix when a \GQL{} sentence $\CAPTHETA$ is \nidf{$\True$} (or \nidf{$\False$}) on a model for $\CAPTHETA$, $\IntA$:
+\begin{cenumerate}
+	\item A sentence letter $\CAPPHI$ is $\True$ on $\IntA$ \Iff $\As{}{}$ assigns $\True$ to it, i.e. \Iff $\As{}{}(\CAPPHI)=\TrueB$.
+	\item An atomic sentence $\Pp{\variable{t}}$ with a 1-place predicate $\PP$ and an individual term $\variable{t}$ is $\True$ on $\IntA$ \Iff what $\IntA$ assigns to the individual term $\variable{t}$ is in the set $\IntA$ assigns to the predicate, i.e. \Iff $\IntA(\variable{t})\in\IntA(\PP)$.
+	\item\label{formtruthatomicn} An atomic sentence $\Pp{\variable{t}_1\ldots\variable{t}_{\integer{n}}}$ with an $\integer{n}$-place predicate $\PP$ is $\True$ on $\IntA$ \Iff $\langle \As{}{}(\variable{t}_1),\As{}{}(\variable{t}_2),\ldots,\As{}{}(\variable{t}_{\integer{n}}) \rangle \in \As{}{}(\PP)$. 
+	\item A negation $\negation{\CAPPHI}$ is $\True$ on $\IntA$ \Iff the unnegated formula $\CAPPHI$ is $\False$ on $\IntA$.
+	\item A conjunction $\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is $\True$ on $\IntA$ \Iff all conjuncts $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ are $\True$ on $\IntA$.
+	\item A disjunction $\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is $\True$ on $\IntA$ \Iff at least one disjunct $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ is $\True$ on $\IntA$.
+	\item A conditional $\parhorseshoe{\CAPPSI}{\CAPPHI}$ is $\True$ on $\IntA$ \Iff the \CAPS{lhs} $\CAPPSI$ is $\False$ or the \CAPS{rhs} $\CAPPHI$ is $\True$ on $\IntA$.
+	\item A biconditional $\partriplebar{\CAPPSI}{\CAPPHI}$ is $\True$ on $\IntA$ \Iff both sides, $\CAPPSI$ and $\CAPPHI$, have the same truth value on $\IntA$.
+	\item\label{GQLTruthUnvQuant} A universal quantification $\universal{\ALPHA}\CAPPHI$ is $\True$ on $\IntA$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is $\True$ on \emph{all} $\variable{t}$-variants of $\IntA$ (where $\variable{t}$ is the first \emph{constant} not contained in $\CAPPHI$).
+	\item An existential quantification $\existential{\ALPHA}\CAPPHI$ is $\True$ on $\IntA$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is $\True$ on \emph{some} $\variable{t}$-variant of $\IntA$ (where $\variable{t}$ is the first \emph{constant} not contained in $\CAPPHI$).
+	\item A sentence $\CAPPHI$ is $\False$ on $\IntA$ \Iff $\CAPPHI$ is not $\True$ on $\IntA$.
+\end{cenumerate}
+\end{majorILnc}
+
+\noindent{}Let's look at a simple example to see how \GQL{} truth works for a two-place predicate.  Consider a model $\IntA$ with the following assignments:\\
+
+\noindent{}$\IntA(\constant{j})=$ Jack\\
+\noindent{}$\IntA(\constant{i})=$ Jill\\
+\noindent{}$\IntA(\constant{b})=$ Bill\\
+\noindent{}$\IntA(\Ap{''})=\{\langle$Jack, Jill$\rangle, \langle$Jill, Bill$\rangle, \langle$Jack, Bill$\rangle\}$\\
+
+\noindent{}Is the \GQL{} sentence $\Ap{''\constant{j}\constant{b}}$ true on $\IntA$?  To find out, we must check the set $\IntA(\Ap{''})$ to see if $\langle\IntA(\constant{j}),\IntA(\constant{b})\rangle$ is a member.  We see that $\langle\IntA(\constant{j}),\IntA(\constant{b})\rangle=\langle$Jack, Bill$\rangle$.  We then find that $\langle$Jack, Bill$\rangle$ is a member of $\IntA(\Ap{''})$, so $\Ap{''\constant{j}\constant{b}}$ is true on $\IntA$.
+
+Next, consider the sentence $\Ap{''\constant{b}\constant{i}}$ on the same model.  This sentence is true on $\IntA$ \Iff $\langle\IntA(\constant{b}),\IntA(\constant{i})\rangle$ is a member of the set $\IntA(\Ap{''})$.  We know that $\langle\IntA(\constant{b}),\IntA(\constant{i})\rangle=\langle$Bill, Jill$\rangle$.  But $\langle$Bill, Jill$\rangle$ is not a member of $\IntA(\Ap{''})$, so $\Ap{''\constant{b}\constant{i}}$ is false on $\IntA$.  (Remember that $\langle$Bill, Jill$\rangle$ is not the same as $\langle$Jill, Bill$\rangle$.  Order matters!)
+
+Let's try more complicated examples, using the models provided on the table below:
+
+\begin{longtable}[c]{ l l l l } %p{2.2in} p{2in}
+	\toprule
+	&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Model}} \\ \cmidrule(l){3-4}
+	& & \textbf{Pos Int} & \textbf{States} \\
+	\midrule 
+	\endfirsthead
+	\multicolumn{4}{c}{\emph{Continued from Previous Page}}\\
+	\toprule
+	&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Model}} \\ \cmidrule(l){3-4}
+	& & \textbf{Pos Int} & \textbf{States} \\
+	\midrule 
+	\endhead
+	\bottomrule
+	\caption{Example Models}\\[-.15in]
+	\multicolumn{4}{c}{\emph{Continued next Page}}\\
+	\endfoot
+	\bottomrule
+	\caption{Example Models}\\%
+	\endlastfoot%
+	\label{table:Example Interpretations}%
+	%\begin{tabular}{ l l l l } %p{2in} p{2in} %\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
+	%\toprule
+	%&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Interpretation}} \\ \cmidrule(l){3-4}
+	%& & \textbf{Pos Int} & \textbf{States} \\
+	%\midrule 
+	{Universe:} & & The set of positive integers & The set of US states (2015) \\ \addlinespace[.25cm]
+	{Sent. Let.:}& A&$\True$&$\False$\\
+	& B&$\True$&$\False$\\
+	& C&$\False$&$\True$\\
+	& D&$\True$&$\False$\\
+	& E&$\True$&$\False$\\
+	& G&$\False$&$\True$\\ \addlinespace[.25cm]
+	{Constants:}&$\constant{a}$&1&Louisiana\\
+	&$\constant{b}$&9&Maine\\
+	&$\constant{c}$&72&Georgia\\
+	&$\constant{d}$&3&Nebraska\\
+	&$\constant{e}$&1&New Mexico\\
+	&$\constant{f}$&2&Texas\\ \addlinespace[.25cm]
+	{1-place:}&$\Ap{'}$&all pos int&Midwestern\\
+	&$\Bp{'}$&empty set&name with $>5$ letters\\
+	&$\Cp{'}$&even&Coastal\\
+	&$\Dp{'}$&odd&on the Pacific Coast\\
+	&$\Ep{'}$&prime&\{Ohio\}\\
+	&$\Gp{'}$&multiple of 7&\{Ohio, Alabama\}\\ \addlinespace[.25cm]
+	{2-place:}&$\Ap{''}$&first $>$ second&share a border\\
+	&$\Bp{''}$&are equal&first is north of second\\
+	&$\Cp{''}$&first = 2 times second&first $>$ second (area)\\
+	&$\Dp{''}$&sum of them equals 7&first $>$ second (population)\\
+	&$\Ep{''}$&first $<$ second&first is west of second\\
+	&$\Gp{''}$&are relatively prime&both coastal, or neither\\ \addlinespace[.25cm]
+	{3-place:}&$\Ap{'''}$&all equal&all same population\\
+	&$\Bp{'''}$&first $<$ second $<$ third&first is north of others\\
+	&$\Cp{'''}$&all odd or all even&first $>$ second $>$ third (area)\\
+	&$\Dp{'''}$&first + second = third&first + second $>$ third (area)\\
+	&$\Ep{'''}$&first $\times$ second = third&first is west of the others\\
+	&$\Gp{'''}$&are all relatively prime& at least two coastal \\
+	%\bottomrule
+\end{longtable}
+
+While looking over the many-place predicates in the table, you'll notice that we don't actually list sets of $n$-tuples.  Instead, for each many-place predicate we provide a brief description of some relation which could be used to identify such a set.  This will be our usual practice.  Writing out all the specific $n$-tuples in our chart would be excessively tedious for the model \emph{States}, and impossible for the model \emph{Pos Int}.\footnote{Finite beings often have difficulty performing tasks with an infinite number of steps.}
+
+\begin{majorILnc}{\LnpEC{GQLTruthExampleA}}
+Determine the truth values of the sentences $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ and $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ on the model \emph{Pos Int} in table \ref{table:Example Interpretations}.  The only difference between these two sentences is the order of the quantifiers.  If we can show that they differ in truth value on the same model, then we will have established that quantifier order matters for assessing truth in a model.
+\end{majorILnc}
+\begin{PROOF}
+First, let's consider the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$.
+
+(i)  $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int} \Iff $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}.  The sentence $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on an $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, \Iff $\App{''\constant{b}}{\constant{a}}$ is true on some $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ (definition of truth, $\exists$).  \emph{Pos Int} assigns to $\App{''}{}$ the set of ordered pairs such that the first is greater than the second.  So, $\App{''\constant{b}}{\constant{a}}$ is true on some $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ when it assigns a larger number to $\constant{b}$ than it assigns to $\constant{a}$.
+
+It doesn't really matter what $\emph{Pos Int}^{\constant{a}}$ assigns to $\constant{a}$.  There is some larger number that a $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ can assign to $\constant{b}$.  Hence, regardless of what number $\emph{Pos Int}^{\constant{a}}(\constant{a})$ is, $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on $\emph{Pos Int}^{\constant{a}}$.
+
+For every assignment to $\constant{a}$, there is some assignment to $\constant{b}$ that is larger.  So $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}.  Thus, the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int}.
+
+(ii) $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int} \Iff $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is true on some $\constant{a}$-variant of \emph{Pos Int}.  The sentence $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is true on some $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, \Iff $\App{''\constant{a}}{\constant{b}}$ is true on all $\constant{b}$-variants of $\emph{Pos Int}^{\constant{a}}$.
+
+But no matter how large of a number that a $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ assigns to $\constant{a}$, there will always be some larger number that it could assign to $\constant{b}$.  So, $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is false on all $\constant{a}$-variants of \emph{Pos Int}.  Thus, $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is false on \emph{Pos Int}.
+\end{PROOF}
+The different quantifier order affects the meanings of the sentences.  The sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ relative to \emph{Pos Int} means, roughly, that \mention{for every positive integer there is a larger positive integer.}  The sentence $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ relative to \emph{Pos Int} means, roughly, that \mention{there is some positive integer that is larger than every positive integer.}  Clearly the former is true and the latter isn't.\footnote{We will further discuss translations of sentences in formal languages in Chapter \ref{Translations}.}
+
+
+
+
+
+
+
+
+
+\begin{majorILnc}{\LnpEC{GQLTruthExampleB}}
+The sentence $\universal{\variable{x}}\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dppp{\variable{x}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\variable{x}}{\variable{z}}}$ is (i) true in the model \emph{Pos Int} given in table \mvref{table:Example Interpretations}, but (ii) is false in the model \emph{States}. 
+\end{majorILnc}
+\begin{PROOF}
+(i) The model \emph{Pos Int} assigns to $\CC$ the set of positive integer pairs $\langle \variable{u},\variable{v}\rangle$ such that $\variable{u}=2\variable{v}$, to $\DD$ the set of positive integer triples $\langle \variable{u},\variable{v},\variable{w}\rangle$ such that $\variable{u}+\variable{v}=\variable{w}$, and to $\BB$ the set of positive integer triples $\langle \variable{v},\variable{u},\variable{w}\rangle$ such that $\variable{v}<\variable{u}<\variable{w}$.  
+
+Consider an instantiation of the sentence $\universal{\variable{x}}\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dppp{\variable{x}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\variable{x}}{\variable{z}}}$; let's say $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$.\footnote{An \mention{instantiation} of a quantified sentence is a second sentence in which the quantifier is first dropped, and then the newly unbound variables are replaced with constants.  In this case we drop all three quantifiers and substitute three different constants for the three variables in the original sentence.}  Now consider an $\constant{a},\constant{b},\constant{c}$-variant of \emph{Pos Int} such that $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})=2\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})$ and $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})+\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})=\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$.
+
+Both $\Cpp{\constant{a}}{\constant{b}}$ and $\Dppp{\constant{a}}{\constant{b}}{\constant{c}}$ are true on any such variant. The \CAPS{rhs} of the conditional, $\Bppp{\constant{b}}{\constant{a}}{\constant{c}}$, is also true on that variant.  Because $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})=2\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})$, it's clear that $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})<\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})$ (0 is not a positive integer). 
+And because $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})+\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})=\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$, it's clear that $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})<\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$.
+So, $\Bppp{\constant{b}}{\constant{a}}{\constant{c}}$ is true on any such variant of \emph{Pos Int}.
+Thus, every variant of \emph{Pos Int} such that $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})=2\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})$ and $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})+\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})=\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$ makes the conditional $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$ true. 
+
+Any variant of \emph{Pos Int} such that either $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})\neq{}2\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})$ or $\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{a})+\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{b})\neq{}\emph{Pos Int}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$ makes either  $\Cpp{\constant{a}}{\constant{b}}$ or $\Dppp{\constant{a}}{\constant{b}}{\constant{c}}$ false (def. of truth, $\WEDGE$), and hence makes the conditional $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$ true (def. of truth, $\HORSESHOE$).
+
+Therefore, every $\constant{a},\constant{b},\constant{c}$-variant of \emph{Pos Int} makes the conditional $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$ true. Put in a slightly different way, every $\constant{c}$-variant of $\emph{Pos Int}^{\constant{a}\constant{b}}$ makes $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$ true.  Hence $\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\variable{z}}}}{\Bppp{\constant{b}}{\constant{a}}{\variable{z}}}$ is true on every $\constant{a},\constant{b}$-variant of \emph{Pos Int}. 
+
+We may repeat this kind of reasoning to add quantifiers and replace the two remaining constants with variables.   Every $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ makes $\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\variable{z}}}}{\Bppp{\constant{b}}{\constant{a}}{\variable{z}}}$ true.  So, by the definition of truth for $\forall$, $\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\variable{y}}}{\Dppp{\constant{a}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\constant{a}}{\variable{z}}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}.  It follows that $\universal{\variable{x}}\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dppp{\variable{x}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\variable{x}}{\variable{z}}}$ is true on \emph{Pos Int}.
+
+\bigskip
+
+(ii) The model \emph{States} assigns to $\CC$ pairs of states $\langle \variable{u},\variable{v}\rangle$ where $\variable{u}>\variable{v}$ (area), to $\DD$ triples of states $\langle \variable{u},\variable{v},\variable{w}\rangle$ where $\variable{u}+\variable{v}>\variable{w}$ (area), and to $\BB$ triples of states $\langle \variable{v},\variable{u},\variable{w}\rangle$ where $\variable{v}$ is north of $\variable{u}$ and $\variable{w}$.  As in the last section, let's reason using an instance of $\universal{\variable{x}}\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dppp{\variable{x}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\variable{x}}{\variable{z}}}$; again, let's use $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$.
+
+Now consider an $\constant{a},\constant{b},\constant{c}$-variant of \emph{States} that assigns $\constant{a}$ to Alaska, $\constant{b}$ to Delaware, and $\constant{c}$ to Rhode Island.  
+Alaska has an area of approximately $1.7\times{}10^6\text{ km}^2$, Delaware an area of approximately $2.5\times{}10^3\text{ km}^2$, and Rhode Island an area of approximately $1.5\times{}10^3\text{ km}^2$.
+Hence $\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{a})>\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{b})$ (area), $\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{a})+\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{b})>\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$ (area), but $\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{b})$ is not north of both $\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{a})$ and $\emph{States}^{\constant{a}\constant{b}\constant{c}}(\constant{c})$; that is, Delaware is not north of Alaska. 
+So, by clause (3) of the definition of truth, \ref{Truth for GQL Sentence}, $\Cpp{\constant{a}}{\constant{b}}$ and $\Dppp{\constant{a}}{\constant{b}}{\constant{c}}$ are true on $\emph{States}^{\constant{a}\constant{b}\constant{c}}$, while $\Bppp{\constant{b}}{\constant{a}}{\constant{c}}$ is false on $\emph{States}^{\constant{a}\constant{b}\constant{c}}$. 
+So by the definition of truth ($\WEDGE$ and $\HORSESHOE$), $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$ is false on $\emph{States}^{\constant{a}\constant{b}\constant{c}}$. 
+
+We may word this slightly differently: there is a $\constant{c}$-variant of $\emph{States}^{\constant{a}\constant{b}}$ on which $\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\constant{c}}}}{\Bppp{\constant{b}}{\constant{a}}{\constant{c}}}$ is false.  It follows (by the definition of truth for $\forall$) that $\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\variable{z}}}}{\Bppp{\constant{b}}{\constant{a}}{\variable{z}}}$ is false on $\emph{States}^{\constant{a}\constant{b}}$.  So, there is, in turn, a $\constant{b}$-variant of $\emph{States}^{\constant{a}}$ on which $\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\constant{b}}}{\Dppp{\constant{a}}{\constant{b}}{\variable{z}}}}{\Bppp{\constant{b}}{\constant{a}}{\variable{z}}}$ is false.  So, again, by the definition of truth for $\forall$, that $\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\variable{y}}}{\Dppp{\constant{a}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\constant{a}}{\variable{z}}}$ is false on $\emph{States}^{\constant{a}}$.
+
+Finally, because there is an $\constant{a}$-variant of \emph{States} on which $\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\constant{a}}{\variable{y}}}{\Dppp{\constant{a}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\constant{a}}{\variable{z}}}$ is false, $\universal{\variable{x}}\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dppp{\variable{x}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\variable{x}}{\variable{z}}}$ is false on \emph{States} (definition of truth, $\forall$).
+\end{PROOF}
+
+\subsection{Logical Truth: QT, QF, \& QC}\label{QT QF QI GQL}
+The concepts of quantificational truth (\CAPS{qt}), quantificational falsehood (\CAPS{qf}), and quantificational contingency (\CAPS{qc}) are defined for \GQL{} exactly as in \GQL{}1.\footnote{See section \vref{QT QT QI} of the last chapter.} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Entailment and other Relations}\label{GQL Entailment and other Relations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The concepts for entailment and the other logical relations are also defined for \GQL{} exactly as in \GQL{}1.\footnote{See section \vref{GQL1 Entailment and other Relations} of the last chapter.} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Dragnet Theorem}\label{Dragnet Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In example \ref{GQL Entailment Example 2} we were able to establish that the entailment  \mention{$\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\constant{b}}$} holds by reasoning as follows:
+
+\begin{enumerate}[label=(\roman*)]
+	\item Any model $\IntA$ that makes $\universal{\variable{x}}\Gp{\variable{x}}$ true makes $\Gp{\constant{a}}$ true on all $\constant{a}$-variants of $\IntA$.
+	\item All $\constant{a}$-variants of $\IntA$ share the same domain and make the same set assignment to $\GG$.
+	\item There is some $\constant{a}$-variant of $\IntA$, $\As{\constant{a}}{}$, such that $\As{\constant{a}}{}(\constant{a})=\IntA(\constant{b})$.
+	\item Because $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\GG)$ and $\As{\constant{a}}{}(\GG)=\IntA(\GG)$, $\As{\constant{a}}{}(\constant{a})\in\As{}{}(\GG)$.
+	\item Because $\As{\constant{a}}{}(\constant{a})\in\As{}{}(\GG)$ and $\As{\constant{a}}{}(\constant{a})=\IntA(\constant{b})$, $\As{}{}(\constant{b})\in\As{}{}(\GG)$.
+	Thus, $\Gp{\constant{b}}$ is true on $\IntA$.
+\end{enumerate}
+
+\noindent{}By analogous reasoning, we can show that $\universal{\variable{x}}\Gp{\variable{x}}$ entails $\Gp{\constant{c}}$, $\Gp{\constant{d}}$, $\Gp{\constant{e}}$, and so on.  But what if we want to prove that the entailment holds, regardless of what constant we pick?  Proving that the entailment always holds, regardless of the constant, requires the use of metatheory.  For such proofs we'll need to use a metavariable, in this case $\variable{t}$: $\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\variable{x}}\variable{t}/\variable{x}$, where $\variable{t}$ is any constant.
+
+And we will also want to prove rather stronger entailments, such as the following: $\universal{\variable{x}}\CAPPHI\sdtstile{}{}\CAPPHI\constant{b}/\variable{x}$, where $\CAPPHI$ is some \GQL{} sentence with only $\variable{x}$ free.
+
+Such proofs are much easier to complete with the following theorem, which we call the \mention{Dragnet Theorem}.  Let's say that $\CAPPHI$ and $\CAPPHI^*$ are sentences of \GQL{} such that $\CAPPHI^*=\CAPPHI\variable{s}/\variable{t}$, where $\variable{s}$ and $\variable{t}$ are constants.\footnote{Recall from section \pmvref{MathEnglishVariableSubEx1} in Chapter \ref{quantifierlogic1} that $\CAPPHI\variable{s}/\variable{t}$ is the sentence you get by replacing each unbound token of $\variable{t}$ in $\CAPPHI$ with a token of $\variable{s}$.  With Dragnet, we are concerned solely with cases in which $\variable{s}$ and $\variable{t}$ are constants.}  Let's also say that we have two models, $\As{}{1}$ and $\As{}{2}$, that make all the same assignments except that what $\As{}{1}$ assigns to $\variable{t}$, $\As{}{2}$ assigns to $\variable{s}$. I.e., $\As{}{1}(\variable{t})=\As{}{2}(\variable{s}).$  It would seem that $\CAPPHI$ is true on $\As{}{1}$ \Iff $\CAPPHI^*$ is true on $\As{}{2}$.  This intuitively plausible claim is true, and the Dragnet theorem proves it.  There are many cases in which Dragnet is crucial for proving properties or relations of sentences (e.g., in theorem \pmvref{Soundness of Quantifier Logic}, and \pmvref{MethodLemmaC}).\footnote{Although the basic claim behind Dragnet seems obviously true, it turns out that stating the theorem precisely and proving is difficult. 
+There are different ways to state the theorem, not all exactly equivalent. See \citealt[66]{Mates1972} and \citealt[577]{Bergmann2003} for two alternative examples.}
+
+We need not restrict the claim to pairs of sentences that vary on only one constant.  A pair of otherwise identical sentences $\CAPPHI$ and $\CAPPHI^*$ may differ on as many constants as you like, and as long as two models, $\IntA_1$ and $\IntA_2$, make the same assignments for the replacement constants in $\CAPPHI^*$, $\CAPPHI$ is true on $\IntA_1$ \Iff $\CAPPHI^*$ is true on $\IntA_2$. 
+That is, if there are two sentences $\CAPPHI$ and $\CAPPHI^*$ such that  $\CAPPHI^*=\CAPPHI\variable{s}_1/\variable{t}_1,\variable{s}_2/\variable{t}_2,\ldots,\variable{s}_{\integer{i}}/\variable{t}_{\integer{i}}$, and two models $\IntA_1$ and $\IntA_2$ such that $\IntA_1(\variable{t}_1)=\IntA_2(\variable{s}_1)$, $\IntA_1(\variable{t}_2)=\IntA_2(\variable{s}_2)$, $\ldots$, and $\IntA_1(\variable{t}_{\integer{i}})=\IntA_2(\variable{s}_{\integer{i}})$, then $\CAPPHI$ is true on $\IntA_1$ \Iff $\CAPPHI^*$ is true on $\IntA_2$.  We prove this theorem below.
+
+\begin{THEOREM}{\LnpTC{The Dragnet Theorem} The Dragnet Theorem:}
+If 
+\begin{cenumerate}
+\item a \GQL{} sentence $\CAPPHI$ contains one or more of each of the constant(s) $\variable{t}_1$, $\variable{t}_2$, $\ldots$, $\variable{t}_{\variable{i}}$, and another \GQL{} sentence $\CAPPHI^*=\CAPPHI\variable{s}_1/\variable{t}_1,\variable{s}_2/\variable{t}_2,\ldots,\variable{s}_{\integer{i}}/\variable{t}_{\integer{i}}$; and
+\item The models $\As{}{1}$ and $\As{}{2}$ differ only in that what $\As{}{1}$ assigns to $\variable{t}_1$, $\As{}{2}$ assigns to $\variable{s}_1$, $\As{}{1}(\variable{t}_2)=\As{}{2}(\variable{s}_2)$, $\ldots$, $\As{}{1}(\variable{t}_{\integer{i}})=\As{}{2}(\variable{s}_{\integer{i}})$,\footnote{In 
+other words, $\As{}{1}$ and $\As{}{2}$ make the same assignments to $\integer{U}$, the predicates, the sentence letters, and the constants, except that what $\As{}{1}$ assigns to $\variable{t}_1$, $\As{}{2}$ assigns to $\variable{s}_1$; what $\As{}{1}$ assigns to $\variable{t}_2$, $\As{}{2}$ assigns to $\variable{s}_2$; and so on.}
+\end{cenumerate} 
+then: $\CAPPHI$ is true on $\As{}{1}$ iff $\CAPPHI^*$ is true on $\As{}{2}$.
+
+\end{THEOREM}
+\noindent{}We proceed by recursive proof.
+\begin{PROOF} 
+Throughout the proof we treat $^*$ as a function that takes a \GQL{} sentence and returns the sentence you get by replacing all occurrences of $\variable{t}_1$ with $\variable{s}_1$, $\variable{t}_2$ with $\variable{s}_2$, and so on. 
+Without further stipulation, $\CAPPHI^*=\CAPPHI\variable{s}_1/\variable{t}_1,\variable{s}_2/\variable{t}_2,\ldots,\variable{s}_{\integer{i}}/\variable{t}_{\integer{i}}$, $\CAPPSI^*=\CAPPSI\variable{s}_1/\variable{t}_1,\variable{s}_2/\variable{t}_2,\ldots,\variable{s}_{\integer{i}}/\variable{t}_{\integer{i}}$, $\CAPTHETA^*=\CAPTHETA\variable{s}_1/\variable{t}_1,\variable{s}_2/\variable{t}_2,\ldots,\variable{s}_{\integer{i}}/\variable{t}_{\integer{i}}$, and so on for all metavariables.  Accordingly, $\CAPPHI$ and $\CAPPHI^*$ satisfy Dragnet condition (1) above; and so do $\CAPPSI$ and $\CAPPSI^*$, as well as $\CAPTHETA$ and $\CAPTHETA^*$, etc. 
+
+Additionally, throughout the proof we assume that $\As{}{1}$ and $\As{}{2}$ are two arbitrary models that satisfy Dragnet condition (2) above.
+\begin{description}
+\item[Base Step:] $\CAPPHI$ is atomic.
+\begin{cenumerate}
+\item If $\CAPPHI$ is a sentence letter, then there are no constants and $\CAPPHI$ and $\CAPPHI^*$ must be identical. So, clearly, $\CAPPHI$ is true on $\As{}{1}$ iff $\CAPPHI^*$ is true on $\As{}{2}$.
+\item Say that $\CAPPHI$ is a predicate letter $\PP$ followed by one constant: $\Pp{\variable{t}}$.  Then $\CAPPHI^*$ is the same, but with a different constant: $\Pp{\variable{s}}$.  In accordance with Dragnet condition (2), $\As{}{1}$ and $\As{}{2}$ make all the same assignments except that what $\As{}{1}$ assigns to $\variable{t}$, $\As{}{2}$ assigns to $\variable{s}$.  So, $\As{}{1}(\PP)=\As{}{2}(\PP)$ and $\As{}{1}(\variable{t})=\As{}{2}(\variable{s})$.
+
+By the definition of truth, 
+
+\begin{center}
+$\Pp{\variable{t}}$ is true on $\As{}{1}$ \Iff $\As{}{1}(\variable{t})\in\As{}{1}(\PP)$.
+\end{center}
+
+But because $\As{}{1}(\PP)=\As{}{2}(\PP)$, we can substitute on the RHS to get:
+
+\begin{center}
+	$\Pp{\variable{t}}$ is true on $\As{}{1}$ \Iff $\As{}{1}(\variable{t})\in\As{}{2}(\PP)$.
+\end{center}
+
+We also know that $\As{}{1}(\variable{t})=\As{}{2}(\variable{s})$, so we can make another substitution to get:
+
+\begin{center}
+	$\Pp{\variable{t}}$ is true on $\As{}{1}$ \Iff $\As{}{2}(\variable{s})\in\As{}{2}(\PP)$.
+\end{center}
+
+Finally, by the definition of truth, we can replace the RHS to get:
+
+\begin{center}
+	$\Pp{\variable{t}}$ is true on $\As{}{1}$ \Iff $\Pp{\variable{s}}$ is true on $\As{}{2}$.
+\end{center}
+
+And that's what we wanted to prove for this base clause.
+
+\item Say that $\CAPPHI$ is a predicate letter $\PP$ followed by $n$ constants,  $\variable{q}_{\integer{1}}$, $\variable{q}_{\integer{2}}$, $\ldots$, $\variable{q}_{\integer{n}}$.  As we stipulated earlier, $\CAPPHI^*$ is exactly the same, except that some or all of the constants of $\CAPPHI$ have been replaced with other constants.  Let's assume, without loss of generality, that $\CAPPHI=\Pp{\variable{q}_{\integer{1}}\ldots\variable{t}_1\ldots\variable{t}_2\ldots\variable{t}_{\integer{i}}\ldots\variable{q}_{\integer{n}}}$.  That is, let $\variable{t}_1$, $\variable{t}_2$, $\ldots $, and $\variable{t}_\integer{i}$ be the constants of $\CAPPHI$ that will be replaced in $\CAPPHI^*$.  So, $\CAPPHI^*$ is $\Pp{\variable{q}_{\integer{1}}\ldots\variable{s}_1\ldots\variable{s}_2\ldots\variable{s}_{\integer{i}}\ldots\variable{q}_{\integer{n}}}$. By the definition of truth, 
+\begin{center}
+$\CAPPHI$ is true on $\As{}{1}$ iff $\langle\As{}{1}(\variable{q}_{\integer{1}}),\ldots,\As{}{1}(\variable{t}_1),\ldots,\As{}{1}(\variable{t}_{\integer{i}}),\ldots,\As{}{1}(\variable{q}_{\integer{n}})\rangle\in\As{}{1}(\PP)$.
+\end{center}
+We know that $\As{}{1}(\PP)=\As{}{2}(\PP)$, so we substitute on the RHS to get:
+\begin{center}
+	$\CAPPHI$ is true on $\As{}{1}$ iff $\langle\As{}{1}(\variable{q}_{\integer{1}}),\ldots,\As{}{1}(\variable{t}_1),\ldots,\As{}{1}(\variable{t}_{\integer{i}}),\ldots,\As{}{1}(\variable{q}_{\integer{n}})\rangle\in\As{}{2}(\PP)$.
+\end{center}
+Because models $\As{}{1}$ and $\As{}{2}$ meet Dragnet condition (2),  $\As{}{1}(\variable{t}_1)=\As{}{2}(\variable{s}_1)$, $\As{}{1}(\variable{t}_2)=\As{}{2}(\variable{s}_2)$, $\ldots$, $\As{}{1}(\variable{t}_{\integer{i}})=\As{}{2}(\variable{s}_{\integer{i}})$. Hence, by more substitutions on the RHS we get:
+\begin{center}
+$\CAPPHI$ is true on $\As{}{1}$ iff $\langle\As{}{1}(\variable{q}_{\integer{1}}),\ldots,\As{}{2}(\variable{s}_1),\ldots,\As{}{2}(\variable{s}_{\integer{i}}),\ldots,\As{}{1}(\variable{q}_{\integer{n}})\rangle\in\As{}{2}(\PP)$.
+\end{center}
+The models $\As{}{1}$ and $\As{}{2}$ otherwise make all the same assignments; so
+for the constants that aren't changed from $\CAPPHI$ to $\CAPPHI^*$, they are each assigned the same object on both models. I.e., for the unchanged constants of $\variable{q}_{\integer{1}}$ through $\variable{q}_{\integer{n}}$ we know that $\As{}{1}(\variable{q}_{\integer{1}})=\As{}{2}(\variable{q}_{\integer{1}})$, $\As{}{1}(\variable{q}_{\integer{2}})=\As{}{2}(\variable{q}_{\integer{2}})$, $\ldots$,  $\As{}{1}(\variable{q}_{\integer{n}})=\As{}{2}(\variable{q}_{\integer{n}})$.  Thus, we can carry out even more substitutions to get: 
+\begin{center}
+$\CAPPHI$ is true on $\As{}{1}$ iff $\langle\As{}{2}(\variable{q}_{\integer{1}}),\ldots,\As{}{2}(\variable{s}_1),\ldots,\As{}{2}(\variable{s}_{\integer{i}}),\ldots,\As{}{2}(\variable{q}_{\integer{n}})\rangle\in\As{}{2}(\PP)$.
+\end{center}
+And we also know, by the definition of truth, that:
+\begin{center} $\langle\As{}{2}(\variable{q}_{\integer{1}}),\ldots,\As{}{2}(\variable{s}_1),\ldots,\As{}{2}(\variable{s}_{\integer{i}}),\ldots,\As{}{2}(\variable{q}_{\integer{n}})\rangle\in\As{}{2}(\PP)$ iff $\CAPPHI^*$ is true on $\As{}{2}$.
+\end{center}
+So it follows that $\CAPPHI$ is true on $\As{}{1}$ iff $\CAPPHI^*$ is true on $\As{}{2}$.
+\end{cenumerate}
+\item[Inheritance Step:] \hfill 
+\begin{description}
+\item[Recursive Assumption] Assume that the Dragnet theorem holds for all \GQL{} sentences of order $k$ or less, and that $\CAPPHI$ is an \GQL{} sentence of order $k+1$.  Consider the following ways in which $\CAPPHI$ might be of order $k+1$.
+
+\item[Negation:] $\CAPPHI$ is a negation; i.e., is of the form $\negation{\CAPPSI}$. 
+ $\CAPPHI^*$ is the result of substituting $\variable{s}_1$ for $\variable{t}_1$, $\variable{s}_2$ for $\variable{t}_2$, etc., in $\negation{\CAPPSI}$, which is the same as making the substitutions in $\CAPPSI$ and putting a \mention{$\NEGATION$} in front. 
+That is, $\negation{(\CAPPSI)^*}$ is the same formula as $(\negation{\CAPPSI})^*$. 
+Because $\CAPPSI$ is of order $k$, by the recursive assumption (RA):
+\begin{center}
+$\CAPPSI$ is true on $\As{}{1}$ iff $\CAPPSI^*$ is true on $\As{}{2}$,
+\end{center}
+and it follows from this that:
+\begin{center}
+$\CAPPSI$ is false on $\As{}{1}$ iff $\CAPPSI^*$ is false on $\As{}{2}$.
+\end{center}
+The sentence $\CAPPSI$ is false on $\As{}{1}$ \Iff $\negation{\CAPPSI}$ is true on $\As{}{1}$; and the same holds for $\CAPPSI^*$.  So,
+\begin{center}
+$\negation{\CAPPSI}$ is true on $\As{}{1}$ iff $\negation{\CAPPSI^*}$ is true on $\As{}{2}$,
+\end{center}
+which is what we want to show.
+
+\item[Conjunction:] $\CAPPHI$ is a conjunction; i.e., is of the form $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$. 
+The sentence $\CAPPHI^*$ is the result of substituting $\variable{s}_1$ for $\variable{t}_1$, $\variable{s}_2$ for $\variable{t}_2$, etc., in $\CAPPHI$, which is the same as if we make the substitutions in each conjunct and then put \mention{$\WEDGE$}(s) between them, i.e. $\parconjunction{\CAPPSI_1^*}{\conjunction{\CAPPSI_2^*}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}^*}}}$. 
+
+Each conjunct $\CAPPSI_{\integer{j}}$ is of order $k$ or lower.  (Let $\CAPPSI_{\integer{j}}$ be the $\integer{j}^{th}$ conjunct of $\CAPPHI$, where $\integer{j}$ is some arbitrary integer from $1$ to $\integer{n}$.)  So, by RA,
+\begin{center}
+$\CAPPSI_j$ is true on $\As{}{1}$ iff $\CAPPSI_j^*$ is true on $\As{}{2}$.
+\end{center}
+There is one such biconditional for each conjunct of $\CAPPHI$.  So, conjoining all the left-hand sides and all the right-hand sides of these $n$ biconditionals we get:
+\begin{center}
+All of $\CAPPSI_1$, $\CAPPSI_2$, $\ldots$, $\CAPPSI_{\integer{n}}$ are true on $\As{}{1}$ iff all of $\CAPPSI_1^*$, $\CAPPSI_2^*$, $\ldots$, $\CAPPSI_{\integer{n}}^*$ are true on $\As{}{2}$.
+\end{center}
+So, by the definition of truth for $\WEDGE$,
+\begin{center}
+$\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$ is true on $\As{}{1}$ iff  $\parconjunction{\CAPPSI_1^*}{\conjunction{\CAPPSI_2^*}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}^*}}}$ is true on $\As{}{2}$.
+\end{center}
+And that's what we want to prove.
+
+\item[Disjunction:] We leave this case for the reader to do as an exercise.
+
+\item[Conditional:] $\CAPPHI$ is of the form $\parhorseshoe{\CAPPSI}{\CAPTHETA}$. By the definition of truth for $\HORSESHOE$ we know that
+\begin{center}
+$\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$
+  iff  either//
+   (i) $\CAPPSI$ is false on $\As{}{1}$, or (ii)
+   $\CAPTHETA$ is true on $\As{}{1}$.
+\end{center}
+$\CAPPSI$ is of order $k$ or lower; so by the RA, we know that:
+\begin{center}
+$\CAPPSI$ is true on $\As{}{1}$ iff $\CAPPSI^*$ is true on $\As{}{2}$.
+\end{center}
+From which it follows that:
+\begin{center}
+$\CAPPSI$ is false on $\As{}{1}$ iff $\CAPPSI^*$ is false on $\As{}{2}$.
+\end{center}
+Using this and the earlier result in this clause, we substitute to get that
+\begin{center}
+$\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$
+  iff  either // 
+	  (i) $\CAPPSI^*$ is false on $\As{}{2}$,
+        or (ii) $\CAPTHETA$ is true on $\As{}{1}$.
+\end{center}
+$\CAPTHETA$ is of order $k$ or lower; so by the RA we also know that:
+\begin{center}
+$\CAPTHETA$ is true on $\As{}{1}$ iff $\CAPTHETA^*$ is true on $\As{}{2}$.
+\end{center}
+We substitute again to get:
+\begin{center}
+$\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$
+ iff either //
+  (i) $\CAPPSI^*$ is false on $\As{}{2}$,
+ or (ii) $\CAPTHETA^*$ is true on $\As{}{2}$.
+\end{center}
+Finally, by the definition of truth ($\HORSESHOE$), we can substitute to get:
+\begin{center}
+$\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$
+ iff $\parhorseshoe{\CAPPSI^*}{\CAPTHETA^*}$ is true on $\As{}{2}$.
+\end{center}
+From which we get what we wanted to show:
+\begin{center}
+$\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$ iff  $\parhorseshoe{\CAPPSI}{\CAPTHETA}^*$ is true on $\As{}{2}$.
+\end{center}
+
+\item[Biconditional:] We leave this case for the reader to do as an exercise.
+
+\item[Universal Quantification:] $\CAPPHI$ is a universal quantification; i.e., is of the form $\universal{\BETA}\CAPPSI$, where $\CAPPSI$ is a formula that has exactly one free variable, $\BETA$.  Because $\BETA$ is a variable, and thus is different from all constants, $(\universal{\BETA}\CAPPSI)^*=\universal{\BETA}\CAPPSI^*$.
+
+According to the definition of truth for $\forall$,
+\begin{center}
+$\universal{\BETA}\CAPPSI$ is true on $\As{}{1}$
+  iff $\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$, \\where $\variable{q}$ is the first constant not in $\CAPPSI$,
+\end{center}
+ and...
+\begin{center}
+	$\universal{\BETA}\CAPPSI^*$ is true on $\As{}{2}$
+	iff $\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$, \\where $\variable{r}$ is the first constant not in $\CAPPSI^*$.\footnote{The definition of truth for $\forall$ uses \mention{$\variable{t}$} to stand for the first constant not in the formula in question.  Here we instead use \mention{$\variable{q}$} and \mention{$\variable{r}$} so that we don't confuse these with the list of constants $\variable{t}_1$, $\variable{t}_2$, $\ldots$, $\variable{t}_{\integer{i}}$. We also take care to distinguish \mention{$\variable{q}$} and \mention{$\variable{r}$}.  We cannot assume that $\variable{q}=\variable{r}$, because there are certain cases in which they're different. For example, consider the case such that $\universal{\BETA}\CAPPSI=\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gpp{\variable{x}}{\constant{b}}}$ and $\universal{\BETA}\CAPPSI^*=\universal{\BETA}\CAPPSI\constant{a}/\constant{b}=\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gpp{\variable{x}}{\constant{a}}}$.}
+\end{center}
+
+There are two differences between the sentences $\CAPPSI\variable{q}/\BETA$ and $\CAPPSI^*\variable{r}/\BETA$.  First, where $\CAPPSI\variable{q}/\BETA$ contains the constant $\variable{q}$, the sentence $\CAPPSI^*\variable{r}/\BETA$ contains the constant $\variable{r}$.  Second, whereas constants $\variable{t}_1$, $\ldots$, $\variable{t}_\integer{n}$ are in $\CAPPSI\variable{q}/\BETA$, they are replaced by the constants $\variable{s}_1$, $\ldots$, $\variable{s}_\integer{n}$ in $\CAPPSI^*\variable{r}/\BETA$.  Apart from these differences $\CAPPSI\variable{q}/\BETA$ and $\CAPPSI^*\variable{r}/\BETA$ are identical, and so they satisfy Dragnet condition (1).
+
+We must prove that $\universal{\BETA}\CAPPSI$ is true on $\As{}{1}$ \Iff $\universal{\BETA}\CAPPSI^*$ is true on $\As{}{2}$.  To show this, we can take the RHS from each of the two biconditionals above, and prove the following biconditional:
+
+\begin{center}
+($\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$) iff\\
+($\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$).
+\end{center}
+Because this will take some work, we separate it off as a subproof.
+\begin{SUBPROOF} 
+$(\Rightarrow)$ Assume that the \CAPS{lhs} of the biconditional is true: $\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$.  We want to show that $\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$.
+
+Assume some arbitrary $\variable{q}$-variant of $\As{}{1}$; call it $\As{\variable{q}}{1}$.  Let's give an arbitrary name to the object that $\As{\variable{q}}{1}$ assigns to $\variable{q}$: \mention{Kate}.  The models $\As{}{1}$ and $\As{}{2}$ share the same domain, and thus so do all variants of those models.  Therefore, we know that there is an $\variable{r}$-variant of $\As{}{2}$ that assigns Kate to $\variable{r}$.  Let's call this $\variable{r}$-variant $\As{\variable{r}}{2}$.  To put it another way, let $\As{\variable{r}}{2}$ be such that
+\begin{center}
+	$\As{\variable{q}}{1}(\variable{q})=\As{\variable{r}}{2}(\variable{r})$.
+\end{center}
+
+We know that $\As{}{1}(\variable{t}_1)=\As{}{2}(\variable{s}_1)$, $\As{}{1}(\variable{t}_2)=\As{}{2}(\variable{s}_2)$, $\ldots$, $\As{}{1}(\variable{t}_{\integer{i}})=\As{}{2}(\variable{s}_{\integer{i}})$.  We need to show that the same equivalences hold for the model variants, $\As{q}{1}$ and $\As{r}{2}$.   The model $\As{}{1}$ differs from $\As{\variable{q}}{1}$ on the assignment to $\variable{q}$, but $\variable{q}$ is the first constant not in $\CAPPSI$.  Hence, $\variable{q}$ is not in the list of constants $\variable{t}_1$, $\ldots$, $\variable{t}_\integer{i}$.  $\As{}{1}$ and $\As{\variable{q}}{1}$ differ only on $\variable{q}$, so it follows that they make the same assignments to each of $\variable{t}_1$, $\ldots$, $\variable{t}_\integer{i}$.  Analogous reasoning shows that $\As{}{2}$ and $\As{r}{2}$ make the same assignments to each of $\variable{s}_1$, $\ldots$, $\variable{s}_\integer{i}$.  Therefore, $\As{q}{1}(\variable{t}_1)=\As{r}{2}(\variable{s}_1)$, $\As{q}{1}(\variable{t}_2)=\As{r}{2}(\variable{s}_2)$, $\ldots$, $\As{q}{1}(\variable{t}_{\integer{i}})=\As{r}{2}(\variable{s}_{\integer{i}})$.
+
+And because $\As{\variable{q}}{1}(\variable{q})=\As{\variable{r}}{2}(\variable{r})$, it follows that what $\As{q}{1}$ assigns to each constant of $\CAPPSI\variable{q}/\BETA$ is the same as what $\As{r}{2}$ assigns to the analogous constant in the corresponding location of $\CAPPSI^*\variable{r}/\BETA$.  Thus, $\As{q}{1}$ and $\As{r}{2}$ satisfy Dragnet condition (2).
+
+The sentences $\CAPPSI\variable{q}/\BETA$ and $\CAPPSI^*\variable{r}/\BETA$ are each of order $k$, so, by RA,
+ 
+\begin{center}
+	$\CAPPSI\variable{q}/\BETA$ is true on $\As{q}{1}$ \Iff $\CAPPSI^*\variable{r}/\BETA$ is true on $\As{r}{2}$.
+\end{center}
+
+We initially assumed that $\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$.  It follows that $\CAPPSI\variable{q}/\BETA$ is true on $\As{q}{1}$.  Therefore, given the above, $\CAPPSI^*\variable{r}/\BETA$ is true on $\As{\variable{r}}{2}$.
+
+We also assumed a single $\variable{q}$-variant of $\As{}{1}$, $\As{q}{1}$; but nothing in our argument depends on anything specific about the object $\As{q}{1}$ assigns to $\variable{q}$.  We did nothing more than give it an arbitrary name.  So the argument above is perfectly general, and it applies equally for any other $\variable{q}$-variant as well.  That is, for each $\variable{q}$-variant of $\As{}{1}$, there is a corresponding $\variable{r}$-variant of $\As{}{2}$, such that, 
+\begin{center}
+	$\As{\variable{q}}{1}(\variable{q})=\As{\variable{r}}{2}(\variable{r})$.
+\end{center}
+Therefore, because $\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$, it follows that $\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$.\\
+
+$(\Leftarrow)$ The argument in this section of the subproof perfectly mirrors that of the last. 
+
+First assume the \CAPS{rhs} is true. That is, assume that $\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$.  We want to show that the \CAPS{lhs} follows, i.e., that $\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$.
+
+Assume some arbitrary $\variable{r}$-variant of $\As{}{2}$, called $\As{\variable{r}}{2}$.  Let's name the object that $\As{\variable{r}}{2}$ assigns to $\variable{r}$ \mention{Irene}.  The variants of $\As{}{1}$ and $\As{}{2}$ share the same domain, so there's a $\variable{q}$-variant of $\As{}{1}$ that assigns Irene to $\variable{q}$.  Name that $\variable{q}$-variant $\As{\variable{q}}{1}$.  So,
+\begin{center}
+	$\As{\variable{r}}{2}(\variable{r})=\As{\variable{q}}{1}(\variable{q})$.
+\end{center}
+
+As before, $\As{}{1}(\variable{t}_1)=\As{}{2}(\variable{s}_1)$, $\As{}{1}(\variable{t}_2)=\As{}{2}(\variable{s}_2)$, $\ldots$, $\As{}{1}(\variable{t}_{\integer{i}})=\As{}{2}(\variable{s}_{\integer{i}})$.  The model $\As{}{2}$ differs from $\As{\variable{r}}{2}$ on $\variable{r}$, but $\variable{r}$ is the first constant not in $\CAPPSI^*$.  Hence, $\variable{r}$ is not any of the following constants: $\variable{s}_1$, $\ldots$, $\variable{s}_\integer{i}$.  $\As{}{2}$ and $\As{\variable{r}}{2}$ differ only on $\variable{r}$, so they make the same assignments to each of $\variable{s}_1$, $\ldots$, $\variable{s}_\integer{i}$.  Likewise, $\As{}{1}$ and $\As{q}{1}$ make the same assignments to each of $\variable{t}_1$, $\ldots$, $\variable{t}_\integer{i}$.  Therefore, $\As{q}{1}(\variable{t}_1)=\As{r}{2}(\variable{s}_1)$, $\As{q}{1}(\variable{t}_2)=\As{r}{2}(\variable{s}_2)$, $\ldots$, $\As{q}{1}(\variable{t}_{\integer{i}})=\As{r}{2}(\variable{s}_{\integer{i}})$.
+
+Because $\As{\variable{r}}{2}(\variable{r})=\As{\variable{q}}{1}(\variable{q})$, it follows that what $\As{r}{2}$ assigns to each constant of $\CAPPSI^*\variable{r}/\BETA$ is the same as what $\As{q}{1}$ assigns to the analogous constant in the corresponding location of $\CAPPSI\variable{q}/\BETA$.  Thus, $\As{r}{2}$ and $\As{q}{1}$ satisfy Dragnet condition (2).
+
+The sentences $\CAPPSI^*\variable{r}/\BETA$ and $\CAPPSI\variable{q}/\BETA$ are each of order $k$, so, by RA,
+
+\begin{center}
+	$\CAPPSI^*\variable{r}/\BETA$ is true on $\As{r}{2}$ \Iff $\CAPPSI\variable{q}/\BETA$ is true on $\As{q}{1}$.
+\end{center}
+
+We assumed that $\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$.  So $\CAPPSI^*\variable{r}/\BETA$ is true on $\As{r}{2}$.  Therefore, given the above, $\CAPPSI\variable{q}/\BETA$ is true on $\As{\variable{q}}{1}$.
+
+As before, we used a single $\variable{r}$-variant of $\As{}{2}$, $\As{r}{2}$, without our argument depends on anything specific about the object it assigns to $\variable{r}$.  So the argument above is generalizable, and it applies equally to all other $\variable{r}$-variants.  That is, for each $\variable{r}$-variant of $\As{}{2}$, there is a corresponding $\variable{q}$-variant of $\As{}{1}$, such that, 
+\begin{center}
+	$\As{\variable{r}}{2}(\variable{r})=\As{\variable{q}}{1}(\variable{q})$.
+\end{center}
+So, because $\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$, it follows that $\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$.\\
+
+\end{SUBPROOF}
+
+We have established that
+\begin{center}
+	($\CAPPSI\variable{q}/\BETA$ is true on every $\variable{q}$-variant of $\As{}{1}$) iff\\
+	($\CAPPSI^*\variable{r}/\BETA$ is true on every $\variable{r}$-variant of $\As{}{2}$),
+\end{center}
+...so, by the definition of truth for $\forall$, it follows that
+\begin{center}
+	$\universal{\BETA}\CAPPSI$ is true on $\As{}{1}$ \Iff $\universal{\BETA}\CAPPSI^*$ is true on $\As{}{2}$.
+\end{center}
+
+\item[Existential Quantification:] We leave this case for the reader to do as an exercise.
+\end{description}
+\item[Closure Step:] We have now exhausted the ways to construct a sentence of order $k+1$.  There is no other way to construct a sentence of \GQL{}, and so we have shown that the Dragnet theorem holds for all sentences $\CAPPHI$.
+\end{description}
+\end{PROOF}
+
+Dragnet is particularly useful when making arguments about sentences with unknown structures.  To illustrate, let's look at the following example.
+
+\begin{majorILnc}{\LnpEC{DragnetExampleTwo}}
+ Let $\CAPPHI$ be some formula whose only free variable is $\variable{x}$.  Demonstrate the following for all such substitutions for $\CAPPHI$: $\universal{\variable{x}}\CAPPHI\sdtstile{}{}\CAPPHI\constant{b}/\variable{x}$.  
+\end{majorILnc} 
+ 
+\begin{PROOF}
+Suppose $\universal{\variable{x}}\CAPPHI$ is true on $\IntA$. 
+Thus, every $\variable{t}$-variant of $\IntA$ makes $\CAPPHI\variable{t}/\variable{x}$ true, where $\variable{t}$ is the first constant not in $\CAPPHI$. 
+Consider the $\variable{t}$-variant, $\As{\variable{t}}{}$, that makes the same assignment to $\variable{t}$ that $\IntA$ assigns to $\constant{b}$. Because all $\variable{t}$-variants make $\CAPPHI\variable{t}/\variable{x}$ true, it follows that $\As{\variable{t}}{}$ does too.
+
+The sentences $\CAPPHI\constant{b}/\variable{x}$ and $\CAPPHI\variable{t}/\variable{x}$ are the same, except that the latter substitutes the constant $\variable{t}$ for $\constant{b}$.  So Dragnet condition (1) is met.  The models $\IntA$ and $\As{\variable{t}}{}$ make all the same assignments, except that $\As{\variable{t}}{}$ assigns to $\variable{t}$ what $\IntA$ assigns to $\constant{b}$.  So Dragnet condition (2) is met.
+
+Thus, by Dragnet:
+\begin{center}
+	$\CAPPHI\constant{b}/\variable{x}$ is true on $\IntA$ iff $\CAPPHI\variable{t}/\variable{x}$ is true on $\As{\variable{t}}{}$.
+\end{center}
+And because $\CAPPHI\variable{t}/\variable{x}$ is true on $\As{\variable{t}}{}$, it follows that $\IntA$ makes $\CAPPHI\constant{b}/\variable{x}$ true.  Therefore, the entailment holds, regardless of the internal structure of $\CAPPHI$.
+\end{PROOF} 
+
+How do you know when the Dragnet Theorem might be useful? 
+The general answer is that when you are trying to prove something about truth of a sentence given some information about a closely related sentence, that is, one that differs by some constant substitution(s), then you should think about whether the Dragnet Theorem will help. 
+In some cases you will need to select an appropriate variant of a model. 
+To apply the theorem you need two sentences and two models that meet the two Dragnet restrictions. Practice will help.
+
+While the Dragnet theorem is helpful, it can be a bit unwieldy.  So, we prove another theorem, the \mention{Free Choice} theorem, which builds on Dragnet and saves us a good deal of trouble.
+
+\begin{THEOREM}{\LnpTC{The Free Choice Theorem} The Free Choice Theorem:}
+(i) A \GQL{} sentence of the form $\universal\ALPHA\CAPPHI$ is true on some model $\IntA$ \Iff all $\variable{s}$-variants of $\IntA$ make $\CAPPHI\variable{s}/\ALPHA$ true, where $\variable{s}$ is any constant not in $\CAPPHI$; and (ii) a \GQL{} sentence of the form $\existential\ALPHA\CAPPHI$ is true on some model $\IntA$ \Iff some $\variable{s}$-variant of $\IntA$ makes $\CAPPHI\variable{s}/\ALPHA$ true, where $\variable{s}$ is any constant not in $\CAPPHI$.
+\end{THEOREM}
+
+\begin{PROOF}
+(i) $(\Rightarrow)$: Assume that a \GQL{} sentence of the form $\universal\ALPHA\CAPPHI$ is true on some model $\IntA$.  By the definition of truth for $\forall$, $\CAPPHI\variable{t}/\ALPHA$ is true on all $\variable{t}$-variants of $\IntA$.  Let $\variable{s}$ be some arbitrary constant not in $\CAPPHI$.  We want to show that $\CAPPHI\variable{s}/\ALPHA$ is true on all $\variable{s}$-variants of $\IntA$.
+
+The sentences $\CAPPHI\variable{t}/\ALPHA$ and $\CAPPHI\variable{s}/\ALPHA$ are exactly the same, except the latter substitutes the constant $\variable{s}$ where the former has $\variable{t}$.  So this pair of sentences satisfies condition (1) of Dragnet.
+
+For any $\variable{t}$-variant of $\IntA$, there is a corresponding $\variable{s}$-variant of $\IntA$ that assigns to $\variable{s}$ what the $\variable{t}$ assigns to $\variable{t}$.  Let's take one such pair of variants, $\As{\variable{t}}{}$ and $\As{\variable{s}}{}$, such that $\As{\variable{t}}{}(\variable{t})=\As{\variable{s}}{}(\variable{s})$.  Does this pair, $\As{\variable{t}}{}$ and $\As{\variable{s}}{}$, satisfy condition (2) of Dragnet?  Sadly, no; they vary on assignments to two constants, $\variable{s}$ and $\variable{t}$.  We'll get around this problem by using an intermediate model.
+
+Let $\IntA^*$ be a \mention{buffer} model, which make all the same assignments as $\As{\variable{t}}{}$, except that what $\As{\variable{t}}{}$ assigns to $\variable{t}$, $\IntA^*$ assigns to $\variable{s}$.  Thus, $\IntA^*$ and $\As{\variable{t}}{}$ satisfy condition (2) of Dragnet.  By Dragnet,
+
+\begin{center}
+$\CAPPHI\variable{t}/\ALPHA$ is true on $\As{\variable{t}}{}$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is true on $\IntA^*$.
+\end{center}
+
+So $\IntA^*$ makes $\CAPPHI\variable{t}/\ALPHA$ true.  $\IntA^*$ differs from $\As{\variable{s}}{}$ on only one constant assignment: what $\As{\variable{s}}{}$ assigns to $\variable{s}$, $\IntA^*$ assigns to $\variable{t}$.  Thus, $\IntA^*$ and $\As{\variable{s}}{}$ satisfy condition (2) of Dragnet.  By Dragnet,
+
+\begin{center}
+	$\CAPPHI\variable{t}/\ALPHA$ is true on $\IntA^*$ \Iff $\CAPPHI\variable{s}/\ALPHA$ is true on $\As{\variable{s}}{}$.
+\end{center}
+
+So $\As{\variable{s}}{}$ makes $\CAPPHI\variable{s}/\ALPHA$ true.
+
+This argument holds not just for this pair of variants, $\As{\variable{t}}{}$ and $\As{\variable{s}}{}$.  All $\variable{t}$-variants of $\IntA$ make $\CAPPHI\variable{t}/\ALPHA$ true, and using analogous reasoning, we see that all $\variable{s}$-variants of $\IntA$ make $\CAPPHI\variable{s}/\ALPHA$ true.
+
+We assumed nothing special about $\variable{s}$, except that it's a constant not in $\CAPPHI$.  Therefore, all $\variable{s}$-variants of $\IntA$ make $\CAPPHI\variable{s}/\ALPHA$ true, where $\variable{s}$ is any constant not in $\CAPPHI$.
+
+$(\Leftarrow)$:  Assume that all $\variable{s}$-variants of some model $\IntA$ make $\CAPPHI\variable{s}/\ALPHA$ true, where $\variable{s}$ is any constant not in $\CAPPHI$.  Let constant $\variable{t}$ be the first constant not in $\CAPPHI$.  It follows that all $\variable{t}$-variants of $\IntA$ make $\CAPPHI\variable{t}/\ALPHA$ true.  Therefore, by the definition of truth for $\forall$, $\universal\ALPHA\CAPPHI$ is true on $\IntA$.
+
+(ii) We leave the case with the existential quantifier as an exercise for the reader.
+\end{PROOF}
+
+Let's do an example proof that uses the Free Choice theorem.
+
+
+\begin{majorILnc}{\LnpEC{FreeChoiceExampleOne}}
+	Let $\CAPPHI$ and $\CAPPSI$ be formulas whose only free variable is $\variable{x}$.  Prove that $\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}\sdtstile{}{}\horseshoe{\universal{\variable{x}}\CAPPHI}{\universal{\variable{x}}\CAPPSI}$.  
+\end{majorILnc} 
+ 
+\begin{PROOF}
+	Let's assume, for reductio, that $\IntA$ is a counterexample to the entailment.  So, $\IntA$ makes $\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}$ true and $\horseshoe{\universal{\variable{x}}\CAPPHI}{\universal{\variable{x}}\CAPPSI}$ false.
+	
+	Because $\IntA$ makes $\horseshoe{\universal{\variable{x}}\CAPPHI}{\universal{\variable{x}}\CAPPSI}$ false, it makes $\universal{\variable{x}}\CAPPHI$ true and $\universal{\variable{x}}\CAPPSI$ false (definition of truth, $\HORSESHOE$). 
+	It follows that all $\variable{t}$-variants of $\IntA$ make $\CAPPHI\variable{t}/\variable{x}$ true, where $\variable{t}$ is the \emph{some} constant not in $\CAPPHI$ (Free Choice theorem).  In fact, let's stipulate that $\variable{t}$ occurs nowhere in the entire entailment claim, in neither $\CAPPHI$ nor $\CAPPSI$.\footnote{The Free Choice theorem allows us to make this stipulation, and it makes the proof considerably easier.} 
+	 And because $\IntA$ makes $\universal{\variable{x}}\CAPPSI$ false, there is some $\variable{t}$-variant of $\IntA$ makes $\CAPPSI\variable{t}/\variable{x}$ false (Free Choice).%\footnote{Free Choice allows us to use the same constant throughout.  You might wonder why we distinguish $\variable{t}_1$ from $\variable{t}_2$.  	It's because we can't assume that they are the same constant.  	For example, what if $\CAPPHI=\Lppp{'''\variable{x}}{\constant{a}}{\constant{b}}$, so that the first constant not in the formula is \mention{$\constant{c}$}; and what if $\CAPPSI=\Dppp{''}{\variable{x}}{\constant{c}}$, so that the first constant not in that formula is \mention{$\constant{a}$}? 	On these substitutions for $\CAPPHI$ and $\CAPPSI$, $\variable{t}_1=\constant{c}$ and $\variable{t}_2=\constant{a}$.  	Cases like this are why we distinguish the term metavariables $\variable{t}_1$ from $\variable{t}_2$ in our argument.} 
+
+	The model $\IntA$ makes the LHS, $\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}$, true.  
+	Hence, all $\variable{t}$-variants of $\IntA$ make $\parhorseshoe{\CAPPHI\variable{t}/\variable{x}}{\CAPPSI\variable{t}/\variable{x}}$ true (Free Choice). %\footnote{We distinguish $\variable{t}_3$ from $\variable{t}_1$ and $\variable{t}_2$ because there are cases in which it must be a different constant.  	Consider the formula substitutions from the last footnote, which are such that $\parhorseshoe{\CAPPHI}{\CAPPSI}=\parhorseshoe{\Lppp{'''\variable{x}}{\constant{a}}{\constant{b}}}{\Dppp{''}{\variable{x}}{\constant{c}}}$. 	The first constant not in this formula is \mention{$\constant{d}$}, so on this substitution $\variable{t}_3=\constant{d}$.  So we should distinguish $\variable{t}_3$ from the other term metavariables.} 
+	 Because $\CAPPHI\variable{t}/\variable{x}$ is true on all $\variable{t}$-variants of $\IntA$, it follows that $\CAPPSI\variable{t}/\variable{x}$ is true on all $\variable{t}$-variants of $\IntA$ (definition of truth, $\HORSESHOE$).  But we'd concluded that some $\variable{t}$-variant of $\IntA$ makes $\CAPPSI\variable{t}/\variable{x}$ false.  This is contradictory.
+	 
+	 Therefore, our initial assumption---that some model is a counterexample to the entailment---is false.  No such model exists.  The entailment holds.	
+	  
+\end{PROOF}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercises}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\notocsubsection{Formulas, Order, and Subformulas}{ex:Formulas, Order, and Subformulas} Which of the following are \emph{formulas}? 
+For those which are formulas, what is their order? 
+How many subformulas does each have?
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\universal{\variable{x}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gpp{'}{\variable{x}}}$}
+\item {$\universal{\variable{x}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gpp{''}{\variable{x}}}$}
+\item {$\universal{\variable{x}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gpp{'_7}{\variable{x}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{z}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{z}}\parhorseshoe{\Hpp{'}{\constant{a}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{z}}\parhorseshoe{\Hp{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{z}}\parhorseshoe{\Wpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{z}}\bparhorseshoe{\Hpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}_9}\universal{\variable{z}}\parhorseshoe{\Hpp{'}{\variable{x}_9}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\negation{\universal{\variable{x}}\universal{\variable{y}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}}$}
+\item {$\universal{\constant{b}}\universal{\variable{y}}\parhorseshoe{\Hpp{'}{\constant{b}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\parhorseshoe{\universal{\variable{x}}\Hpp{'}{x}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\parhorseshoe{\universal{\variable{z}}\Hpp{'}{x}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{y}}\parhorseshoe{\universal{\variable{x}}\Hpp{'}{x}}{\universal{\variable{x}}\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\end{enumerate}
+\end{multicols}
+
+\notocsubsection{Sentences and Order}{ex:Sentences and Order} For each of the following, say whether it is an official sentence, an unofficial sentence, an official formula but not a sentence, an unofficial formula but not a sentence or none of the above. 
+If it is a formula or sentence (official or unofficial) say what its order is and how many sub\emph{formulas} it has.
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\existential{\variable{z}}\parhorseshoe{\Hpp{'}{\variable{x}}}{\Gppp{''}{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parconjunction{\Hp{\variable{x}}}{\conjunction{\Gpp{\variable{x}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parhorseshoe{\Hp{\variable{x}}}{\horseshoe{\Gpp{\variable{x}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parconjunction{\negation{\Hp{\variable{x}}}}{\conjunction{\Gpp{\variable{z}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parconjunction{\Hp{\variable{x}}}{\parconjunction{\Gpp{\variable{z}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parconjunction{\Hpp{'}{\variable{x}}}{\parconjunction{\Gppp{''}{\variable{z}}{\variable{y}}}{\Kpp{''}{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\conjunction{\Hp{\variable{x}}}{\parconjunction{\Gpp{\variable{z}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\existential{\variable{z}}\universal{\variable{y}}\parconjunction{\Hp{\variable{x}}}{\conjunction{\Gpp{\variable{x}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\existential{\variable{y}}\universal{\variable{z}}\parconjunction{\Hp{\variable{x}}}{\conjunction{\universal{\variable{y}}\Gpp{\variable{x}}{\variable{y}}}{\Kp{\variable{y}}}}$}
+\end{enumerate}
+\end{multicols}
+
+\notocsubsection{Truth in a Model}{ex:Truth in an Interpretation} Give the truth value of each of the following sentences on both of the models found in table \mvref{table:Example Interpretations Exercise}. 
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\cparhorseshoe{\parconjunction{\Ap{\variable{x}}}{\Bp{\variable{y}}}}{\App{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\cparhorseshoe{\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{y}}}}{\Dpp{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\cparhorseshoe{\parconjunction{\Cp{\variable{x}}}{\Ep{\variable{x}}}}{\Cpp{\variable{x}}{\constant{a}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\cparhorseshoe{\Cpp{\variable{x}}{\variable{y}}}{\App{\variable{x}}{\variable{y}}}$}
+\item {$\horseshoe{\universal{\variable{x}}\Cp{\variable{x}}}{\universal{\variable{y}}\Dp{\variable{y}}}$}
+\item {$\universal{\variable{z}}\universal{\variable{w}}\cparhorseshoe{\parconjunction{\Gp{\variable{z}}}{\Gp{\variable{w}}}}{\negation{\Gpp{\variable{z}}{\variable{w}}}}$}
+\item {$\universal{\variable{z}}\universal{\variable{w}}\universal{\variable{x}}\cparhorseshoe{\Cppp{\variable{x}}{\variable{z}}{\variable{w}}}{\bpartriplebar{\Cp{\variable{x}}}{\Cp{\variable{w}}}}$}
+\item {$\universal{\variable{x}}\cparhorseshoe{\Ap{\variable{x}}}{\existential{\variable{y}}\parconjunction{\Cp{\variable{y}}}{\Bpp{\variable{y}}{\variable{x}}}}$}
+\item {$\existential{\variable{y}}\existential{\variable{x}}\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dpp{\variable{x}}{\variable{y}}}$}
+\item {$\existential{\variable{y}}\existential{\variable{x}}\parconjunction{\Epp{\variable{x}}{\variable{y}}}{\Gpp{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\cparhorseshoe{\Gp{\variable{x}}}{\universal{\variable{w}}\bparhorseshoe{\App{\variable{x}}{\variable{w}}}{\pardisjunction{\Ap{\variable{w}}}{\Cp{\variable{w}}}}}$}
+\item {$\existential{\variable{x}}\cparhorseshoe{\Cp{\variable{x}}}{\universal{\variable{y}}\Cp{\variable{y}}}$}
+\item {$\universal{\variable{z}}\universal{\variable{w}}\universal{\variable{x}}\cparhorseshoe{\Dppp{\variable{x}}{\variable{z}}{\variable{w}}}{\App{\variable{x}}{\variable{w}}}$}
+\item {$\universal{\variable{y}}\bparhorseshoe{\Ap{\variable{y}}}{\existential{\variable{x}}\parconjunction{\Ep{\variable{x}}}{\App{\variable{x}}{\variable{y}}}}$}
+\item {$\universal{\variable{x}}\universal{\variable{y}}\parhorseshoe{\Gpp{\variable{x}}{\variable{y}}}{\Gpp{\variable{y}}{\variable{x}}}$}
+\end{enumerate}
+\end{multicols}
+
+\begin{longtable}[c]{ l l l l } %p{2.2in} p{2in}
+	\toprule
+	&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Model}} \\ \cmidrule(l){3-4}
+	& & \textbf{Pos Int} & \textbf{States} \\
+	\midrule 
+	\endfirsthead
+	\multicolumn{4}{c}{\emph{Continued from Previous Page}}\\
+	\toprule
+	&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Model}} \\ \cmidrule(l){3-4}
+	& & \textbf{Pos Int} & \textbf{States} \\
+	\midrule 
+	\endhead
+	\bottomrule
+	\caption{Example Models}\\[-.15in]
+	\multicolumn{4}{c}{\emph{Continued next Page}}\\
+	\endfoot
+	\bottomrule
+	\caption{Example Models}\\%
+	\endlastfoot%
+	\label{table:Example Interpretations Exercise}%
+	%\begin{tabular}{ l l l l } %p{2in} p{2in} %\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
+	%\toprule
+	%&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Interpretation}} \\ \cmidrule(l){3-4}
+	%& & \textbf{Pos Int} & \textbf{States} \\
+	%\midrule 
+	{Universe:} & & The set of positive integers & The set of US states (2015) \\ \addlinespace[.25cm]
+	{Sent. Let.:}& A&$\True$&$\False$\\
+	& B&$\True$&$\False$\\
+	& C&$\False$&$\True$\\
+	& D&$\True$&$\False$\\
+	& E&$\True$&$\False$\\
+	& G&$\False$&$\True$\\ \addlinespace[.25cm]
+	{Constants:}&$\constant{a}$&1&Louisiana\\
+	&$\constant{b}$&9&Maine\\
+	&$\constant{c}$&72&Georgia\\
+	&$\constant{d}$&3&Nebraska\\
+	&$\constant{e}$&1&New Mexico\\
+	&$\constant{f}$&2&Texas\\ \addlinespace[.25cm]
+	{1-place:}&$\Ap{'}$&all pos int&Midwestern\\
+	&$\Bp{'}$&empty set&name with $>5$ letters\\
+	&$\Cp{'}$&even&Coastal\\
+	&$\Dp{'}$&odd&one of original 13\\
+	&$\Ep{'}$&prime&\{Ohio\}\\
+	&$\Gp{'}$&multiple of 7&\{Ohio, Alabama\}\\ \addlinespace[.25cm]
+	{2-place:}&$\Ap{''}$&first $>$ second&share a border\\
+	&$\Bp{''}$&are equal&first is north of second\\
+	&$\Cp{''}$&first = 2 times second&first $>$ second (area)\\
+	&$\Dp{''}$&sum of them equals 7&first $>$ second (population)\\
+	&$\Ep{''}$&first $<$ second&first is west of second\\
+	&$\Gp{''}$&are relatively prime&both coastal, or neither\\ \addlinespace[.25cm]
+	{3-place:}&$\Ap{'''}$&all equal&all same population\\
+	&$\Bp{'''}$&first $<$ second $<$ third&first is north of others\\
+	&$\Cp{'''}$&all odd or all even&first $>$ second $>$ third (area)\\
+	&$\Dp{'''}$&first + second = third&first + second $>$ third (area)\\
+	&$\Ep{'''}$&first $\times$ second = third&first is west of the others\\
+	&$\Gp{'''}$&are all relatively prime& at least two coastal \\
+	%\bottomrule
+\end{longtable}
+
+\notocsubsection{Quantificational Truth Problems}{ex:More Quantificational Truth Problems} For each sentence below, say whether or not it's a quantificational truth. 
+If so, prove it. 
+If not, show it by giving a model $\IntA$ that makes it false.
+\begin{multicols}{2} 
+\begin{enumerate}
+\item {$\horseshoe{\universal{\variable{x}}\universal{\variable{y}}\Hpp{\variable{x}}{\variable{y}}}{\universal{\variable{y}}\universal{\variable{x}}\Hpp{\variable{x}}{\variable{y}}}$}
+\item {$\horseshoe{\existential{\variable{x}}\existential{\variable{y}}\Hpp{\variable{x}}{\variable{y}}}{\existential{\variable{y}}\existential{\variable{x}}\Hpp{\variable{x}}{\variable{y}}}$}
+\item {$\horseshoe{\universal{\variable{x}}\existential{\variable{y}}\Hpp{\variable{x}}{\variable{y}}}{\existential{\variable{y}}\universal{\variable{x}}\Hpp{\variable{x}}{\variable{y}}}$}
+\item {$\horseshoe{\existential{\variable{y}}\universal{\variable{x}}\Hpp{\variable{x}}{\variable{y}}}{\universal{\variable{x}}\existential{\variable{y}}\Hpp{\variable{x}}{\variable{y}}}$}
+\item {$\universal{\variable{x}}\bparhorseshoe{\Ap{\variable{x}}}{\existential{\variable{y}}\parconjunction{\Hpp{\variable{x}}{\variable{y}}}{\Bp{\variable{y}}}}$}
+\item {$\existential{\variable{y}}\bparconjunction{\Ap{\variable{y}}}{\universal{\variable{z}}\parhorseshoe{\Bp{\variable{z}}}{\Hpp{\variable{y}}{\variable{z}}}}$}
+\end{enumerate}
+\end{multicols}
+\begin{enumerate}[start=7]
+\item {$\universal{\variable{x}}\bparconjunction{\existential{\variable{y}}\Hpp{\variable{x}}{\variable{y}}}{\conjunction{\negation{\Hpp{\variable{x}}{\variable{x}}}}{\universal{\variable{y}}\universal{z}\cparhorseshoe{\parconjunction{\Hpp{\variable{x}}{\variable{y}}}{\Hpp{\variable{y}}{\variable{z}}}}{\Hpp{\variable{x}}{\variable{z}}}}}$}
+\end{enumerate}
+
+\notocsubsection{Preliminary Dragnet Practice Problems}{ex:Preliminary Dragnet Practice Problems} 
+\begin{enumerate}
+\item If $\CAPPHI$ is $\horseshoe{\universal{\variable{z_{\integer{3}}}}\parconjunction{\Gpp{\variable{z_{\integer{1}}}}{\variable{z_{\integer{3}}}}}{\existential{\variable{x}}\Bppp{\variable{x}}{\variable{z_{\integer{3}}}}{\variable{y_{\integer{2}}}}}}{\parhorseshoe{\Al}{\universal{\variable{y_{\integer{2}}}}\Dpp{\variable{z_{\integer{3}}}}{\variable{y_{\integer{2}}}}}}$, what is
+\begin{enumerate}
+\item $\CAPPHI\constant{a}/\variable{z_{\integer{3}}}$
+\item $\CAPPHI\constant{a}/\variable{y_{\integer{2}}}$
+\item $\CAPPHI\variable{z_{\integer{3}}}/\variable{x}$
+\item $\CAPPHI\constant{a}/\variable{x}$
+\end{enumerate} 
+\item If $\CAPPHI\variable{x}/\variable{y}$ is $\Dpp{\variable{x}}{\variable{x}}$, can you determine what $\CAPPHI$ is? If so, what is it? If not, why not?
+\end{enumerate}
+
+\notocsubsection{Dragnet Practice}{ex:Dragnet Practice} (i) For each of the following statements, work out whether it is true or false. 
+(ii) For each statement, determine whether Dragnet would be required to prove it if it is true. 
+(iii) For which ones is Dragnet required to disprove it if it is false? Note that each of $\CAPTHETA$, $\CAPPSI$, and $\CAPPHI$ should be understood as standing for complex formulas of \GQL{} whose only free variables are $\variable{x}$, and which do not contain the variables $\variable{y}$, $\variable{z}$ or $\variable{w}$. 
+%Recall, for example, that $\CAPPSI{\variable{w}/\variable{x}}$ is the formula $\CAPPSI$ with the variable $\variable{w}$ replacing all occurrences of $\variable{x}$ (see def. \pmvref{MathEnglishVariableSub}).
+
+%For all $\CAPTHETA$, $\CAPPSI$ and $\CAPPHI$:
+\begin{enumerate}
+\item {$\universal{\variable{w}}\parconjunction{\CAPPHI{\variable{w}/\variable{x}}}{\CAPPSI{\variable{w}/\variable{x}}}\sdtstile{}{}\horseshoe{\universal{\variable{x}}\CAPPHI}{\universal{\variable{x}}\CAPPSI}$}
+\item {$\horseshoe{\universal{\variable{x}}\CAPPHI}{\universal{\variable{x}}\CAPPSI}\sdtstile{}{}\horseshoe{\universal{\variable{y}}\CAPPHI{\variable{y}/\variable{x}}}{\universal{\variable{z}}\CAPPSI{\variable{z}/\variable{x}}}$}
+\item {$\horseshoe{\universal{\variable{x}}\CAPPHI}{\universal{\variable{x}}\CAPPSI}\sdtstile{}{}\existential{\variable{x}}\parconjunction{\CAPPHI}{\CAPPSI}$}
+\item {$\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}\sdtstile{}{}\horseshoe{\universal{\variable{y}}\CAPPHI{\variable{y}/\variable{x}}}{\universal{\variable{z}}\CAPPSI{\variable{z}/\variable{x}}}$}
+\item {$\horseshoe{\universal{\variable{y}}\CAPPHI{\variable{y}/\variable{x}}}{\universal{\variable{z}}\CAPPSI{\variable{z}/\variable{x}}}\sdtstile{}{}\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}$}
+\item {$\horseshoe{\universal{\variable{y}}\CAPPHI{\variable{y}/\variable{x}}}{\universal{\variable{z}}\CAPPSI{\variable{z}/\variable{x}}}\text{, }\existential{\variable{x}}\parconjunction{\CAPPHI}{\CAPPSI}\sdtstile{}{}\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}$}
+\item {$\text{If }\sdtstile{}{}\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}\text{, then }\sdtstile{}{}\universal{\variable{x}}\cparhorseshoe{\parconjunction{\CAPPHI}{\CAPTHETA}}{\parconjunction{\CAPPSI}{\CAPTHETA}}$}
+\item {$\existential{\variable{y}}\parconjunction{\CAPPHI{\variable{y}/\variable{x}}}{\negation{\CAPPSI{\variable{y}/\variable{x}}}}\sdtstile{}{}\universal{\variable{y}}\parhorseshoe{\CAPPHI{\variable{y}/\variable{x}}}{\negation{\CAPPSI{\variable{y}/\variable{x}}}}$}
+\item {$\negation{\universal{\variable{x}}\CAPPHI}\sdtstile{}{}\existential{\variable{x}}\negation{\CAPPHI}$}
+\item {$\sdtstile{}{}\disjunction{\universal{\variable{x}}\parhorseshoe{\CAPPHI}{\CAPPSI}}{\universal{\variable{y}}\parhorseshoe{\CAPPHI{\variable{y}/\variable{x}}}{\negation{\CAPPSI{\variable{y}/\variable{x}}}}}$}
+\end{enumerate}
+
+%\theendnotes
+

@@ -1,0 +1,1175 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Soundness and Completeness}\label{completenesschapter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Recall from section \mvref{Derivation Preliminaries} that we want to use derivations as a way of showing that a sentence is a logical truth, or of showing that some set of sentences entails some other sentence.
+Specifically, we want to use derivations in \GSD{} and \GQD{} to show that sentences of \GSL{} and \GQL{} are \CAPS{tft} and \CAPS{qt}, or to show entailments between sentences of \GSL{} or between sentences of \GQL{}.  
+But derivations can only fill this role if our derivation systems are both sound and complete.
+Let \Language{L} be some formal language for which we have defined some kind of models.
+\begin{majorILnc}{\LnpDC{LSoundness}}
+A derivation system \DerivationSystem{D} for \Language{L} is \nidf{sound}\index{soundness|textbf} \Iff for every set $\Delta$ of sentences of \Language{L} and every sentence $\CAPPHI$ of \Language{L}, if $\Delta\sststile{}{}\CAPPHI$, then $\Delta\sdtstile{}{}\CAPPHI$.
+\end{majorILnc} 
+\begin{majorILnc}{\LnpDC{LCompleteness}}
+A derivation system \DerivationSystem{D} for \Language{L} is \nidf{strongly complete}\index{completeness!strong|textbf} \Iff for every set $\Delta$ of sentences of \Language{L} and every sentence $\CAPPHI$ of \Language{L}, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
+\end{majorILnc} 
+\noindent{}Note that in the definitions the \CAPS{rhs} of the biconditionals must hold even in the special case when $\Delta$ is the empty set and the special case when $\Delta$ is (countably) infinite. 
+If we limit $\Delta$ so that it must be finite (but still allow it to be empty), we get (regular) completeness:
+\begin{majorILnc}{\LnpDC{LRCompleteness}}
+A derivation system \DerivationSystem{D} for \Language{L} is \nidf{complete}\index{completeness|textbf} \Iff for every finite set $\Delta$ of sentences of \Language{L} and every sentence $\CAPPHI$ of \Language{L}, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
+\end{majorILnc} 
+\noindent{}If we limit $\Delta$ to just the empty set, we get weak completeness:
+\begin{majorILnc}{\LnpDC{LWCompleteness}}
+A derivation system \DerivationSystem{D} for \Language{L} is \nidf{weakly complete}\index{completeness!weak|textbf} \Iff for every sentence $\CAPPHI$ of \Language{L}, if $\sdtstile{}{}\CAPPHI$, then $\sststile{}{}\CAPPHI$.
+\end{majorILnc} 
+\noindent{}The following theorem can be proved using basic results we already have.\footnote{It 
+should \emph{not} be assumed that a similar theorem connecting weak and regular completeness holds for all languages and derivation systems on those languages.
+It just so happens that, for \GSD{} and \GQD{} and our semantics for \GSL{} and \GQL{}, weak and regular completeness are equivalent in this way.
+But one could certainly devise languages and derivation systems where weak and regular completeness come apart.}
+\begin{THEOREM}{\LnpTC{RegWeakCompletenessEquiv}}
+\GSD{} is weakly complete \Iff it's complete; and likewise for \GQD{}.
+\end{THEOREM}
+\begin{PROOF}
+$(\Leftarrow)$ This direction of the biconditional is trivial. 
+Assume that \GSD{}/\GQD{} is complete. 
+Then if for finite $\Delta$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$. 
+By definition, this includes the case when $\Delta=\emptyset$. 
+Hence \GSD{}/\GQD{} is weakly complete. 
+
+$(\Rightarrow)$ Assume that \GSD{}/\GQD{} is weakly complete. 
+Hence for any sentence $\CAPPSI$, if $\sdtstile{}{}\CAPPSI$, then $\sststile{}{}\CAPPSI$. 
+Now assume that, for some finite set $\Delta$ of sentences and sentence $\CAPPSI$, $\Delta\sdtstile{}{}\CAPPHI$.
+Since $\Delta$ is finite, we can consider the conjunction of all the sentences in $\Delta$.
+Let $\DELTA$ be this conjunction. 
+%From the \GQL{} Entailment-Exponentiation Theorem (Thm. \pmvref{Exponentiation of Entailment GQL}) we know that $\DELTA\sdtstile{}{}\CAPPHI$ \Iff $\sdtstile{}{}\horseshoe{\DELTA}{\CAPPHI}$.
+We want to show that $\sdtstile{}{}\horseshoe{\DELTA}{\CAPPHI}$;
+to do so, assume that there's some model $\IntA$ that makes $\horseshoe{\DELTA}{\CAPPHI}$ false.
+By theorem \mvref{GQL Truth Corollary}, it follows that $\IntA$ makes all the conjuncts of $\DELTA$ true and $\CAPPHI$ false. 
+But that would mean that $\IntA$ makes all the sentences in $\Delta$ true and $\CAPPHI$ false.
+But we assumed that $\Delta\sdtstile{}{}\CAPPHI$, so there's no model $\IntA$ that makes $\horseshoe{\DELTA}{\CAPPHI}$ false.
+Hence $\sdtstile{}{}\horseshoe{\DELTA}{\CAPPHI}$, and so by weak completeness, $\sststile{}{}\horseshoe{\DELTA}{\CAPPHI}$.
+It should be clear to the reader that if $\sststile{}{}\horseshoe{\DELTA}{\CAPPHI}$, then $\DELTA\sststile{}{}\CAPPHI$.
+Hence, $\DELTA\sststile{}{}\CAPPHI$.
+Finally, it should be clear that by theorem \ref{GQL Truth Corollary}, $\Delta\sststile{}{}\DELTA$, and since $\sststile{}{}$ is transitive, $\Delta\sststile{}{}\CAPPHI$.
+%To show that $\Delta\sststile{}{}\CAPPHI$, first write each sentence in $\Delta$ (which are the conjuncts of $\DELTA$) as an assumption on a line in a derivation.
+%Then derive $\horseshoe{\DELTA}{\CAPPHI}$, which we know can be done without any assumptions. 
+%Next, use \Rule{$\WEDGE\!$-Intro} to conjoin all the assumptions from $\Delta$; this will result in $\DELTA$ on a line in the derivation. 
+%Then use \Rule{$\HORSESHOE$-Elim} on $\horseshoe{\DELTA}{\CAPPHI}$ and $\DELTA$. 
+%This will get us $\CAPPHI$ on a line with all and only the sentences of $\Delta$ as assumptions, thus showing that $\Delta\sststile{}{}\CAPPHI$. 
+\end{PROOF}
+\noindent{}Note that both \GSD{} and \GQD{} are strongly complete, but there is no simple theorem that uses results we already have which extends weak completeness to strong completeness in the way this theorem (Thm. \ref{RegWeakCompletenessEquiv}) extends weak completeness to (regular) completeness.
+
+Returning to strong completeness, letting $\Delta$ be infinite may seem problematic, since as we've defined them (def. \pmvref{Recursive definition of Derivation}) derivations can only have finitely many lines. 
+Hence, a derivation can only have finitely many assumptions. 
+And, as we've defined the single turnstile, $\Delta\sststile{}{}\CAPPHI$ iff there's a derivation of $\CAPPHI$ from the sentences in $\Delta$. 
+But there's nothing problematic about letting $\Delta$ be infinite, because showing that there's a derivation of $\CAPPHI$ from the sentences in $\Delta$ doesn't require that the derivation use \emph{all} the sentences in $\Delta$ as assumptions. 
+In general, even when $\Delta$ is finite, any derivation of $\CAPPHI$ from some subset of sentences in $\Delta$ will show that $\Delta\sststile{}{}\CAPPHI$. 
+So, if $\Delta$ is infinite and $\Delta\sdtstile{}{}\CAPPHI$, if the derivation system \DerivationSystem{D} is complete we'll know that $\CAPPHI$ can be derived from some finite subset of sentences of $\Delta$. 
+
+Before turning to the proofs of these theorems, some historical background might be of interest. 
+As mentioned above (Sec. \ref{Sec:GQLSymbols}), quantificational languages were first developed by Frege, Peirce and Mitchell in the 1870's and 1880's. 
+But it wasn't until David Hilbert and Wilhelm Ackermann published their hugely influential text \emph{Grundz\"uge der theoretischen Logik} (Principles of Mathematical Logic) in \citeyear{Hilbert1928} that the question of completeness was clearly formulated. 
+While Kurt G\"odel, in his \citeyear{Godel1929} doctorial dissertation (republished in \citeyear{Godel1930}), is widely accepted as the first person to prove that quantificational logic is strongly complete, Church \citeyearpar[291,~fn.464]{Church1956} reports that the Jacques Herbrand's dissertation in 1930 had the essential material for the same proof.  
+Further, completeness follows from results of Skolem \citeyearpar{Skolem1928}, but since the question of completeness hadn't been clearly raised yet no one seems to have noticed. 
+Leon Henkin \citeyearpar{Henkin1949} later developed a method of proving completeness different from G\"odels. 
+Henkin's approach is probably the most common one used today in logic textbooks, but the proof we give here is a constructive proof closer to G\"odel's original.
+(Ours owes much to Willard Quine's completeness proof \citeyearpar{Quine1982}.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Soundness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Soundness of  of \GSD{}}
+We begin by proving the soundness of \GSD{}.\index{soundness!of \GSD{}}
+\begin{THEOREM}{\LnpTC{Soundness of Sentential Logic} \GSD{} Soundness Theorem:}
+\GSD{} is sound; i.e., for every set $\Delta$ of sentences of \GSL{} and every sentence $\CAPPHI$ of \GSL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
+\end{THEOREM}
+\noindent{}To prove that \GSD{} is sound we will first prove the following result about derivations:
+\begin{THEOREM}{\LnpTC{Main GSL Soundness Lemma} Soundness Lemma:}
+For any sequence of derivation lines that is a derivation, the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assumption}. 
+\end{THEOREM}
+\noindent{}Since the definition of a derivation (def. \pmvref{Recursive definition of Derivation}) is a recursive definition, the most natural way to prove theorem \ref{Main GSL Soundness Lemma} is through a recursive proof. 
+The recursive proof we give will use three easily proved lemmas (proofs are left to the reader; the first lemma, on monotonicity, is also used to prove thm. \ref{Soundness of Sentential Logic}). 
+Two are facts about entailment and one is about derivation.
+\begin{THEOREM}{\LnpTC{Monotonicity of Entailment} Monotonicity of Entailment:}
+For all \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}},\CAPTHETA,\CAPPSI$:
+\begin{center}
+If $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI$, then $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}},\CAPTHETA\sdtstile{}{}\CAPPSI$
+\end{center}
+\end{THEOREM}
+\begin{THEOREM}{\LnpTC{Transitivity of Entailment} Transitivity of Entailment:}
+For all \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$, $\CAPTHETA$, and $\CAPPSI_1,\ldots,\CAPPSI_{\integer{k}}$:
+\begin{center}
+\begin{tabular}{ l@{\hspace{.25em}}l@{\hspace{.25em}}l }
+If & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI_1$ & and \\
+   & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI_2$ & and \\
+   & \hspace{.5in} $\vdots$ &  \\
+   & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI_{\integer{k}}$ & and \\
+   & $\CAPPSI_1,\CAPPSI_2,\ldots,\CAPPSI_{\integer{k}}\sdtstile{}{}\CAPTHETA$ & then: \\
+   & & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPTHETA$   \\
+\end{tabular}
+\end{center}
+\end{THEOREM}
+\begin{THEOREM}{\LnpTC{Non-decreasing Assumption Principle} Non-decreasing Assumption Principle (NDAP):}
+If $\Delta_1$ is the set of assumptions of an unboxed line and $\Delta_2$ is the set of assumptions of a later unboxed line, then $\Delta_1$ is a subset of $\Delta_2$, i.e., $\Delta_1\subseteq\Delta_2$.
+\end{THEOREM}
+\begin{PROOFOF}{Thm. \ref{Main GSL Soundness Lemma}, Soundness Lemma}
+\begin{description}
+
+\item[Base Step:] 
+The base case is a single-line derivation $\Derivation{D}$ sanctioned by the rule \Rule{Assumption}. 
+Say the sentence on that line is $\CAPPHI$.
+We have to show that the sentence on the last line is entailed by all the sentences, on unboxed lines, that are sanctioned by \Rule{Assumption}. 
+But in this case the sentence on the last line is $\CAPPHI$, and the set of unboxed sentences sanctioned by \Rule{Assumption} only contains $\CAPPHI$. 
+Obviously $\CAPPHI\sdtstile{}{}\CAPPHI$, so the theorem holds in the base case. 
+
+\item[Inheritance Step:] 
+In the inheritance step we start with a derivation $\Derivation{D}$.
+Say $\Delta$ is the set of unboxed assumptions occurring in $\Derivation{D}$, and $\Delta_\integer{i}$ is the set of unboxed assumptions occurring in $\Derivation{D}$ up to (and including) line number $\integer{i}$. 
+%We then want to show that if some rule \Rule{R} of \GSD{} applied to unboxed lines of $\Derivation{D}$ sanctions writing down sentence $\CAPPHI$, then $Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line with $\CAPPHI$.\footnote{Note 
+We then want to show that if we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by rule \Rule{R}, then $\Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line. 
+(Note that this is not the same as showing that the rule \Rule{R} is truth-preserving; see def. \pncmvref{Derivation Rule Soundness}.) 
+We need to consider each rule \Rule{R} of \GSD{} as its own case.
+
+\begin{description}
+
+\item[Recursive Assumption:]  
+The recursive assumption is that for all lines $\Derivation{L}_\integer{i}$ in the derivation $\Derivation{D}$, if $\CAPPHI$ is the sentence on the line, then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPSI$. 
+
+\item[\Rule{Assumption}:] 
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{Assumption}. 
+Note that the set $\Delta^*$ of unboxed assumptions for this new line are those in $\Delta$ plus $\CAPPHI$. 
+We know $\CAPPHI\sdtstile{}{}\CAPPHI$, and $\Delta,\CAPPHI\sdtstile{}{}\CAPPHI$ follows from this by monotonicity.
+
+\item[\Rule{Repetition}:] 
+Say $\CAPPHI$ already occurs somewhere in $\Derivation{D}$, say on line number $\integer{i}$. 
+Then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI$ by the recursive assumption. 
+Say we add another line to $\Derivation{D}$ with $\CAPPHI$ sanctioned by \Rule{Repetition}. 
+By NDAP, $\Delta_{\integer{i}}\subseteq\Delta^*$. 
+So by monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\VEE$-Intro}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\VEE$-Intro}. 
+Then there's some earlier line $\integer{i}$ with the sentence $\CAPTHETA$ and $\CAPPHI$ is a disjunction with $\CAPTHETA$ as one disjunct. 
+We have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\CAPTHETA$.
+So by monotonicity, $\Delta^*\sdtstile{}{}\CAPTHETA$.
+It should be clear that since $\CAPPHI$ is a disjunction with $\CAPTHETA$ as one disjunct, $\CAPTHETA\sdtstile{}{}\CAPPHI$. 
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$. 
+
+\item[\Rule{$\WEDGE\!$-Elim}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\WEDGE\!$-Elim}.
+Then there's some earlier line $\integer{i}$ with the sentence $\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$ and $\CAPPHI$ is a conjunction of some subset of the conjuncts. 
+As before, by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$. 
+So by monotonicity, $\Delta^*\sdtstile{}{}\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
+It should be clear that since $\CAPPHI$ is a conjunction of some subset of the conjuncts of $\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$ that $\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}\sdtstile{}{}\CAPPHI$. 
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\NEGATION$-Elim}:] 
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\NEGATION$-Elim}.
+Then there's some earlier line $\integer{i}$ with the sentence $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
+As before, by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
+So by monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
+Since the \CAPS{rhs} of $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$ is false in all models (it's a \CAPS{tff}), the conditional is true in a model $\IntA{}$ only if the \CAPS{lhs} is false in $\IntA{}$.
+So if the conditional is true in a model $\IntA{}$, $\CAPPHI$ is true in $\IntA{}$.
+In other words, $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}\sdtstile{}{}\CAPPHI$. 
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\NEGATION$-Intro}:] 
+This case is very similar to the last and is left to the reader. 
+
+\item[\Rule{$\HORSESHOE$-Elim}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\HORSESHOE$-Elim}.
+Then there's two earlier lines $\integer{i}$ and $\integer{j}$, and (say) line $\integer{i}$ has a sentence $\horseshoe{\CAPTHETA}{\CAPPHI}$ and line $\integer{j}$ has sentence $\CAPTHETA$. 
+By NDAP we have that $\Delta_{\integer{i}}\subseteq\Delta^*$ and $\Delta_{\integer{j}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta_{\integer{j}}\sdtstile{}{}\CAPTHETA$.
+By monotonicity, 
+$\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta^*\sdtstile{}{}\CAPTHETA$.
+It should be clear that $\CAPTHETA,\horseshoe{\CAPTHETA}{\CAPPHI}\sdtstile{}{}\CAPPHI$.
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\TRIPLEBAR$-Elim}:] The argument for each of the two versions of \Rule{$\TRIPLEBAR$-Elim} is the same as that for \Rule{$\HORSESHOE$-Elim}.
+
+\item[\Rule{$\TRIPLEBAR$-Intro}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI=\triplebar{\CAPPHI}{\CAPTHETA}$ sanctioned by \Rule{$\TRIPLEBAR$-Intro}.
+Then there's two earlier lines $\integer{i}$ and $\integer{j}$, and (say) line $\integer{i}$ has a sentence $\horseshoe{\CAPTHETA}{\CAPPHI}$ and line $\integer{j}$ has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$. 
+By NDAP we have that $\Delta_{\integer{i}}\subseteq\Delta^*$ and $\Delta_{\integer{j}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta_{\integer{j}}\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
+By monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
+It should be clear that $\horseshoe{\CAPPHI}{\CAPTHETA},\horseshoe{\CAPTHETA}{\CAPPHI}\sdtstile{}{}\triplebar{\CAPPHI}{\CAPTHETA}$.
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\WEDGE\!$-Intro}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI=\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$ sanctioned by \Rule{$\WEDGE\!$-Intro}.
+Then there are $\integer{m}$ earlier lines numbered $\integer{i}_{1},\ldots,\integer{i}_{\integer{m}}$ with, respectively, sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$. 
+By NDAP we have that $\Delta_{\integer{i}_1}\subseteq\Delta^*,\ldots,\Delta_{\integer{i}_\integer{m}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}_1}\sdtstile{}{}\CAPPHI_1,\ldots,\Delta_{\integer{i}_\integer{m}}\sdtstile{}{}\CAPPHI_{\integer{m}}$.
+So by monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI_1,\ldots,\Delta^*\sdtstile{}{}\CAPPHI_{\integer{m}}$.
+We now observe that $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}\sdtstile{}{}\conjunction{\CAPPHI}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$.
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\VEE$-Elim}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\VEE$-Elim}.
+Then there are $\integer{m}+1$ earlier lines numbered $\integer{i}_{1},\ldots,\integer{i}_{\integer{m}},\integer{i}_{\integer{m}+1}$ with, respectively, sentences $\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$, and  $\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
+By NDAP we have that $\Delta_{\integer{i}_1}\subseteq\Delta^*,\ldots,\Delta_{\integer{i}_\integer{m}}\subseteq\Delta^*$ and $\Delta_{\integer{i}_{\integer{m}+1}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}_1}\sdtstile{}{}\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\Delta_{\integer{i}_\integer{m}}\sdtstile{}{}\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$ and $\Delta_{\integer{i}_{\integer{m}+1}}\sdtstile{}{}\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
+By monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$ and $\Delta^*\sdtstile{}{}\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
+We now observe that $\horseshoe{\CAPTHETA_1}{\CAPPHI},\ldots,\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI},\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}\sdtstile{}{}\CAPPHI$.
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+
+\item[\Rule{$\HORSESHOE$-Intro}:]
+Like \Rule{Assumption}, the assumptions change in \Rule{$\HORSESHOE$-Intro}. 
+If the new line sanctioned by \Rule{$\HORSESHOE$-Intro} has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$ and unboxed assumptions $\Delta^*$, then earlier we have an assumption line (now in a box) that starts with $\CAPPHI$ and $\Delta^*$ as its other assumptions, and we have a line (now at the bottom of the box) with $\CAPTHETA$ on it with assumptions $\CAPPHI,\Delta^*$. 
+By the recursive assumption we have that $\CAPPHI,\Delta^*\sdtstile{}{}\CAPTHETA$. 
+Consider any model $\IntA{}$ that makes $\Delta_{\integer{i}}$ true;
+if it also makes $\CAPPHI$ true, then $\CAPTHETA$ is true in $\IntA{}$ as well and so is $\horseshoe{\CAPPHI}{\CAPTHETA}$. 
+If $\IntA{}$ makes $\CAPPHI$ false, then $\horseshoe{\CAPPHI}{\CAPTHETA}$ is true. 
+(Notice that this step only works because we defined the conditional to be true when the \CAPS{lhs} is false.)
+So if $\IntA{}$ makes $\Delta^*$ true, it makes $\horseshoe{\CAPPHI}{\CAPTHETA}$ true too. 
+So, $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.  
+
+\end{description}
+\item[Closure Step:] We have now covered all the generating cases for derivations. By the closure clause of the definition, we have proved soundness for all derivations. 
+\end{description}
+\end{PROOFOF} 
+
+\begin{PROOFOF}{Thm. \ref{Soundness of Sentential Logic}, GSL Soundness Theorem}
+Assume that $\Delta$ is a set of \GSL{} sentences. 
+Assume $\Delta\sststile{}{}\CAPPHI$ and consider some derivation $\Derivation{D}$ off $\CAPPHI$ from $\Delta$. 
+Let $\Delta'\subseteq\Delta$ be the set of sentences in $\Delta$ that appear as unboxed assumptions in $\Derivation{D}$. 
+By the soundness lemma (Thm. \pmvref{Main GSL Soundness Lemma}), $\Delta'\sdtstile{}{}\CAPPHI$. 
+It follows immediately by monotonicity that $\Delta\sdtstile{}{}\CAPPHI$.  
+\end{PROOFOF} 
+
+\subsection{Soundness of \GQD{}}
+In this section we prove that \GQD{} is also sound.\index{soundness!of \GQD{}}
+\begin{THEOREM}{\LnpTC{Soundness of Quantifier Logic} \GQD{} Soundness Theorem:}
+\GQD{} is sound; i.e., for every set $\Delta$ of sentences of \GQL{} and every sentence $\CAPPHI$ of \GQL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
+\end{THEOREM}
+\noindent{}The proof given in the last section of the \GSL{} Soundness Theorem (Thm. \pmvref{Soundness of Sentential Logic}) can be carried over to the \GQL{} Soundness Theorem. 
+That proof relied on the monotonicity of entailment and the soundness lemma (Them. \pmvref{Main GSL Soundness Lemma}). 
+It should be clear that entailment is also monotonic in the case of \GQL{}. 
+Since \GQD{} is just an extension of \GSD{} (it's just \GSD{} plus the rules for the quantifiers in table \pncmvref{GQD}), all we need to do to show that the soundness lemma holds for \GQD{} is add a case, for each new rule of \GQD{}, to the inheritance step of the proof of the soundness lemma for \GSD{}.
+\begin{PROOFOF}{Thm. \ref{Main GSL Soundness Lemma} for GQD}
+\begin{description}
+
+\item[Base Step:] 
+The base case has been covered in the proof for \GSD{}. 
+
+\item[Inheritance Step:] 
+Just as in the proof for \GSD{}, in the inheritance step we start with a derivation $\Derivation{D}$.
+Say $\Delta$ is the set of unboxed assumptions occurring in $\Derivation{D}$, and $\Delta_\integer{i}$ is the set of unboxed assumptions occurring in $\Derivation{D}$ up to (and including) line number $\integer{i}$. 
+%We then want to show that if some rule \Rule{R} of \GSD{} applied to unboxed lines of $\Derivation{D}$ sanctions writing down sentence $\CAPPHI$, then $Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line with $\CAPPHI$.\footnote{Note 
+We then want to show that if we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by rule \Rule{R}, then $\Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line.%\footnote{Note 
+%that this is not the same as showing that the rule \Rule{R} is truth-preserving (see def. \pncmvref{Derivation Rule Soundness}).
+%} 
+Again we need to consider each rule \Rule{R} of \GQD{} as its own case.
+Most of the rules have already been covered in the proof of \GSD{}, so we only need to cover the introduction and elimination rules for the quantifiers. 
+
+\begin{description}
+
+\item[Recursive Assumption:]  
+The recursive assumption, as in the proof for \GSD{}, is that for all lines $\Derivation{L}_\integer{i}$ in the derivation $\Derivation{D}$, if $\CAPPHI$ is the sentence on the line, then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPSI$. 
+
+\item[\Rule{$\forall$-Elim}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI\constant{a}/\BETA$ sanctioned by \Rule{$\forall$-Elim}. 
+Then there's some earlier line $\integer{i}$ with the sentence $\universal{\BETA}\CAPPHI$. 
+We have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\universal{\BETA}\CAPPHI$.
+So by monotonicity, $\Delta^*\sdtstile{}{}\universal{\BETA}\CAPPHI$.
+We have already proved (example \pmvref{UniversalInstantiationExample}), using the Dragnet Theorem, that $\universal{\BETA}\CAPPHI\sdtstile{}{}\CAPPHI\constant{a}/\BETA$.
+So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI\constant{a}/\BETA$.   
+
+\item[\Rule{$\exists$-Intro}:]
+Say we add another line to $\Derivation{D}$ with sentence $\existential{\BETA}\CAPPHI$ sanctioned by \Rule{$\exists$-Intro}.
+Then there's some earlier line $\integer{i}$ with the sentence $\CAPPHI\constant{a}/\BETA$.
+Again we have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI\constant{a}/\BETA$.
+By monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI\constant{a}/\BETA$.
+It can be proved, using the Dragnet Theorem, that $\CAPPHI\constant{a}/\BETA\sdtstile{}{}\existential{\BETA}\CAPPHI$. 
+So by transitivity, $\Delta^*\sdtstile{}{}\existential{\BETA}\CAPPHI$.
+
+\item[\Rule{$\forall$-Intro}:]
+Say we add another line to $\Derivation{D}$ with sentence $\universal{\BETA}\CAPPHI$ sanctioned by \Rule{$\forall$-Intro}.
+Then there's some earlier line $\integer{i}$ with the sentence $\CAPPHI\constant{a}/\BETA$. 
+Again we have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI\constant{a}/\BETA$. 
+By monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI\constant{a}/\BETA$.
+However we know that $\CAPPHI\constant{a}/\BETA$ does not entail $\universal{\BETA}\CAPPHI$, so we have to do some extra work and make use of the restrictions on the rule. 
+
+Let $\IntA$ be any model that makes all of $\Delta^*$ true and let $\As{}$ be some extended model of $\IntA$ that makes $\CAPPHI$ false. 
+Now consider the object from the universe of $\IntA{}$ which $\As$ assigns to $\BETA$ and call it Ottoline. 
+We now construct the model $\IntA^*$ that is like $\IntA$ except that it assigns Ottoline to $\constant{a}$. Since $\constant{a}$ does not occur in $\Delta^*$ or $\universal{\BETA}\CAPPHI$ and $\IntA^*$ is like $\IntA$ except in what it assigns to $\constant{a}$, we have that $\IntA^*$ makes all of $\Delta^*$ true. 
+Thus by the entailment $\Delta^*\sdtstile{}{}\CAPPHI\constant{a}/\BETA$, $\IntA^*$ makes $\CAPPHI\constant{a}/\BETA$ true. Since $\constant{a}$ does not occur in $\CAPPHI$, we have that the pairs $\IntA^*$, $\IntA$ and $\As$, $\As$ meet the Dragnet condition and we hence know that:
+\begin{center}
+$\As$ makes $\CAPPHI$ true in $\IntA$ \Iff $\As$ makes $\CAPPHI\constant{a}/\BETA$ true in $\IntA^*$.
+\end{center}
+But clearly this biconditional can't be true, since $\As$ makes $\CAPPHI$ false in $\IntA$ and $\IntA^*$ makes $\CAPPHI\constant{a}/\BETA$ true (hence every extension of $\IntA^*$, including $\As$, makes it true). 
+
+Therefore, if $\IntA$ is a model that makes all of $\Delta^*$ true, there exists no extension $\As$ on $\IntA$ that makes $\CAPPHI$ false. 
+So by theorem \mvref{Quantifier Corollary}, if $\IntA$ is a model that makes all of $\Delta^*$ true, then $\IntA$ makes $\universal{\BETA}\CAPPHI$ true. 
+So, $\Delta^*\sdtstile{}{}\universal{\BETA}\CAPPHI$.
+
+\item[\Rule{$\exists$-Elim}:]
+Say we add another line to $\Derivation{D}$ with sentence $\CAPTHETA$ sanctioned by \Rule{$\exists$-Elim}.
+Then there's some earlier line $\integer{i}$ with the sentence $\horseshoe{\CAPPHI\constant{a}/\BETA}{\CAPTHETA}$ and an earlier line $\integer{j}$ with the sentence $\existential{\BETA}\CAPPHI$. 
+Again we have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$ and $\Delta_{\integer{j}}$ the unboxed assumptions of line $\integer{j}$.
+By NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$ and $\Delta_{\integer{j}}\subseteq\Delta^*$.
+By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\CAPPHI\constant{a}/\BETA}{\CAPTHETA}$ and $\Delta_{\integer{j}}\sdtstile{}{}\existential{\BETA}\CAPPHI$.
+By monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI\constant{a}/\BETA}{\CAPTHETA}$ and $\Delta^*\sdtstile{}{}\existential{\BETA}\CAPPHI$.
+Again we have to do some extra work and make use of the restrictions on the rule to show that $\Delta^*\sdtstile{}{}\CAPTHETA$. 
+
+Let $\IntA$ be any model that makes all of $\Delta^*$ true. 
+We know by the entailment above that it makes $\existential{\BETA}\CAPPHI$ true;
+thus by theorem \mvref{Quantifier Corollary} we know that on $\IntA$ there is at least one partial $\BETA$-variant of $\As$ on which $\CAPPHI$ is true.
+We now consider the object from the universe of $\IntA$ that $\As$ assigns to $\BETA$ (that is, very roughly, the object that makes $\CAPPHI$ true) and call it Otto. 
+We now construct the model $\IntA^*$ that is like $\IntA$ except that $\IntA^*$ assigns Otto to $\constant{a}$. 
+Since $\constant{a}$ does not occur in $\Delta^*$, $\CAPPHI$, or $\CAPTHETA$, and $\IntA^*$ is like $\IntA$ except in what it assigns to $\constant{a}$, $\IntA^*$ makes all of $\Delta^*$ true. 
+Thus since $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI\constant{a}/\BETA}{\CAPTHETA}$, $\IntA^*$ makes $\horseshoe{\CAPPHI\constant{a}/\BETA}{\CAPTHETA}$ true. 
+Since $\constant{a}$ does not occur in $\CAPPHI$, we have that the pairs $\IntA^*$, $\IntA$ and $\As$, $\As$ meet the Dragnet condition and we know that:
+\begin{center}
+$\As$ makes $\CAPPHI$ true in $\IntA$ \Iff $\As$ makes $\CAPPHI\constant{a}/\BETA$ true in $\IntA^*$.
+\end{center}
+Since $\As$ makes $\CAPPHI$ true in $\IntA$, $\IntA^*$ makes $\CAPPHI\constant{a}/\BETA$ true.
+(Because, in general if one extended model makes a sentence true, then every extension of that model and hence the model itself makes the sentence true). 
+
+Since $\IntA^*$ makes both $\CAPPHI\constant{a}/\BETA$ and $\horseshoe{\CAPPHI\constant{a}/\BETA}{\CAPTHETA}$ true, by theorem \mvref{GQL Truth Corollary} $\IntA^*$ must make $\CAPTHETA$ true too. 
+But since $\CAPTHETA$ does not contain $\constant{a}$, and $\IntA^*$ makes $\CAPTHETA$ true, we know that $\IntA$ also makes $\CAPTHETA$ true. 
+So we have shown that $\Delta^*\sdtstile{}{}\CAPTHETA$.
+
+\end{description}
+
+\item[Closure Step:] We have now covered all the generating cases for derivations. By the closure clause of the definition, we have proved soundness for all derivations in \GQD{}. 
+
+\end{description}
+\end{PROOFOF} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Completeness of \GSD{}}\label{Section:Completeness for GSD}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section we prove the completeness of \GSD{}.
+(But we don't prove the strong completeness of \GSD{}. \GSD{} is strongly complete; our proof of the strong completeness of \GQD{} will show this.) 
+To do so we'll prove a statement equivalent to the claim that \GSD{} is weakly complete and then show that it's equivalent. 
+By theorem \mvref{RegWeakCompletenessEquiv}, this will be sufficient to show that \GSD{} is complete.
+The equivalent statement is:
+\begin{THEOREM}{\LnpTC{GSDCompletenessLemma} The \GSD{} Weak Completeness Lemma:}
+For\index{completeness!weak \GSD{}} any sentence $\CAPPHI$ of \GSD{}, either $\CAPPHI\sststile{}{}\conjunction{\Al}{\negation{\Al}}$, or $\CAPPHI$ is true in some model $\IntA$.
+\end{THEOREM}
+\noindent{}Before proving the theorem, it will be useful to introduce a new exchange rule for \GQD{} 
+and then show that anything we can derive using \GQD{} and this rule can be derived using \GQD{} alone. We really only need the rule for \GSD{}, but doing it this way will allow us to use the rule further down the road, if we wish.
+We call the rule \Rule{$\TRIPLEBAR$-Exchange}.
+(Note that every application of \Rule{$\TRIPLEBAR$-Exchange} is truth preserving, as the last problem in exercise \pmvref{exercises:GSDTFETheorem}, extends theorem \pmvref{ExchangeRuleGSDSoundnessLemma}, to it.)
+It's given in table \ref{GSDplusDNF}.
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\Rule{$\TRIPLEBAR$-Exchange} &  $\triplebar{\CAPTHETA}{\CAPPSI}$ & $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}$ \\
+\nopagebreak
+ & $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}$ &  $\triplebar{\CAPTHETA}{\CAPPSI}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{\Rule{$\TRIPLEBAR$-Exchange}}
+\label{GSDplusDNF}%
+\end{table}
+\index{derivation!rule!for DNF}\index{DNF}
+\noindent{}Recall from section \ref{Shortcut Rule Elimination Theorem Section} that all we need to do to show that anything that can be derived using \GQD{} and this rule can be derived using just \GQD{} is to prove the following:
+\begin{THEOREM}{\LnpTC{GQD NDF Rule}}
+Any two \GQL{} formulas got by substituting other \GQL{} formulas into the may-add and given schemas of \Rule{$\TRIPLEBAR$-Exchange} are provably equivalent; that is, $\sststile{}{}\forall\bpartriplebar{\partriplebar{\CAPTHETA}{\CAPPSI}}{\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}}$.
+\end{THEOREM}
+\begin{PROOF}
+We show that $\sststile{}{}\forall\bpartriplebar{\partriplebar{\CAPTHETA}{\CAPPSI}}{\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}}$ by giving a derivation schema, which for any two formulas $\CAPTHETA$ and $\CAPPSI$ will result in the needed derivation. 
+(Note that to save space $\integer{q}=\integer{n}+\integer{m}$.)
+\begin{gproofnn}
+\gaproof{
+\galine{1}{$\partriplebar{\CAPTHETA}{\CAPPSI}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{Ass.}}
+\galine{2}{$\partriplebar{\negation{\CAPTHETA}}{\negation{\CAPPSI}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\NEGATION$/$\TRIPLEBAR$-Intro}, 1}
+\gaaproof{
+\gaaline{3}{$\negation{\parconjunction{\CAPTHETA}{\CAPPSI}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{Ass.}}
+\gaaline{4}{$\pardisjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{DeM}, 3}
+\gaaaproof{
+\gaaaline{5}{$\negation{\CAPTHETA}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{Ass.}}
+\gaaaline{6}{$\negation{\CAPPSI}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\TRIPLEBAR$-Elim}, 2, 5}
+\gaaaline{7}{$\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\WEDGE\!$-Intro}, 5, 6}
+}
+\gaaline{8}{$\parhorseshoe{\negation{\CAPTHETA}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\HORSESHOE$-Intro}, 5--7}
+
+\gaaaproof{
+\gaaaline{9}{$\negation{\CAPPSI}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{Ass.}}
+\gaaaline{10}{$\negation{\CAPTHETA}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\TRIPLEBAR$-Elim}, 2, 9}
+\gaaaline{11}{$\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\WEDGE\!$-Intro}, 9, 10}
+}
+\gaaline{12}{$\parhorseshoe{\negation{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\HORSESHOE$-Intro}, 9--11}
+\gaaline{13}{$\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\VEE$-Intro}, 4, 8, 12}
+}
+\galine{14}{$\parhorseshoe{\negation{\parconjunction{\CAPTHETA}{\CAPPSI}}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\HORSESHOE$-Intro}, 3--13}
+\galine{15}{$\pardisjunction{\negation{\negation{\parconjunction{\CAPTHETA}{\CAPPSI}}}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\HORSESHOE$/$\VEE$-Exch.}, 14}
+\galine{16}{$\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\NEGATION\NEGATION$-Elim}, 15}
+}
+\gline{17}{$[\partriplebar{\CAPTHETA}{\CAPPSI}\HORSESHOE$}{ }
+\nopagebreak
+\glinend{ }{$\qquad\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}]\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\HORSESHOE$-Intro}, 1--16}
+\gaproof{
+\galine{18}{$\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{Ass.}}
+\galinend{ }{ }{ }
+\galinend{ }{$\qquad\vdots$}{ }
+\galinend{ }{ }{ }
+\galine{$\integer{n}$}{$\partriplebar{\CAPTHETA}{\CAPPSI}\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{ }
+}
+\gline{$\integer{n}+1$}{$[\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}\HORSESHOE$}{ }
+\glinend{ }{$\qquad\partriplebar{\CAPTHETA}{\CAPPSI}]\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{\Rule{$\HORSESHOE$-Intro}, 18--$\integer{n}$}
+\gline{$\integer{n}+2$}{$[\partriplebar{\CAPTHETA}{\CAPPSI}\TRIPLEBAR$}{\Rule{$\TRIPLEBAR$-Intro}, 17,}
+\glinend{ }{$\qquad\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}]\constant{c_{\integer{1}}}\ldots\constant{c_{\integer{\integer{m}}}}/\variable{x}_1\ldots\variable{x}_{\integer{m}}$}{$\integer{n}+1$}
+\glinend{ }{ }{ }
+\glinend{ }{$\qquad\vdots$}{ }
+\glinend{ }{ }{ }
+\gline{$\integer{q}+2$}{$\forall\bpartriplebar{\partriplebar{\CAPTHETA}{\CAPPSI}}{\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}}$}{\Rule{$\forall$-Intro}, $\integer{q}+1$}
+\end{gproofnn}
+\noindent{}Note that we have left steps $18$--$\integer{n}$ for the reader; 
+this is just the derivation of the other conditional needed for \Rule{$\TRIPLEBAR$-Intro} on line $\integer{n}+2$. 
+Also note that the last steps, lines $\integer{n}+3$ to the end, are all \Rule{$\forall$-Intro} meant to eliminate the constants $\constant{c_{\integer{1}}},\ldots,\constant{c_{\integer{\integer{m}}}}$.
+\end{PROOF}
+%Now we turn to the proof of the \GSD{} Completeness Lemma.
+\begin{PROOFOF}{Thm. \ref{GSDCompletenessLemma}}
+To prove the theorem, we shall describe an algorithm for applying the rules of \GSDP{} and \Rule{$\TRIPLEBAR$-Exchange} that takes a \GSL{} sentence $\CAPPHI$ and either halts in a derivation of $\conjunction{\Al}{\negation{\Al}}$, or halts with a sentence in \CAPS{dnf} from which we can read off a model $\IntA$ that makes $\CAPPHI$ true.
+Since a sentence can be derived using the rules of \GSDP{} and \Rule{$\TRIPLEBAR$-Exchange} \Iff it can be derived using the basic rules of \GSD{}, this will be sufficient to prove the theorem. 
+
+The algorithm begins with $\CAPPHI$ as an assumption on line 1. 
+The algorithm then applies the method studied earlier in section \mvref{Disjunctive Normal Form} to produce a sentence $\CAPPHI'$ in \CAPS{dnf} that's \CAPS{tfe} to $\CAPPHI$.
+We have to show that each step of the earlier method can be carried out in steps using the rules of \GSDP{} and \Rule{$\TRIPLEBAR$-Exchange}.
+The earlier method proceeded in three stages. 
+\begin{description}
+\item[Step A:] \hfill
+\begin{cenumerate}
+\item If a subsentence of $\CAPPHI$ has a horseshoe as its main connective, i.e. if $\CAPPHI=\horseshoe{\CAPTHETA}{\CAPPSI}$, replace the subsentence by $\disjunction{\negation{\CAPTHETA}}{\CAPPSI}$.
+Repeat as necessary to obtain a sentence $\CAPPHI^*$ without conditionals. 
+Each of these steps are sanctioned by \Rule{$\HORSESHOE$/$\VEE$-Exchange}.
+
+\item If a subsentence of $\CAPPHI$ has a triplebar as its main connective, i.e. if $\CAPPHI=\triplebar{\CAPTHETA}{\CAPPSI}$, it is replaced with the subsentence $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}$.
+Repeat as necessary to obtain a sentence $\CAPPHI^{**}$ without biconditionals.
+Each of these steps are sanctioned by \Rule{$\TRIPLEBAR$-Exchange}.
+\end{cenumerate}
+
+\item[Step B:]
+In the case where $\CAPPHI^{**}$ contains a subsentence whose main connective is negation and which contains other connectives, we replace that subsentence by the following steps:
+\begin{cenumerate}
+\item Replace $\negation{\negation{\CAPTHETA}}$ by $\CAPTHETA$; this step is sanctioned by \Rule{$\NEGATION\NEGATION$-Elim}.
+\item Replace $\negation{\parconjunction{\CAPTHETA}{\CAPPSI}}$ by $\disjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}$; this step is sanctioned by \Rule{DeM}.
+\item Replace $\negation{\pardisjunction{\CAPTHETA}{\CAPPSI}}$ by $\conjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}$; this step is sanctioned by \Rule{DeM}.
+\end{cenumerate}
+Repeat as necessary to obtain a sentence $\CAPPHI^{***}$ in which negations govern nothing but sentence letters. 
+
+\item[Step C:]
+The only thing that could prevent $\CAPPHI^{***}$ from being in \CAPS{dnf} is that some conjunctions govern some disjunctions, i.e., there is a subsentence of the form $\conjunction{\CAPTHETA}{\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$, or the reverse $\conjunction{\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}{\CAPTHETA}$.
+Those subsentences can each be replaced by the equivalent sentence $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI_1}}{\disjunction{\ldots}{\parconjunction{\CAPTHETA}{\CAPPSI_{\integer{n}}}}}$ or $\disjunction{\parconjunction{\CAPPSI_1}{\CAPTHETA}}{\disjunction{\ldots}{\parconjunction{\CAPPSI_{\integer{n}}}{\CAPTHETA}}}$.
+This steps are sanctioned by \Rule{Distribution}.
+\end{description}
+\noindent{}Applying the above steps A, B, and C will provide us a derivation starting with $\CAPPHI$ as an assumption (and no other assumptions) and ending with a \CAPS{dnf} sentence that's \CAPS{tfe} to $\CAPPHI$. 
+We now have two possibilities:
+\begin{description}
+\item[Case 1:] 
+Every disjunct contains a sentence letter and the negation of that sentence letter. 
+That is, each disjunction has the form $\parconjunction{\CAPPSI_1}{\conjunction{\ldots}{\conjunction{\CAPPSI_{\integer{i}}}{\conjunction{\ldots}{\conjunction{\negation{\CAPPSI_{\integer{i}}}}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}}}$; for example: $\parconjunction{\Al}{\conjunction{B}{\conjunction{\Cl}{\conjunction{\negation{\El}}{\conjunction{\negation{\Bl}}{\negation{\Fl}}}}}}$.
+
+\item[Case 2:]
+At least one disjunct contains no sentence letter such that the negation of the sentence letter is also in the disjunct. 
+\end{description}
+\noindent{}We can show in case $1$ that the original sentence leads to a contradiction.
+First, we observe that any conjunction that contains a sentence letter and its negation leads to a contradiction by repeated steps of \Rule{$\WEDGE\!$-Elim}. 
+Thus we can derive the negation of any such conjunction using \Rule{$\NEGATION$-Intro}.
+So, if the last line of our derivation so far is of the form $\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$ and each $\CAPPSI_{\integer{i}}$ contains a sentence letter and the negation of that sentence letter, then we can add to the derivation lines that establish the negation of each $\CAPPSI_{\integer{i}}$. 
+Thus by $\integer{n}-1$ steps of \Rule{D.S.} we get a single $\CAPPSI_{\integer{i}}$ by itself with only the first line as an assumption.
+Since by hypothesis in this case $\CAPPSI_{\integer{i}}$ leads to a contradiction, we can show the initial assumption leads to a contradiction.
+Roughly, the procedure will look like this:
+\begin{gproofnn}
+\glinend{ }{$\CAPPHI$}{\Rule{Ass.}} %\marginnote{\scriptsize{}The original sentence}[0cm]
+\glinend{ }{ }{ }
+\glinend{ }{$\qquad\vdots$}{ }
+\glinend{ }{ }{ }
+\glinend{ }{$\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$}{ } %\marginnote{\scriptsize{}The \CAPS{dnf} sentence after steps A, B, and C}[0cm]
+\gaproof{
+\galinend{ }{$\CAPPSI_1$}{\Rule{Ass.}}
+\galinend{ }{ }{ }
+\galinend{ }{$\qquad\vdots$}{ }
+\galinend{ }{ }{ }
+\galinend{ }{$\conjunction{\CAPTHETA_1}{\negation{\CAPTHETA_1}}$}{ }
+}
+\glinend{ }{$\horseshoe{\CAPPSI_1}{\parconjunction{\CAPTHETA_1}{\negation{\CAPTHETA_1}}}$}{\Rule{$\HORSESHOE$-Intro}} %\marginnote{\scriptsize{}We start deriving the negation of each disjunct}[0cm]
+\glinend{ }{$\negation{\CAPPSI_1}$}{\Rule{$\NEGATION$-Intro}}
+\glinend{ }{ }{ }
+\glinend{ }{$\qquad\vdots$}{ }
+\glinend{ }{ }{ }
+\gaproof{
+\galinend{ }{$\CAPPSI_{\integer{n}}$}{\Rule{Ass.}}
+\galinend{ }{ }{ }
+\galinend{ }{$\qquad\vdots$}{ }
+\galinend{ }{ }{ }
+\galinend{ }{$\conjunction{\CAPTHETA_{\integer{n}}}{\negation{\CAPTHETA_{\integer{n}}}}$}{ }
+}
+\glinend{ }{$\horseshoe{\CAPPSI_{\integer{n}}}{\parconjunction{\CAPTHETA_{\integer{n}}}{\negation{\CAPTHETA_{\integer{n}}}}}$}{\Rule{$\HORSESHOE$-Intro}}
+\glinend{ }{$\negation{\CAPPSI_{\integer{n}}}$}{\Rule{$\NEGATION$-Intro}}
+\glinend{ }{$\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}-1}}}$}{\Rule{D.S.}} %\marginnote{\scriptsize{}Start applying \Rule{D.S.}}[0cm]
+\glinend{ }{$\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}-2}}}$}{\Rule{D.S.}}
+\glinend{ }{$\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}-3}}}$}{\Rule{D.S.}}
+\glinend{ }{ }{ }
+\glinend{ }{$\qquad\vdots$}{ }
+\glinend{ }{ }{ }
+\glinend{ }{$\disjunction{\CAPPSI_1}{\CAPPSI_2}$}{\Rule{D.S.}}
+\glinend{ }{$\CAPPSI_1$}{\Rule{D.S.}}
+\glinend{ }{$\conjunction{\CAPPSI_1}{\negation{\CAPPHI_1}}$}{\Rule{$\WEDGE\!$-Intro}} %\marginnote{\scriptsize{}Finally we reach a contradiction}[0cm]
+\end{gproofnn}
+We can show in case $2$ that we can find a model that makes all sentences in the derivation true, starting with the last. 
+We choose the disjunction that does not contain a sentence letter and its negation (if there is more than one, it doesn't matter which we choose), and we construct a (partial) model $\IntA$ by assigning $\TrueB$ to each sentence letter that occurs positively (without a negation in front) in the conjunction and $\FalseB$ to each sentence letter that occurs negatively (with a negation in front).
+We can do this since none occur in both modes. 
+
+This model makes each element of the conjunction true and thus makes the entire conjunction true. 
+Since the sentence containing it is a disjunction, this is sufficient to make the entire sentence true.
+Thus we can make the last line of the derivation true. 
+Observe now that all of the steps we used in the derivation were replacement of provably equivalence steps;
+that is, they used exchange shortcut rules.
+Thus, we know that we could also construct a derivation by turning this proof upside down.
+
+And finally, by truth-preservation, we know that if the first sentence of the upside-down derivation (the sentence in \CAPS{dnf} that was at the bottom) is true in a model, then so is everything that can be derived from it, including our original sentence $\CAPPHI$ that is now at the end of the inverted derivation. 
+Therefore, $\CAPPHI$ is true in some model. 
+\end{PROOFOF}
+\begin{THEOREM}{\LnpTC{GSDWCompleteness} Weak \GSD{} Completeness Theorem:}
+For all \GSL{} sentences $\CAPPHI$: if $\sdtstile{}{}\CAPPHI$, then $\sststile{}{}\CAPPHI$ in \GSD{}.
+\end{THEOREM}
+\begin{PROOF}
+We apply the method above from the \GSD{} Completeness Lemma to the negation of $\CAPPHI$. 
+This either produces a derivation of a contradiction from $\negation{\CAPPHI}$, in which case we can prove $\CAPPHI$ by adding two more steps justified by \Rule{$\HORSESHOE$-Intro} and \Rule{$\NEGATION$-Elim}, or it produces a model that makes $\negation{\CAPPHI}$ true and that therefore makes $\CAPPHI$ false. So, $\CAPPHI$ is either false in some model or is derivable in \GSD{}. 
+\end{PROOF}
+\noindent{}Finally, as a corollary we get:
+\begin{THEOREM}{\LnpTC{GSDCompleteness} \GSD{} Completeness Theorem:}
+For every finite set $\Delta$ of sentences of \GSL{} and every sentence $\CAPPHI$ of \GSL{}, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$ in \GSD{}.
+\end{THEOREM}
+\begin{PROOF}
+This follows immediately from the Weak \GSD{} Completeness Theorem and theorem \mvref{RegWeakCompletenessEquiv}.
+\end{PROOF}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Completeness of \GQD{}}\label{Sec:Completeness of GQD}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section we shall prove that \GQD{} is strongly complete.
+
+\subsection{Prenex Definition and Steps}\label{Prenex Definition and Steps}
+\begin{majorILnc}{\LnpDC{PrenexNF}}
+A sentence $\CAPPHI$ of \GQL{} is in \df{prenex normal form} \Iff every quantifier is in initial position, or, in other words, the scope of all quantifiers is greater than the that of an non-quantifier.
+\end{majorILnc}
+\begin{THEOREM}{\LnpTC{PrenexNFTheorem} Prenex Normal Form Theorem:}
+For all sentence $\CAPTHETA$ of \GQL{}, there is a provably equivalent sentence $\CAPTHETA^*$ in prenex normal form; that is, $\CAPTHETA^*$ is in prenex normal form and $\sststile{}{}\triplebar{\CAPTHETA}{\CAPTHETA^*}$ in \GQD{}.
+\end{THEOREM}
+\begin{PROOF}
+As with \CAPS{dnf} we have a set of steps for turning sentence $\CAPTHETA$ into a sentence $\CAPTHETA^*$ in prenex normal form. 
+First we give the steps, and then show that each step can be sanctioned either by \Rule{QN}, \Rule{$\TRIPLEBAR$-Exchange}, or an exchange rule that can be introduced.
+(We'll call these new exchange rules the \niidf{Prenex Exchange Rules}.\index{Exchange Rules!Prenex}) 
+Since all the steps in the process are justified by exchange rules, we can either read the resulting series of steps top-down as a derivation of $\CAPTHETA^*$ from $\CAPTHETA$, or bottom-up as a derivation of $\CAPTHETA$ from $\CAPTHETA^*$. 
+So, we'll have shown that $\sststile{}{}\triplebar{\CAPTHETA}{\CAPTHETA^*}$ in the derivation system consisting of \Rule{$\TRIPLEBAR$-Exchange} and the Prenex Exchange Rules.
+But, as with all the other exchange rules anything that can be derived using the Prenex Exchange Rules can be derived in \GQD{} alone;
+so, this will be sufficient to show that $\sststile{}{}\triplebar{\CAPTHETA}{\CAPTHETA^*}$ in \GQD{}. First, the steps are:
+\begin{cenumerate}
+\item Replace biconditionals by disjunctions of conjunctions; i.e. replace $\triplebar{\CAPPHI}{\CAPPSI}$ by $\disjunction{\parconjunction{\CAPPHI}{\CAPPSI}}{\parconjunction{\negation{\CAPPHI}}{\negation{\CAPPSI}}}$.
+\item Rewrite any variables that occur bound by more than one quantifier.
+\item Move the first quantifier not in prenex position one step towards the front by the following principles. Repeat this step as often as necessary.
+\begin{longtable}[c]{ l l }
+\toprule
+\textbf{Replace} & \textbf{by} \\
+\midrule
+$\parconjunction{(\#\variable{x})\CAPTHETA}{\CAPPSI}$ & $(\#\variable{x})\parconjunction{\CAPTHETA}{\CAPPSI}$ \\
+$\parconjunction{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\parconjunction{\CAPTHETA}{\CAPPSI}$ \\
+
+$\pardisjunction{(\#\variable{x})\CAPTHETA}{\CAPPSI}$ & $(\#\variable{x})\pardisjunction{\CAPTHETA}{\CAPPSI}$ \\
+$\pardisjunction{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\pardisjunction{\CAPTHETA}{\CAPPSI}$ \\
+
+$\parhorseshoe{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+
+$\parhorseshoe{\existential{\variable{x}}\CAPTHETA}{\CAPPSI}$ & $\universal{\variable{x}}\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+$\parhorseshoe{\universal{\variable{x}}\CAPTHETA}{\CAPPSI}$ & $\existential{\variable{x}}\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+
+$\negation{\existential{\variable{x}}\CAPTHETA}$ & $\universal{\variable{x}}\negation{\CAPTHETA}$ \\
+$\negation{\universal{\variable{x}}\CAPTHETA}$ & $\existential{\variable{x}}\negation{\CAPTHETA}$ \\
+\bottomrule
+\end{longtable}
+Note that $(\#\variable{x})$ is just a dummy quantifier standing for either; 
+replacement is the same for both quantifiers. 
+\end{cenumerate}
+After applying these steps to a sentence $\CAPTHETA$ we will get a sentence $\CAPTHETA^*$ that is in prenex normal form.
+(For more discussion of Prenex Form, see \citealt[132]{Kleene1967}, \citealt[54]{Hodges2001}, \citeyear[30]{Hodges2001b}.)
+We now have to show that each step can be sanctioned by an exchange rule.
+Step (1) is straightforward, since obviously it will be sanctioned by \Rule{$\TRIPLEBAR$-Exchange}.
+But steps (2) and (3) we need new rules (although the replacements involving negations in (30) can be handled with \Rule{QN}).
+The most straightforward strategy is to just read the needed exchange rules right off the steps. 
+Thus, the Prenex Exchange Rules are given in the following chart.
+%\begin{table}[!ht]
+%\renewcommand{\arraystretch}{1.5}
+%\begin{center}
+%\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
+%\toprule
+%\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+%\midrule
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\endfirsthead
+\multicolumn{3}{c}{\emph{Continued from Previous Page}}\\
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\endhead
+\bottomrule
+\caption{Prenex Exchange Short-Cut Rules for \GQD{}}\\[-.15in]
+\multicolumn{3}{c}{\emph{Continued next Page}}\\
+\endfoot
+\bottomrule
+\caption{Prenex Exchange Shortcut Rules for \GQD{}}\\
+\endlastfoot
+\label{GSDplusPrenex}\Rule{$\ALPHA$/$\BETA$-Exch} & $(\#\ALPHA)\CAPPHI$ & $(\#\BETA)\CAPPHI\BETA/\ALPHA$ \\
+\Rule{Q Shuffling} & $\parconjunction{(\#\variable{x})\CAPTHETA}{\CAPPSI}$ & $(\#\variable{x})\parconjunction{\CAPTHETA}{\CAPPSI}$ \\
+& $\parconjunction{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\parconjunction{\CAPTHETA}{\CAPPSI}$ \\
+
+& $\pardisjunction{(\#\variable{x})\CAPTHETA}{\CAPPSI}$ & $(\#\variable{x})\pardisjunction{\CAPTHETA}{\CAPPSI}$ \\
+& $\pardisjunction{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\pardisjunction{\CAPTHETA}{\CAPPSI}$ \\
+
+& $\parhorseshoe{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+
+& $\parhorseshoe{\existential{\variable{x}}\CAPTHETA}{\CAPPSI}$ & $\universal{\variable{x}}\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+& $\parhorseshoe{\universal{\variable{x}}\CAPTHETA}{\CAPPSI}$ & $\existential{\variable{x}}\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+\end{longtable}
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%\caption{Exchange Short-Cut Rules for \GSD{} (\GSD{})}
+%\label{GSDplus2}
+%\end{table}
+\noindent{}Now all that's left to show is that anything that can be derived using the Prenex Exchange Rules can be derived using the basic rules of \GQD{} alone.
+Recall from section \ref{Shortcut Rule Elimination Theorem Section} that all we need to do to show this is to prove the following:
+\begin{THEOREM}{\LnpTC{GQD NDF Rule2}}
+For all Prenex Exchange Rules \Rule{R}, any two \GQL{} formulas got by substituting other \GQL{} formulas into the may-add and given schemas of \Rule{R} are provably equivalent.
+\end{THEOREM}
+\noindent{}We leave the proof of this theorem to the reader, since as with the other exchange rules it just involves writing down the appropriate derivation schemas. 
+\end{PROOF}
+
+\subsection{The Strategy for Proving \GQD{} Completeness}
+Our goal is to prove the strong completeness of \GQD{}; 
+that is, we want to prove that for \emph{any} set $\Delta$ of \GQL{} sentences (even countably infinite) and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$. 
+Our strategy will be to first prove the \emph{weak} completeness of \GQD{} and then show how to modify the method to prove the strong completeness.
+Our strategy for proving weak completeness will be to show that for any sentence we can either find a derivation of it or we can construct a model that makes it false. 
+(This part of the strategy is more or less the same as what we did to show that \GSD{} is weakly complete.)
+In other words, $\CAPPHI$ is either derivable or not quantificationally true, from which it immediately follows that if $\CAPPHI$ is quantificationally true, then it is derivable. 
+
+The method,\index{method, the} in brief, is to negate the sentence $\CAPPHI$ and begin a derivation.
+Then we transform the negation of the sentence into prenex normal form, using the steps outlined in section \ref{Prenex Definition and Steps}. 
+Next we transform the inner part of he sentence (remember the quantifiers are all up front) into \CAPS{dnf} form, using our standard method for that (see Sec. \pmvref{Disjunctive Normal Form}).
+This will not introduce any new assumptions. 
+We then systematically take instances of the bound variables and try to derive a contradiction.
+If we can derive a contradiction we can then (assuming all goes we) use \Rule{$\NEGATION$-Elim} to obtain a derivation of $\CAPPHI$.
+
+We must be very systematic since we have to be sure that if we get a contradiction we can derive it from the initial sentence $\CAPPHI$, and that if we do not get a contradiction we have not overlooked anything and that we can show the existence of a model making the sentence on the first line, $\CAPPHI$, true. 
+
+It is important that we know the form of the sentence we have reached and are able to prescribe a uniform systematic method.
+The sentence has been highly standardized; 
+there are no biconditionals or conditionals (these have been eliminated in early steps of the transformation), negations govern only atomic sentences and conjunctions govern only atomic sentences or their negations. 
+These last, atomic sentence and their negations, are called \idf{ions}. 
+We say an ion occurs \niidf{positively} \Iff it's an atomic sentence with a negation, and it occurs \niidf{negatively} \Iff it's a negated atomic sentence. 
+We will call the quantifier free part of the original sentence the \idf{matrix}. 
+It is usually not a sentence since it may have free variables.
+We will call the sentences that are obtained from the matrix by substitution in the process of constructing the derivation \niidf{matrix instances}\index{matrix!instances|textbf}. 
+To put some of our jargon together, the matrix of the sentence will consist of disjunctions of conjunctions of ions. 
+
+\subsection{The Method and Weak Completeness Lemmas}\label{The Method Section}
+In this section we describe the method sketched above.\index{method, the} 
+Say we're given a sentence $\CAPTHETA$. 
+Then:
+\begin{description}
+\item[Step 0:] Write $\negation{\CAPTHETA}$ on line 1 as an assumption.
+Then first apply the prenex steps to put $\negation{\CAPTHETA}$ in Prenex Normal Form (\CAPS{pnf}). 
+Next, apply the disjunctive normal form steps to the inner, quantifier-free part of the sentence until it's in \CAPS{dnf}. 
+At this point we'll have a sentence $(\negation{\CAPTHETA})^*$ that's in what we'll call \idf{prenex disjunctive normal form}\index{disjunctive normal form!prenex} (\CAPS{pdnf}). 
+
+\item[Step 1:] We continue the derivation operating on $(\negation{\CAPTHETA})^*$, the \CAPS{pdnf} of the sentence we're concerned with. 
+If this \CAPS{pdnf} is a universal statement and contains no constants we write as the next line the instance of it we obtain by eliminating the quantifier and substituting the constant $\constant{a}$ for the previously bound variable;
+these steps are sanctioned by \Rule{$\forall$-Elim}.
+this step is only done once, whereas the next three steps generally require repeated recursive applications. 
+
+\item[Step 2:] For every universal sentence that appears thus far in the derivation, we add \emph{all new instances} that can be formed with constants that occur earlier in the derivation;
+these steps are sanctioned by \Rule{$\forall$-Elim}.
+E.g., if $\universal{\variable{x}}\CAPPHI$ appears on a line and the constant $\constant{c}$ appears anywhere (earlier) in the derivation, then if we have not taken an instance of $\CAPPHI$ with $\constant{c}$ yet (i.e., $\CAPPHI\constant{c}/\variable{x}$), we do so.
+As a practical matter, this means that it is useful in following the method to keep track somewhere of the constants used at each stage and of which constants have been used to instantiate which universal statements.
+Note that in this step we are taking new instances with old constants and that we are not adding any new assumptions. 
+We may, however, be adding new existentials. 
+
+\item[Step 3:] For every existential sentence that appears in the derivation for which no instance has been added yet, add an instance using the first constant which \emph{does not occur in any previous assumption}. 
+Note that \mention{instance} is to be taken very strictly here. 
+The fact that we instantiated $\existential{\variable{x}}\Fpp{\variable{x}}{\constant{a}}$ with $\Fpp{\constant{b}}{\constant{a}}$ takes care of that existential, but if we later add the sentence $\existential{\variable{x}}\Fpp{\variable{x}}{\constant{b}}$ then we must add an instance of it. 
+The rule which sanctions these steps will be \Rule{Assumption}. 
+We will eventually discharge these premises by \Rule{$\HORSESHOE$-Elim} and \Rule{$\exists$-Elim} if we get to a contradiction.
+It is in anticipation of this eventuality that we carefully chose a constant which does not occur in any previous assumption.
+Note that with this step we are adding new instances with new constants in new assumptions. 
+
+\item[Step 4:] Determine whether the conjunction of the \emph{instances} of the matrix in the derivation thus far are contradictory. 
+Officially, the way to do this is to take the conjunction of them all by \Rule{$\WEDGE\!$-Intro}, use \Rule{Distribution} to get the conjunction into \CAPS{dnf} and check whether every disjunct contains a contradiction. 
+If so, then by a process of \Rule{$\VEE$-Elim} and \Rule{Any Contradiction} we can eventually produce the line $\conjunction{\Al}{\negation{\Al}}$. 
+
+\item[Step 5:] \hfill
+\begin{cenumerate}
+\item If the matrices are contradictory we stop.
+\item Or if the conjunction of the matrix instances is consistent and the last applications of Steps 2 and 3 produce no new sentences, we stop.
+\item Or if the conjunction of the matrix instance is consistent and the last applications of Steps 2 and 3 produced new sentences, then we return to Step 2 and reapply those steps.
+\end{cenumerate}
+\end{description}
+Thus, there are three possible outcomes of applying this method to a sentence:
+\begin{cenumerate}
+\item The method might reach a contradiction.
+\item The method might stop without a contradiction.
+\item The method might generate new sentences perpetually without contradiction.
+\end{cenumerate}
+We will show first that if a contradiction is reached we can construct a derivation of $\CAPTHETA$. 
+
+\begin{THEOREM}{\LnpTC{Derivational Lemma} Derivational Lemma:}
+If the Method starts with $\negation{\CAPTHETA}$ and produces a contradiction, then there is a derivation of $\CAPTHETA$.
+\end{THEOREM}
+\begin{PROOF}
+Step 3 left us with $\conjunction{\Al}{\negation{\Al}}$ on a line with its assumptions being those of the matrices. 
+We want to shift those assumptions so that we end up with the contradiction from the first assumption, $\negation{\CAPTHETA}$, alone.
+We know by considering our method that other assumptions entered only by Step 2, where we added instances of existentials using new constants. 
+We eliminate the last assumption by a \Rule{$\HORSESHOE$-Intro}. 
+We know that our last assumption introduced a \emph{new} constant, and therefore we know that that constant did not appear in any earlier assumption or in the existential of which we are taking an instance.
+It also (obviously) does not occur in $\conjunction{\Al}{\negation{\Al}}$.
+Thus the \Rule{$\exists$-Elim} step in legitimate. 
+
+Thus we can repeat the contradiction $\conjunction{\Al}{\negation{\Al}}$, sanctioning it by \Rule{$\exists$-Elim}. 
+We continue this process, repeating $\conjunction{\Al}{\negation{\Al}}$ as often as necessary to shift the dependence back to the assumption on line 1. 
+This gives us a derivation of $\conjunction{\Al}{\negation{\Al}}$ from the first assumption, $\negation{\CAPTHETA}$, only. 
+
+We then add two more lines: $\horseshoe{\negation{\CAPTHETA}}{\parconjunction{\Al}{\negation{\Al}}}$, sanctioned by \Rule{$\HORSESHOE$-Intro}, and $\CAPTHETA$, sanctioned by \Rule{$\NEGATION$-Elim}. 
+Thus we have a derivation of $\CAPTHETA$ from no assumptions. 
+\end{PROOF}
+
+We have shown that if we obtain a contradiction in the derivation process we can derive the original sentence that interests us.
+We must now show that if we do not obtain a contradiction (whether or not the method stops), then there is a model that makes $\negation{\CAPTHETA}$ true (and hence makes $\CAPTHETA$ false).
+
+Before giving the rigorous version of the construction of the model, we will present some of the ideas in a more concrete context. 
+If we consider a sentence such as $\disjunction{\parconjunction{\Fp{\constant{a}}}{\negation{\Gp{\constant{b}}}}}{\parconjunction{\negation{\Fp{\constant{b}}}}{\Hp{\constant{c}}}}$ we can observe several things. 
+First, each disjunct is satisfiable \Iff no ion occurs both positively and negatively in it. 
+It is obvious that a conjunction that includes a sentence and its negation cannot be satisfied, but we can show for a conjunction of ions that that is the only way in which it can fail to be satisfiable. 
+For example, we can make $\Fp{\constant{a}}$ and $\negation{\Gp{\constant{b}}}$ true by letting $\FF$ be interpreted as the set of even numbers, $\GG$ the set of numbers divisible by $10$ and letting \mention{$\constant{a}$} be assigned $2$ and \mention{$\constant{b}$} be assigned $7$. 
+
+Of course several such sentences taken together produce different results. For example, as we saw above $\disjunction{\parconjunction{\Fp{\constant{a}}}{\conjunction{\negation{\Fp{\constant{b}}}}{\negation{\Gp{\constant{c}}}}}}{\parconjunction{\Gp{\constant{b}}}{\negation{\Gp{\constant{c}}}}}$ is satisfiable, as is $\disjunction{\parconjunction{\Fp{\constant{b}}}{\conjunction{\negation{\Fp{\constant{c}}}}{\negation{\Gp{\constant{b}}}}}}{\parconjunction{\Gp{\constant{c}}}{\negation{\Gp{\constant{d}}}}}$, but the two together (taken as a conjunction) are not.
+The reason is that while each disjunct of the first sentence is self-consistent, it cannot be true simultaneously with either of the disjuncts of the second sentence. If we have a series of disjunctions then they are simultaneously satisfiable only if we can find a way of picking a disjunct from each one in such a way that all the chosen disjuncts can be true together.
+
+This is relevant to the task at hand because we know that all of the non-quantified sentences in our derivation are in \CAPS{dnf} and are thus disjunctions of conjunctions of ions.
+We are calling the quantifier free part of the original sentence the matrix.
+It is usually not a sentence since it may have free variables. 
+The sentences that are obtained from the matrix by substitution in the process of constructing the derivation are the matrix instances. 
+We will use the notation $M_{i,j}$ for the disjuncts of the matrix instances, specifically the disjuncts of the first matrix instance will be $M_{1,1},M_{1,2},\ldots,M_{1,m}$.
+Thus the first matrix instance is $\disjunction{M_{1,1}}{\disjunction{M_{1,2}}{\disjunction{\ldots}{M_{1,m}}}}$.
+The matrix instances that appear in the derivation can be listed in an array:
+\begin{center}
+\begin{tabular}{ c }
+$\disjunction{M_{1,1}}{\disjunction{M_{1,2}}{\disjunction{\ldots}{M_{1,m}}}}$ \\
+$\disjunction{M_{2,1}}{\disjunction{M_{2,2}}{\disjunction{\ldots}{M_{2,m}}}}$ \\
+\\
+\hspace{.5in} $\vdots$ \\
+\\
+$\disjunction{M_{n,1}}{\disjunction{M_{n,2}}{\disjunction{\ldots}{M_{n,m}}}}$ \\
+\end{tabular}
+\end{center}
+Note that if the the method never stops, then this array will be infinitely long. 
+
+The matrices are jointly consistent \Iff there is a way of picking an $M_{i,j}$ from each matrix instance so that the conjunction of those $M_{i,j}$ contains no atomic sentence and its negation. 
+In one direction this is easy to see: if there is no way of choosing a disjunct from each matrix instance that does not end up with an atomic sentence and its negation among the chosen sentences then the set of instances is inconsistent. 
+
+To show that all instances are satisfiable when such a selection can be made without choosing a sentence and its negation will take some proving.
+In order to do this we will need to define the \idf{master matrix list} $M$.\index{matrix!master list} 
+We will first choose (if there is more than one) a set of disjuncts $M_{i,j}$ (including one from each matrix instance $M_i$) that does not contain any atomic sentence and its negation.
+This will be a set of conjunctions of atomic sentences and negations of atomic sentences.
+Our master matrix list $M$ simply consists of all these atomic sentences and negated atomic sentences.
+Note that since the $M_{i,j}$ selections must be consistent no atomic sentence that appears unnegated also appears negated.
+\begin{majorILnc}{\LnpDC{MatrixModel}}
+Given a master matrix list $M$, the \nidf{matrix model of $M$}\index{matrix!model} is the model $\IntA_M$ such that:
+\begin{cenumerate}
+\item The universe of $\IntA_M$ contains one natural number for each constant that appears in $M$, and $\IntA_M(\constant{a})=1$, $\IntA_M(\constant{b})=2$, $\IntA_M(\constant{c})=3$, $\IntA_M(\constant{d})=4$, and so on; $\IntA_M(\variable{t})=1$ for any constant $\variable{t}$ that doesn't appear in $M$. 
+\item For each $\integer{m}$-place predicate $\PP$, $\IntA_M(\PP)$ is the set of $\integer{m}$-tuples of natural numbers $\langle\integer{n}_1,\ldots,\integer{n}_\integer{m}\rangle$ such that $\IntA_M(\variable{t}_1)=\integer{n}_1,\ldots,\IntA_M(\variable{t}_\integer{m})=\integer{n}_\integer{m}$ and $\Pp{\variable{t}_1\ldots\variable{t}_\integer{m}}$ appears on the list $M$.
+\item Assignments are only made if justified by these principles.
+\end{cenumerate}
+\end{majorILnc}
+A bit more informally, we list the constants that occur on the master matrix list. $\IntA_M$ has a universe that contains as many natural numbers as constants used.
+We assign to each constant that occurs on the list the natural number that indicates its place in the order, i.e. $1$ to $\constant{a}$, $2$ to $\constant{b}$, and so on.
+Any constants not occurring on the master matrix list $M$ will be assigned $1$. 
+Note that this produces a \idf{census}.
+Each $1$-place predicate is assigned the set of numbers associated with the constants such that an instance of the predicate followed by that constant appears on the master matrix list $M$. 
+Each $2$-place predicate is assigned the set of pairs of numbers associated with constants such that an instance of the predicate followed by that pair of constants appears on the master matrix list $M$. 
+E.g., if $\Fpp{\constant{a}}{\constant{b}}$, $\Fpp{\constant{b}}{\constant{c}}$, and $\Fpp{\constant{d}}{\constant{e}}$ appear on $M$, then $\IntA_M(\FF)$ is assigned $\{\langle0,1\rangle,\langle1,2\rangle,\langle3,4\rangle\}$.
+Assignments are made in a similar fashion for $\integer{n}$-placed predicates for $\integer{n}>2$.\footnote{Note 
+that if the method never stops, then the master matrix list $M$ will be infinite and we won't actually be able to write down the matrix model $\IntA_M$. 
+But this isn't a problem, the matrix model $\IntA_M$ still exists, even if we can't write it down.} 
+\begin{THEOREM}{\LnpTC{MethodLemmaA} The Method Lemma 1:}
+The matrix model $\IntA_M$ makes true all sentences on the master matrix list $M$.
+\end{THEOREM}
+\begin{PROOF}
+By construction, if an atomic sentence appears on the list we decided to put the relevant pair, triple, or whatever, of numbers in the set assigned to the predicate letter. 
+For each negated atomic sentence on the list we know that we would not put the relevant pair, triple, or whatever, in the model of the predicate letter unless the atomic sentence which is being negated also appeared. 
+But that never happened because $M$ is consistent by hypothesis.
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{MethodLemmaB} The Method Lemma 2:}
+All matrix instances in the derivation are true in the matrix model $\IntA_M$.
+\end{THEOREM}
+\begin{PROOF}
+By Lemma 1 (Thm. \ref{MethodLemmaA}), all sentences on the master matrix list $M$ are true, and we included all the conjuncts of at least one disjunct $M_{i,j}$ from each matrix instance in forming the master list.
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{MethodLemmaC} The Method Lemma 3:}
+All quantified sentences in the derivation are true in the matrix model $\IntA_M$.
+\end{THEOREM}
+\begin{PROOF}
+We prove this lemma using a recursive proof on the number of quantifiers in the sentence.
+\begin{description}
+\item[Base Case:] 
+The base case is the case of the sentences with $\integer{k}=0$ quantifiers. 
+But these sentences are just the matrix instances in the derivation. 
+We already proved in The Method Lemma 2 (Thm. \ref{MethodLemmaB}) that all these sentences are true the matrix model $\IntA_M$, so the base case is complete.
+
+\item[Inheritance Step:] \hfill
+\begin{description}
+\item[Recursive Assumption:]
+Our recursive assumption is that all sentences in the derivation with less than $\integer{k}$ quantifiers are true in the matrix model $\IntA_M$.
+
+\item[Existential Quantifier:]
+Say $\CAPTHETA$ is a sentence appearing in the derivation of the form $\existential{\ALPHA}\CAPPHI$, where $\CAPPHI$ is a sentence with $\integer{k}-1$ quantifiers. 
+Step 3 of the method guarantees that the sentence $\CAPPHI\variable{t}/\ALPHA$, for $\variable{t}$ some constant, appears somewhere in the derivation. 
+This sentence $\CAPPHI\variable{t}/\ALPHA$ has $\integer{k}$ quantifiers, so by the recursive assumption it is true in the matrix model $\IntA_M$. 
+But then the existentially quantified sentence $\existential{\ALPHA}\CAPPHI$ is true in $\IntA_M$ as well.
+(To show this rigorously, consider a partial $\ALPHA$-variant of $\As$ that assigns $\ALPHA$ to the same element of the universe of $\IntA_M$ as $\IntA_M$ assigns to the constant $\variable{t}$.
+Now by the Dragnet Theorem, Thm. \pncmvref{The Dragnet Theorem}, since $\IntA_M$ makes $\CAPPHI\variable{t}/\ALPHA$ true, the formula $\CAPPHI$ is true in $\IntA$ on the partial $\ALPHA$-variant of $\As$.
+It follows from this by theorem \pncmvref{Quantifier Corollary} that $\existential{\ALPHA}\CAPPHI$ is true on $\IntA_M$.)
+
+\item[Universal Quantifier:]
+Say $\CAPTHETA$ is a sentence appearing in the derivation of the form $\universal{\ALPHA}\CAPPHI$, where $\CAPPHI$ is a sentence with $\integer{k}-1$ quantifiers. 
+All instances $\CAPPHI\variable{t}/\ALPHA$ which appear in the derivation have $\integer{k}-1$ quantifiers, and so by the recursive hypothesis are true in the matrix model $\IntA_M$. 
+If we consider any partial $\ALPHA$-variant of $\As$, we know that what it assigns to $\ALPHA$ must be a number from the universe of $\IntA_M$;
+we also know from the way that we constructed the matrix model $\IntA_M$ that a number was included in the universe of $\IntA_M$ only if it was assigned to some constant that occurred in the derivation.  
+Let what's assigned to $\ALPHA$ by $\As$ be the number associated with the constant $\constant{c}$.
+Since the universal statement $\universal{\ALPHA}\CAPPHI$ occurred in the derivation, we know that we took all instances of it, including $\CAPPHI\constant{c}/\ALPHA$. 
+As already stated, all instances $\CAPPHI\variable{t}/\ALPHA$ are true in $\IntA_M$, including $\CAPPHI\constant{c}/\ALPHA$.
+By the Dragnet Theorem (Thm. \pncmvref{The Dragnet Theorem}), since $\CAPPHI\constant{c}/\ALPHA$ is true in $\IntA_M$ it follows that $\CAPPHI$ is true in $\IntA_M$ on $\As$. 
+But the exact same argument will work for every partial $\ALPHA$-variant of $\As$; so $\CAPPHI$ is true in $\IntA_M$ on every partial $\ALPHA$-variant of $\As$. 
+It follows from theorem \mvref{Quantifier Corollary} that $\universal{\ALPHA}\CAPPHI$ is true on the matrix model $\IntA_M$. 
+\end{description}
+
+\item[Closure Step:]
+Every sentence in the derivation is true in the matrix model $\IntA_M$, which is what was to be shown. 
+\end{description}
+\end{PROOF}
+
+\subsection{Proving Completeness}
+In\index{completeness!weak \GQD{}} this section we put together all the pieces from the last section to prove that \GQD{} is complete. 
+\begin{THEOREM}{\LnpTC{MainGQDWCompletenessLemma} Main Weak \GQD{} Completeness Lemma:}
+For all sentences $\CAPTHETA$ of \GQL{}, if the method is applied to $\negation{\CAPTHETA}$ then either: (a) the method produces a derivation of $\CAPTHETA$ in \GQDP{}, or (b) a model $\IntA$ can be read off which makes $\CAPTHETA$ false.
+\end{THEOREM}
+\begin{PROOF}
+If the method is applied to $\negation{\CAPTHETA}$, then either (1) it will produce a contradiction $\conjunction{\Al}{\negation{\Al}}$, (2) the method halts without a contradiction, or (3) the method never halts (and hence never halts in a contradiction). 
+If (1), then by the Derivational Lemma (Thm. \pmvref{Derivational Lemma}) there is a derivation of $\CAPTHETA$. 
+
+If either (2) or (3) is the case, then by the Method Lemma 3 (Thm. \pmvref{MethodLemmaC}) we know that all sentences in the derivation starting with $(\negation{\CAPTHETA})^*$, the prenex disjunctive normal form sentence produced in Step 0 of the method from the sentence $\negation{\CAPTHETA}$ on line 1, are true in the matrix model $\IntA_M$. 
+Note that all the steps in the derivation of $(\negation{\CAPTHETA})^*$ from $\negation{\CAPTHETA}$ are sanctioned by exchange rules;
+therefore those steps can be turned upside down to produce a derivation in \GSDP{} of $\negation{\CAPTHETA}$ from $(\negation{\CAPTHETA})^*$. 
+So by theorem \mvref{GQD Shortcut Theorem3} there's a derivation in \GSD{} of $\negation{\CAPTHETA}$ from $(\negation{\CAPTHETA})^*$.
+Since \GSD{} is sound (Thm. \pmvref{Soundness of Quantifier Logic}), it follows that $(\negation{\CAPTHETA})^*\sdtstile{}{}\;\negation{\CAPTHETA}$.
+Since we know that $(\negation{\CAPTHETA})^*$ is true in the matrix model $\IntA_M$, it follows that $\negation{\CAPTHETA}$ is true in $\IntA_M$ too.
+So it follows that $\CAPTHETA$ is false in $\IntA_M$. 
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{GQDWeakCompletenessTheorem} Weak \GQD{} Completeness Theorem:}
+For all sentences $\CAPTHETA$ of \GQL{}, if $\sdtstile{}{}\CAPTHETA$, then $\sststile{}{}\CAPTHETA$ in \GQD{}.
+\end{THEOREM}
+\begin{PROOF}
+Assume that $\sdtstile{}{}\CAPTHETA$. Then there are no models $\IntA$ which makes $\CAPTHETA$ false. 
+Thus, if the method is applied to $\negation{\CAPTHETA}$ it can't be the case that a model $\IntA$ can be read off which makes $\CAPTHETA$ false. 
+By the Main \GSD{} Weak Completeness Lemma (Thm. \ref{MainGQDWCompletenessLemma}), it follows that when the method is applied to $\negation{\CAPTHETA}$ it produces a derivation of $\CAPTHETA$ in \GSDP{}. 
+Hence there is a derivation of $\CAPTHETA$ in \GSD{}.
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{GQDCompletenessTheorem} \GQD{} Completeness Theorem:}
+For all finite sets $\Delta$ of \GQL{} sentences and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
+\end{THEOREM}
+\begin{PROOF}
+The theorem follows immediate from the Weak \GQD{} Completeness Theorem and theorem \mvref{RegWeakCompletenessEquiv}.
+\end{PROOF}
+
+\subsection{Shortcut Rules for the Method}
+Tthe method discussed in section \ref{The Method Section} becomes practically unwieldy.
+For example, if the matrix has three disjuncts with two sentences each, then combining two instances gives 9 disjuncts with 4 elements each, and combining three gives 27 disjuncts with 8 elements each. 
+Thus we will use some additional short cut rules to speed the process of detecting contradictions. 
+(But note that \emph{none} of the shortcut Rules we add here are \emph{exchange} shortcut rules.)
+
+Our first shortcut rule is \Rule{Greg's Rule}. We\index{Greg's Rule} know that if a conjunction contains an atomic formula and the negation of that atomic formula then we can derive the negation of the conjunction.
+For example, we can derive the negation of $\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}$.
+So if we have a disjunction, one disjunct of which contains a contradiction of this kind, we can derive he negation of that disjunct and use disjunctive syllogism to prune that disjunct.
+For example, given $\disjunction{\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}{\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$ on a line we can derive $\negation{\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}$ and then $\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}$. 
+Greg's Rule lets us accomplish those steps by crossing out the contradictory and writing down the remaining ones.
+
+It\index{$\VEE$/$\WEDGE$-Elim} is helpful to have a short cut rule which combines \Rule{$\WEDGE\!$-Eim} steps with \Rule{$\VEE$-Elim} steps to go from a disjunction of which each disjunct contains a particular sentence to that sentence itself on a later line;
+we will call it \Rule{$\VEE$/$\WEDGE\!$-Elim} and it sanctions the step from $\disjunction{\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{c}}}}}}}{\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$ to $\Gp{\constant{b}}$. 
+In addition to citing the justification, if the sentence is at all complex you should circle the repeated subsentence.
+
+Finally,\index{One Bad Apple} given the opposite of even one conjunct in a conjunction, we can derive the negation of the conjunction.
+E.g., from $\Gp{\constant{a}}$ we can derive $\negation{\parconjunction{\Fp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Fp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$.
+We will call this rule \Rule{One Bad Apple}, or \Rule{OBA}.
+%\begin{table}[!ht]
+%\renewcommand{\arraystretch}{1.5}
+%\begin{center}
+%\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
+%\toprule
+%\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+%\midrule
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\endfirsthead
+\multicolumn{3}{c}{\emph{Continued from Previous Page}}\\
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\endhead
+\bottomrule
+\caption{Short-Cut Rules for the Method}\\[-.15in]
+\multicolumn{3}{c}{\emph{Continued next Page}}\\
+\endfoot
+\bottomrule
+\caption{Short-Cut Rules for the Method}\\
+\endlastfoot
+\label{GSDplusMethod}\Rule{Greg's Rule} & $\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$, where some & $\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\disjunction{\CAPPSI_{\integer{i}-1}}{\disjunction{\CAPPSI_{\integer{i}+1}}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}}$ \\[-.25cm]
+ & $\CAPPSI_{\integer{i}}=\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_{\integer{j}}}{\ldots}}}$ & \\[-.25cm]
+\nopagebreak
+ & $\WEDGE\conjunction{\negation{\CAPPHI_{\integer{j}}}}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$ & \\
+ 
+\Rule{$\VEE$/$\WEDGE\!$-Elim} & $\disjunction{\CAPPSI_{1}}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$, where & $\CAPPHI$ \\[-.25cm]
+ & each $\CAPPSI_{\integer{i}}$ contains $\CAPPHI$ & \\
+ 
+\Rule{OBA} &  $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_i}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, $\negation{\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_i}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+\nopagebreak
+ & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+\end{longtable}
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%\caption{Exchange Short-Cut Rules for \GSD{} (\GSDP{})}
+%\label{GSDplus2}
+%\end{table}
+
+\subsection{Proving Strong Completeness}\label{Sec:Proving Strong Completeness}
+In this section we want to extend our results and show that \GSD{} is strongly complete.
+Note that the method we used to extend the Weak Completeness Theorem to the Completeness Theorem will not work here.
+To do that, we used theorem \mvref{RegWeakCompletenessEquiv}, the proof of which depending on $\Delta$ being finite.  
+To show that \GQD{} is strongly complete, we have modify the method we used to show that it's weakly complete.
+\begin{THEOREM}{\LnpTC{GQDStrongCompletenessTheorem} Strong \GQD{} Completeness Theorem:}
+For any set $\Delta$ of \GSL{} sentences and any \GSL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
+\end{THEOREM}
+\noindent{}To show that \GQD{} is weakly complete, we gave a method that, given a sentence $\CAPTHETA$, either produces a derivation of $\CAPTHETA$ or produces a model $\IntA$ which makes $\CAPTHETA$ false. 
+To show that \GQD{} is strongly complete, what we want is a method that, given a (possibly countably infinite) set $\Delta$ of sentences and another sentence $\CAPPHI$, either produces a derivation of a contradiction $\conjunction{\Al}{\negation{\Al}}$ from $\negation{\CAPPHI}$ and some finite subset of $\Delta$ or produces a model $\IntA$ that makes $\negation{\CAPPHI}$ and every sentence in $\Delta$ true.
+
+The method we'll give is a modification of the original method given in section \ref{The Method Section}. 
+Since it is just a modification of the the original method, we'll only sketch the changes needed. 
+We'll call the modified method the \niidf{strong method}\index{strong method, the}\index{method, the!strong}. 
+Given some possible countably infinite set $\Delta$ and sentence $\CAPPHI$, the strong method is:
+\begin{description}
+\item[Step 1:] Let $\Delta^*=\Delta\cup\{\negation{\CAPPHI}\}$. 
+Then put some ordering on the sentences in $\Delta^*$;
+the only constraint is that $\negation{\CAPPHI}$ should be first.
+
+\item[Step 2:] Put the first sentence of $\Delta^*$ on line 1 and put it in \CAPS{pdnf}, just as was done in Step 0 of the method.
+
+\item[Step 3:] Apply Step 1 of the method.
+
+\item[Step 4:] Apply Steps 2 and 3 of the method to the whole derivation thus far.
+
+\item[Step 5:] Check for contradictions, just as in Step 4 of the method.
+
+\item[Step 6:] \hfill
+\begin{cenumerate}
+\item If there's a contradiction, stop.
+\item If there's no contradiction, write the next sentence of $\Delta^*$ on the next line of the derivation, put that sentence in \CAPS{pdnf}, and go back into Step 4. 
+\end{cenumerate}
+\end{description}
+The strong method will either halt in a contradiction, or not. 
+\begin{THEOREM}{\LnpTC{DerivationalLemmaS} Strong Derivational Lemma:}
+If the strong method halts in a contradiction, then $\Delta\sststile{}{}\CAPPHI$.
+\end{THEOREM}
+\begin{PROOF}
+If the strong method halts in a contradiction, then it will have produced a derivation of a contradiction $\conjunction{\Al}{\negation{\Al}}$ from $\negation{\CAPPHI}$ and some subset $\Delta'$ of $\Delta$. 
+Thus, if the strong method halts in a contradiction, $\negation{\CAPPHI},\Delta'\sststile{}{}\conjunction{\Al}{\negation{\Al}}$.
+It should be clear that if $\negation{\CAPPHI},\Delta'\sststile{}{}\conjunction{\Al}{\negation{\Al}}$, then $\Delta'\sststile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$.
+Hence $\Delta'\sststile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$, and from this it follows that $\Delta\sststile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$.
+By using \Rule{$\NEGATION$-Elim}, we can see that if $\Delta\sststile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$, then $\Delta\sststile{}{}\CAPPHI$; 
+hence $\Delta\sststile{}{}\CAPPHI$.
+\end{PROOF}
+\noindent{}Next, note that if the strong method doesn't halt in a contradiction, then we will have a list of matrix instances from which we can construct a matrix model $\IntA_M$ in just the same way we did for the method (Def. \pmvref{MatrixModel}).
+Similar to the method, we have the following three theorems.
+\begin{THEOREM}{\LnpTC{MethodSLemmaA} The Strong Method Lemma 1:}
+The matrix model $\IntA_M$ makes true all sentences on the master matrix list $M$.
+\end{THEOREM}
+\begin{PROOF}
+The same proof used for the method (Thm. \pmvref{MethodLemmaA}) applies here too.
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{MethodSLemmaB} The Strong Method Lemma 2:}
+All matrix instances in the derivation are true in the matrix model $\IntA_M$.
+\end{THEOREM}
+\begin{PROOF}
+The same proof used for the method (Thm. \pmvref{MethodLemmaB}) applies here too.
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{MethodSLemmaC} The Strong Method Lemma 3:}
+All quantified sentences in the derivation are true in the matrix model $\IntA_M$.
+\end{THEOREM}
+\begin{PROOF}
+The same proof used for the method (Thm. \pmvref{MethodLemmaC}) applies here too, so long as we can show that if an existential $\existential{\ALPHA}\CAPPSI$ appears on a line, at least one instance $\CAPPSI\variable{t}/\ALPHA$ does, and if a universal $\universal{\ALPHA}\CAPPSI$ appears on a line, then every instance $\CAPPSI\variable{t}/\ALPHA$ of it with a constant $\variable{t}$ appearing somewhere in the derivation appears somewhere in the derivation. [MUST FINISH] %(Why? assume not. Then say that universal is PHI and that constant is b. Since the derivation is never ending, there must have been a pass of steps 1 and 2 that comes after both the pass that introduced b and the pass that introduced PHI. So contra assumption, this pass put that instance of PHI in the sequence.).
+\end{PROOF}
+\noindent{}Finally, we have one last lemma:
+\begin{THEOREM}{\LnpTC{MainGQDSCompletenessLemma} Main Strong \GQD{} Completeness Lemma:}
+For all sets of sentences $\Delta$ of sentences of \GQL{} and \GQL{} sentences $\CAPPHI$, if the strong method is applied to $\Delta^*=\Delta\cup\{\negation{\CAPPHI}\}$ then either: (a) the strong method produces a derivation of $\CAPPHI$ from $\Delta$ in \GQDP{}, or (b) a model $\IntA$ can be read off which makes every sentence in $\Delta$ true and $\CAPPHI$ false.
+\end{THEOREM}
+\begin{PROOF}
+If the method is applied to $\Delta^*=\Delta\cup\{\negation{\CAPPHI}\}$, then either it halts in a contradiction or not. 
+By the Strong Derivational Lemma (\pmvref{DerivationalLemmaS}), if the strong method halts in a contradiction, then $\Delta\sststile{}{}\CAPPHI$ in \GQDP{}.
+
+If the method does not halt in a contradiction, then by the Strong Method Lemma 3 (Thm. \pmvref{MethodSLemmaC}) the matrix model $\IntA_M$  makes all the sentences in the derivation true. 
+But since the strong method did not halt in a contradiction, for every sentence $\CAPPSI$ in $\Delta$ and $\negation{\CAPPHI}$, there's some sentence in \CAPS{pdnf} that's quantificationally equivalent to $\CAPPSI$ and appears in the derivation. 
+So $\IntA_M$ makes all the sentences in $\Delta$ and the sentence $\negation{\CAPPHI}$ true; 
+hence $\IntA_M$ makes all the sentences in $\Delta$ true and $\CAPPHI$ false. 
+\end{PROOF}
+\begin{PROOFOF}{Thm. \ref{GQDStrongCompletenessTheorem}, The Strong Completeness Theorem for GQD}
+Assume that $\Delta\sdtstile{}{}\CAPPHI$. 
+Then there can be no model $\IntA$ which makes all of the sentences in $\Delta$ true and $\CAPPHI$ false;
+so, application of the method can't produce such a model.
+Thus by the Main \GQD{} Strong Completeness Lemma (Thm. \ref{MainGQDSCompletenessLemma}), $\Delta\sststile{}{}\CAPPHI$ in \GQDP{}. 
+It follows by theorem \mvref{GQD Shortcut Theorem3} that $\Delta\sststile{}{}\CAPPHI$ in \GQD{}.
+\end{PROOFOF}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Decidability and Church's Theorem}\label{Decidability and Churchs Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Next\index{decidable}\index{undecidable} we turn to refinements of the method to obtain what are called \niidf{decision procedures} for logical truth in a language \Language{L}. %\index{decision procedure}
+We first introduced the idea of a decision procedure in section \mvref{Section:Intro to Decidability}; here we shall fill things out a bit further. 
+\begin{majorILnc}{\LnpDC{Def:DecisionProcedure}}
+A \df{decision procedure} for logical truth in a language (or sublanguage) \Language{L} is a completely specified method which produces, for any sentence $\CAPPHI$ of \Language{L} and in a finite number of steps, the answer YES if $\CAPPHI$ is a logical truth and the answer NO otherwise.
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TruthTableDecisionProcedure}}
+We have already seen two decision procedures for \CAPS{tft} in \GSL{}: truth tables and the method discussed in the completeness proof of \GSD{}. 
+(Others include truth trees and Quine's ``fell swoop'', \citealt{Quine1950}, \citealt[23]{Hodges2001}.)
+The truth-table decision procedure is simple:\index{decision procedure!truth table} take a sentence $\CAPPHI$ of \GSL{} and construct a truth table for it. If you get all $\TrueB{}$ in the column under $\CAPPHI$; answer YES. If you don't, answer NO. 
+Likewise for the method discussed in the completeness proof of \GSD{}:\index{decision procedure!for \CAPS{tft} in \GSL{}} take a sentence $\CAPPHI$, negate it to get $\negation{\CAPPHI}$, and apply the method. 
+If it results in a contradiction $\conjunction{\Al}{\negation{\Al}}$, answer YES. 
+If no contradiction is reached, answer NO. 
+\end{majorILnc}
+\noindent{}Our method of proving completeness for \GQD{} is a little short of being a decision procedure for quantificational truth in \GQL{} because it does not always produce an answer in a finite amount of time.
+It can be shown that there is no decision procedure for the whole language \GQL{} \citetext{\citealp[83--86]{Hodges2001}, \citeyear[31]{Hodges2001b}, \citealp[486]{Bergmann2003}}.
+\begin{THEOREM}{\LnpTC{ChurchsTheorem} Church's Theorem:}
+If\index{Church's Theorem}\index{decision procedure!for \CAPS{qt} in \GQL{}|see{Church's Theorem}} \Language{L} is a sublanguage of \GQL{} with (1) the same logical connectives as \GQL{}, and (2) at least one 2-place predicate symbol, then there is no decision procedure for the set of logical truths of \Language{L}.\footnote{Actually, 
+Church's Theorem also says that if we also consider languages with function symbols, then if \Language{L} has at least two 1-place function symbols there is no decision procedure for the set of logical truths of \Language{L}.}
+\end{THEOREM}
+Church's Thesis at once tells us that there is no decision procedure for quantificational truth in \GQL{}, but we can show that with some modifications our method from section \ref{The Method Section} can be turned into a decision procedure for certain sublanguages of \GQL{}. 
+As the thesis suggests, one such sublanguage \Language{L} of \GQL{} is the language that consists of just 1-place predicate symbols. 
+We'll call this language monadic \GQL{}.\index{decision procedure!for \CAPS{qt} in monadic \GQL{}}\index{GQL!monadic}
+
+The basic insight for modifying the method is that infinite loops are created by having an existential quantifier inside a universal quantifier; 
+the existential requires a new constant to be instantiated, and that creates a new potential instance for the universal, which then creates a new existential, and so on. 
+
+Put more positively, if the method produces a sentence in standardized form which has only existential, or only universal quantifiers, then the method will stop. 
+Moreover, if in the standardized form the existentials all precede the universals the method will also stop, for we will first take instances of all the existentials using $\integer{n}$ constants if there are $\integer{n}$ existentials, and afterwards we will instantiate the $\integer{n}$ new constants in the $\integer{m}$ universals giving $\integer{n}^\integer{m}$ instances.
+But, we will be done then since no more new constants will be added. 
+
+The general principle is that if one quantifier occurs within the scope of another then it cannot be moved in front of the other quantifier. 
+You may remember that the scope of a quantifier, say $\forall$ in $\universal{\variable{x}}\CAPPHI$, is the subformula $\CAPPHI$ of which it is the main connective. 
+We can say two quantifiers are \niidf{independent}\index{quantifier!s, independent} if neither is in the scope of the other.
+With this terminology, we can notice that for any sentence all of whose quantifiers are independent of each other that they can be brought forward in any order, and thus we have a decision procedure for such sentences. 
+
+Now the trick is that every sentence of monadic \GQL{} is equivalent to a sentence whose quantifiers are independent. 
+We can show this by appeal to the reverse of our procedure for putting sentences into prenex form, i.e. by moving quantifiers inward, but we use most of the same rules as for standard prenex (remember they are exchange rules).
+\begin{THEOREM}{\LnpTC{MonadicGQLEquivTheorem} Monadic \GQL{} Equivalence Theorem:}
+Every sentence of monadic \GQL{} is quantificationally equivalent to a sentence whose quantifiers are independent.
+\end{THEOREM}
+\begin{PROOF}
+Proof here.
+\end{PROOF}
+\begin{THEOREM}{\LnpTC{MonadicDecisionTheorem} The Monadic Decision Theorem:}
+The\index{Monadic Decision Theorem, The} modified method just described provides a decision procedure for quantificational truth in monadic \GQL{}.
+\end{THEOREM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{L\"owenheim-Skolem and Compactness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A number of results follow directly from the completeness of \GQD{} or the method we used to prove completeness. 
+\begin{THEOREM}{\LnpTC{LowenheimSkolemTheorem} The Downward L\"owenheim-Skolem Theorem:}
+If a sentence of \GQL{} is true in any model, then it is true in one whose domain consists of all or some of the natural numbers.
+\end{THEOREM}
+\begin{PROOF}
+If $\CAPPHI$ is true in some model, then $\negation{\CAPPHI}$ is not a quantificational truth.
+Thus, applying the method to $\negation{\CAPPHI}$ will not produce a contradiction, but will produce a model of the natural numbers which falsifies $\negation{\CAPPHI}$ and hence makes $\CAPPHI$ true.
+\end{PROOF}
+It's important to note that there's really nothing special about the natural numbers.
+When we devised the procedure for constructing a model of ions in the master matrix list that results from the method (when no contradiction arises), we choose to use natural numbers for the universe. 
+But it should be clear that we did this out of convenience (it's easy, after all, to associate constants with the natural numbers). 
+We could have used any set of objects for the universe. 
+What's important is that, whatever we used, the domain of the constructed model will at most be countably infinite (that is, it will at most be the size of the natural numbers and no larger). 
+Hence a more abstract version of the downward Lowenheim-Skolem Theorem simply says: If a sentence of \GQL{} is true in any model, then either it's true in only models with finite domains, or, if it's true at all in models with infinite domains, then there's an model with a \emph{countably} infinite domain in which it's true. 
+
+This thorem was proved in a weaker form originally by Leopold L\"owenheim \citeyearpar{Lowenheim1915}, and the proof was improved by Thoralf Skolem \citeyearpar{Skolem1920,Skolem1922}. 
+Notice that the theorem talks only about models, and we have proved it via a detour through derivations. 
+As you might imagine, there are more direct proofs, including Skolem's \citetext{\citealp{Tarski1956}, \citealp{Vaught1974}, \citealp[ch.~3.1]{Hodges1997}, \citeyear[63]{Hodges2001}}.
+
+Notice also that after our work on monadic logic, we know that for monadic sentences the method will stop after a finite number of steps (if we arrange the prenex carefully) and so we can conclude that if a monadic sentence is true in any model then it is true in a finite one. 
+\begin{THEOREM}{\LnpTC{MonadicIntSizeTheorem}}
+If $\CAPPHI$ is a sentence of monadic \GQL{} and has a model, then it has a finite model.
+\end{THEOREM}
+
+Our next corollary of completeness is the Compactness Theorem.
+Although historically the completeness theorem was proved first and compactness followed as a corollary, today the compactness theorem takes center stage in many areas of logic (especially model theory). 
+Like the L\"owenheim-Skolem Theorem, there are many different proofs of compactness that do not go through completeness or use any facts about derivations \citetext{see \citealt[321]{Kleene1967}, \citealt{Ebbinghaus1985}, \citealt[ch.~5.1]{Hodges1997}, \citealp[63]{Hodges2001}, \citeyear[29]{Hodges2001b}}. 
+%answers the question of whether it's possible that an infinite set of sentences is intuitively contradictory but we cannot deduce the contradiction in our system because our derivations are finite?
+%This is a specific version of the more general worry that if $\Delta$ is an infinite set then it might be that $\Delta\sdtstile{}{}\CAPPHI$ but not $\Delta\sststile{}{}\CAPPHI$. 
+%We can prove that this doe not occur in our language by proving the following theorem.
+\begin{THEOREM}{\LnpTC{Thm:CompactnessTheorem} The Compactness Theorem for \GQL{}:}
+For all sets of sentences $\Delta$ of \GQL{}, if for every finite subset $\Delta'$ of $\Delta$ there exists a model $\IntA'$ that makes all the sentences in $\Delta'$ true, then there's some model $\IntA$ that makes all the sentences in $\Delta$ true. 
+\end{THEOREM}
+\begin{PROOF}
+By the strong completeness theorem, for all sets $\Delta$ of \GQL{} sentences and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
+Now assume that there's no model $\IntA$ that makes all the sentences in $\Delta$ true. 
+Hence $\Delta\sdtstile{}{}\conjunction{\Al}{\negation{\Al}}$.
+So by strong completeness, $\Delta\sststile{}{}\conjunction{\Al}{\negation{\Al}}$.
+By definition, this implies that there's some finite subset $\Delta'$ of $\Delta$ such that $\conjunction{\Al}{\negation{\Al}}$ can be derived from $\Delta'$. 
+Hence there is no model $\IntA$ that makes all the sentences in $\Delta'$ true. 
+Hence it's not the case that for every finite subset $\Delta'$ of $\Delta$ there exists a model $\IntA'$ that makes all the sentences in $\Delta'$ true. 
+\end{PROOF}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercises}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\notocsubsection{Section Review Exercises}{Section Review Exercises}
+%\begin{enumerate}
+%\item Rewrite derivation \ref{cangetlong} using \Rule{A.C.}
+%\item Definition \mvref{GSDprovablyequivalent} assumes/claims that: both $\CAPPHI\sststile{}{}\CAPPSI$ and $\CAPPSI\sststile{}{}\CAPPHI$ \Iff $\sststile{}{}\triplebar{\CAPPHI}{\CAPPSI}$. Prove that this is true.
+%\item Give the needed arguments for conditionals and biconditionals in the inheritance step of the proof for theorem \mvref{ExchangeRuleTheorem}. 
+%\end{enumerate}
+
+\notocsubsection{Misc. Problems}{Misc Problems} 
+\begin{enumerate}
+\item Show directly that the following rule is sound: From an earlier unboxed line $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ you can write $\pardisjunction{\negation{\CAPPHI}}{\CAPTHETA}$.
+\item Recall that $\HORSESHOE$ elimination can only be used on a conditional that is the main connective of a sentence. Show that if we do not make this restriction, then the rule is unsound. In other words, give a derivation which violates only that restriction (a derivation where you use $\HORSESHOE$ elimination on a horseshoe that's not the main connective) and which ends with a proof of a sentence that is \emph{not} a logical truth (not truth-functionally true) from the empty set of assumptions.
+\end{enumerate}
+
+%\theendnotes

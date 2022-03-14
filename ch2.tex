@@ -1,0 +1,1858 @@
+
+%\addtocontents{toc}{\protect\thispagestyle{empty}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Sentential Logic}\label{sententiallogic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\AddToShipoutPicture*{\BackgroundPicA}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Language \GSL{}}\label{The Language GSL}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sentences of \GSL{}}\label{Sentences of GSL}
+Our first task is to define the syntax of the basic formal language \GSL{}.\footnote{Work on this sentential logic originated with George Boole \citeyearpar{Boole1854} and Augustus De Morgan \citeyearpar{DeMorgan1847,DeMorgan1860}. 
+	As Christine Ladd-Franklin notes \citeyearpar[17]{LaddFranklin1883} before giving her own, variations quickly followed from William S. Jevons, Ernst Schr\"oder, Hugh McColl, and Charles S. Peirce.} 
+The language we're starting with is variously called \idf{sentential logic} or \niidf{propositional logic}\index{propositional logic|see{sentential logic}}. 
+We use the former name, because it's easier to get a grasp on sentences than propositions.\footnote{For historical and contemporary discussions of propositions, see \citealt{Frege1892}, \citealt[13,47]{Russell1903}, \citealt[26]{Church1956}, \citealt[ch.~1]{Quine1986}, \citealt[ch.~3]{Schiffer1987}, \citealt{Grandy1993}, \citealt{Bealer1998b}, \citealp{King2007}, \citealt{Soames2010}.} 
+
+As stated in the previous chapter, each formal language\index{language} requires (1) a list of basic symbols, and (2) a definition of which strings count as sentences\index{sentence}. Think of these as determining the proper grammar of the language. 
+
+\begin{majorILnc}{\LnpDC{Basic Symbols of GSL}} The \df{basic symbols} of \GSL{} are of three kinds:\footnote{The commas, ellipses, and bracketed comments are \emph{not} symbols of \GSL{}.}
+\begin{cenumerate}
+\item Logical Connectives: $\NEGATION$, $\WEDGE$, $\VEE$, $\HORSESHOE$, $\TRIPLEBAR$
+\item Punctuation Symbols: (, )
+\item Sentence Letters: $\Al,\Bl, \ldots, \Tl, \Al_1,\Bl_1, \ldots, \Tl_1, \Al_2, \Bl_2, \ldots$  
+\end{cenumerate}
+\end{majorILnc} 
+\noindent{}Logical connectives are sometimes called logical symbols, logical operators, logical terms, or logical functors.%
+\footnote{%
+In other textbooks there are sometimes different symbols used for these connectives. 
+Along with $\NEGATION$, $\neg$ and $-$ are used for negation, $\&$ and $\cdot$ for conjunction, $\supset$ and $\Rightarrow$ for conditionals, and $\equiv$ for biconditionals. $\VEE$ is almost universally the symbol for disjunction.
+} 
+One could draw important distinctions between symbols, terms, and operators, but the names are just as often used interchangeably.
+The sentence letters are the capital letters of the Roman alphabet from \mention{$\Al$} to \mention{$\Tl$}.  To give ourselves an infinite supply, any of these letters concatenated with a subscripted positive integer is also a sentence letter; e.g. $\Cl$ and a subscripted $7$ can be combined to get the new sentence letter $\Cl_7$. Keep in mind that $\Cl_7$ and $\Cl$ are different sentences.
+
+\begin{majorILnc}{\LnpDC{Recursive definition of Sentences of GSL}} The \nidf{sentences} \underdf{of \GSL{}}{sentence} are given by the following recursive definition:
+\begin{description}
+\item[Base Clause:] Every sentence letter is a sentence.
+\item[Generating Clauses:] \hfill
+\begin{cenumerate}
+\item If $\CAPPHI$ is a sentence, then so is $\negation{\CAPPHI}$.
+\item If $\CAPPHI$ and $\CAPTHETA$ are sentences, then so are both $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\partriplebar{\CAPPHI}{\CAPTHETA}$.
+\item If all of $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}$ are sentences (where $\integer{n}$ is an integer $\geq2$), then so are $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ and $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$.
+\end{cenumerate}
+\item[Closure Clause:] No string is an \GSL{} sentence unless it counts as such according to the above base and generating clauses.
+\end{description}
+\end{majorILnc}
+
+The sentences specified by the base clause, i.e. lone sentence letters, are called \underidf{atomic}{sentence} sentences.
+In generating clause (2), sentences of the first form are called \idf{conditionals}, and those of the second are \idf{biconditionals}. 
+The left-hand side of the conditional is traditionally called the \idf{antecedent}\index{LHS} and the right-hand side the \idf{consequent}\index{RHS}. 
+We often use the alternative terminology \CAPS{lhs} (left-hand side) and \CAPS{rhs} (right-hand side).
+
+Generating clause (3) makes our version of \GSL{} slightly different from what you'll find in other logic texts.\footnote{Some linguists have used the definition we use, including \citealt{Gleitman1965}.} 
+Sentences of the first form of clause (3) are called \idf{conjunctions} and their component sentences \idf{conjuncts}. Sentences of the second form are called \idf{disjunctions} and their component sentences \idf{disjuncts}. 
+Most logic books treat conjunction and disjunction as binary (2-place), e.g., \mention{$\pardisjunction{\Al}{\Bl}$}. According to our clause (3) \mention{$\pardisjunction{\disjunction{\Al}{\Bl}}{\Cl}$} is also a perfectly good sentence. Textbooks that treat disjunctions as binary require an extra set of parentheses to generate an equivalent sentence: e.g., \mention{$\pardisjunction{\pardisjunction{\Al}{\Bl}}{\Cl}$}.\footnote{We'll explain which sentences count as \mention{equivalent} later in the chapter.} This is also an acceptable sentence of \GSL{}, but the extra parentheses don't add interesting information. We prefer the definitions of conjunction and disjunction given above because they're closer to natural English and they allow us to avoid unnecessary parentheses.
+
+The closure clause excludes strings that the other clauses don't define as sentences. 
+This is needed to prevent nonsense such as \mention{$(\Bl(\HORSESHOE{}\Al$} from counting as an \GSL{} sentence. 
+There is no way to generate the string from repeated applications of the base and generating clauses, so it is ruled out. 
+
+Additionally, \mention{$\negation{\CAPPHI}$}, \mention{$\parhorseshoe{\CAPPHI}{\CAPTHETA}$}, etc. in the generating clauses are \idf{sentence schemas}. 
+They aren't \GSL{} sentences because the Greek letters aren't given as symbols of the language. 
+The substitution of an \GSL{} sentence for each Greek letter in a schema results in a \GSL{} sentence, however. 
+For example, the substitution $\CAPPHI=\;$\mention{$\Al$}, $\CAPTHETA=\;$\mention{$\partriplebar{\Cl}{\Dl}$} into the schema \mention{$\parhorseshoe{\CAPPHI}{\CAPTHETA}$} results in the sentence \mention{$\parhorseshoe{\Al}{\partriplebar{\Cl}{\Dl}}$}.\footnote{Often when Greek letters \mention{$\CAPPHI$}, \mention{$\CAPPSI$}, \mention{$\CAPTHETA$}, etc. are used it will tacitly be assumed that they are ranging over \GSL{} sentences and not mere strings of \GSL{} symbols. 
+Of course, we can still use them when needed to range over all strings of \GSL{} symbols as we did in the definition just given of \GSL{} sentences.}
+
+\begin{majorILnc}{\LnpEC{Example of Recursive definition of GSL sentences}}
+$\parconjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is a sentence of \GSL{}. 
+Proof: The base clause of definition \ref{Recursive definition of Sentences of GSL} shows that $\Al$, $\Dl$, $\Bl$, and $\Gl$ are all sentences; they are all sentence letters. 
+From $\Dl$ and $\Bl$, and by generating clause (2), we know $\parhorseshoe{\Dl}{\Bl}$ is a sentence. 
+From $\Gl$ and generating clause (1), $\negation{\Gl}$ is a sentence. 
+From $\Al$ and $\parhorseshoe{\Dl}{\Bl}$, and generating clause (3), $\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ is a sentence. 
+And, finally, from $\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ and $\negation{\Gl}$, and generating clause (3), we see that $\parconjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is a sentence. 
+\end{majorILnc}
+
+\subsection{Official and Unofficial Sentences of \GSL{}}\label{Unofficial Sentences of GSL}
+
+Definition \ref{Recursive definition of Sentences of GSL} is the definition of an \emph{official} sentence of \GSL{}.
+For convenience' sake we often work with \emph{un}official sentences. 
+\begin{majorILnc}{\LnpDC{Unofficial Sentence of GSL}}
+A string of symbols is an \nidf{unofficial} sentence\index{sentence!unofficial (of \GSL{})|textbf} \Iff we can obtain it from an official sentence by
+\begin{cenumerate}
+\item deleting outer parentheses, or
+\item replacing one or more pairs of official round parentheses ( ) with square brackets [ ] or curly brackets \{ \}.
+\end{cenumerate}
+\end{majorILnc}
+\noindent{}Thus \mention{$\conjunction{\Al}{\conjunction{\Bl}{\Cl}}$} is an unofficial sentence, as are
+\begin{multicols}{2}
+\begin{smenumerate}
+\item\label{usex1} $\negation{\pardisjunction{[\Al\wedge\Bl]}{[\Cl\wedge\Dl]}}$
+\item $\conjunction{\parconjunction{\Al}{\Bl}}{\Cl}$
+\item $\horseshoe{\parconjunction{\Al}{\Bl}}{\Cl}$
+\item $\parconjunction{\Al}{[\Bl\rightarrow\Cl]}$
+\item $\disjunction{\negation{\Al}}{\Cl}$
+\item $[\parconjunction{\Al}{\Bl}\wedge\Cl]$
+\item $\conjunction{\{\Al\wedge\Bl\}}{\Cl}$
+\item\label{usexL} $\conjunction{\Al}{[\Bl\rightarrow\Cl]}$
+\end{smenumerate}
+\end{multicols}
+\noindent{}From an unofficial sentence we can unambiguously reconstruct the related official sentence. 
+Throughout the rest of this text we usually drop outer parentheses, but we will consistently use the standard parentheses ( ). 
+The reader should feel free to use brackets [ ] or curly parentheses \{ \} as is helpful. 
+
+\subsection{A Comment on Use and Mention}\label{use mention comment}
+
+Most of the time when you see Greek letters in the text, as in definition \mvref{Recursive definition of Sentences of GSL}, we are \emph{using} them, not mentioning them. 
+Thus it's appropriate that in definition \ref{Recursive definition of Sentences of GSL} we did not put them in single quotes.\index{single quotes}
+By contrast, we generally \emph{mention} official and unofficial \GSL{} sentences rather than use them.
+Because we mention \GSL{} sentences so often it would be tedious to put them in quotes. 
+Therefore we refrain from doing so unless there is some special reason to do so.  
+We are also less strict when mentioning the basic symbols of \GSL{}.\footnote{This is the usual convention, e.g. \citealt[7]{Hodges2001}.}
+
+\subsection{Other Properties of Sentences}\label{Other Properties of GSL Sentences}
+Next we define four important properties and related features of sentences: subsentence, order, main connective, and construction tree. 
+\begin{majorILnc}{\LnpDC{Subsentences}}
+The following clauses define when one sentence is a \df{subsentence} of another:
+\begin{cenumerate}
+\item\label{ss1} Every sentence is a subsentence of itself.
+\item $\CAPPHI$ is a subsentence of $\negation{\CAPPHI}$.
+\item $\CAPPHI$ and $\CAPTHETA$ are subsentences of $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\partriplebar{\CAPPHI}{\CAPTHETA}$.
+\item\label{ss4} Each of $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}$ is a subsentence of $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$\\ and $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$.
+\item\label{ss5} (Transitivity) If $\CAPPHI$ is a subsentence of $\CAPTHETA$ and $\CAPTHETA$ is a subsentence of $\CAPPSI$, then $\CAPPHI$ is a subsentence of $\CAPPSI$.
+\item\label{ss6} That's all. 
+\end{cenumerate}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{SubSentenceExampleA}}
+	The sentence $\parhorseshoe{\Bl}{\Cl}$ has 3 subsentences:
+	\begin{cenumerate}
+		\item $\parhorseshoe{\Bl}{\Cl}$
+		\item $\Bl$
+		\item $\Cl$
+	\end{cenumerate}
+\end{majorILnc}
+\noindent{}Subsentences are counted by token, not type. Hence the similar $\parhorseshoe{\Bl}{\Bl}$ also has three subsentences; the two tokens of $\Bl$ are counted separately.
+\begin{majorILnc}{\LnpEC{SubSentenceExampleB}}
+$\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ has 8 subsentences:
+\begin{multicols}{2}
+\begin{cenumerate}
+\item $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$
+\item $\disjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$
+\item $\horseshoe{\Dl}{\Bl}$
+\item $\Al$
+\item $\Dl$
+\item $\Bl$
+\item $\negation{\Gl}$
+\item $\Gl$
+\end{cenumerate}
+\end{multicols}
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{Proper Subsentences}}
+	A sentence $\CAPPHI$ is a \df{proper subsentence} of $\CAPPSI$ \Iff $\CAPPHI$ is a subsentence of, but isn't identical to $\CAPPSI$.
+\end{majorILnc}
+\noindent{}Thus, while each sentence is a subsentence of itself, no sentence is a proper subsentence of itself.
+\begin{majorILnc}{\LnpDC{Order}}
+The following clauses define the \df{order} of every \GSL{} sentence.\footnote{\citetext{\citealt{Post1921}, \citealt[11]{Hodges2001}}} Let $\ORD{\CAPPHI}$ be the order of $\CAPPHI$. Then: 
+\begin{cenumerate}
+\item If $\CAPPHI$ is an atomic sentence (a sentence letter), then $\ORD{\CAPPHI}=1$.
+\item For any sentence $\CAPPHI$, $\ORD{\negation{\CAPPHI}}=\ORD{\CAPPHI}+1$.
+\item For any sentences $\CAPPHI$ and $\CAPTHETA$, $\ORD{\parhorseshoe{\CAPPHI}{\CAPTHETA}}$ is one greater than the max of $\ORD{\CAPPHI}$ and $\ORD{\CAPTHETA}$. Likewise, $\ORD{\partriplebar{\CAPPHI}{\CAPTHETA}}$ is one greater than the max of $\ORD{\CAPPHI}$ and $\ORD{\CAPTHETA}$.
+\item For any sentences $\CAPPHI_1,\ldots,\CAPPHI_\integer{n}$, $\ORD{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_\integer{n}}}}$ is one greater than the max of $\ORD{\CAPPHI_1}$, $\ldots$, $\ORD{\CAPPHI_\integer{n}}$.
+\item For any sentences $\CAPPHI_1,\ldots,\CAPPHI_\integer{n}$, $\ORD{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_\integer{n}}}}$ is one greater than the max of $\ORD{\CAPPHI_1}$, $\ldots$, $\ORD{\CAPPHI_\integer{n}}$. 
+\item That's all.
+\end{cenumerate}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{OrderExampleA}}
+We'll give the order for all the subsentences of $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$.
+The order of an atomic sentence is 1, so $\Al$, $\Dl$, $\Bl$, $\Gl$ each have order 1.
+The order of $\horseshoe{\CAPPHI}{\CAPPSI}$ is $1$ plus the maximum of the orders of $\CAPPHI$ and $\CAPPSI$; thus the order of $\horseshoe{\Dl}{\Bl}$ is 2.  
+Because $\ORD{\negation{\CAPPHI}}=\ORD{\CAPPHI}+1$, $\ORD{(\negation{\Gl})}=\ORD{(\Gl)}+1=2$. 
+Because the order of a disjunction $\disjunction{\CAPPHI_\integer{1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is $1$ plus the maximum order of the disjuncts, the order of $\disjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ is 3.
+Similarly for conjunctions, the order of $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is 4.
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL Main connective}}
+The \nidf{main connective}\index{main connective!of GSL|textbf} is the connective token (or tokens) that occur(s) in the sentence but in no proper subsentence.  
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{GSLMainConnectiveExampleA}}
+The main connective in each of the following sentences has been underlined.
+\begin{multicols}{2}
+\begin{cenumerate}
+\item $(\Al\VEE(\Dl\HORSESHOE\Bl))\, \underline{\WEDGE}\, \negation{\Gl}$
+\item $\Ll\, \underline{\VEE}\, \Kl\, \underline{\VEE}\, \Hl $
+\item $\Ll\, \underline{\VEE}\, \parhorseshoe{\Al}{\Bl}\, \underline{\VEE}\, \Hl $
+\item $\underline{\NEGATION}(\Ll\VEE\Kl\VEE\Hl)$
+\item $(((\Dl\!\HORSESHOE\!\El)\VEE\Al)\underline{\WEDGE}(\NEGATION\Bl\WEDGE\NEGATION(\Cl\!\TRIPLEBAR\!\Hl)))$
+\item $(\NEGATION\Bl\, \underline{\WEDGE}\, \NEGATION(\Cl\TRIPLEBAR\Hl))$
+\end{cenumerate}
+\end{multicols}
+\end{majorILnc}
+
+\begin{majorILnc}{\LnpDC{Construction Tree}}
+The \df{construction tree} for a sentence is a diagram of how the sentence is generated through the recursive clauses of the definition of \GSL{} sentences. We put atomic sentences as leaves at the top, and the generating clauses specify how we can join nodes of the tree together (starting with the leaves at the top) into new nodes. The complete sentence is the node at the base of the tree. 
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{ConstructionTreeExampleA}}
+Give the construction tree for $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$.
+\begin{center}
+\begin{tikzpicture}[grow=up]
+\tikzset{level distance=40pt}
+\tikzset{level 1/.style={level distance=60pt}}
+\tikzset{sibling distance=32pt}
+\tikzset{every tree node/.style={align=center,anchor=north}}
+	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
+[.{$\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$}
+  [.{$\Gl$\\ $\negation{\Gl}$} %!{\qsetw{3in}}
+%   [.{$\Gl$}
+%   ]
+  ]
+  [.{$\disjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$} 
+    [.{$\horseshoe{\Dl}{\Bl}$} 
+      [.{$\Bl$} 
+      ]
+      [.{$\Dl$} %!{\qsetw{2in}}
+      ] 
+    ]
+    [.{$\Al$}
+    ]    
+  ]
+]%
+	%\caption{Example formula tree}
+	%\label{fig:ExampleFormulaTree}
+\end{tikzpicture}
+\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{ConstructionTreeExampleB}}
+Give the construction tree for $((\Cl \WEDGE \Dl) \HORSESHOE \Al)\TRIPLEBAR (\Dl \VEE \Hl)$.
+\begin{center}
+\begin{tikzpicture}[grow=up]
+\tikzset{level distance=42pt}
+\tikzset{sibling distance=32pt}
+\tikzset{every tree node/.style={align=center,anchor=north}}
+	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
+[.{$((\Cl \WEDGE \Dl) \HORSESHOE \Al)\TRIPLEBAR (\Dl \VEE \Hl)$}
+  [.{$\Dl\VEE \Hl$} %!{\qsetw{3in}}
+    [.{$\Hl$} %!{\qsetw{2in}}
+    ]   
+    [.{$\Dl$}
+    ]  
+  ]
+  [.{$(\Cl\WEDGE \Dl)\HORSESHOE \Al$} 
+    [.{$\Al$} %!{\qsetw{2in}}
+    ]  
+    [.{$\Cl\WEDGE \Dl$} 
+      [.{$\Dl$} %!{\qsetw{2in}}
+      ]     
+      [.{$\Cl$} 
+      ]
+    ]
+  ]
+]%
+	%\caption{Example formula tree}
+	%\label{fig:ExampleFormulaTree}
+\end{tikzpicture}
+\end{center}
+\end{majorILnc}
+\noindent{}There are some helpful relationships between the construction tree of a sentence,  its order, its subsentences, and its main connective. 
+The subsentences of a sentence are the nodes in the sentence's construction tree.
+The order of a sentence is the number of nodes of its longest branch (from root to leaf). 
+The main connective of a sentence is the connective added last (at the bottom) of the construction tree. 
+\begin{majorILnc}{\LnpEC{ConstructionTreeExampleC}}
+Consider again the construction tree for $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$. 
+Find the order of the sentence by counting the height of the branches of the tree. 
+(We count up as we work our way down the branches.)
+Note that the answer we get agrees with that computed in example \mvref{OrderExampleA}.
+\begin{center}
+\begin{tikzpicture}[grow=up]
+\tikzset{level distance=40pt}
+\tikzset{level 1/.style={level distance=60pt}}
+\tikzset{sibling distance=40pt}
+\tikzset{every tree node/.style={align=center,anchor=north}}
+	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
+[.{$\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ /4}
+  [.{$\Gl$ /1\\ $\negation{\Gl}$ /2} %!{\qsetw{3in}}
+%   [.{$\Gl$ /1}
+%   ]
+  ]
+  [.{$\disjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ /3} 
+    [.{$\horseshoe{\Dl}{\Bl}$ /2} 
+      [.{$\Bl$ /1} 
+      ]
+      [.{$\Dl$ /1} %!{\qsetw{2in}}
+      ] 
+    ]
+    [.{$\Al$ /1}
+    ]    
+  ]
+]%
+	%\caption{Example formula tree}
+	%\label{fig:ExampleFormulaTree}
+\end{tikzpicture}
+\end{center}
+\end{majorILnc}
+
+\subsection{How Many \GSL{} Sentences are There?}
+There are at least as many sentence letters as there are natural numbers (countably infinite), and the sentence letters are a proper subset of the set of sentences. 
+Are there more sentences than natural numbers?  
+Below we prove there are not by matching up sentences with natural numbers.
+\begin{THEOREM}{\LnpTC{Number of sentences}}
+The number of \GSL{} sentences is equal to the number of natural numbers.
+\end{THEOREM}
+\begin{PROOF}
+First, assign each sentence letter a natural number that only contains the digit \mention{$1$}, for example:
+\begin{center}
+\begin{tabular}{ c c c c c }
+$\Al$ & $\Bl$ & $\Cl$ & $\Dl$ & $\ldots$ \\
+1 & 11 & 111 & 1111 & $\ldots$ \\
+\end{tabular}
+\end{center}
+Next, assign numbers to the other symbols of \GSL{}, for example:
+\begin{center}
+\begin{tabular}{ c c c c c c c }
+$\NEGATION$ & $\WEDGE$ & $\VEE$ & $\HORSESHOE$ & $\TRIPLEBAR$ & ( & ) \\
+2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\end{tabular}
+\end{center}
+Given any sentence, replace its symbols with the associated numbers.
+For example, \mbox{$\negation{\parconjunction{\Al}{\conjunction{\Bl}{\negation{\Dl}}}}$} gets mapped to 2713113211118.
+For any sentence of \GSL{}, there is a unique natural number defined by this process. 
+For any natural number we can determine if it represents an \GSL{} sentence, and if so which one.
+\end{PROOF}
+
+\noindent{}This is not the most efficient way of representing sentences with numbers, but it is a simple one that avoids the use of special properties (e.g., being a prime number).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Models}\label{Interpretations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\GSL{} is a formal language and as was mentioned in section \ref{Formal Languages} sentences of formal languages are mere strings of symbols.
+Because they lack inherent meanings---they don't ``say anything'' about the world---sentences of \GSL{} lack a truth value. That is, they are neither true nor false. 
+Even so nothing stops us from \emph{assigning} truth values to \GSL{} sentences. 
+In this section we explain how to do that consistently. 
+You might ask why we don't first assign \GSL{} sentences meanings, then determine whether they are true or false based on those meanings. 
+Unfortunately there are difficulties associated with \emph{assigning} meanings that would unnecessarily complicate our project.\footnote{Later we will \emph{interpret} \GSL{} sentences as having meanings (chapter \ref{Translations}).} The point of giving formal definitions of an \GSL{} sentence and model is to provide a rigorous basis for studying logical truth and logical consequence.  Many of the discoveries of logic in the twentieth century occurred as a result of this setting aside of meaning; some of the results of chapter \ref{completenesschapter} are examples.
+
+\subsection{Truth in a Model}\label{Truth in an Interpretation} 
+
+\begin{majorILnc}{\LnpDC{Definition of GSL interpretation}}
+A \df{model of a \GSL{} sentence $\CAPPHI$} is an assignment of a truth value, either $\True$ or $\False$, to each sentence letter in $\CAPPHI$.
+\end{majorILnc}
+
+\noindent{}In mathematical terms, a model of $\CAPPHI$ is a function from the set of sentence letters of $\CAPPHI$ to the set of truth values: $\{\TrueB, \FalseB\}$. 
+We use the letter \mention{$\IntA$} (a fraktur-style \mention{m}) as the symbol for a model. 
+If a model $\IntA$ assigns a sentence letter $\CAPPSI$ the value $\True$, we write $\IntA(\CAPPSI)=\TrueB$.
+For the value $\False$, we instead write $\IntA(\CAPPSI)=\FalseB$.
+
+To illustrate, a model for $\pardisjunction{\disjunction{\Al}{\Bl}}{\Cl}$ must make a truth value assignment to each of the sentence letters $\Al$, $\Bl$, and $\Cl$.  Any model for $\pardisjunction{\disjunction{\Al}{\Bl}}{\Cl}$ is therefore also a model for $\parconjunction{\conjunction{\Al}{\Bl}}{\Cl}$ and $\parconjunction{\parhorseshoe{\Al}{\Bl}}{\negation{\Cl}}$; they all have the same sentence letters.
+
+We often speak informally of \emph{models} without making reference to any particular \GSL{} sentence.  It's useful to talk this way because any given model of $\CAPPHI$ is a model of any other \GSL{} sentence with the same sentence letters, or a subset of them.  If $\IntA$ makes assignments to $\Al$, $\Bl$, and $\Cl$, then $\IntA$ is a model of all the sentences that only contain sentence letters from that list.  Accordingly, we define a model for a \emph{set} of \GSL{} sentences.
+
+\begin{majorILnc}{\LnpDC{Definition of Model for Set}}
+	$\IntA$ is a \df{model of a set of sentences $\Delta$} \Iff $\IntA$ is a model for each sentence in $\Delta$.
+\end{majorILnc}
+
+Consider a model $\IntA$ that makes a truth value assignment to every sentence letter of \GSL{}.  No sentence letter lacks an assignment, so it follows that $\IntA$ is a model for the set of all \GSL{} sentences.  The following definition characterizes such models as \emph{models of \GSL{}}.
+
+\begin{majorILnc}{\LnpDC{Definition of Model for SL}}
+	$\IntA$ is a \df{model of \GSL{}} \Iff $\IntA$ is a model of every sentence of \GSL{}.
+\end{majorILnc}
+
+Models can be uniform; for example, there is a model that assigns $\True$ to every sentence letter.  Or they can be systematic and mildly complicated, such as the model that alternately assigns $\True$ or $\False$ to a list of sentence letters.
+A model can assign truth values in any other pattern you can think of, or even random assignments. 
+\emph{Every} possible function from sentence letters to truth values is a model.
+
+Our models assign one of two truth values to each sentence letter, but that's not the only way to define them. Other definitions of \mention{model} assign more than two.  Our assumption that there are only two truth values simplifies analysis and is widely shared, but whether two is enough is a matter of intense philosophical debate.  Nevertheless, even if our definition of a model is a simplification, it is a historically fruitful one and helps us better understand logical consequence.  In chapter \ref{furtherdirections} we discuss formal languages with additional truth values. 
+
+A model of $\CAPPHI$ only assigns truth values to the sentence letters of $\CAPPHI$. It does not directly assign a truth value to any of the non-atomic sentences of \GSL{}. Thus, we must specify how each of the logical connectives operates on lower-order truth values in order to fix a truth value, in some given model, for non-atomic \GSL{} sentences.  While the truth assignments to the sentence letters vary by model, the truth functions of the connectives do not.\footnote{We discuss \emph{truth functions} further in section \ref{Truth Functions Truth Tables and Boolean Operators}.}
+
+\begin{majorILnc}{\LnpDC{True on a GSL interpretation}} The following clauses define when an \GSL{} sentence $\CAPTHETA$ is \nidf{$\True$} (or \nidf{$\False$}) on a model $\IntA$ for $\CAPTHETA$ depending on which main connective it has, if any:
+\begin{cenumerate}
+\item $\CAPTHETA$ is a sentence letter. $\CAPTHETA$ is $\True$ on $\IntA$ \Iff $\IntA$ assigns $\True$ to it, i.e. $\IntA(\CAPTHETA)=\TrueB$.
+\item $\CAPTHETA$ is of the form $\negation{\CAPPHI}$ (i.e. is a negation). $\CAPTHETA$ is $\True$ on $\IntA$ \Iff $\CAPPHI$ is $\False$ on $\IntA$.
+\item\label{GSL true conjunction} $\CAPTHETA$ is of the form $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ (i.e. is a conjunction).   $\CAPTHETA$ is $\True$ on $\IntA$ \Iff each of the conjuncts $\CAPPHI_1, \CAPPHI_2, \ldots, \CAPPHI_n$ is $\True$ on $\IntA$.
+\item $\CAPTHETA$ is of the form $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ (i.e. is a disjunction). $\CAPTHETA$ is $\True$ on $\IntA$ \Iff at least one of the disjuncts $\CAPPHI_1, \CAPPHI_2, \ldots, \CAPPHI_n$ is $\True$ on $\IntA$.
+\item\label{GSL true horseshoe} $\CAPTHETA$ is of the form $\horseshoe{\CAPPHI}{\CAPPSI}$ (i.e. is a conditional). $\CAPTHETA$ is $\True$ on $\IntA$ \Iff the \CAPS{lhs} $\CAPPHI$ is $\False$ or the \CAPS{rhs} $\CAPPSI$ is $\True$ on $\IntA$.
+\item $\CAPTHETA$ is of the form $\triplebar{\CAPPHI}{\CAPPSI}$ (i.e., is a biconditional). $\CAPTHETA$ is $\True$ on $\IntA$ \Iff $\CAPPHI$ and $\CAPPSI$ have the same truth value on $\IntA$.
+\item A sentence is $\False$ on $\IntA$ \Iff it's not $\True$ on $\IntA$.
+\end{cenumerate}
+\end{majorILnc}
+
+For every model $\IntA$ for sentence $\CAPPHI$, the above definition (i.e., the definition of truth) fixes a unique truth value for $\CAPPHI$.\footnote{If a model $\IntA$ is \emph{not} a model for some \GSL{} sentence $\CAPPHI$, then $\IntA$ does \emph{not} fix a truth value for $\CAPPHI$.}
+
+Although there are an infinite number of \GSL{} sentences letters to which a model can assign truth values, only what the model assigns to a finite number of those sentence letters matters for determining the value of any given sentence.  
+Unsurprisingly, the sentence letters that matter are just the ones that appear in the sentence. (We prove this later in the chapter.) 
+For example, when assessing the value of $\horseshoe{\Al}{\Bl}$ on $\IntA$ only the assignments to $\Al$ and $\Bl$ are relevant; other assignments may be disregarded. It follows that if two models $\IntA_1$ and $\IntA_2$ assign the same truth values to $\Al$ and $\Bl$, respectively, then they fix the same truth value for $\horseshoe{\Al}{\Bl}$. 
+
+If $\IntA$ makes assignments to $\Al$ and $\Bl$ but no other sentence letters, we say that $\IntA$ is a \emph{minimal model} for $\horseshoe{\Al}{\Bl}$. More generally:
+
+\begin{majorILnc}{\LnpDC{Definition of Minimal SL Model}}
+	$\IntA$ is a \df{minimal model of $\CAPPHI$} \Iff $\IntA$ makes assignments to every sentence letter in $\CAPPHI$ but to no other sentence letters.
+\end{majorILnc}
+
+\noindent{}There are only four minimal models for the sentence $\horseshoe{\Al}{\Bl}$, because there are only $4$ combinations of truth values that can be assigned to $\Al$ and $\Bl$. The number of distinct minimal models for a sentence $\CAPPHI$ is $2^n$, where $n$ is the number of sentence letter (types) in $\CAPPHI$.
+
+There are several different ways to compute the truth value of an \GSL{} sentence in a model.
+We demonstrate some informal ones in the following examples, and then develop a systematic method in section \mvref{Proceduresfortesting}. 
+
+\begin{majorILnc}{\LnpEC{GSLTVExampleA}}
+	Give the truth value of $\disjunction{\Al}{\negation{\Bl}}$ on a model $\IntA$ such that $\IntA(\Al)=\FalseB$ and $\IntA(\Bl)=\FalseB$.
+	
+	One way to compute the truth value of this sentence in $\IntA$ is to read off the values of all the subsentences, using definition \ref{True on a GSL interpretation} (the definition of truth in \GSL{}), until we finally get to the sentence itself.
+	
+	\begin{PROOF}	
+		From the negation clause of the definition of truth and the fact that $\IntA(\Bl)=\FalseB$, it follows that $\negation{\Bl}$ is true on $\IntA$. According to the disjunction clause of the definition of truth $\disjunction{\Al}{\negation{\Bl}}$ is true on $\IntA$ \Iff at least one of the disjuncts is true, i.e., $\Al$ and $\negation{\Bl}$. So because $\negation{\Bl}$ is true on $\IntA$, $\disjunction{\Al}{\negation{\Bl}}$ is too.
+	\end{PROOF}
+
+\end{majorILnc}
+
+\begin{majorILnc}{\LnpEC{GSLTVExampleB}}
+	Give the truth value of $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ on a model $\IntA$ such that $\IntA(\Al)=\FalseB$, $\IntA(\Dl)=\TrueB$, $\IntA(\Bl)=\TrueB$, and $\IntA(\Gl)=\TrueB$.
+	
+	When computing the truth value for a complicated sentence it can help to be strategic about which subsentences to look at first. Often you don't need to determine the value of every subsentence. The main connective can be an important clue about where to start. The sentence $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is a conjunction, which is false on a model if any one of its conjuncts is.
+	
+	\begin{PROOF}
+		From the negation clause of the definition of truth and the fact that $\IntA(\Gl)=\TrueB$, it follows that $\negation{\Gl}$ is $\False$ on $\IntA$. From the conjunction clause of the definition of truth, $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is true on $\IntA$ \Iff each conjunct is. But $\negation{\Gl}$ is false on $\IntA$, so $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is too.
+	\end{PROOF}
+	
+	One way to make sure we compute the truth values of the subsentences in an appropriate order is by following the branches in the construction tree of the sentence. 
+	The idea is to start at the top of the construction tree (the truth values of which are given by the model) and work our way down the branches. 
+	We can even use the tree itself as an aid to computing truth values, writing the truth value of each subsentence next to it on the tree as we go. 
+	Let's illustrate with $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ on $\IntA$:
+	\begin{center}
+		\begin{tikzpicture}[grow=up]
+		\tikzset{level distance=40pt}
+		\tikzset{level 1/.style={level distance=60pt}}
+		\tikzset{sibling distance=32pt}
+		\tikzset{every tree node/.style={align=center,anchor=north}}
+		\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
+		[.{$\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ /$\FalseB$}
+		[.{$\Gl$ /$\TrueB$\\ $\negation{\Gl}$ /$\FalseB$} %!{\qsetw{3in}}
+		%   [.{$\Gl$ /$\TrueB$}
+		%   ]
+		]
+		[.{$\disjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ /$\TrueB$} 
+		[.{$\horseshoe{\Dl}{\Bl}$ /$\TrueB$} 
+		[.{$\Bl$ /$\FalseB$} 
+		]
+		[.{$\Dl$ /$\FalseB$} %!{\qsetw{2in}}
+		] 
+		]
+		[.{$\Al$ /$\TrueB$}
+		]    
+		]
+		]%
+		%\caption{Example formula tree}
+		%\label{fig:ExampleFormulaTree}
+		\end{tikzpicture}
+	\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{GSLTVExampleC}}
+	Compute the truth value of the sentence $((\Cl \WEDGE \Dl) \HORSESHOE \Al)\TRIPLEBAR (\Dl \VEE \Hl)$ on a model $\IntA$ such that $\IntA(\Cl)=\TrueB$, $\IntA(\Dl)=\TrueB$, $\IntA(\Al)=\FalseB$, and $\IntA(\Hl)=\TrueB$.
+	
+	We again use a construction tree to illustrate how to work toward the answer.
+	\begin{center}
+		\begin{tikzpicture}[grow=up]
+		\tikzset{level distance=42pt}
+		\tikzset{sibling distance=32pt}
+		\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
+		[.{$((\Cl \WEDGE \Dl) \HORSESHOE \Al)\TRIPLEBAR (\Dl \VEE \Hl)$ /$\FalseB$}
+		[.{$\Dl\VEE \Hl$ /$\TrueB$} %!{\qsetw{3in}}
+		[.{$\Hl$ /$\TrueB$} %!{\qsetw{2in}}
+		]  
+		[.{$\Dl$ /$\TrueB$}
+		]
+		]
+		[.{$(\Cl\WEDGE \Dl)\HORSESHOE \Al$ /$\FalseB$} 
+		[.{$\Al$ /$\FalseB$} %!{\qsetw{2in}}
+		]   
+		[.{$\Cl\WEDGE \Dl$ /$\TrueB$}
+		[.{$\Dl$ /$\TrueB$} %!{\qsetw{2in}}
+		]     
+		[.{$\Cl$ /$\TrueB$} 
+		]
+		]
+		]
+		]%
+		%\caption{Example formula tree}
+		%\label{fig:ExampleFormulaTree}
+		\end{tikzpicture}
+	\end{center}
+\end{majorILnc}
+%\begin{majorILnc}{\LnpEC{GSLTVExampleC}}
+%
+%\end{majorILnc}
+ 
+\subsection{Truth Functions and Truth Tables}\label{Truth Functions Truth Tables and Boolean Operators}
+A truth function is any function $f:\{\TrueB,\FalseB\}\times\ldots\times\{\TrueB,\FalseB\}\Rightarrow\{\TrueB,\FalseB\}$, i.e., from sequences of truth values to truth values.  The middle clauses of the definition of truth in a model---\mvref{True on a GSL interpretation}---associate each logical connective of \GSL{} with a truth function. 
+Often these truth functions are given by a truth table, though they can be written out explicitly in other ways.  
+For example, the truth function associated with conditionals in the definition of truth can be represented as:
+\begin{center} 
+	$f(\TrueB,\TrueB)=\TrueB$ \\
+	$f(\TrueB,\FalseB)=\FalseB$ \\
+	$f(\FalseB,\TrueB)=\TrueB$ \\
+	$f(\FalseB,\FalseB)=\TrueB$ \\
+\end{center}
+Or, for short:
+\begin{menumerate} 
+	\item\hspace{1in}$f(v_1,v_2)=
+	\begin{cases}
+	\FalseB{} & \text{ if } v_1=\TrueB\text{ and }v_2=\FalseB \\
+	\TrueB{} & \text{ otherwise}
+	\end{cases}$
+\end{menumerate}
+The \emph{truth table} for the conditional is:
+\begin{menumerate}
+	\item\hspace{2in}\begin{tabular}[t]{c | c c}
+		$\HORSESHOE$ & $\TrueB$ & $\FalseB$ \\
+		\hline
+		& & \\[-.25cm]
+		$\TrueB$ & $\TrueB$ & $\FalseB$ \\
+		$\FalseB$ & $\TrueB$ & $\TrueB$  
+	\end{tabular}
+\end{menumerate}
+or can be written alternatively as:
+\begin{menumerate}
+	\item\hspace{1.9in}\begin{tabular}[t]{c c c}
+		$\CAPPHI$ & $\CAPPSI$ & $\horseshoe{\CAPPHI}{\CAPPSI}$ \\
+		\hline 
+		& & \\[-.25cm]
+		$\TrueB$ & $\TrueB$ & $\TrueB$ \\
+		$\TrueB$ & $\FalseB$ & $\FalseB$ \\
+		$\FalseB$ & $\TrueB$ & $\TrueB$ \\
+		$\FalseB$ & $\FalseB$ & $\TrueB$ \\
+	\end{tabular}
+\end{menumerate}
+
+The truth functions for $\NEGATION$ and $\WEDGE$ are good translations of \mention{not} and \mention{and} in English, respectively.  The symbol $\VEE$ is a good translation of the inclusive sense of \mention{or} in which the overall sentence is true \Iff at least one component is true.  When we come to translations in chapter \ref{Translations}, we will discuss the exclusive sense of \mention{or} for which the overall sentence is true just in case exactly one component is true. Our truth function for $\HORSESHOE$ is generally considered to be a translation of \mention{if...then...} in English, but the adequacy of this translation is a matter of controversy. 
+
+\subsection{Logical Truth: TFT, TFF, \& TFC}\label{TFT TFF TFI}
+
+A randomly chosen sentence will probably be true on some models and false on others. 
+However, some special sentences are true on all models. 
+One example of such is the sentence $\disjunction{\Al}{\negation{\Al}}$.  Others are false on all models, e.g. $\conjunction{\Al}{\negation{\Al}}$.
+\begin{majorILnc}{\LnpDC{GSL TFT}}
+A sentence $\CAPPHI$ of \GSL{} is \nidf{truth functionally true}\index{truth!truth functional|textbf} (\CAPS{tft})\index{TFT|see{truth, truth functional}} \Iff it is $\True$ on all models for $\CAPPHI$.
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL TFF}}
+A sentence $\CAPPHI$ of \GSL{} is \nidf{truth functionally false}\index{falsehood!truth functional|textbf} (\CAPS{tff})\index{TFF|see{falsehood, truth functional}} \Iff it is $\False$ on all models for $\CAPPHI$.
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL TFI}}
+A sentence $\CAPPHI$ of \GSL{} is \nidf{truth functionally contingent}\index{indeterminate!truth functional|textbf} (\CAPS{tfc})\index{TFI|see{indeterminate, truth functional}} \Iff it is $\True$ on one model for $\CAPPHI$ and $\False$ on another. 
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleA}}
+	Prove that $\conjunction{\Al}{\negation{\Al}}$ is \CAPS{tff}. 
+	\begin{PROOF}
+		Any model $\IntA$ for $\conjunction{\Al}{\negation{\Al}}$ has to assign either $\TrueB$ or $\FalseB$ to $\Al$. 
+		If it assigns $\TrueB$ to $\Al$, then $\negation{\Al}$ will be false on $\IntA$.
+		So $\conjunction{\Al}{\negation{\Al}}$ is false on $\IntA$.
+		But if $\IntA$ assigns $\FalseB$ to $\Al$, then again $\conjunction{\Al}{\negation{\Al}}$ is false on $\IntA$. 
+		Either way, the sentence is false on $\IntA$.
+		This holds in all models $\IntA$, so $\conjunction{\Al}{\negation{\Al}}$ is \CAPS{tff}.
+	\end{PROOF}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleB}}
+Similar reasoning shows that any sentence of the form $\conjunction{\CAPPHI}{\negation{\CAPPHI}}$ is \CAPS{tff}.
+By definition \mvref{True on a GSL interpretation}, $\CAPPHI$ is either true or false on any model $\IntA$. 
+If $\CAPPHI$ is false on $\IntA$, then $\conjunction{\CAPPHI}{\negation{\CAPPHI}}$ is false on $\IntA$.
+If $\CAPPHI$ is true on $\IntA$, then $\negation{\CAPPHI}$ is false on $\IntA$ and the conjunction $\conjunction{\CAPPHI}{\negation{\CAPPHI}}$ is false on $\IntA$.
+Either way, $\conjunction{\CAPPHI}{\negation{\CAPPHI}}$ is false on $\IntA$, and this holds for all models. 
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleC}}
+Similar reasoning will show that any sentence of the form $\disjunction{\CAPPHI}{\negation{\CAPPHI}}$ is \CAPS{tft}.
+We leave it to the reader to adapt the argument. 
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleE}}
+In examples \mvref{GSLTVExampleA} and \mvref{GSLTVExampleC} we saw that the sentence $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is false in some models.
+To see that it's true in some models, consider a model that's just like the one used in example \mvref{GSLTVExampleA}, but assigns $\FalseB$ to $\Gl$ instead of $\TrueB$. 
+In that model the sentence is true. 
+Hence the sentence is \CAPS{tfc}. 
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleD}}
+The sentence $\horseshoe{\Bl}{\parhorseshoe{\Cl}{\Bl}}$ is \CAPS{tft}.
+Any model $\IntA$ will assign either $\TrueB$ or $\FalseB$ to $\Bl$. 
+If it assigns $\FalseB$ to $\Bl$, then $\horseshoe{\Bl}{\parhorseshoe{\Cl}{\Bl}}$ is true on $\IntA$, because, according to the def. of truth for $\HORSESHOE$, a conditional is true if the \CAPS{lhs} is false.
+If $\IntA$ assigns $\TrueB$ to $\Bl$, then $\horseshoe{\Cl}{\Bl}$ is true on $\IntA$, again because of the def. of truth for $\HORSESHOE$. 
+But if $\horseshoe{\Cl}{\Bl}$ is true on $\IntA$, it follows that $\horseshoe{\Bl}{\parhorseshoe{\Cl}{\Bl}}$ is true on $\IntA$. 
+\end{majorILnc}%
+\begin{majorILnc}{\LnpEC{TFTExampleF}}
+The sentence $\conjunction{\negation{\Cl}}{\bparconjunction{\parhorseshoe{\Bl}{\Cl}}{\Bl}}$ is \CAPS{tff}.
+There are a few ways we can show this, but here we'll use a different approach than we used in the previous examples.
+Assume that the sentence \emph{isn't} \CAPS{tff}.
+Then there is some model $\IntA$ that makes it true.
+By def. of truth for $\WEDGE$, it follows that both conjuncts $\negation{\Cl}$ and $\conjunction{\parhorseshoe{\Bl}{\Cl}}{\Bl}$ are true on this $\IntA$.
+If $\negation{\Cl}$ is true on $\IntA$, then $\Cl$ is false on $\IntA$; so $\IntA$ assigns $\FalseB$ to $\Cl$.
+If $\conjunction{\parhorseshoe{\Bl}{\Cl}}{\Bl}$ is true on $\IntA$, then both conjuncts are true; 
+so both $\horseshoe{\Bl}{\Cl}$ and $\Bl$ are true on $\IntA$.
+Thus $\Cl$ is true on $\IntA$ too; 
+so $\IntA$ assigns $\TrueB$ to $\Cl$.
+But $\IntA$ can't assign both $\FalseB$ and $\TrueB$ to $\Cl$, so there can't be any model $\IntA$ that makes $\conjunction{\negation{\Cl}}{\bparconjunction{\parhorseshoe{\Bl}{\Cl}}{\Bl}}$ true. 
+\end{majorILnc}
+
+The method of demonstration used in example \ref{TFTExampleF} is called \emph{Indirect Proof} or \emph{reductio ad absurdum} (or sometimes just \mention{\emph{reductio}} or \mention{RAA}).  On this method, we assume the opposite of our desired conclusion and then work our way to a contradiction.  Because we know that a contradiction can't be true, we then infer that the original assumption must be false.  For many problems and theorems, RAA is the easiest method to use.  It is called \mention{\emph{reductio ad absurdum}} because it `reduces' the initial assumption to a contradiction, an absurdity.
+
+Although the definitions of \CAPS{tft}, \CAPS{tff}, and \CAPS{tfc} are specific to \GSL{} (after all, the models to which each definition refers are models of \GSL{}), we can use essentially the same definitions for \emph{any} formal language for which we have some notion of a model. 
+Broadly speaking, we can think of sentences which fit these definitions as being (respectively) \niidf{logically true}\index{logical!truth}\index{truth!logical}, \niidf{logically false}\index{logical!falsehood}\index{falsehood!logical}, and \niidf{logically contingent}\index{logical!indeterminate}\index{indeterminate!logical}. Hereafter we'll sometimes use the more general term \mention{logical truth} instead of \mention{truth functional truth} when it's clear we're talking about \GSL{}.
+A sentence that's a logical truth is sometimes said to be \niidf{valid}, or said to be a \niidf{tautology}.\index{sentence!valid|see{truth, logical}}\index{tautology|see{truth, logical}} 
+We will avoid these terms in this context.  
+
+\subsection{Procedures for Testing TFT, TFF, \& TFC}\label{Proceduresfortesting}
+
+In the above examples (\ref{TFTExampleA}--\ref{TFTExampleF}) we used the definitions of \CAPS{tft}, \CAPS{tff}, \& \CAPS{tfc} (definitions \ref{GSL TFT}--\ref{GSL TFI}) and the definition for truth (definition \mvref{True on a GSL interpretation}) to show whether a given \GSL{} sentence was \CAPS{tft}, \CAPS{tff}, or \CAPS{tfc}. 
+But there are methods or procedures for systematically testing whether a given \GSL{} sentence is \CAPS{tft}, \CAPS{tff}, or \CAPS{tfc}. 
+
+Perhaps the most well known method is using truth tables.%
+\footnote{%
+On a historical note, Hodges \citeyearpar[5]{Hodges2001} says that Peirce \citeyearpar{Peirce1902} was the first to use truth tables, but his student Ladd-Franklin \citeyearpar[62]{LaddFranklin1883} had something similar.
+} 
+Later in this chapter we'll prove theorem \mvref{thm:localityoftruth}, which says that when looking at a given \GSL{} sentence $\CAPPHI$ we only need to think about the \emph{minimal} models that assign truth values to the sentence letters appearing in $\CAPPHI$. 
+One way to test whether $\CAPPHI$ is \CAPS{tft}, \CAPS{tff}, or \CAPS{tfc} is to write down all the possible assignments of truth values to the sentence letters of $\CAPPHI$, then for each compute the truth value of $\CAPPHI$ on that assignment. 
+The number of possible assignments (minimal models) are finite. 
+In fact if there are $\integer{n}$ sentence letters in $\CAPPHI$ there will be $2^{\integer{n}}$ possible assignments. 
+If $\CAPPHI$ turns out true in all these possible assignments, then $\CAPPHI$ is \CAPS{tft}. 
+If it turns out false in all of them, then $\CAPPHI$ is \CAPS{tff}. 
+And if it is true in some assignments and false in others, then $\CAPPHI$ is \CAPS{tfc}. 
+
+We can diagrammatically represent this procedure by arranging all the possible assignments of truth values to sentences letters appearing in the given sentence $\CAPPHI$ and the truth value of $\CAPPHI$ on those assignments in rows. 
+We will use $\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ as an example. 
+If $\CAPPHI$ has $\integer{n}$ sentence letters, there will be $2^{\integer{n}}$ rows. 
+Because this sentence has 4 sentence letters, its table will have 16 rows. 
+We write the 4 sentence letters on a top row and then fill out the assignments by starting at the far right sentence letter ($\Gl$), putting $\TrueB$ and $\FalseB$ alternating below it for the 16 rows. (See table \ref{truthtableexample}.) 
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{ c c c c c}
+$\Al$ & $\Bl$ & $\Dl$ & $\Gl$ & $\parconjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ \\
+\hline
+$ $ & $ $ & & & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\FalseB$ \\
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\FalseB$& $\TrueB$ \\
+$\TrueB$ & $\TrueB$ & $\FalseB$ & $\TrueB$ & $\FalseB$ \\
+$\TrueB$ & $\TrueB$ & $\FalseB$ & $\FalseB$  & $\TrueB$ \\
+$\TrueB$ &  $\FalseB$& $\TrueB$ & $\TrueB$	&$\FalseB$ \\
+$\TrueB$ & $\FalseB$ & $\TrueB$ & $\FalseB$	& $\TrueB$  \\
+$\TrueB$ &$\FalseB$  & $\FalseB$& $\TrueB$	&$\FalseB$ \\
+$\TrueB$ & $\FalseB$ &$\FalseB$	& $\FalseB$	& $\TrueB$ \\
+$\FalseB$	& $\TrueB$ & $\TrueB$ & $\TrueB$	& $\FalseB$ \\
+$\FalseB$	& $\TrueB$ & $\TrueB$ & $\FalseB$	& $\TrueB$ \\
+$\FalseB$	& $\TrueB$ & $\FalseB$&	$\TrueB$ &$\FalseB$ \\
+$\FalseB$	& $\TrueB$ & $\FalseB$& $\FalseB$	& $\TrueB$ \\
+$\FalseB$	& $\FalseB$	& $\TrueB$ & $\TrueB$	&$\FalseB$ \\
+$\FalseB$	& $\FalseB$	& $\TrueB$ & $\FalseB$	& $\FalseB$ \\
+$\FalseB$	& $\FalseB$	& $\FalseB$& $\TrueB$	& $\FalseB$ \\
+$\FalseB$	& $\FalseB$& $\FalseB$& $\FalseB$	& $\TrueB$ \\
+\end{tabular}
+\end{center}
+\caption{Sample Truth Table}
+\label{truthtableexample}
+\end{table}
+Next, move to the second-to-the-right sentence letter ($\Dl$) and write 2 $\TrueB$'s and 2 $\FalseB$'s alternating below it for 16 rows. 
+Then move to the sentence letter to the left of the last one ($\Bl$) and write 4 $\TrueB$'s and 4 $\FalseB$'s alternating below it until all the rows are filled. 
+Finally, move to the last sentence letter ($\Al$) and write 8 $\TrueB$'s and 8 $\FalseB$'s alternative below it until all the rows are filled. 
+This will fill out the 16 rows in such a way that each row gives a distinct possible assignment of truth values to sentence letters and no possible assignment is missed. 
+In general the pattern is to start at the far right column alternating $\TrueB$ and $\FalseB$, then move to the left doubling the number of $\TrueB$'s and $\FalseB$'s that appeared in the previous column. 
+
+With all the possible assignments to the sentence letters filled out, we write the sentence itself to the right of the sentence letters and under it put, in the respective rows, its truth value on that assignment. 
+The truth value of the sentence on the given assignment can be computed in any number of ways, e.g., using trees as was done in example \mvref{GSLTVExampleB}. 
+Once the truth value of the sentence has been computed for all the rows it's a trivial matter to read off the table whether the sentence is \CAPS{tft}, \CAPS{tff}, or \CAPS{tfc}. 
+If $\TrueB$ is under the sentence in every row, then it's \CAPS{tft}. 
+If $\FalseB$ is in every row, then it's \CAPS{tff}.
+And if each $\TrueB$ and $\FalseB$ appear in at least one row, then it's \CAPS{tfc}. 
+By looking at table \ref{truthtableexample} we can see that $\parconjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ is \CAPS{tfc}.
+
+The process of filling out a truth table is entirely \mention{mechanical.}  That is, one can carry out the process by following purely formal rules.  Once we have a truth table for some \GSL{} sentence, we can again use purely formal rules to determine whether it's \CAPS{tft}, \CAPS{tff}, or \CAPS{tfc}.  Therefore, no creativity is necessary to determine whether any given sentence is, e.g., \CAPS{tft}.
+
+\begin{majorILnc}{\LnpEC{TFTExampleA2}}
+We already saw in example \mvref{TFTExampleA} that $\conjunction{\Al}{\negation{\Al}}$ is \CAPS{tff}. 
+The following truth table confirms this. 
+\begin{center}
+\begin{tabular}{ c c }
+$\Al$ & $\conjunction{\Al}{\negation{\Al}}$ \\
+\hline
+$ $ & $ $ \\[-.25cm]
+$\TrueB$ & $\FalseB$ \\
+$\FalseB$ & $\FalseB$ \\
+\end{tabular}
+\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleD2}}
+In example \mvref{TFTExampleD} we saw that $\horseshoe{\Bl}{\parhorseshoe{\Cl}{\Bl}}$ is \CAPS{tft}.
+This is confirmed by the following truth table. 
+\begin{center}
+\begin{tabular}{ c c c }
+$\Bl$ & $\Cl$ & $\horseshoe{\Bl}{\parhorseshoe{\Cl}{\Bl}}$ \\
+\hline
+$ $ & $ $ & $ $ $ $ \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\FalseB$& $\TrueB$ \\
+$\FalseB$ & $\TrueB$ & $\TrueB$ \\
+$\FalseB$ & $\FalseB$  & $\TrueB$ \\
+\end{tabular}
+\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFTExampleF2}}
+We saw in example \mvref{TFTExampleF} that the sentence $\conjunction{\negation{\Cl}}{\bparconjunction{\parhorseshoe{\Bl}{\Cl}}{\Bl}}$ is \CAPS{tff}.
+The following truth table confirms this.  
+\begin{center}
+\begin{tabular}{ c c c }
+$\Bl$ & $\Cl$ & $\conjunction{\negation{\Cl}}{\bparconjunction{\parhorseshoe{\Bl}{\Cl}}{\Bl}}$ \\
+\hline
+$ $ & $ $ & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\FalseB$ \\
+$\TrueB$ & $\FalseB$& $\FalseB$ \\
+$\FalseB$ & $\TrueB$ & $\FalseB$ \\
+$\FalseB$ & $\FalseB$  & $\FalseB$ \\
+\end{tabular}
+\end{center}
+\end{majorILnc} 
+
+The various formal derivation systems used in logic provide another class of procedures for testing \GSL{} sentences for \CAPS{tft} and \CAPS{tff} (not all derivation systems provide a procedure for testing for \CAPS{tfc}, but semantic tableaux do). 
+In chapter \ref{Derivations} we develop one such derivation system, which is a specific variant of what's called a natural deduction system.\index{natural deduction} 
+Some derivation systems, in particular variants of semantic tableaux,\index{semantic tableaux} provide more or less direct ways of testing for \CAPS{tft} (logical truths), \CAPS{tff} (logical falsehoods), and \CAPS{tfc} (logical contingencies).%
+\footnote{%
+A comprehensive introductory treatment of semantic tableaux (called truth trees by the author) is given in Nicholas J.J. Smith's \citeyearpar{Smith2012} textbook \emph{Logic: The Laws of Truth}. 
+Smith also gives a more detailed and thorough introduction to truth tables. 
+}
+Other derivation systems, such as variants of natural deduction systems, Hilbert-style axiomatic systems, and Gentzen-style sequent calculi, don't on their own provide direct means of testing for them. 
+But with these specific algorithms or ways of using the derivation systems can be developed (as we do in chapter \ref{completenesschapter}) that provide a testing procedure. 
+
+While truth tables are a convenient method for answering many questions about \GSL{} sentences, two warnings are in order.  First, for complex sentences the size of the truth table can be very large.  Remember, the number of rows needed for a truth table is $2^n$ where $n$ is the number of different sentence letters.  Second, while truth tables are useful in \GSL{}, there is nothing comparable for our later formal languages.  The sooner you learn to analyze sentences directly, rather than relying on a truth table, the better.  For example, consider the sentence $\disjunction{\parhorseshoe{\Al}{\parconjunction{\Bl}{\negation{\pardisjunction{\Cl}{\Dl}}}}}{\parhorseshoe{\El}{\Al}}$.  You \emph{could} evaluate this sentence with a 32 line truth table.  Or, you can instead note that if $\Al$ is true in a model, then $\parhorseshoe{\El}{\Al}$ is also true (def. of truth for $\HORSESHOE$), and so the whole sentence is true; and if $\Al$ is false on the model, then $\parhorseshoe{\Al}{\parconjunction{\Bl}{\negation{\pardisjunction{\Cl}{\Dl}}}}$ is also true (def. of truth for $\HORSESHOE$), and the whole sentence is true.  Every model must make $\Al$ either true or false, so the whole sentence is true either way.  Therefore it is \CAPS{TFT}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Entailment and other Relations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Entailment}\label{Entailment}
+So far we've discussed what it is for a sentence of \GSL{} to be true in a model and we've mentioned the special cases of \CAPS{tft}, \CAPS{tff}, and \CAPS{tfc} sentences. 
+Now we turn to the notion of entailment. 
+Entailment is a 2-place relation that holds between sets of sentences and individual sentences.  The symbol \mention{$\:\sdtstile{}{}\:$}, called the double turnstile,\index{double turnstile}\index{$\sdtstile{}{}$} is used to represent entailment. 
+We write that $\Delta$ entails $\CAPTHETA$ as follows: \mention{\:$\Delta\sdtstile{}{}\CAPTHETA\:$}. 
+(The \mention{\:$\sdtstile{}{}\:$} is \emph{not} a symbol of \GSL{}. 
+Like the Greek letters it is a symbol of MathEnglish.)
+
+\begin{majorILnc}{\LnpDC{GSL Generalized Further Entailment}}
+	If $\Delta$ is a set of \GSL{} sentences and $\CAPTHETA$ is an \GSL{} sentence, then the following are equivalent ways to define when $\Delta$ entails $\CAPTHETA$:
+	\begin{cenumerate}
+		\item $\Delta\sdtstile{}{}\CAPTHETA$ \Iff every model for $\Delta$ and $\CAPTHETA$ that makes all sentences in $\Delta$ $\True$ also makes $\CAPTHETA$ $\True$.
+		\item $\Delta\sdtstile{}{}\CAPTHETA$ \Iff every model for $\Delta$ and $\CAPTHETA$ either makes at least one sentence in $\Delta$ $\False$ or makes $\CAPTHETA$ $\True$.
+	\end{cenumerate}
+\end{majorILnc}
+
+\noindent{}$\Delta$ can be the empty set or an infinite set. 
+If $\Delta$ is the empty set then we simply write \mention{$\:\sdtstile{}{}\CAPTHETA$}. The following are a consequence of the definition of entailment:
+
+\begin{cenumerate}
+		\item $\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPTHETA$ \Iff every model for $\CAPPHI_1$, $\CAPPHI_2$, $\CAPPHI_3$, $\ldots$, $\CAPPHI_{\integer{n}}$, and $\CAPTHETA$ that makes all of $\CAPPHI_1$, $\CAPPHI_2$, $\CAPPHI_3$, $\ldots$ $\CAPPHI_{\integer{n}}$ $\True$ also makes $\CAPTHETA$ $\True$.
+		\item $\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPTHETA$ \Iff every model for $\CAPPHI_1$, $\CAPPHI_2$, $\CAPPHI_3$, $\ldots$, $\CAPPHI_{\integer{n}}$, and $\CAPTHETA$ either makes at least one of $\CAPPHI_1$, $\CAPPHI_2$, $\CAPPHI_3$, $\ldots$ $\CAPPHI_{\integer{n}}$ $\False$ or makes $\CAPTHETA$ $\True$.
+\end{cenumerate}
+
+
+\noindent{}And for an even more narrow consequence:
+
+\begin{cenumerate}
+\item A sentence $\CAPPHI$ {entails} another sentence $\CAPTHETA$ \Iff every model for $\CAPPHI$ and $\CAPTHETA$ that makes $\CAPPHI$ $\True$ also makes $\CAPTHETA$ $\True$.
+\item A sentence $\CAPPHI$ {entails} another sentence $\CAPTHETA$ \Iff there is no model for $\CAPPHI$ and $\CAPTHETA$ that makes $\CAPPHI$ $\True$ and $\CAPTHETA$ $\False$.
+\end{cenumerate}
+
+
+\noindent{}Above we mentioned that \:$\Delta\sdtstile{}{}\CAPTHETA\:$ may hold even in cases where $\Delta$ is the empty set: $\:\sdtstile{}{}\CAPTHETA$.  If $\:\sdtstile{}{}\CAPTHETA$, then every model for $\CAPTHETA$ must make a sentence to the left of the turnstile $\False$, or make $\CAPTHETA$ true. 
+But there are no sentences to the left of the turnstile for a model to make false. 
+So, every model for $\CAPTHETA$ must make $\CAPTHETA$ true. 
+Therefore:
+\begin{THEOREM}{\LnpTC{entailmentTFT theorem}}
+For all \GSL{} sentences $\CAPTHETA$, $\:\sdtstile{}{}\CAPTHETA$ \Iff $\CAPTHETA$ is \CAPS{tft}.
+\end{THEOREM} 
+\noindent{}Before moving on to examples, it's worth noting that the definition of entailment given here only makes sense for uninterpreted sentences like those of \GSL{}.
+It can't be applied directly to meaningful English sentences. 
+But as we discuss in section \mvref{SLApplications}, through translations between \GSL{} and English we can begin to talk about entailment between English sentences. 
+And this will be at least a start to elucidating the notion of logical consequence.\index{logical consequence}
+
+\begin{majorILnc}{\LnpEC{GSLEntailmentExA}}
+$\parconjunction{\Al}{\Bl}\sdtstile{}{}\Bl$, that is, any model that makes $\parconjunction{\Al}{\Bl}$ true makes $\Bl$ true as well. 
+\end{majorILnc}
+\begin{PROOF}
+We must show that for all models $\IntA$, if $\IntA$ makes $\parconjunction{\Al}{\Bl}$ true, then it also makes $\Bl$ true. 
+Assume an model $\IntA$ makes $\parconjunction{\Al}{\Bl}$ true. 
+By the definition of truth for $\WEDGE$---clause 3, \mvref{True on a GSL interpretation}---both $\Al$ and $\Bl$ are true in $\IntA$ as well. 
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{GSLEntailmentExB}}
+$\Bl\sdtstile{}{}\pardisjunction{\Al}{\Bl}$. We leave the proof to the reader.
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{GSLEntailmentExC}}
+For all $\CAPPHI$, for some $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$. That is, every \GSL{} sentence entails at least one \GSL{} sentence.
+\end{majorILnc}
+\begin{PROOF}
+We need to show that no matter what \GSL{} sentence $\CAPPHI$ you pick, there's always some \GSL{} sentence $\CAPTHETA$ which is entailed by it, i.e. always some $\CAPTHETA$ such that $\CAPPHI\sdtstile{}{}\CAPTHETA$. 
+But this is easy: for every \GSL{} sentence $\CAPPHI$ you pick, just let $\CAPTHETA=\CAPPHI$. 
+Every \GSL{} sentence entails itself.  Thus, no matter what \GSL{} sentence you pick, there's always some sentence entailed by it. 
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{GSLEntailmentExD}}
+For some $\CAPTHETA$, for all $\CAPPHI$, $\CAPPHI\sdtstile{}{}\CAPTHETA$. That is, there's some \GSL{} sentence that's entailed by all \GSL{} sentences.
+\end{majorILnc}
+\begin{PROOF}
+We need to find some $\CAPTHETA$ such that all \GSL{} sentences entail it. 
+Let $\CAPTHETA$ be $\pardisjunction{\Al}{\negation{\Al}}$. 
+This sentence is \CAPS{tft}, so no model makes it false. 
+No matter what sentence $\CAPPHI$ we pick, there is no model that makes $\CAPPHI$ true and $\CAPTHETA$ false. 
+So, by the definition of $\:\sdtstile{}{}$ (\ref{GSL Generalized Further Entailment}), $\CAPPHI$ entails $\CAPTHETA$.
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{GSLEntailmentExE}}
+For some $\CAPPHI$, for all $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$. We leave the proof to the reader.
+\end{majorILnc}
+
+\subsection{Procedures for Testing Entailment}\label{TestingEntailment}
+
+In the previous examples (\ref{GSLEntailmentExA}--\ref{GSLEntailmentExE}) we used the definition of entailment (definition \ref{GSL Generalized Further Entailment}) to reason about whether a given entailment holds. 
+But there are various procedures for mechanically checking whether a given entailment holds. 
+Truth tables provide the simplest way. 
+
+To test whether a set of sentences $\Delta$ entails a sentence $\CAPTHETA$, we first write down all the sentence letters that appear in $\CAPTHETA$ and that appear in the sentences in $\Delta$. 
+Again we put these on the left side of the truth table and under them (following the procedure outlined in section \pmvref{Proceduresfortesting}) we write all the possible assignments of truth values. 
+Then to the right of the sentence letters we write each of the sentences from $\Delta$ (in separate columns) and to the right of those we write $\CAPTHETA$. 
+Under $\CAPTHETA$ and all the sentences from $\Delta$ we write the truth value of that sentence based on the assignment of truth values listed in that row. 
+Then $\Delta$ entails $\CAPTHETA$ iff there is no row in the truth table in which all the sentences in $\Delta$ are true and $\CAPTHETA$ is false. Any rows of the truth table that do not make all of the \CAPS{lhs} sentences true are irrelevant.  After marking one of the \CAPS{lhs} sentences as false we can omit the rest of the row.
+\begin{majorILnc}{\LnpEC{GSLEntailmentExA2}}
+In example \ref{GSLEntailmentExA} we said that $\parconjunction{\Al}{\Bl}\sdtstile{}{}\Bl$. 
+We can show this with a truth table.  
+\begin{center}
+\begin{tabular}{ c c c c }
+$\Al$ & $\Bl$ & $\parconjunction{\Al}{\Bl}$ & $\Bl$ \\
+\hline
+$ $ & $ $ & & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\FalseB$& $\FalseB$ & $\FalseB$ \\
+$\FalseB$ & $\TrueB$ & $\FalseB$ & $\TrueB$ \\
+$\FalseB$ & $\FalseB$  & $\FalseB$ & $\FalseB$ \\
+\end{tabular}
+\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{GSLEntailmentExB2}}
+In example \ref{GSLEntailmentExB} we said that $\Bl\sdtstile{}{}\pardisjunction{\Al}{\Bl}$. 
+The following truth table shows this. 
+\begin{center}
+\begin{tabular}{ c c c c }
+$\Al$ & $\Bl$ & $\Bl$ & $\pardisjunction{\Al}{\Bl}$ \\
+\hline
+$ $ & $ $ & & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\FalseB$& $\FalseB$ & $\TrueB$ \\
+$\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\FalseB$ & $\FalseB$  & $\FalseB$ & $\FalseB$ \\
+\end{tabular}
+\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{GSLEntailmentExAA}}
+We conclude with a more complicated example. 
+Here we want to show that $\disjunction{\Al}{\Bl},\horseshoe{\negation{\Cl}}{\negation{\Al}},\horseshoe{\Bl}{\Cl}\sdtstile{}{}\Cl$.
+\begin{center}
+\begin{tabular}{ c c c c c c c }
+$\Al$ & $\Bl$ & $\Cl$ & $\disjunction{\Al}{\Bl}$ & $\horseshoe{\negation{\Cl}}{\negation{\Al}}$ & $\horseshoe{\Bl}{\Cl}$ & $\Cl$ \\
+\hline
+$ $ & $ $ & & & & & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$\\
+$\TrueB$ & $\TrueB$ & $\FalseB$& $\TrueB$ & $\FalseB$ & $\FalseB$ &  $\FalseB$\\
+$\TrueB$ & $\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ &  $\TrueB$\\
+$\TrueB$ & $\FalseB$ & $\FalseB$  & $\TrueB$ & $\FalseB$ & $\TrueB$ & $\FalseB$\\
+$\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$\\
+$\FalseB$ & $\TrueB$ & $\FalseB$& $\TrueB$ & $\TrueB$ & $\FalseB$ & $\FalseB$\\
+$\FalseB$ & $\FalseB$ & $\TrueB$ & $\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$\\
+$\FalseB$ & $\FalseB$ & $\FalseB$  & $\FalseB$ & $\TrueB$ & $\TrueB$ & $\FalseB$\\
+\end{tabular}
+\end{center}
+\end{majorILnc}
+
+\subsection{Basic Results on Entailment}\label{Basic Results on Entailment} 
+A simple, but important theorem involves moving sentences from one side of the turnstile to the other.
+\begin{THEOREM}{\LnpTC{Exponentiation of Entailment} \GSL{} Exportation Theorem:} For all \GSL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$ \Iff $\:\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
+\end{THEOREM}
+\noindent{}In order to prove an iff-statement like this one (i.e., a biconditional), we need to prove two things. 
+First, we have to prove that if the left-hand side---in this example, $\CAPPHI\sdtstile{}{}\CAPTHETA$---is true, then the right-hand side---in this example, $\:\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$---must also be true. 
+Second, we have to prove that if the right-hand side is true, then the left-hand side must also be true. 
+Proofs of a biconditional generally involve these two parts.\footnote{There are other ways of proving a biconditional that don't involve explicitly carrying out these steps, but the method we use here is often the most straightforward.} 
+The convention is that the first part of the proof (the one that shows that if the left-hand side is true, then the right-hand side is true) will be marked with a left-to-right arrow \mention{$\Rightarrow$},\index{$\Leftarrow$, $\Rightarrow$} and the other part of the proof will be marked with a right-to-left arrow \mention{$\Leftarrow$}. 
+\begin{PROOF}
+$(\Rightarrow)$ To begin, we assume that the left-hand side, $\CAPPHI\sdtstile{}{}\CAPTHETA$, is true.  We want to show, without using any additional information, that the right-hand side, $\:\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$, is also true.  Given the definition of $\:\sdtstile{}{}$ and the truth of $\CAPPHI\sdtstile{}{}\CAPTHETA$, it follows that on every model on which $\CAPPHI$ is true, $\CAPTHETA$ is also true.
+
+There are two possibilities for the truth value of $\CAPPHI$: either (a) $\CAPPHI$ is true or (b) $\CAPPHI$ is false.  (a) Assume a model $\IntA$ such that $\CAPPHI$ is true.  Because $\CAPPHI\sdtstile{}{}\CAPTHETA$, that means that $\IntA$ makes $\CAPTHETA$ true.  By the definition of truth for $\HORSESHOE$, $\IntA$ makes $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ true.  (If a model makes the \CAPS{rhs} of a conditional true, it makes the whole conditional true.)  Remember this result!  This is close to our goal.
+
+Now for the second possibility.  (b) Assume a model $\IntA$ that makes $\CAPPHI$ false.  According to the definition of truth for $\HORSESHOE$, $\IntA$ makes $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ true. (If a model makes the \CAPS{lhs} of a conditional false, it makes the whole conditional true.)
+
+No matter what model we pick, $\CAPPHI$ must be true or false.  Either way, we see---in (a) and (b)---that the model must make $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ true.  In other words, all models make $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ true.  Which in turn means that $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ is \CAPS{tft} (def. of \CAPS{tft}, \pmvref{GSL TFT}).  And according to theorem \mvref{entailmentTFT theorem}, it follows that the entailment $\:\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$ holds.  
+
+$(\Leftarrow)$ Now assume that $\:\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$ is true, with the goal of showing that $\CAPPHI\sdtstile{}{}\CAPTHETA$ is also true.  By the definition of $\:\sdtstile{}{}$, the truth of $\:\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$ implies that $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ is \CAPS{tft}.  By the definition of \CAPS{tft}, this means that $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ is true on every model $\IntA$.
+
+By the definition of truth of $\HORSESHOE$, this means that for every model $\IntA$, either the \CAPS{lhs}, $\CAPPHI$, is false or the \CAPS{rhs}, $\CAPTHETA$, is true.  Hence there is no model that makes $\CAPPHI$ true and $\CAPTHETA$ false.  So, by the definition of $\:\sdtstile{}{}$, that means that $\CAPPHI\sdtstile{}{}\CAPTHETA$.
+\end{PROOF}
+
+There are a number of other theorems that are similar to, and expand upon, theorem \ref{Exponentiation of Entailment}. Here we state them and leave the proofs to the reader.
+\begin{THEOREM}
+{\LnpTC{expo generalizations}}
+\begin{cenumerate}
+\item If $\CAPPHI_1$, $\CAPPHI_2$, $\ldots$, $\CAPPHI_{\integer{n}}$ and $\CAPPSI$ are \GSL{} sentences, then
+\begin{itemize}
+\item[] $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI$ \Iff $\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\parhorseshoe{\CAPPHI_1}{\CAPPSI}$
+\item[] $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI$ \Iff $\CAPPHI_1,\CAPPHI_3,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\parhorseshoe{\CAPPHI_2}{\CAPPSI}$
+\item[] \hspace{1in} $\vdots$
+\item[] $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{n}\sdtstile{}{}\CAPPSI$ \Iff $\CAPPHI_1,\ldots,\CAPPHI_{n-1}\sdtstile{}{}\parhorseshoe{\CAPPHI_{\integer{n}}}{\CAPPSI}$
+\end{itemize} 
+\item If $\CAPPHI_1$, $\CAPPHI_2$, $\ldots$, $\CAPPHI_{\integer{n}}$ and $\CAPPSI$ are \GSL{} sentences, then
+\begin{itemize}
+\item[] $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI$ \Iff $\CAPPHI_1,\ldots,\CAPPHI_{n-1}\sdtstile{}{}\parhorseshoe{\CAPPHI_{\integer{n}}}{\CAPPSI}$
+\item[] $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI$ \Iff $\CAPPHI_1,\ldots,\CAPPHI_{n-2}\sdtstile{}{}\parhorseshoe{\CAPPHI_{n-1}}{\parhorseshoe{\CAPPHI_{\integer{n}}}{\CAPPSI}}$
+\item[] \hspace{1in} $\vdots$
+\item[] $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{n}\sdtstile{}{}\CAPPSI$ \Iff $\sdtstile{}{}\parhorseshoe{\CAPPHI_1}{\parhorseshoe{\ldots}{\parhorseshoe{\CAPPHI_{n-1}}{\parhorseshoe{\CAPPHI_{\integer{n}}}{\CAPPSI}}}}$
+\end{itemize}
+\item If $\CAPPHI$ and $\CAPPSI$ are \GSL{} sentences and $\Delta$ is a set of \GSL{} sentences containing $\CAPPHI$ (i.e, $\CAPPHI\in\Delta$) and $\Delta^*$ is $\Delta$ with $\CAPPHI$ removed, then $\Delta\sdtstile{}{}\CAPPSI$ \Iff $\Delta^*\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPPSI}$.
+\item If $\CAPPHI$ and $\CAPPSI$ are \GSL{} sentences, then $\CAPPHI\sdtstile{}{}\CAPPSI$ \Iff $\CAPPHI,\negation{\CAPPSI}\sdtstile{}{}\parconjunction{\Al}{\negation{\Al}}$.
+\item If $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ and $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ are all \GSL{} sentences, then
+\begin{itemize}
+\item[] $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$ \Iff $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}},\negation{\CAPPSI_1}\sdtstile{}{}\pardisjunction{\CAPPSI_2}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$
+\item[] $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$ \Iff $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}},\negation{\CAPPSI_2}\sdtstile{}{}\pardisjunction{\CAPPSI_1}{\disjunction{\CAPPSI_3}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$
+\item[] \hspace{1in} $\vdots$
+\item[] $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$ \Iff $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}},\negation{\CAPPSI_{\integer{n}}}\sdtstile{}{}\pardisjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{n-1}}}$
+\end{itemize} 
+\end{cenumerate}
+\end{THEOREM}
+
+\subsection{Other Relations}\label{Other Relations}
+
+We can define a number of other important relations between \GSL{} sentences in terms of entailment:
+
+\begin{majorILnc}{\LnpDC{GSL TFE}}
+Two sentences $\CAPTHETA$ and $\CAPPHI$ are \index{equivalent sentences!truth functional|textbf} \nidf{truth functionally equivalent} (\CAPS{tfe}) \Iff all models for $\CAPTHETA$ and $\CAPPHI$ assign them the same truth value, which is the same as saying they entail each other: both $\CAPTHETA\sdtstile{}{}\CAPPHI$ and $\CAPPHI\sdtstile{}{}\CAPTHETA$.
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL Contradictory}}
+Two sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{truth functionally contradictory}\index{contradictory!truth functional|textbf} \Iff all models for $\CAPTHETA$ and $\CAPPHI$ assign them opposite truth values, which is the same as saying that each sentence is \CAPS{tfe} to the negation of the other.
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL Contrary}}
+Two sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{truth functionally contrary}\index{contraries!truth functional|textbf} \Iff they cannot both be $\True$ in the same model $\IntA$. (This is the same as saying that each entails the negation of the other.)
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL subcontrary}}
+Two sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{truth functionally subcontrary}\index{subcontraries!truth functional|textbf} \Iff they cannot both be $\False$ in the same model $\IntA$. (This is the same as saying that the negation of each entails the other.)
+\end{majorILnc}
+\begin{majorILnc}{\LnpDC{GSL Independence}}
+Two sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{truth functionally independent}\index{independent sentences!truth functional|textbf} \Iff none of the above hold (including entailments), i.e. \Iff there are four models:
+\begin{cenumerate}
+\item A model in which both $\CAPTHETA$ and $\CAPPHI$ are $\True$; 
+\item A model in which both $\CAPTHETA$ and $\CAPPHI$ are $\False$;
+\item A model in which $\CAPTHETA$ is $\True$ and $\CAPPHI$ is $\False$; and
+\item A model in which $\CAPTHETA$ is $\False$ and $\CAPPHI$ is $\True$.
+\end{cenumerate}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFE Ex 4}}
+Every pair of contradictory sentences are also contrary (this follows trivially from the definitions). 
+But, sentences can be contrary without being contradictory.
+\end{majorILnc}
+\begin{PROOF}
+$\conjunction{\Cl}{\Dl}$ and $\conjunction{\Cl}{\negation{\Dl}}$ are contrary but not contradictory.
+
+(Contrary:) If $\conjunction{\Cl}{\Dl}$ is true in a model $\IntA$, then $\Cl$ and $\Dl$ are each true on $\IntA$. 
+So $\negation{\Dl}$ is false in $\IntA$, and $\conjunction{\Cl}{\negation{\Dl}}$ is false in $\IntA$.
+If $\conjunction{\Cl}{\negation{\Dl}}$ is true in $\IntA$, then both $\Cl$ and $\negation{\Dl}$ are true on $\IntA$.
+$\Dl$ is false in $\IntA$, and hence $\conjunction{\Cl}{\Dl}$ is false in $\IntA$.
+Thus, by def. \ref{GSL Contrary}, the pair is contrary.
+
+(Not Contradictory:) Any model $\IntA$ that assigns $\FalseB$ to $\Cl$ makes both $\conjunction{\Cl}{\Dl}$ and $\conjunction{\Cl}{\negation{\Dl}}$ false.
+By def. \ref{GSL Contradictory}, the pair is not contradictory.
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{TFE Ex 5}}
+Contradictory sentences are also subcontrary, but sentences can be subcontrary without being contradictory. 
+\end{majorILnc}
+\begin{PROOF}
+$\Dl$ and $\disjunction{\Cl}{\negation{\Dl}}$ are subcontrary but not contradictory.
+
+(Subcontrary:) Assume that $\Dl$ is false on a model $\IntA$.
+It follows that $\negation{\Dl}$ is true on $\IntA$ and so is $\disjunction{\Cl}{\negation{\Dl}}$. 
+Alternatively, assume that $\disjunction{\Cl}{\negation{\Dl}}$ is false on $\IntA$.  Then both $\Cl$ and $\negation{\Dl}$ are false on $\IntA$.
+So $\Dl$ is true on $\IntA$.
+By def. \ref{GSL subcontrary}, the pair is subcontrary.
+
+(Not Contradictory:) Any model that assigns $\TrueB$ to both $\Dl$ and $\Cl$ makes both $\Dl$ and $\disjunction{\Cl}{\negation{\Dl}}$ true. 
+So by def. \ref{GSL Contradictory}, the pair isn't contradictory.
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{TFE Ex 6}}
+If two sentences are both contrary and subcontrary, they are contradictory. 
+\end{majorILnc}
+\begin{PROOF}
+If two sentences are contrary, then by definition \ref{GSL Contrary} any model $\IntA$ that makes one true makes the other false. 
+If two sentences are subcontrary, then by definition \ref{GSL subcontrary} any model $\IntA$ that makes one false makes the other true. 
+Because every model either makes a sentence true or makes it false, no model assigns two sentences that are contrary and subcontrary the same truth value. 
+So by definition \ref{GSL Contradictory}, two sentences that are contrary and subcontrary are also contradictory. 
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{TFE Ex 1}}
+$\disjunction{\Al}{\parconjunction{\Bl}{\Dl}}$ and $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$ are \CAPS{tfe}.
+\end{majorILnc}
+\begin{PROOF}
+Assume that $\disjunction{\Al}{\parconjunction{\Bl}{\Dl}}$ is true on some $\IntA$. 
+By the def. of truth of $\VEE$, either $\Al$ is true on $\IntA$ or $\conjunction{\Bl}{\Dl}$ is true on $\IntA$.
+If $\Al$ is true on $\IntA$, then both $\disjunction{\Al}{\Bl}$ and $\disjunction{\Al}{\Dl}$ are true on $\IntA$.
+So, $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$ is true on $\IntA$. 
+If, alternatively, $\conjunction{\Bl}{\Dl}$ is true on $\IntA$, then then both $\Bl$ and $\Dl$ are true on $\IntA$, and so both $\disjunction{\Al}{\Bl}$ and $\disjunction{\Al}{\Dl}$ are true on $\IntA$.
+Hence, $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$ is true on $\IntA$. 
+In either case, $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$ is true on $\IntA$.
+Thus,  $\disjunction{\Al}{\parconjunction{\Bl}{\Dl}}\sdtstile{}{}\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$.
+
+We leave it to the reader to show that $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}\sdtstile{}{}\disjunction{\Al}{\parconjunction{\Bl}{\Dl}}$. 
+It then follows by definition \ref{GSL TFE} that the two sentences are \CAPS{tfe}.
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{TFE Ex 2}}
+For any \GSL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\horseshoe{\CAPPHI}{\CAPTHETA}$ and $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ are \CAPS{tfe}.
+\end{majorILnc}
+\begin{PROOF}
+Assume that $\horseshoe{\CAPPHI}{\CAPTHETA}$ is true on some model $\IntA$.
+Then on $\IntA$ either $\CAPPHI$ is false or $\CAPTHETA$ is true. 
+Hence either $\negation{\CAPPHI}$ or $\CAPTHETA$ is true on $\IntA$. 
+It follows that $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ is true on $\IntA$. 
+Hence by the definition of $\:\sdtstile{}{}$, $\horseshoe{\CAPPHI}{\CAPTHETA}\sdtstile{}{}\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$.
+
+We leave it to the reader to show that $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
+It then follows by definition \ref{GSL TFE} that the two sentences are \CAPS{tfe}.
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{TFE Ex 3}}
+For any \GSL{} sentence $\CAPPHI$, $\negation{\negation{\CAPPHI}}$ and $\CAPPHI$ are \CAPS{tfe}.
+\end{majorILnc}
+\begin{PROOF}
+The Proof is left to the reader.
+\end{PROOF}
+
+\subsection{Procedures for Testing Other Relations} 
+
+As before we can use truth tables to test for the following relationships: truth-functional equivalence, truth-functional contradictory, truth-functional contrary, truth-functional subcontrary, and truth-functional independence. 
+By definition, two sentences $\CAPPHI$ and $\CAPTHETA$ are truth functionally equivalent iff they have the same truth value on every assignment. 
+So we can test for truth-functional equivalence by putting both $\CAPPHI$ and $\CAPTHETA$ in a truth table and seeing if they have the same truth value in every row. 
+\begin{majorILnc}{\LnpEC{TFE Ex 1 2}}
+In example \mvref{TFE Ex 1} we said that $\disjunction{\Al}{\parconjunction{\Bl}{\Dl}}$ and $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$ are \CAPS{tfe}. 
+We can show this using truth tables. 
+\begin{center}
+\begin{tabular}{ c c c c c }
+$\Al$ & $\Bl$ & $\Dl$ & $\disjunction{\Al}{\parconjunction{\Bl}{\Dl}}$ & $\conjunction{\pardisjunction{\Al}{\Bl}}{\pardisjunction{\Al}{\Dl}}$ \\
+\hline
+$ $ & $ $ & & & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\TrueB$ & $\FalseB$& $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$\\
+$\TrueB$ & $\FalseB$ & $\FalseB$  & $\TrueB$ & $\TrueB$\\
+$\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$\\
+$\FalseB$ & $\TrueB$ & $\FalseB$& $\FalseB$ & $\FalseB$\\
+$\FalseB$ & $\FalseB$ & $\TrueB$ & $\FalseB$ & $\FalseB$\\
+$\FalseB$ & $\FalseB$ & $\FalseB$  & $\FalseB$ & $\FalseB$\\
+\end{tabular}
+\end{center}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{TFE Ex 2 2}}
+In example \mvref{TFE Ex 2} we said that for any \GSL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\horseshoe{\CAPPHI}{\CAPTHETA}$ and $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ are \CAPS{tfe}. 
+This can be shown using truth tables. 
+\begin{center}
+\begin{tabular}{ c c c c c }
+$\CAPPHI$ & $\CAPTHETA$ & $\horseshoe{\CAPPHI}{\CAPTHETA}$ & $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ & \\
+\hline
+$ $ & $ $ & & & \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\FalseB$& $\FalseB$ & $\FalseB$ \\
+$\FalseB$ & $\TrueB$ & $\TrueB$ & $\TrueB$\\
+$\FalseB$ & $\FalseB$  & $\TrueB$ & $\TrueB$\\
+\end{tabular}
+\end{center}
+In this example we're not looking at actual \GSL{} sentences; instead we have sentence schemas. 
+But for reasons to be discussed below this procedure still works: this truth table shows that for any two sentences $\CAPPHI$ and $\CAPTHETA$, $\horseshoe{\CAPPHI}{\CAPTHETA}$ and $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ are \CAPS{tfe}.
+\end{majorILnc}
+While truth tables provide guaranteed answers to these questions, students should not become reliant on this method. 
+For one thing, this method doesn't work for more complex languages, and it is important to practice with the simpler \GSL{} structures the reasoning skills and methods needed later. 
+Secondly, truth tables can quickly become very large and tedious, and often simple reasoning suffices. 
+More generally, truth tables give an answer but often don’t give insight.
+
+For example, the truth table for the sentence $\horseshoe{\parconjunction{\parhorseshoe{\Al}{\Bl}}{\parhorseshoe{\Bl}{\Cl}}}{\parhorseshoe{\Al}{\Cl}}$ requires 8 lines. 
+But we can reason that the only way for this sentence to be false is if $\parconjunction{\parhorseshoe{\Al}{\Bl}}{\parhorseshoe{\Bl}{\Cl}}$ is true in $\IntA$ and $\parhorseshoe{\Al}{\Cl}$ is false. 
+$\parhorseshoe{\Al}{\Cl}$ can only be false in $\IntA$ if $\Al$ is $\True$ and $\Cl$ is $\FalseB$ in $\IntA$. 
+Now we look at $\Bl$ and ask what $\IntA$ should assign it to make the sentence $\False$; 
+we see that if $\Bl$ is $\TrueB$, $\parhorseshoe{\Bl}{\Cl}$ is false and the LHS is false so the whole sentence is true; 
+if $\Bl$ is $\FalseB$ in $\IntA$, then $\parhorseshoe{\Al}{\Bl}$ is false, the LHS is false and the whole sentence is true. 
+Therefore \emph{there is no model that makes the sentence $\FalseB$} and it is \CAPS{tft}. 
+We have discovered a pattern. 
+And if we consider a similar but more complex sentence in which $\Al$, $\Bl$ and $\Cl$ are systematically replaced by complex sentences, the size of the truth-table blows up, but the reasoning above remains simple.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Recursive Proofs}\label{Recursive Proofs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The Method of Recursive Proof}
+Many logic concepts are characterized by recursive definitions.  
+To prove a theorem about recursively defined concept, we usually want to employ a method called \df{recursive proof}. 
+The structure of a recursive proof mirrors the structure of a recursive definition.
+
+\begin{majorILnc}{\LnpDC{Definition of Recursive Proof}}
+	Let $\Delta$ be some set whose members are defined recursively. To prove that all members of $\Delta$ have some property $\CAPPHI$ we use a \df{recursive proof}, which works as follows:
+	\begin{description}
+		\item[Base Step:] Show that everything identified by the base clause of the recursive definition has $\CAPPHI$.  
+		\item[Inheritance Step:] Show that $\CAPPHI$ is inherited; i.e., show that if the previous objects from which new objects are generated (or found) by the generating clause have $\CAPPHI$ then the new ones have $\CAPPHI$ too.
+		\item[Closure Step:] Finally, show that completing the base and inheritance steps is sufficient to show that all members of $\Delta$ have $\CAPPHI$. 
+		
+	\end{description}
+\end{majorILnc}
+The inheritance step usually has two parts. The first part is a \emph{recursive assumption}.  We will \emph{assume} that some previous objects---the objects from which new ones are generated by the generating clause---already have the property in question.  Generally we make this assumption by selecting metavariables to represent the previous objects.  We are entitled to this assumption because we know with certainty that there are some such previous objects.  At the very least, the objects previously identified in the base clause have the property.  Second, we prove that the new, generated objects must also have the property in question.
+
+How much we actually write down in the closure step will vary from proof to proof. 
+Sometimes we will simply note that the closure condition (``that's all'') ensures nothing has been left out by our proof. 
+Other times, if the proof is more complicated, we might also reiterate what we have just shown. 
+
+Throughout the book we signify the end of a completed proof with a black box: $\blacksquare$.
+
+\subsection{Recursive Proof and Mathematical Induction}
+Many important mathematical concepts are defined recursively. 
+We already saw the recursive definition of natural numbers. 
+If we want to \emph{prove} something about all natural numbers, we can use mathematical induction\index{principle of mathematical induction}.  \emph{Mathematical induction} is a method of proof in which one shows (i) that some property holds of the first natural number, and (ii) that for any natural number $n$ having that property, the successor of $n$ also has that property.  Mathematical induction is one sort of recursive proof:
+\begin{description}
+	\item[Base Step:] $0$ has property $\CAPPHI$. 
+	\item[Inheritance Step:] Whenever $\integer{n}$ has property $\CAPPHI$, its successor, $n+1$, also has $\CAPPHI$.
+\end{description}
+Therefore, we can conclude that
+\begin{description}
+	\item[Closure Step:] all natural numbers have property $\CAPPHI$.
+\end{description}
+
+Let's go through an example of mathematical induction. This first proof isn't very exciting but it illustrates how recursive proofs work.
+
+\begin{majorILnc}{\LnpEC{English Recursive Proof 1}} 
+	Let's prove that there is no largest natural number $n$, i.e., that there are an infinity of natural numbers. 
+	
+	\begin{PROOF}	\begin{cenumerate}
+			\item Base Step: The number $0$ isn't the largest; $1$ is larger.
+			\item Inheritance Step: First we'll make our recursive assumption.  Assume that $n$ isn't the largest natural number.
+			
+			We want to show that the \emph{successor} of $n$---i.e., $n+1$---isn't the largest natural number either.  This is easy.  $n+1$ can't be the largest because $n+1<n+2$.  
+			
+			So, we've shown that the natural number $n+1$ can't be the largest.
+			\item Closure Step: So, no natural number $n$ is the largest.
+	\end{cenumerate}	\end{PROOF}
+\end{majorILnc}
+
+\noindent{}Let's look at another, slightly more difficult recursive proof.
+
+\begin{majorILnc}{\LnpEC{English Recursive Proof 2}} 
+	For every natural number $n$, there is a set that has exactly $n$ elements. 
+	\begin{PROOF}\begin{cenumerate}
+			\item Base Step: The empty set, $\emptyset$, has $0$ elements.
+			\item Inheritance Step: Recursive Assumption: Assume that for natural number $n$ there is a corresponding set $\Delta$ containing only the natural numbers $i$ such that $0<i \leq n$.  This means that $\Delta$ has exactly $n$ elements. (To illustrate, if $n=1$, then $\Delta=\{1\}$; if $n=2$, then $\Delta=\{1,2\}$; etc.)
+			
+			We want to show that for the successor of $n$, $n+1$, there is another set $\Delta'$ with $n+1$ elements.  We can construct such a set by defining $\Delta'$ as $\Delta\cup\{n+1\}$.  The set $\{n+1\}$ has exactly one element, and this element isn't in $\Delta$.  Because $\Delta$ has $n$ elements and $\Delta'=\Delta\cup\{n+1\}$, it follows that $\Delta'$ has one more element than $\Delta$, i.e., that it has $n+1$ elements.
+			
+			We've shown that for the natural number $n+1$ there is a corresponding set $\Delta'$ with $n+1$ elements.
+			\item Closure Step: So, for every natural number $n$ there is a corresponding set with $n$ elements.
+	\end{cenumerate}\end{PROOF}
+\end{majorILnc}
+
+
+\noindent{}Two things can give people trouble with the structure of recursive proofs (aside from intrinsically hard problems).  
+One is that the base case is often easy or trivial. 
+Make sure you have done it correctly but don't worry if it seems too easy. 
+
+Second, some students initially think that the recursive assumption in the inheritance step assumes what we are trying to prove, but that isn't so.  Think of the recursive assumption this way: \emph{if} some group of objects has property X, then from that we can prove that another group of objects also has X.  We already know that some objects have the property in question: the object(s) identified in the base step.  The recursive assumption lets us give a label to these previously identified objects bearing the property in question. In the last example, we used the variable $n$ to stand for numbers that we already know have a corresponding set.  That allowed us to show that other objects---in this example, designated by $n+1$---also have the same property.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Recursive Proofs in SL}\label{recursive proofs in SL}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Recursive Proof Examples in SL}
+
+Let's illustrate recursive proofs further by establishing two simple results about \GSL{} sentences.  
+
+We'll use the method to prove more surprising and substantial results throughout the rest of this book.
+\begin{majorILnc}{\LnpEC{Recursive Proof Ex 1}} 
+In this example we prove that every (official) sentence has exactly as many left parentheses as right.
+\begin{PROOF}
+\begin{description}
+\item[Base Step:] All atomic sentences (i.e., sentence letters) have zero left parentheses and zero right parentheses. 
+And, of course, $0=0$.
+\item[Inheritance Step:] Suppose $\CAPPHI$ and $\CAPTHETA,\CAPTHETA_1,\CAPTHETA_2,\ldots,\CAPTHETA_{\integer{n}}$ each have exactly as many left parentheses as right, and are of order $k$ or less. 
+(This is our recursive assumption.)  We want to show that sentences of order $k+1$ have the same property.
+
+
+New sentences can be generated as $\parconjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$, $\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$, $\parhorseshoe{\CAPPHI}{\CAPTHETA}$, and $\partriplebar{\CAPPHI}{\CAPTHETA}$. 
+In all these cases the resulting parentheses are all those of $\CAPPHI$ and $\CAPTHETA$ plus the new matching outer ones; so, the resulting sentence still has exactly as many left parentheses as right.
+The only other way new sentences can be generated is as $\negation{\CAPPHI}$, in which case the resulting parentheses are just those of $\CAPPHI$ and that, by the recursive assumption, has exactly as many left parentheses as right.
+\item[Closure Step:] Because the inheritance step covers all the ways of generating an \GSL{} sentence, for all \GSL{} sentences the number of left parentheses is the same as the number of right parentheses.\end{description}
+\end{PROOF}
+\end{majorILnc}
+\begin{majorILnc}{\LnpEC{Recursive Proof Ex 2}} 
+In this example we prove that in every official \GSL{} sentence, the number of left parentheses is greater than or equal to the number of arrows.
+\begin{PROOF}
+Let $\LP\CAPPHI$ be the number of left parentheses in $\CAPPHI$ and $\HHH\CAPPHI$ be the number of arrows in $\CAPPHI$.
+\begin{description}
+\item[Base Step:] In the base case $\CAPPHI$ is atomic, so $\LP\CAPPHI=0$ and $\HHH\CAPPHI=0$.  Thus, $\LP\CAPPHI=\HHH\CAPPHI$ and so $\LP\CAPPHI\geq\HHH\CAPPHI$.
+ This holds for \emph{all} atomic $\CAPPHI$.
+\item[Inheritance Step:] \hfill{}
+\begin{description}
+\item[Recursive Assumption:] Assume the above property holds for some $\CAPTHETA$, $\CAPTHETA_1$, $\CAPTHETA_2$, $\ldots$ $\CAPTHETA_{\integer{n}}$, which are all of order $k$ or less. 
+That is, assume that $\LP\CAPTHETA\geq\HHH\CAPTHETA$, $\LP\CAPTHETA_1\geq\HHH\CAPTHETA_1$, $\LP\CAPTHETA_2\geq\HHH\CAPTHETA_2$, $\ldots$ $\LP\CAPTHETA_{\integer{n}}\geq\HHH\CAPTHETA_{\integer{n}}$.  Let's show that the sentences of order $k+1$ have the same property. 
+\item[Negation:] $\LP\negation{\CAPTHETA}=\LP\CAPTHETA$ and $\HHH\negation{\CAPTHETA}=\HHH\CAPTHETA$. By assumption $\LP\CAPTHETA\geq\HHH\CAPTHETA$, so $\LP\negation{\CAPTHETA}\geq\HHH\negation{\CAPTHETA}$ too.
+\item[Conditional:] $\LP\parhorseshoe{\CAPTHETA_1}{\CAPTHETA_2}=\LP\CAPTHETA_1+\LP\CAPTHETA_2+1$ and $\HHH\parhorseshoe{\CAPTHETA_1}{\CAPTHETA_2}=\HHH\CAPTHETA_1+\HHH\CAPTHETA_2+1$. Because $\LP\CAPTHETA_1\geq\HHH\CAPTHETA_1$ and $\LP\CAPTHETA_2\geq\HHH\CAPTHETA_2$, clearly $\LP\CAPTHETA_1+\LP\CAPTHETA_2+1\geq\HHH\CAPTHETA_1+\HHH\CAPTHETA_2+1$ too. So $\LP\parhorseshoe{\CAPTHETA_1}{\CAPTHETA_2}\geq\HHH\parhorseshoe{\CAPTHETA_1}{\CAPTHETA_2}$.
+\item[Biconditional:] $\LP\partriplebar{\CAPTHETA_1}{\CAPTHETA_2}=\LP\CAPTHETA_1+\LP\CAPTHETA_2+1$ and $\HHH\partriplebar{\CAPTHETA_1}{\CAPTHETA_2}=\HHH\CAPTHETA_1+\HHH\CAPTHETA_2$. 
+Because $\LP\CAPTHETA_1\geq\HHH\CAPTHETA_1$ and $\LP\CAPTHETA_2\geq\HHH\CAPTHETA_2$, clearly $\LP\CAPTHETA_1+\LP\CAPTHETA_2+1\geq\HHH\CAPTHETA_1+\HHH\CAPTHETA_2$ too. 
+So $\LP\partriplebar{\CAPTHETA_1}{\CAPTHETA_2}\geq\HHH\partriplebar{\CAPTHETA_1}{\CAPTHETA_2}$.
+\item[Disjunction:] We have that $\LP\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}=\LP\CAPTHETA_1+\LP\CAPTHETA_2+\ldots+\LP\CAPTHETA_{\integer{n}}+1$ and $\HHH\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}=\HHH\CAPTHETA_1+\HHH\CAPTHETA_2+\ldots+\HHH\CAPTHETA_{\integer{n}}$. 
+Because $\LP\CAPTHETA_1\geq\HHH\CAPTHETA_1$, $\LP\CAPTHETA_2\geq\HHH\CAPTHETA_2$, $\ldots$ $\LP\CAPTHETA_{\integer{n}}\geq\HHH\CAPTHETA_{\integer{n}}$, we have that $\LP\CAPTHETA_1+\LP\CAPTHETA_2+\ldots+\LP\CAPTHETA_{\integer{n}}+1\geq\HHH\CAPTHETA_1+\HHH\CAPTHETA_2+\ldots+\HHH\CAPTHETA_{\integer{n}}$. 
+So, $\LP\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}\geq\HHH\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$ too.
+\item[Conjunction:] The argument is literally the same as that for disjunction, just erase every token of \mention{$\VEE$} and replace it with a token of \mention{$\!\WEDGE\!$}.
+\end{description}
+\item[Closure Step:] These are all the ways of constructing \GSL{} sentences, and in every case, if the number of left parentheses is greater than or equal to the number of arrows in the component sentences, then that still holds in the new sentences generated from those components.\end{description}
+\end{PROOF}
+\end{majorILnc}%
+
+\noindent{}In both examples we are trying to prove something about all \GSL{} sentences.
+In both cases our recursive assumption is something like: assume that the property in question already holds, in particular, for some \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ of order $k$ or less.
+We do this because in the inheritance step we're trying to show that if you build new \GSL{} sentences (using the logical connectives) out of old ones for which the property holds, then the property also holds for the new ones. 
+One way to do this---the one just used here---is to assume that the property holds for some particular sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ and then show that it holds for those built from those sentences using the logical connectives. 
+
+
+\subsection{Minimal Model Theorem}\label{minimal model theorem} 
+
+Earlier we claimed that the only sentence letter assignments that matter for the truth value of some \GSL{} sentence $\CAPPHI$ are those actually in $\CAPPHI$.  We're now ready to prove it.
+
+\begin{THEOREM}{\LnpTC{thm:localityoftruth}}
+	If two models for $\CAPPHI$, $\As{}{1}$ and $\As{}{2}$, make the same assignments to all the sentence letters contained in $\CAPPHI$, then $\CAPPHI$ is true on $\As{}{1}$ \Iff $\CAPPHI$ is true on $\As{}{2}$.
+\end{THEOREM}
+\begin{PROOF}
+	\begin{description}
+		\item[Base Step:]  Let $\CAPTHETA$ be a \GSL{} sentence of order 1.  It follows that $\CAPTHETA$ must be a lone sentence letter.  If $\As{}{1}$ and $\As{}{2}$ make the same assignments for all the sentence letters, then $\CAPTHETA$, which is just one sentence letter, is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
+		
+		\item[Inheritance Step:] 
+		\begin{description}
+			\item[Recursive Assumption:] Assume that for each sentence $\CAPTHETA$ of order $n$ or less, $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
+			\item[Negation:] Say that $\CAPPSI$ is of the form $\negation{\CAPTHETA}$.  $\negation{\CAPTHETA}$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is false on $\As{}{1}$ (definition of truth, $\NEGATION$).  And $\negation{\CAPTHETA}$ is true on $\As{}{2}$ \Iff $\CAPTHETA$ is false on $\As{}{2}$.  By our recursive assumption (RA), $\CAPTHETA$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.  It follows that $\negation{\CAPTHETA}$ is true on $\As{}{1}$ \Iff $\negation{\CAPTHETA}$ is true on $\As{}{2}$. I.e., $\CAPPSI$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
+			\item[Conditional:] Say that $\CAPPSI$ is of the form $\horseshoe{\CAPTHETA_1}{\CAPTHETA_2}$.  $\horseshoe{\CAPTHETA_1}{\CAPTHETA_2}$ is true on $\As{}{1}$ \Iff either $\CAPTHETA_1$ is false or $\CAPTHETA_2$ is true on $\As{}{1}$ (definition of truth, $\HORSESHOE$).  The same holds on model $\As{}{2}$.  By RA, $\CAPTHETA_1$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$; and $\CAPTHETA_2$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.  Therefore, there are four possibilities:  (i) $\CAPTHETA_1$ is true on both $\As{}{1}$ and $\As{}{2}$, and $\CAPTHETA_2$ is true on both too; (ii) $\CAPTHETA_1$ is false on both $\As{}{1}$ and $\As{}{2}$, and $\CAPTHETA_2$ is false on both too; (iii) $\CAPTHETA_1$ is false on both $\As{}{1}$ and $\As{}{2}$, and $\CAPTHETA_2$ is true on both models; and (iv) $\CAPTHETA_1$ is true on both $\As{}{1}$ and $\As{}{2}$, and $\CAPTHETA_2$ is false on both models.  In cases (i) through (iii), $\horseshoe{\CAPTHETA_1}{\CAPTHETA_2}$ is true on both $\As{}{1}$ and $\As{}{2}$.  In case (iv), $\horseshoe{\CAPTHETA_1}{\CAPTHETA_2}$ is false on both $\As{}{1}$ and $\As{}{2}$.  Thus, $\CAPPSI$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
+			\item[Biconditional:] Say that $\CAPPSI$ is of the form $\triplebar{\CAPTHETA_1}{\CAPTHETA_2}$.  $\triplebar{\CAPTHETA_1}{\CAPTHETA_2}$ is true on $\As{}{1}$ \Iff $\CAPTHETA_1$ and $\CAPTHETA_2$ have the same truth value on $\As{}{1}$ (definition of truth, $\TRIPLEBAR$).  The same holds on model $\As{}{2}$.  By RA, $\CAPTHETA_1$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$; and $\CAPTHETA_2$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.  There are two possibilities: (i) $\CAPTHETA_1$ and $\CAPTHETA_2$ share the same truth value on both $\As{}{1}$ and $\As{}{2}$; and (ii) $\CAPTHETA_1$ and $\CAPTHETA_2$ have differing truth values on both $\As{}{1}$ and $\As{}{2}$.  In case (i), $\triplebar{\CAPTHETA_1}{\CAPTHETA_2}$ is true on both $\As{}{1}$ and $\As{}{2}$.  In case (ii), $\triplebar{\CAPTHETA_1}{\CAPTHETA_2}$ is false on both $\As{}{1}$ and $\As{}{2}$.  Thus, $\CAPPSI$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
+			\item[Disjunction:] Say that $\CAPPSI$ is of the form $\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$.  $\pardisjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$ is true on $\As{}{1}$ \Iff at least one disjunct is true on $\As{}{1}$ (definition of truth, $\VEE$).  As before, the same holds on $\As{}{2}$.  By RA, for every disjunct $\CAPTHETA_{k}$, $\CAPTHETA_{k}$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.  So, either one disjunct (at least) is true on both $\As{}{1}$ and $\As{}{2}$, or none of the disjuncts is true on either of $\As{}{1}$ and $\As{}{2}$.  Either way, $\CAPPSI$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
+			\item[Conjunction:] Say that $\CAPPSI$ is of the form $\parconjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$.  $\parconjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$ is true on $\As{}{1}$ \Iff every conjunct is true on $\As{}{1}$ (definition of truth, $\WEDGE$).  Again, the same holds on $\As{}{2}$.  By RA, for every conjunct $\CAPTHETA_{k}$, $\CAPTHETA_{k}$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.  Thus, either every conjunct is true on both $\As{}{1}$ and $\As{}{2}$, or at least one conjunct is false on both $\As{}{1}$ and $\As{}{2}$.  Either way, $\CAPPSI$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
+		\end{description}
+		\item[Closure Step:] There is no other way to form a sentence of \GSL{} $\CAPPHI$, so the above clauses are sufficient to prove that if $\As{}{1}$ and $\As{}{2}$ make the same assignments for all the sentence letters, then $\CAPPHI$ is true on $\As{}{1}$ \Iff $\CAPPHI$ is true on $\As{}{2}$.
+	\end{description}
+\end{PROOF}
+
+
+\subsection{Main Connective Theorem}\label{additional recur examples} 
+
+Earlier (\ref{GSL Main connective}) we defined the main connective of a sentence $\CAPPHI$ as the connective that isn't in any proper subsentence of $\CAPPHI$.  Atomic sentences don't have any connectives, and so don't have main connectives.  Most non-atomic sentences have just one main connective, but there is an exception: conjunctions (or disjunctions) with $n$ tokens of \mention{$\WEDGE$} (or \mention{$\VEE$}) that are all the main connectives, where $n>1$.  In such sentences, $n+1$ is the number of conjuncts (disjuncts).  For example, all three of the \mention{$\WEDGE$} tokens in the following sentence are the main connectives: $\parconjunction{\conjunction{\Bl}{\Al}}{\conjunction{\Hl}{\Gl}}$.  Let's call sentences that have multiple tokens of \mention{$\WEDGE$} as main connectives \mention{extended conjunctions}, and those that have multiple tokens of \mention{$\VEE$} as main connectives \mention{extended disjunctions}.  With this new terminology, let's turn to another recursive proof.
+
+\begin{THEOREM}{\LnpTC{Recur Main Connective} Main Connective Theorem:} 
+For\index{main connective!theorem} every \GSL{} sentence $\CAPPHI$, one of the following holds: (i) $\CAPPHI$ has no main connective; (ii) $\CAPPHI$ has exactly one main connective token; or (iii) $\CAPPHI$ is an extended conjunction (or disjunction) with $n-1$ main connective tokens, where $n$ is the number of conjuncts (disjuncts).
+\end{THEOREM}
+\begin{PROOFOF}{Thm. \ref{Recur Main Connective}, Main Connective Theorem}
+\begin{description}
+\item[Base Step:] 
+Every \GSL{} sentence of order 1 is atomic (i.e., a lone sentence letter) and has no connectives at all.  Therefore it has no main connective.
+ 
+\item[Inheritance Step:] 
+Assume that the theorem holds for every sentence with order $\integer{i}$ or less, and that $\CAPPHI$ is of order $\integer{i}+1$, where $i\geq 1$.  (This is the recursive assumption.)
+
+By the definition of an \GSL{} sentence (\ref{Recursive definition of Sentences of GSL}), $\CAPPHI$ will have to have one of the following forms:
+$\negation{\CAPPSI}$, $\parhorseshoe{\CAPTHETA_1}{\CAPTHETA_2}$, $\partriplebar{\CAPTHETA_1}{\CAPTHETA_2}$, $\parconjunction{\CAPTHETA_1}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}$, or $\pardisjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}$.  For each of these possible sentence schemas for $\CAPPHI$, there is at least one connective that isn't in any proper subsentence of $\CAPPHI$.  It follows that $\CAPPHI$ must have \emph{at least} one main connective token.
+
+\begin{description}
+
+\item[Negation:] 
+Assume (for \emph{reductio}) that $\CAPPHI$ has more than one main connective token, and that the leftmost of these tokens is a negation.  Given that the leftmost is a \mention{$\NEGATION$} token, $\CAPPHI$ must be of the form $\negation{\CAPPSI}$ (by def. of \GSL{} sentence, \ref{Recursive definition of Sentences of GSL}).  If this is so, then the other main connective tokens of $\CAPPHI$ must be in $\CAPPSI$.  But $\CAPPSI$ is a proper subsentence of $\CAPPHI$, so any connective in $\CAPPSI$ can't be a main connective of $\CAPPHI$ (def. of main connective).  Therefore, contrary to our assumption for \emph{reductio}, there must be exactly one main connective token in $\CAPPHI$: the \mention{$\NEGATION$}.
+
+\item[Conditional:]
+Assume (again, for \emph{reductio}) that $\CAPPHI$ has more than one main connective token, and that the leftmost of these is a \mention{$\HORSESHOE$}.  By the definition of \GSL{} sentence (\ref{Recursive definition of Sentences of GSL}), it follows that $\CAPPHI$ must be of the form $\horseshoe{\CAPTHETA_1}{\CAPTHETA_2}$.  Accordingly, any other main connective tokens of $\CAPPHI$ must be in $\CAPTHETA_2$.  However, $\CAPTHETA_2$ is a proper subsentence of $\CAPPHI$, and thus can't contain a main connective of $\CAPPHI$.  So, contrary to our assumption for \emph{reductio}, there must be exactly one main connective token for $\CAPPHI$: the \mention{$\HORSESHOE$}.
+
+\item[Biconditional:]
+This clause is the same as the \mention{Conditional} clause above, except with \mention{$\TRIPLEBAR$} in place of \mention{$\HORSESHOE$}.
+
+\item[Conjunction:]
+Assume that the leftmost main connective token in $\CAPPHI$ is a \mention{$\WEDGE$}.  Assume (for \emph{reductio}) that there is some main connective of $\CAPPHI$ other than \mention{$\WEDGE$}.  According to the definition of \GSL{} sentence (\ref{Recursive definition of Sentences of GSL}), $\CAPPHI$ must be of the form $\parconjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\CAPTHETA_3}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}}$, where $\integer{n}$ is the number of conjuncts.  It follows that the non-\mention{$\WEDGE$} main connective token must be in one of the conjuncts of $\CAPPHI$.  But the conjuncts of $\CAPPHI$ are proper subsentences of $\CAPPHI$, and so can't contain any main connective tokens.  So, contrary to our assumption for \emph{reductio}, all of the main connective tokens of $\CAPPHI$ are \mention{$\WEDGE$}.
+
+Given that $\CAPPHI$ is of the form $\parconjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\CAPTHETA_3}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}}$, $n$ is the number of conjuncts.  We want to show that the number of main connective tokens, $k$, is $n-1$.  Assume that $k>n-1$\footnote{I.e., that the number of main connective tokens is greater than (the number of conjuncts, minus one )....}.  But if $k>n-1$ then there must be two \mention{$\WEDGE$} tokens adjacent to each other; $\CAPPHI$ is an \GSL{} sentence, so this is impossible.  Assume instead that $k<n-1$\footnote{I.e., that the number of main connective tokens is fewer than (the number of conjuncts, minus one)....}.  But then there must be two conjuncts adjacent to each other, not separated by a connective.  Again, $\CAPPHI$ is an \GSL{} sentence, so this is impossible.  Therefore $k=n-1$.  So, when $n$ is the number of conjuncts in $\CAPPHI$, $n-1$ is the number of main connective tokens.
+
+There must be at least two conjuncts in $\CAPPHI$ (definition of \GSL{} sentence). Assuming only two conjuncts in $\CAPPHI$, there is exactly one main connective token.  Alternatively, when the number of conjuncts, $n$, is greater than two, there are $n-1$ main connective tokens and $\CAPPHI$ is an extended conjunction.
+
+\item[Disjunction:]
+This clause is the same as the \mention{Conjunction} clause above, except with \mention{$\VEE$} in place of \mention{$\WEDGE$}.
+
+
+\end{description}
+
+\item[Closure Step:] 
+We've shown that sentences with order 1 have no main connective, and that every sentence of order of 2 or greater either has exactly one main connective token, or is an extended conjunction (or disjunction) with $n$ main connective tokens, where $n+1$ is the number of conjuncts (disjuncts).  There is no other way to construct an \GSL{} sentence than the ways described in the previous two clauses.
+
+\end{description}
+\end{PROOFOF}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Disjunctive Normal Form]{Disjunctive Normal Form}\label{DNF and the TFE Replacement Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Which sentences below are easy to evaluate? 
+Which are difficult?
+\begin{multicols}{2}
+\begin{menumerate}
+\item\label{dnf1} $\horseshoe{\negation{\bparhorseshoe{\Al}{\negation{\parconjunction{\Cl}{\Bl}}}}}{\parhorseshoe{\Al}{\Cl}}$
+\item\label{dnf2} $\conjunction{\Al}{\conjunction{\Rl}{\conjunction{\Al}{\negation{\Rl}}}}$
+\item\label{dnf3} $\negation{\cparhorseshoe{\negation{\bparhorseshoe{\Al}{\negation{\Rl}}}}{\parhorseshoe{\Al}{\Rl}}}$
+\item\label{dnf4} $\disjunction{\bpardisjunction{\negation{\Al}}{\disjunction{\negation{\Cl}}{\negation{\Bl}}}}{\bpardisjunction{\negation{\Al}}{\Cl}}$
+\end{menumerate}
+\end{multicols}
+\noindent{}If we have the truth values of the sentence letters, then clearly \ref{dnf2} and \ref{dnf4} are much simpler to figure out than \ref{dnf1} and \ref{dnf3}. 
+In general, we find that the truth values for certain sentences are easier to calculate than others. (Some sentences, we might say, are more \sq{transparent}). 
+Say that we want to figure out the truth value of a difficult sentence and we know that it's \CAPS{tfe} to an easy sentence. Then we could figure out the truth value of the difficult one by figuring out the truth value of the easy one.  After all, they're equivalent!  In the above list of sentences, \ref{dnf1} is TFE to \ref{dnf4} and \ref{dnf2} is TFE to \ref{dnf3}.
+
+If a sentence is fairly complicated we might not know whether it's \CAPS{tfe} to a simpler, more transparent sentence. 
+To get around this we can simplify the complicated sentence by a systematic series of steps, each of which replaces some subsentence with a simpler sentence that we know is \CAPS{tfe} to the subsentence being replaced.  
+
+\subsection{The \CAPS{tfe} Replacement Theorem}\label{The TFE Replacement Theorem}
+First we have to verify that equivalence transformation is legitimate, so we will prove:
+\begin{THEOREM}{\LnpTC{TFE Replacement} Truth Functional Equivalence Replacement:}
+Let $\CAPPHI$ be a subsentence of $\CAPTHETA$.  If $\CAPPHI$ and $\CAPPHI^*$ are truth functionally equivalent, and $\CAPTHETA^*$ is the result of replacing one occurrence of $\CAPPHI$ by $\CAPPHI^*$ in $\CAPTHETA$, then $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent.
+\end{THEOREM}
+\noindent{}Before turning to the proof, recall from section \ref{Other Relations}, definition \mvref{GSL TFE} that two sentences $\CAPPHI$ and $\CAPPHI^*$ are truth functionally equivalent \Iff all models assign them the same truth value.  This is the same as saying they entail each other, i.e., that $\CAPPHI^*\sdtstile{}{}\CAPPHI$ and $\CAPPHI\sdtstile{}{}\CAPPHI^*$. 
+
+\begin{PROOF}
+\begin{description}
+\item[Base Step:] Suppose that $\CAPTHETA$ is an atomic sentence. 
+In this case $\CAPTHETA$ and $\CAPPHI$ are the same. 
+So, $\CAPTHETA^*$ and $\CAPPHI^*$ are the same. 
+Thus, by hypothesis (the hypothesis being that $\CAPPHI$ and $\CAPPHI^*$ are truth functionally equivalent), $\CAPTHETA^*$ and $\CAPTHETA$ are truth functionally equivalent.
+
+\item[Inheritance Step:] For this proof we must consider each connective separately. 
+\begin{description}
+
+\item[Negation:] Suppose $\CAPTHETA$ is a negation $\negation{\CAPPSI}$, for some sentence $\CAPPSI$ which either is identical to $\CAPPHI$, or of which $\CAPPHI$ is a subsentence. 
+
+Assume that $\CAPPSI$ and $\CAPPSI^*$ ($\CAPPSI^*$ the result of replacing at least one occurrence of $\CAPPHI$ with $\CAPPHI^*$ in $\CAPPSI$) are truth functionally equivalent, i.e. have the same truth value on every model, and are of order $k$ or less. 
+(This is our recursive assumption.)
+Now, by supposition $\CAPTHETA^*$ is the same sentence as $\parnegation{\CAPPSI}^*$, which with a little thought one can see is the same sentence as $\NEGATION(\CAPPSI^*)$. 
+
+Next, note that by the definition of $\True$ in a model, $\NEGATION(\CAPPSI^*)$ is $\True$ in a model $\IntA$ \Iff $\CAPPSI^*$ is $\False$ in $\IntA$ \Iff $\CAPPSI$ is $\False$ in $\IntA$ \Iff $\negation{\CAPPSI}$ is $\True$ in $\IntA$. So, $\CAPTHETA^*$ is $\True$ in $\IntA$ \Iff $\negation{\CAPPSI}$ is $\True$ in $\IntA$.
+
+So, $\CAPTHETA^*$ is $\True$ in $\IntA$ \Iff $\CAPTHETA$ is $\True$ in $\IntA$, so by definition $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent.
+
+\item[Conditional:] Suppose $\CAPTHETA$ is a conditional $\parhorseshoe{\CAPPSI_1}{\CAPPSI_2}$, were at least one of $\CAPPSI_1$ and $\CAPPSI_2$ has $\CAPPHI$ as a subsentence, or is identical to $\CAPPHI$. 
+So $\CAPTHETA^*$ is $\parhorseshoe{\CAPPSI_1}{\CAPPSI_2}^*$, which with some thought one can see is either (case 1) $\parhorseshoe{{\CAPPSI_1}^*}{\CAPPSI_2}$ or (case 2) $\parhorseshoe{\CAPPSI_1}{{\CAPPSI_2}^*}$.
+
+Suppose it is the first case, and assume that $\CAPPSI_1$ is truth functionally equivalent to ${\CAPPSI_1}^*$, and that both are of order $k$ or less.
+(This is our recursive assumption.)
+
+We know that  $\parhorseshoe{{\CAPPSI_1}^*}{\CAPPSI_2}$ is $\True$ in a model $\IntA$ \Iff ${\CAPPSI_1}^*$ is $\False$ in $\IntA$ or $\CAPPSI_2$ is $\True$ in $\IntA$. 
+But that holds \Iff $\CAPPSI_1$ is $\False$ in $\IntA$ or $\CAPPSI_2$ is $\True$ in $\IntA$, and that holds \Iff $\parhorseshoe{\CAPPSI_1}{\CAPPSI_2}$ is $\True$ in $\IntA$. 
+
+In the first case, $\CAPTHETA^*$ is $\True$ in $\IntA$ \Iff $\CAPTHETA$ is $\True$ in $\IntA$, so by definition $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent.
+
+Showing that $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent in case 2 is left to the reader.
+
+\item[Biconditional:] Showing that $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent when $\CAPTHETA$ is a biconditional of the form $\partriplebar{\CAPPSI_1}{\CAPPSI_2}$ is left to the reader.
+
+\item[Conjunction:] Suppose that $\CAPTHETA$ is a conjunction $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$, where at least one of $\CAPPSI_1$, $\CAPPSI_2$, $\CAPPSI_3$, $\ldots$ $\CAPPSI_{\integer{n}}$ has $\CAPPHI$ as a subsentence, or is identical to $\CAPPHI$. 
+
+So $\CAPTHETA^*$ is $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}^*$. Since $\CAPTHETA^*$ is the result of replacing \emph{one} occurrence of $\CAPPHI$ in $\CAPTHETA$ with $\CAPPHI^*$, it's not hard to see that $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}^*$ can \emph{only} one of either $\parconjunction{\CAPPSI_1^*}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$ or $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2^*}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$ or $\ldots$ or $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}^*}}}$. 
+But, clearly, there's no difference which it is. 
+So, without loss of generality say that $\CAPTHETA^*$ is $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2^*}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$. 
+
+As before, assume that $\CAPPSI_2$ and ${\CAPPSI_2}^*$ are truth functionally equivalent, and are of order $k$ or less. 
+(This is our recursive assumption.)
+So, for any model $\IntA$, $\CAPTHETA$ is $\True$ in $\IntA$ \Iff $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$ is $\True$ in $\IntA$ \Iff $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2^*}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$ is is $\True$ in $\IntA$ \Iff $\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\CAPPSI_3}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}^*$ is $\True$ in $\IntA$ \Iff $\CAPTHETA^*$ is $\True$ in $\IntA$.
+
+Therefore $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent.
+
+\item[Disjunction:] The disjunction case is similar and it is left to the reader. 
+\end{description}
+\item[Closure Step:] Those are the only ways \GSL{} sentences can be formed; hence the theorem is proved.
+\end{description}
+\end{PROOF}
+\begin{majorILnc}{\LnpEC{TFE Replacement Example}}
+We can use this theorem to show that \ref{dnf1} and \ref{dnf4} above are equivalent, as are \ref{dnf2} and \ref{dnf3}. 
+Consider \ref{dnf1} and \ref{dnf4}. 
+(We leave \ref{dnf2} and \ref{dnf3} to the reader.)
+For any formulas $\CAPPHI$ and $\CAPTHETA$, 
+\begin{menumerate}
+\item $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\pardisjunction{\negation{\CAPPHI}}{\CAPTHETA}$ are \CAPS{tfe} (See ex. \pmvref{TFE Ex 2})
+\item $\negation{\negation{\CAPPHI}}$ and $\CAPPHI$ are \CAPS{tfe} (See ex. \pmvref{TFE Ex 3})
+\item $\negation{\parconjunction{\CAPTHETA}{\CAPPHI}}$ and $\pardisjunction{\negation{\CAPTHETA}}{\negation{\CAPPHI}}$ are \CAPS{tfe} (See \ref{HW Entailment 4} and \ref{HW Entailment 12}, section \ref{Entailment Problems for GSL})
+\item $\pardisjunction{\CAPPHI}{\disjunction{\CAPTHETA}{\CAPPSI}}$ and $\pardisjunction{\CAPPHI}{\pardisjunction{\CAPTHETA}{\CAPPSI}}$ are \CAPS{tfe} (Obvious)
+\end{menumerate}
+By making substitutions starting with \ref{dnf1} that the theorem says result in successive truth functionally equivalent sentences, we can get from \ref{dnf1} to \ref{dnf4} and thereby have shown that \ref{dnf4} is truth functionally equivalent to \ref{dnf1}.
+\begin{menumerate}
+\item $\horseshoe{\negation{\bparhorseshoe{\Al}{\negation{\parconjunction{\Cl}{\Bl}}}}}{\parhorseshoe{\Al}{\Cl}}$ [\ref{dnf1}]
+\item $\disjunction{\negation{\negation{\bparhorseshoe{\Al}{\negation{\parconjunction{\Cl}{\Bl}}}}}}{\parhorseshoe{\Al}{\Cl}}$
+\item $\disjunction{\bparhorseshoe{\Al}{\negation{\parconjunction{\Cl}{\Bl}}}}{\parhorseshoe{\Al}{\Cl}}$
+\item $\disjunction{\bpardisjunction{\negation{\Al}}{\negation{\parconjunction{\Cl}{\Bl}}}}{\pardisjunction{\negation{\Al}}{\Cl}}$
+\item $\disjunction{\bpardisjunction{\negation{\Al}}{\pardisjunction{\negation{\Cl}}{\negation{\Bl}}}}{\pardisjunction{\negation{\Al}}{\Cl}}$
+\item $\disjunction{\bpardisjunction{\negation{\Al}}{\disjunction{\negation{\Cl}}{\negation{\Bl}}}}{\pardisjunction{\negation{\Al}}{\Cl}}$ [\ref{dnf4}]
+\end{menumerate}
+\end{majorILnc}
+
+\subsection{Disjunctive Normal Form}\label{Disjunctive Normal Form}
+
+Sentences in disjunctive normal form are especially easy to evaluate.  
+\begin{majorILnc}{\LnpDC{DNF Definition}}
+A \GSL{} sentence is in \df{disjunctive normal form} (\CAPS{dnf})\index{DNF|see{disjunctive normal form}} \Iff
+\begin{cenumerate}
+\item it contains no conditional ($\HORSESHOE$) or biconditional ($\TRIPLEBAR$),
+\item negations ($\NEGATION$) only govern sentence letters, and
+\item no conjunction ($\WEDGE$) contains a disjunction ($\VEE$) as a subsentence.
+\end{cenumerate}
+\end{majorILnc}
+\noindent{}A typical example of a sentence in \CAPS{dnf} is $\disjunction{\parconjunction{\Ql}{\negation{\Rl}}}{\parconjunction{\negation{\Pl}}{\Rl}}$.  The truth conditions for this sentence are easy to see.  The sentence $\disjunction{\parconjunction{\Ql}{\negation{\Rl}}}{\parconjunction{\negation{\Pl}}{\Rl}}$ is true on a model $\IntA$ when either $\IntA(\Ql)=\TrueB$ and $\IntA(\Rl)=\FalseB$, or $\IntA(\Pl)=\FalseB$ and $\IntA(\Rl)=\TrueB$.  Some less typical examples are:
+\begin{menumerate}
+\item $\Ql$
+\item $\negation{\Rl}$
+\item $\conjunction{\Ql}{\negation{\Rl}}$
+\item $\disjunction{\negation{\Ql}}{\Rl}$
+\end{menumerate}
+\CAPS{dnf} is of interest because we can prove the following theorem.
+\begin{THEOREM}{\LnpTC{Disjunctivie Normal Form Theorem} The Disjunctive Normal Form Theorem:}
+Every sentence of \GSL{} is truth functionally equivalent to an \GSL{} sentence which is in \CAPS{dnf}.
+\end{THEOREM}
+\begin{PROOF}
+The proof relies on three lemmas, each of which can be established rigorously by recursive proof.  We leave the details of these lemmas to the reader.
+
+Here we provide a process showing how to turn any given sentence into one that's in \CAPS{dnf}. We proceed in three stages, corresponding to the three lemmas that are necessary for a proof.
+\begin{description}
+\item[Step A:] If a subsentence of $\CAPPHI$ has a conditional or biconditional as its main connective, i.e., is of the form $\parhorseshoe{\CAPPSI}{\CAPTHETA}$ or $\partriplebar{\CAPTHETA}{\CAPPSI}$, replace the subsentence by $\pardisjunction{\negation{\CAPPSI}}{\CAPTHETA}$ or $\disjunction{\parconjunction{\CAPPSI}{\CAPTHETA}}{\parconjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}}$ respectively. 
+Repeat as necessary to obtain a sentence $\CAPPHI'$ without conditionals or biconditionals.
+\item[Step B:] \hfill{}
+\begin{cenumerate}
+\item Replace any subsentence of the form $\negation{\negation{\CAPPSI}}$ in $\CAPPHI'$ with $\CAPPSI$.
+\item Replace any subsentence of the form $\negation{\parconjunction{\CAPPSI}{\CAPTHETA}}$ in $\CAPPHI'$ with $\pardisjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$. 
+\item Replace $\negation{\pardisjunction{\CAPPSI}{\CAPTHETA}}$ in $\CAPPHI'$ with $\parconjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$. 
+%(These last two are known as DeMorgan's laws after the logician who first explicitly formulated them.)
+\end{cenumerate} 
+Repeat as necessary to obtain $\CAPPHI''$ in which negations govern nothing but sentence letters.
+\item[Step C:] The only thing that could prevent $\CAPPHI''$ from being in \CAPS{dnf} is that some conjunctions govern some disjunctions, i.e., there is a subsentence  $\conjunction{\CAPTHETA}{\pardisjunction{\CAPPSI_1}{\disjunction{\CAPPSI_2}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$, or the reverse $\conjunction{\pardisjunction{\CAPPSI_1}{\disjunction{\CAPPSI_2}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}{\CAPTHETA}$. 
+Those subsentences can be replaced by the equivalent $\disjunction{\parconjunction{\CAPPSI_1}{\CAPTHETA}}{\disjunction{\parconjunction{\CAPPSI_2}{\CAPTHETA}}{\disjunction{\ldots}{\parconjunction{\CAPPSI_{\integer{n}}}{\CAPTHETA}}}}$. 
+Repeat as necessary.
+\end{description}
+\end{PROOF}
+
+\noindent{}A recursive proof would be more rigorous---it would have a clause for each \GSL{} connective, and would explain in each clause how to construct from each subsentence another \CAPS{tfe} subsentence that is in \CAPS{dnf}. 
+
+\CAPS{dnf} sentences allow us see some of the advantages of formal languages.  For instance, we can construct a simple, mechanical process that will tell us when a \CAPS{dnf} sentence is \CAPS{tff}.
+
+Let $\CAPPHI$ be some \CAPS{dnf} sentence, and let $\CAPTHETA_1$, $\CAPTHETA_2$, $\CAPTHETA_3$, \ldots, and $\CAPTHETA_n$ each be the disjuncts of $\CAPPHI$.  We can see that $\CAPPHI$ is \CAPS{tff} \Iff every disjunct $\CAPTHETA_i$ is \CAPS{tff}.  Because each $\CAPTHETA_i$ is a conjunction with negated and unnegated sentence letters as the conjuncts, there is only one way that it can be \CAPS{tff}.  A $\CAPTHETA_i$ is \CAPS{tff} \Iff it has some sentence letter $\CAPPSI$ as one conjunct and $\negation{\CAPPSI}$ as another.
+
+It follows that we can use the following process to determine whether a \CAPS{dnf} sentence $\CAPPHI$ is \CAPS{tff}. Check every disjunct of $\CAPPHI$ to see if it has some $\CAPPSI$ and $\negation{\CAPPSI}$ as conjuncts.  If so, then $\CAPPHI$ is \CAPS{tff}; otherwise it isn't.  For example, consider the following \CAPS{dnf} sentence:
+
+\begin{center}
+\noindent{}$\disjunction{\parconjunction{\Ql}{\conjunction{\Rl}{\negation{\Ql}}}}{\disjunction{\parconjunction{\negation{\Ql}}{\conjunction{\Rl}{\Rl}}}{\parconjunction{\Ol}{\conjunction{\Rl}{\negation{\Ol}}}}}$
+\end{center}
+
+\noindent{}The first disjunct, $\parconjunction{\Ql}{\conjunction{\Rl}{\negation{\Ql}}}$, is \CAPS{tff} because it has $\Ql$ and $\negation{\Ql}$ as conjuncts; the third disjunct, $\parconjunction{\Ol}{\conjunction{\Rl}{\negation{\Ol}}}$, is also \CAPS{tff}.  But the second disjunct, $\parconjunction{\negation{\Ql}}{\conjunction{\Rl}{\Rl}}$, isn't \CAPS{tff}. So, the whole sentence isn't \CAPS{tff}.
+
+If we were to replace the second disjunct with $\parconjunction{\negation{\Ql}}{\conjunction{\Rl}{\negation{\Rl}}}$, so that the new whole sentence is:
+
+\begin{center}
+	\noindent{}$\disjunction{\parconjunction{\Ql}{\conjunction{\Rl}{\negation{\Ql}}}}{\disjunction{\parconjunction{\negation{\Ql}}{\conjunction{\Rl}{\negation{\Rl}}}}{\parconjunction{\Ol}{\conjunction{\Rl}{\negation{\Ol}}}}}$
+\end{center}
+
+\noindent{}\ldots then the result \emph{is} \CAPS{tff}, because each disjunct has a sentence letter and its negation as conjuncts.
+
+We can now construct a mechanical method that can determine whether \emph{any} \GSL{} sentence $\CAPPHI$ is \CAPS{tff}.  First, we use the process in \ref{Disjunctivie Normal Form Theorem} to construct an equivalent \CAPS{dnf} sentence, $\CAPPHI^*$.  Then we use the method given above to determine whether $\CAPPHI^*$ is \CAPS{tff}.  Because they are equivalent, $\CAPPHI^*$ is \CAPS{tff} \Iff $\CAPPHI$ is \CAPS{tff}.  No creativity is needed to apply this method---each individual step requires nothing more than following simple instructions.
+
+We can even extend this method to determine whether any \GSL{} sentence is \CAPS{tft}.  We will take advantage of the fact that if you put a negation in front of a \CAPS{tft} sentence $\CAPPHI$, the resulting sentence, $\negation{\CAPPHI}$, is \CAPS{tff}.  So, all that is necessary to see whether $\CAPPHI$ is \CAPS{tft} is to negate $\CAPPHI$, put $\negation{\CAPPHI}$ into \CAPS{dnf}, and then to see whether the final result is \CAPS{tff}.  If so, then $\CAPPHI$ is \CAPS{tft}!  If not, then $\CAPPHI$ isn't.  As before, this process is entirely mechanical or \emph{formal}.  Note that, along with the truth table method in section \ref{Proceduresfortesting}, we now have two rather different formal methods for determining logical truth in \GSL{}.  In later chapters our methods will be closer to the \CAPS{dnf} approach.
+
+Any given sentence of \GSL{} is truth functionally equivalent to more than one \CAPS{dnf} sentence. 
+A sentence has \CAPS{dnf}s that differ slightly for at least two reasons.
+First, if a sentence $\CAPPHI$ is in \CAPS{dnf}, then for any sentence $\CAPPSI$, $\disjunction{\CAPPHI}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$ is \CAPS{tfe} to $\CAPPHI$ and is also in \CAPS{dnf}.
+Second, sometimes a sentence in \CAPS{dnf} can be simplified. Thus 
+\begin{menumerate}
+\item $\disjunction{\parconjunction{\Ql}{\conjunction{\Rl}{\Ol}}}{\disjunction{\parconjunction{\Ql}{\conjunction{\Rl}{\Nl}}}{\parconjunction{\Ql}{\conjunction{\Rl}{\negation{\Ol}}}}}$
+\end{menumerate} can be simplified to the \CAPS{dnf}
+\begin{samepage}
+\begin{menumerate}
+\item $\disjunction{\parconjunction{\Ql}{\Rl}}{\parconjunction{\Ql}{\conjunction{\Rl}{\Nl}}}$
+\end{menumerate} and further to 
+\begin{menumerate}
+\item $\parconjunction{\Ql}{\Rl}$.
+\end{menumerate}
+\end{samepage}
+
+%\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Truth Functional Expressiveness]{Truth Functional Expressiveness}\label{Truth Functional Expressiveness} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+The definition of truth in a model (def. \pmvref{True on a GSL interpretation}) associates each of the logical connectives of \GSL{} with a truth function.\footnote{See section \ref{Truth Functions Truth Tables and Boolean Operators} for more details.}
+We can think of the logical connectives of \GSL{} as truth functions---i.e., as having a meaning that's exhausted by the definition of truth. 
+One might ask whether the five logical connectives of \GSL{} cover all the possible logical connectives.
+
+In one sense it's obvious that they do not. 
+For example, we could introduce a new connective, $\%$, choose some number of places for it, and give some clause that describes how the truth value of a sentence with $\%$ as the main connective depends on the truth value of the component parts. 
+As long as this clause differs from any of those in the definition of truth, $\%$ is distinct from the five in \GSL{}.
+
+But although the five logical connectives of \GSL{} obviously do not exhaust all the possible connectives, there's still a sense in which they might indirectly cover them all. 
+Even if $\%$ is distinct from all the connectives of \GSL{}, maybe there's still some sentence schema that is truth functionally equivalent to $\%$, and that uses only (but not necessarily all of) the five connectives of \GSL{}. 
+For example, say $\%$ is a 3-place connective, such that a sentence $\CAPTHETA_1$ $\%$ $\CAPTHETA_2$ $\%$ $\CAPTHETA_3$ is true on a model $\IntA$ \Iff at least two of the $\CAPTHETA$ are true on $\IntA$.  So, the sentence is true if $\CAPTHETA_1$ and $\CAPTHETA_2$ are true, or if $\CAPTHETA_1$ and $\CAPTHETA_3$ are true, or if $\CAPTHETA_2$ and $\CAPTHETA_3$ are true.  We can express this without \mention{$\%$}, using $\WEDGE$ for \mention{and} and $\VEE$ for \mention{or}:  $\disjunction{\parconjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\parconjunction{\CAPTHETA_1}{\CAPTHETA_3}}{\parconjunction{\CAPTHETA_2}{\CAPTHETA_3}}}$.  Even though $\%$ is a connective that isn't in our language, we can use the connectives of \GSL{} to construct a truth functionally equivalent sentence. 
+
+
+A logical connective $\%$ is \niidf{definable}\index{definability} in terms of some set of other logical connectives $\Delta$ \Iff there's some sentence schema using only connectives from $\Delta$ that's truth functionally equivalent to $\%$. 
+With this in mind, we can ask whether every logical connective is definable in terms of the five connectives of \GSL{}.
+We can also ask if any of the connectives of \GSL{} are definable in terms of the others.
+We answer the first of these questions with theorem \pmvref{Truth-functional Expressive Completeness of GSL}.
+The second we consider now in the following examples.\footnote{See \citetext{\citealt{Post1921}, \citealt[17]{Hodges2001}}.}
+
+\begin{majorILnc}{\LnpEC{GSL Connective ID 1}}
+	We can define conjunction using negation and disjunction.
+\end{majorILnc}
+\begin{PROOF}
+	Any sentence $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is \CAPS{tfe} to the sentence $\negation{\pardisjunction{\negation{\CAPPHI_1}}{\disjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}}$.
+\end{PROOF}
+
+\begin{majorILnc}{\LnpEC{GSL Connective ID 2}}
+	We can define disjunction using negation and conjunction.
+\end{majorILnc}
+\begin{PROOF}
+	Any sentence $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is \CAPS{tfe} to the sentence $\negation{\parconjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}}$.
+\end{PROOF}
+
+\begin{majorILnc}{\LnpEC{GSL Connective ID two and half}}
+	We can define conditional using negation and disjunction.
+\end{majorILnc}
+\begin{PROOF}
+	Any sentence $\horseshoe{\CAPPHI_1}{\CAPPHI_2}$ is \CAPS{tfe} to the sentence $\disjunction{\negation{\CAPPHI_1}}{\CAPPHI_2}$.
+\end{PROOF}
+
+\begin{majorILnc}{\LnpEC{GSL Connective ID 3}}
+	The pairs $\NEGATION$ and $\WEDGE$, and $\NEGATION$ and $\VEE$ are each adequate to define the remaining connectives in \GSL{}.
+\end{majorILnc}
+\begin{PROOF}
+	By example \ref{GSL Connective ID 2}, with $\NEGATION$ and $\WEDGE$ we can define $\VEE$. 
+	By example \ref{TFE Ex 2}, $\horseshoe{\CAPPHI}{\CAPTHETA}$ and $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ are \CAPS{tfe}.
+	So we can define $\HORSESHOE$ with $\NEGATION$ and $\WEDGE$. 
+	As the reader can check, $\triplebar{\CAPPHI}{\CAPPSI}$ is \CAPS{tfe} to $\conjunction{\parhorseshoe{\CAPPHI}{\CAPPSI}}{\parhorseshoe{\CAPPSI}{\CAPPHI}}$.
+	So we can define $\TRIPLEBAR$ with $\NEGATION$ and $\WEDGE$.
+	
+	We leave it to the reader to show that $\NEGATION$ and $\VEE$ are adequate to define the remaining connectives in \GSL{}.
+\end{PROOF}
+
+\noindent{}We don't actually need all five connectives, but for the sake of convenience we keep them all.  We also asked the following: 
+Are the five operations we have enough? 
+That is, are there other logical operations we can't express and should add notation for? 
+It turns out that our connectives are adequate. 
+There are no other logical operations we can't express.
+Although it does not strictly depend on the \CAPS{dnf} theorem, the idea behind that theorem lets us prove this.
+\begin{THEOREM}{\LnpTC{Truth-functional Expressive Completeness of GSL} The Truth-functional Expressive Completeness Theorem:}
+Any truth-functional connective of any fixed number of arguments (ternary, quadernary, etc.) is already expressible in \GSL{}.
+\end{THEOREM}
+\begin{PROOF}
+Any truth functional connective of a fixed number of arguments assigns $\TrueB$ or $\FalseB$ depending only on the values of the components, so it can be exactly described by a truth table. 
+For example, consider the 4-place operation \% given by truth \mbox{table \ref{DNFtruthtable}} below.
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{ c c c c c}
+$\CAPPHI_1$ & $\CAPPHI_2$ & $\CAPPHI_3$ & $\CAPPHI_4$ & $\text{\%}(\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\CAPPHI_4)$ \\
+\hline
+$ $ $ $ \\[-.25cm]
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\TrueB$ & $\TrueB$ & $\FalseB$&$\FalseB$ \\
+$\TrueB$ & $\TrueB$ & $\FalseB$ & $\TrueB$ & $\TrueB$ \\
+$\TrueB$ & $\TrueB$ & $\FalseB$ & $\FalseB$  &$\FalseB$ \\
+$\TrueB$ &  $\FalseB$& $\TrueB$ & $\TrueB$	&$\FalseB$ \\
+$\TrueB$ & $\FalseB$ & $\TrueB$ & $\FalseB$	& $\TrueB$ \\
+$\TrueB$ &$\FalseB$  & $\FalseB$& $\TrueB$	&$\FalseB$ \\
+$\TrueB$ & $\FalseB$ &$\FalseB$	& $\FalseB$	&$\FalseB$ \\
+$\FalseB$	& $\TrueB$ & $\TrueB$ & $\TrueB$	& $\TrueB$ \\
+$\FalseB$	& $\TrueB$ & $\TrueB$ & $\FalseB$	&$\FalseB$ \\
+$\FalseB$	& $\TrueB$ & $\FalseB$&	$\TrueB$ &$\FalseB$ \\
+$\FalseB$	& $\TrueB$ & $\FalseB$& $\FalseB$	&$\FalseB$ \\
+$\FalseB$	& $\FalseB$	& $\TrueB$ & $\TrueB$	&$\FalseB$ \\
+$\FalseB$	& $\FalseB$	& $\TrueB$ & $\FalseB$	&$\FalseB$ \\
+$\FalseB$	& $\FalseB$	& $\FalseB$& $\TrueB$	& $\TrueB$ \\
+$\FalseB$	& $\FalseB$& $\FalseB$& $\FalseB$	&$\FalseB$ \\
+\end{tabular}
+\end{center}
+\caption{Truth Table for \%}
+\label{DNFtruthtable}
+\end{table}
+We could attempt to find a complicated sentence in terms of various
+connectives that would express this, but it will be better for our purposes to construct
+a \CAPS{dnf} equivalent systematically. We know from the first line that the expression $\text{\%}(\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\CAPPHI_4)$ is
+true when all components are, that is, if $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\CAPPHI_4}}}$ is true; we know from the third line it is true when the first two, $\CAPPHI_1$ and $\CAPPHI_2$, and fourth, $\CAPPHI_4$, are true and the third, $\CAPPHI_3$, false, i.e., $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\negation{\CAPPHI_3}}{\CAPPHI_4}}}$. We also know it is true when only the first, $\CAPPHI_1$, and third, $\CAPPHI_3$, are true, i.e., $\parconjunction{\CAPPHI_1}{\conjunction{\negation{\CAPPHI_2}}{\conjunction{\CAPPHI_3}{\negation{\CAPPHI_4}}}}$, when the first, $\CAPPHI_1$, is false and the other three, $\CAPPHI_2$, $\CAPPHI_3$, and $\CAPPHI_4$, are true i.e., $\parconjunction{\negation{\CAPPHI_1}}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\CAPPHI_4}}}$ and when all but the fourth, $\CAPPHI_4$, are false, i.e., $\parconjunction{\negation{\CAPPHI_1}}{\conjunction{\negation{\CAPPHI_2}}{\conjunction{\negation{\CAPPHI_3}}{\CAPPHI_4}}}$. Because each of these conjunctions is true exactly when the corresponding line is true the whole sentence will be true when any one of them is true, i.e., it is equivalent to the formula: 
+\begin{menumerate} 
+\item $\disjunction{\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\CAPPHI_4}}}}{\disjunction{\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\negation{\CAPPHI_3}}{\CAPPHI_4}}}}{\parconjunction{\CAPPHI_1}{\conjunction{\negation{\CAPPHI_2}}{\conjunction{\CAPPHI_3}{\negation{\CAPPHI_4}}}}}}\:\VEE$\\ $\disjunction{\parconjunction{\negation{\CAPPHI_1}}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\CAPPHI_4}}}}{\parconjunction{\negation{\CAPPHI_1}}{\conjunction{\negation{\CAPPHI_2}}{\conjunction{\negation{\CAPPHI_3}}{\CAPPHI_4}}}}$
+\end{menumerate}
+We could simplify this sentence further, but that is not important for our purposes. 
+We now can see how to read off from any truth table for any operation on any fixed number of sentences a \CAPS{dnf} representation that is equivalent. 
+Our five connectives are enough. 
+\end{PROOF}
+
+%We know that we can define conjunction using negation and disjunction (ex. \pmvref{GSL Connective ID 1}), and we can define disjunction using conjunction and negation (ex. \pmvref{GSL Connective ID 2}).
+Since either of the pairs \mention{$\NEGATION$} and \mention{$\!\WEDGE\!$}, or \mention{$\NEGATION$} and \mention{$\VEE$} are adequate to define the remaining connectives in \GSL{} (see ex. \pmvref{GSL Connective ID 1}) we can see that either of those pairs is adequate to define all truth-functional connectives.
+We can even improve on that though, because there are two connectives either of which would be adequate all by itself. 
+One is the Sheffer stroke\index{Sheffer stroke|see{NAND}}, named after the logician who first demonstrated its properties and the symbol he used, \mention{|}, but it is sometimes called NAND.\index{NAND} 
+Its definition is that $(\CAPPHI_1|\CAPPHI_2|\ldots|\CAPPHI_{\integer{n}})$ is true \Iff at least one component is false. So, $(\CAPPHI_1|\CAPPHI_1)$ is equivalent to $\negation{\CAPPHI}$. 
+And $(\negation{\CAPPHI_1}|\negation{\CAPPHI_2}|\ldots|\negation{\CAPPHI_{\integer{n}}})$ is true just in case at least one component is false. That means at least one $\CAPPHI_i$ is true, which is to say that the sentence is equivalent to a disjunction. 
+The other connective that is adequate by itself is NOR,\index{NOR} which is defined to be true \Iff all the components are false. It is left to the reader as an optional exercise to show how to define the other connectives using NOR. 
+
+Thus, to get a language just as expressive as \GSL{}, we only need one logical connective (either NAND or NOR), not five. 
+If we had a taste for cutting down basic symbols, we could go further and generate an infinite set of sentence letters by using just one symbol, \mention{$\Al$}, and generating new sentence letters by concatenating prime marks \mention{$'$} to it. 
+Then all we need are parentheses (though there are ways to do without these too). 
+Such a language is sparse, but it is just as expressive as \GSL{}.  Most people would find such a language difficult to work with, but computers love them.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercises}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\notocsubsection{Recursive Definition Problems}{ex:Recursive Definitions Problems}
+
+\begin{enumerate}
+\item Although it's not framed as one, definition \mvref{Order} of order is a recursive definition. Rewrite it so that the base, generating, and closure clauses are explicit. 
+\item Although we don't give a recursive definition, a recursive definition can be given for the unofficial \GSL{} sentences. (Definition \pmvref{Unofficial Sentence of GSL} is the definition we give.) Write down a recursive definition for unofficial \GSL{} sentences.
+\end{enumerate}
+
+\notocsubsection{Construction Trees}{ex:Construction Trees}
+Write the construction tree for each of the following \GSL{} sentences.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $\negation{\negation{\negation{\Bl}}}$
+\item $\negation{\pardisjunction{\Bl}{\parhorseshoe{\Al}{\Al}}}$
+\item $\pardisjunction{\negation{\Bl}}{\parhorseshoe{\Al}{\Al}}$
+\item $\parhorseshoe{\partriplebar{\parconjunction{\Al}{\Bl}}{\Al}}{\negation{\parhorseshoe{\Bl}{\Cl}}}$
+\item $\parhorseshoe{\parconjunction{\partriplebar{\Al}{\Bl}}{\Al}}{\negation{\parhorseshoe{\Bl}{\Cl}}}$
+\item $\parconjunction{\Pl}{\parconjunction{\Ql}{\Rl}}$
+\item $\parconjunction{\parconjunction{\Pl}{\Ql}}{\Rl}$
+\item $\parhorseshoe{\parconjunction{\Pl}{\negation{\Rl}}}{\negation{\Ql}}$
+\item $\parconjunction{\Pl}{\parhorseshoe{\negation{\Rl}}{\negation{\Ql}}}$
+\item $\negation{\pardisjunction{\parhorseshoe{\Pl}{\Ql}}{\parhorseshoe{\Pl}{\Ql}}}$
+\end{enumerate}
+\end{multicols}
+
+\notocsubsection{Official and Unofficial Sentences}{ex:Official and Unofficial Sentences} 
+Which of these are official sentences? Which are unofficial? Which are neither official nor unofficial sentences (i.e., not a sentence in any sense)? If
+neither, how could you make it either an official or unofficial sentence? Note: there
+might be multiple different ways to make it an official or unofficial sentence. Finally, if it's a sentence (official or unofficial), then give its order and the number of subsentences in it. 
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\parhorseshoe{\Al}{\conjunction{\Bl}{\Cl}}$}
+\item {$\parhorseshoe{\Al}{\bparhorseshoe{\Bl}{\Cl}}$}
+\item {$\horseshoe{\Al}{\parconjunction{\Bl}{\conjunction{\Cl}{\Bl}}}$}
+\item {$\parhorseshoe{\Al}{\parconjunction{\CAPTHETA}{\Cl}}$}
+\item {$\parhorseshoe{\Al}{\parconjunction{\Bl}{\disjunction{\Cl}{\Dl}}}$}
+\item {$\parhorseshoe{\Al}{\parconjunction{\Zl}{\Cl}}$}
+\item {$\parhorseshoe{\negation{\Al}}{\parconjunction{\Bl_{374}}{\Cl}}$}
+\item {$\parhorseshoe{\Al}{\parconjunction{\Bl}{\Cl}}$}
+\item {$\parnegation{\parconjunction{\Bl}{\Cl}}$}
+\item {$\bparconjunction{\Bl}{\conjunction{\negation{\negation{\Ml}}}{\Dl}}$}
+\end{enumerate}
+\end{multicols}
+
+\notocsubsection{Truth in a Model}{ex:GSLTruth in an Interpretation}
+Consider the model $\IntA_1$ such that $\IntA_1(\Al)=\TrueB$, $\IntA_1(\Bl)=\FalseB$, $\IntA_1(\Cl)=\TrueB$, $\IntA_1(\Dl)=\FalseB$, and $\IntA_1(\El)=\TrueB$; and the model $\IntA_2$ such that $\IntA_2(\Al)=\TrueB$, $\IntA_2(\Bl)=\TrueB$, $\IntA_2(\Cl)=\FalseB$, $\IntA_2(\Dl)=\FalseB$, and $\IntA_2(\El)=\FalseB$.
+Give the truth values of each of the following \GSL{} sentences on each of these two models.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $\horseshoe{\pardisjunction{\Al}{\Bl}}{\parconjunction{\Cl}{\Dl}}$
+\item $\horseshoe{\pardisjunction{\Al}{\Bl}}{\parconjunction{\Cl}{\negation{\Dl}}}$
+\item $\horseshoe{\parconjunction{\Cl}{\Dl}}{\pardisjunction{\Al}{\Bl}}$
+\item $\conjunction{\parhorseshoe{\Al}{\Cl}}{\El}$
+\item $\negation{\conjunction{\parhorseshoe{\Bl}{\El}}{\Dl}}$
+\item $\disjunction{\negation{\pardisjunction{\Al}{\Bl}}}{\parconjunction{\Al}{\conjunction{\Bl}{\parhorseshoe{\El}{\El}}}}$
+\item $\disjunction{\Al}{\parhorseshoe{\Bl}{\parhorseshoe{\El}{\El}}}$
+\item $\disjunction{\parconjunction{\Al}{\El}}{\disjunction{\parconjunction{\negation{\Dl}}{\Cl}}{\parconjunction{\Bl}{\negation{\Al}}}}$
+\end{enumerate}
+\end{multicols}
+
+\notocsubsection{\CAPS{tft}, \CAPS{tff}, and \CAPS{tfc}}{ex:TFT, TFF, and TFI}
+For each of the following say whether the sentence is \CAPS{tfc}, \CAPS{tff} or \CAPS{tft}. 
+If it is \CAPS{tfc}, give a model which makes the sentence $\True$ and another model which makes it $\False$. 
+If it is \CAPS{tff}, justify your answer without truth tables (i.e., explain why there is no model which makes the sentence $\True$). 
+If it is \CAPS{tft}, again justify your answer without truth tables (i.e., explain why every model makes the sentence $\True$).
+
+%\begin{multicols}{2}
+\begin{enumerate}
+\item {$\horseshoe{\parhorseshoe{\Al}{\Bl}}{\pardisjunction{\negation{\Bl}}{\negation{\Al}}}$}
+\item {$\horseshoe{\parconjunction{\Al}{\Bl}}{\partriplebar{\Al}{\Bl}}$}
+\item {$\horseshoe{\pardisjunction{\negation{\Al}}{\negation{\Bl}}}{\negation{\parconjunction{\Al}{\Bl}}}$}
+\item {$\disjunction{\Al}{\parhorseshoe{\Al}{\Bl}}$}
+\item {$\horseshoe{\negation{\pardisjunction{\Al}{\Bl}}}{\parconjunction{\negation{\Al}}{\negation{\Bl}}}$}
+\item {$\horseshoe{\negation{\partriplebar{\Al}{\Bl}}}{\partriplebar{\negation{\Al}}{\Bl}}$}
+\item {$\horseshoe{\parconjunction{\Al}{\pardisjunction{\Bl}{\Cl}}}{\pardisjunction{\parconjunction{\Al}{\Bl}}{\Cl}}$}
+\item {$\horseshoe{\negation{\Al}}{\parhorseshoe{\Al}{\Bl}}$}
+\item {$\horseshoe{\parconjunction{\negation{\Al}}{\negation{\Bl}}}{\negation{\pardisjunction{\Al}{\Bl}}}$}
+\item {$\horseshoe{\Al}{\parhorseshoe{\Al}{\Bl}}$}
+\item {$\horseshoe{\partriplebar{\Al}{\Bl}}{\parconjunction{\Al}{\Bl}}$}
+\item {$\horseshoe{\negation{\parhorseshoe{\Al}{\Bl}}}{\Al}$}
+\item {$\horseshoe{\negation{\parconjunction{\Al}{\Bl}}}{\pardisjunction{\negation{\Al}}{\negation{\Bl}}}$}
+\item {$\horseshoe{\Al}{\parhorseshoe{\Bl}{\Al}}$}
+\item {$\horseshoe{\parhorseshoe{\Al}{\Bl}}{\parconjunction{\Al}{\negation{\Bl}}}$}
+\item {$\negation{\pardisjunction{\Al}{\parhorseshoe{\Al}{\Bl}}}$}
+\end{enumerate}
+%\end{multicols}
+
+
+\notocsubsection{Entailment Problems for \GSL{}}{Entailment Problems for GSL}
+For each of the following, without using truth tables show whether or not the entailment holds. 
+There are a number of different methods for thinking through these problems.  
+Remember that an entailment means that on all $\IntA$ if the \CAPS{lhs} is $\True$ then the \CAPS{rhs} is also $\True$.  One approach is to show that making the \CAPS{lhs} $\True$ forces the \CAPS{rhs} to be $\True$.  Another is to show that making the \CAPS{rhs} $\False$ forces the \CAPS{lhs} to be $\False$.  Both are examples of arguing that it is not possible for the \CAPS{lhs} to be $\True$ and the \CAPS{rhs} $\False$.  Another method is showing that all $\IntA$ either make the \CAPS{lhs} $\False$ or the \CAPS{rhs} $\True$.  If the entailment does not hold, you can show this by providing a counterexample.
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\negation{\Al}\sdtstile{}{}\parhorseshoe{\Al}{\Bl}$}
+\item {$\parhorseshoe{\Al}{\Bl}\sdtstile{}{}\pardisjunction{\negation{\Bl}}{\negation{\Al}}$}
+\item {$\parconjunction{\negation{\Al}}{\negation{\Bl}}\sdtstile{}{}\:\negation{\pardisjunction{\Al}{\Bl}}$}
+\item\label{HW Entailment 4} {$\pardisjunction{\negation{\Al}}{\negation{\Bl}}\sdtstile{}{}\:\negation{\parconjunction{\Al}{\Bl}}$}
+\item {$\Al\sdtstile{}{}\parhorseshoe{\Al}{\Bl}$}
+\item {$\negation{\partriplebar{\Al}{\Bl}}\sdtstile{}{}\partriplebar{\negation{\Al}}{\Bl}$} 
+\vfill
+\item {$\parconjunction{\Al}{\pardisjunction{\Bl}{\Cl}}\sdtstile{}{}\pardisjunction{\parconjunction{\Al}{\Bl}}{\Cl}$}
+\item {$\negation{\pardisjunction{\Al}{\Bl}}\sdtstile{}{}\parconjunction{\negation{\Al}}{\negation{\Bl}}$}
+\item {$\Al\sdtstile{}{}\parhorseshoe{\Bl}{\Al}$}
+\item {$\parconjunction{\Al}{\Bl}\sdtstile{}{}\partriplebar{\Al}{\Bl}$}
+\item {$\negation{\parhorseshoe{\Al}{\Bl}}\sdtstile{}{}\parhorseshoe{\Bl}{\Al}$}
+\item\label{HW Entailment 12} {$\negation{\parconjunction{\Al}{\Bl}}\sdtstile{}{}\pardisjunction{\negation{\Al}}{\negation{\Bl}}$}
+\item {$\negation{\parhorseshoe{\Al}{\Bl}}\sdtstile{}{}\Al$}
+\item {$\partriplebar{\Al}{\Bl}\sdtstile{}{}\parconjunction{\Al}{\Bl}$}
+\end{enumerate}
+\end{multicols}
+
+%\notocsubsection{Testing for Entailment}{ex:Testing for Entailment}
+%For each problem in exercise \ref{Entailment Problems for GSL}, use truth tables to test whether the entailment holds. 
+
+\notocsubsection{More Entailment Problems for \GSL{}}{ex:More Entailment Problems for GSL} 
+Show whether, for any \GSL{} sentence $\CAPPHI$, $\CAPTHETA$, and $\CAPPSI$, each of the following statements is true.
+%Show whether each of the following entailments hold, for any sentences got by substituting into the schemas.
+\begin{enumerate}
+\item {$\sdtstile{}{}\disjunction{\parhorseshoe{\CAPPHI}{\CAPTHETA}}{\parhorseshoe{\CAPTHETA}{\CAPPHI}}$}
+\item {Either $\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$, or $\sdtstile{}{}\parhorseshoe{\CAPTHETA}{\CAPPHI}$}
+\item {If $\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\sdtstile{}{}\CAPPHI$, then $\sdtstile{}{}\CAPTHETA$}
+\item {If $\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\sdtstile{}{}\:\negation{\CAPPHI}$, then $\sdtstile{}{}\:\negation{\CAPTHETA}$}
+\item {$\sdtstile{}{}\disjunction{\parhorseshoe{\CAPPHI}{\CAPTHETA}}{\parhorseshoe{\CAPTHETA}{\CAPPSI}}$}
+\item {If $\parconjunction{\CAPPHI}{\CAPTHETA}\sdtstile{}{}\CAPPSI$, then both $\CAPPHI\sdtstile{}{}\CAPPSI$ and $\CAPTHETA\sdtstile{}{}\CAPPSI$}
+\item {If $\CAPPSI\sdtstile{}{}\parconjunction{\CAPPHI}{\CAPTHETA}$, then both $\CAPPSI\sdtstile{}{}\CAPTHETA$ and $\CAPPSI\sdtstile{}{}\CAPPHI$}
+\end{enumerate}
+
+\notocsubsection{Even More Entailment Problems: Truth-preservation Lemma}{exercises:truth-preservation lemma} 
+Show that, for any \GSL{} sentence $\CAPPHI$, $\CAPTHETA$, and $\CAPPSI$, each of the following entailments holds.
+Showing that these entailments hold will be helpful later, since they are needed in the proof of theorems \mvref{Soundess of Basic GSD Rules} and \mvref{Soundness of Std Shortcut Applications}.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $\CAPPHI\sdtstile{}{}\CAPPHI$.
+\item $\horseshoe{\CAPTHETA}{\CAPPSI},\CAPTHETA\sdtstile{}{}\CAPPSI$
+\item $\conjunction{\CAPTHETA}{\CAPPSI}\sdtstile{}{}\CAPPSI$
+\item $\conjunction{\CAPTHETA}{\CAPPSI}\sdtstile{}{}\CAPTHETA$
+\item $\CAPTHETA,\CAPPSI\sdtstile{}{}\conjunction{\CAPTHETA}{\CAPPSI}$
+\item $\disjunction{\CAPTHETA}{\CAPPSI},\horseshoe{\CAPTHETA}{\CAPPHI},\horseshoe{\CAPPSI}{\CAPPHI}\sdtstile{}{}\CAPPHI$
+\item $\CAPTHETA\sdtstile{}{}\disjunction{\CAPTHETA}{\CAPPSI}$
+\item $\horseshoe{\CAPTHETA}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}\sdtstile{}{}\negation{\CAPTHETA}$
+\item $\horseshoe{\negation{\CAPTHETA}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}\sdtstile{}{}\CAPTHETA$
+\item $\horseshoe{\CAPTHETA}{\CAPPSI},\horseshoe{\CAPPSI}{\CAPTHETA}\sdtstile{}{}\triplebar{\CAPTHETA}{\CAPPSI}$
+\item $\triplebar{\CAPTHETA}{\CAPPSI},\CAPPSI\sdtstile{}{}\CAPTHETA$
+\item $\triplebar{\CAPTHETA}{\CAPPSI},\CAPTHETA\sdtstile{}{}\CAPPSI$
+\item $\horseshoe{\CAPPSI}{\CAPTHETA},\negation{\CAPTHETA}\sdtstile{}{}\negation{\CAPPSI}$
+\item $\disjunction{\CAPPSI}{\CAPTHETA},\negation{\CAPTHETA}\sdtstile{}{}\CAPPSI$
+\item $\disjunction{\CAPTHETA}{\CAPPSI},\negation{\CAPPSI}\sdtstile{}{}\CAPTHETA$
+\item $\CAPTHETA,\negation{\CAPTHETA}\sdtstile{}{}\CAPPSI$
+\item $\triplebar{\CAPPSI}{\CAPTHETA}\sdtstile{}{}\triplebar{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$
+\end{enumerate}
+\end{multicols}
+
+\notocsubsection{Truth Functional Equivalence}{exercises:GSDTFETheorem} 
+Without using truth tables, show that each of the following pairs of sentences is \CAPS{tfe}, for any sentences got by substituting into the schemas. 
+Showing that these pairs are \CAPS{tfe} will be helpful later, since it's both needed for the proof of theorem \mvref{Soundness of Std Shortcut Applications} and it amounts to proving theorem \mvref{ExchangeRuleGSDSoundnessLemma} (including for \Rule{$\TRIPLEBAR$-Exchange}), which is needed to prove theorem \mvref{ExchangeRuleGSDSoundness}.
+\begin{enumerate}
+
+\item $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$, $\disjunction{\negation{\CAPPHI_1}}{\disjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$
+
+%\item $\disjunction{\negation{\CAPPHI_1}}{\disjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$, $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$
+ 
+\item $\negation{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$, $\conjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$ 
+ 
+%\item $\conjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$, $\negation{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ 
+ 
+\item $\negation{\negation{\CAPPHI}}$, $\CAPPHI$
+
+%\item $\CAPPHI$, $\negation{\negation{\CAPPHI}}$ 
+
+\item $\horseshoe{\CAPPHI}{\CAPTHETA}$, $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ 
+
+%\item $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$, $\horseshoe{\CAPPHI}{\CAPTHETA}$
+ 
+\item $\horseshoe{\CAPPHI}{\CAPTHETA}$, $\horseshoe{\negation{\CAPTHETA}}{\negation{\CAPPHI}}$ 
+
+%\item $\horseshoe{\negation{\CAPTHETA}}{\negation{\CAPPHI}}$, $\horseshoe{\CAPPHI}{\CAPTHETA}$ 
+ 
+\item $\negation{\parhorseshoe{\CAPPHI}{\CAPTHETA}}$, $\conjunction{\CAPPHI}{\negation{\CAPTHETA}}$
+
+%\item $\conjunction{\CAPPHI}{\negation{\CAPTHETA}}$, $\negation{\parhorseshoe{\CAPPHI}{\CAPTHETA}}$
+ 
+\item $\conjunction{\CAPTHETA}{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$, $\disjunction{\parconjunction{\CAPTHETA}{\CAPPHI_1}}{\disjunction{\ldots}{\parconjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$
+
+%\item $\disjunction{\parconjunction{\CAPTHETA}{\CAPPHI_1}}{\disjunction{\ldots}{\parconjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$, $\conjunction{\CAPTHETA}{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$
+ 
+
+\item $\conjunction{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$, $\disjunction{\parconjunction{\CAPPHI_1}{\CAPTHETA}}{\disjunction{\ldots}{\parconjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$
+ 
+%\item $\disjunction{\parconjunction{\CAPPHI_1}{\CAPTHETA}}{\disjunction{\ldots}{\parconjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$, $\conjunction{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$
+ 
+ 
+\item $\disjunction{\CAPTHETA}{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$, $\conjunction{\pardisjunction{\CAPTHETA}{\CAPPHI_1}}{\conjunction{\ldots}{\pardisjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$
+ 
+%\item $\conjunction{\pardisjunction{\CAPTHETA}{\CAPPHI_1}}{\conjunction{\ldots}{\pardisjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$, $\disjunction{\CAPTHETA}{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$
+
+\item $\disjunction{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$, $\conjunction{\pardisjunction{\CAPPHI_1}{\CAPTHETA}}{\conjunction{\ldots}{\pardisjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$
+
+%\item $\conjunction{\pardisjunction{\CAPPHI_1}{\CAPTHETA}}{\conjunction{\ldots}{\pardisjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$, $\disjunction{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$
+
+\item $\triplebar{\CAPTHETA}{\CAPPSI}$, $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}$
+
+\end{enumerate}
+
+%\notocsubsection{Testing for Truth Functional Equivalence}{exercises:TestingGSDTFETheorem} 
+%Use truth tables to show that the sentences in each of the pairs given in exercise \ref{exercises:GSDTFETheorem} are \CAPS{tfe}. 
+
+\notocsubsection{Relations Between \GSL{} Sentences}{ex:Relations Between GSL Sentences}
+What relations hold among these sentences? Specifically, say whether they are contradictory, contrary, subcontrary, independent, or truth functionally equivalent. (So, you need to supply 30 answers for each problem: for each sentence, you must determine which of the 5 relations hold between it and each of the 6 other sentences.) 
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\Al$}
+\item {$\conjunction{\Al}{\Bl}$}
+\item {$\conjunction{\negation{\Al}}{\Bl}$}
+\item {$\horseshoe{\Al}{\Cl}$}
+\item {$\horseshoe{\Al}{\negation{\Cl}}$}
+\item {$\disjunction{\parconjunction{\Al}{\Bl}}{\Cl}$}
+\end{enumerate}
+\end{multicols}
+\begin{enumerate}[start=7]
+\item {$\conjunction{\Dl}{\negation{\Dl}}$}
+\end{enumerate}
+
+%\notocsubsection{Testing for Relations Between \GSL{} Sentences}{ex:Testing Relations Between GSL Sentences}
+%Write a single joint truth table for the 7 sentences listed in exercise \ref{ex:Relations Between GSL Sentences}. 
+%Read off from that table, for each pair of sentences, whether they are contradictory, contrary, subcontrary, independent, or truth functionally equivalent. 
+
+\notocsubsection{Recursive Definitions and Proofs}{ex:Recursive Definitions and Proofs}
+
+\begin{enumerate}
+	\item Give a recursive definition of the even positive integers. 
+	\item Give a recursive definition of the odd positive integers that are greater than 100. 
+	\item Prove that all positive multiples of 10 are also multiples of 5.
+	\item For each even positive integer $n$, prove that dividing $n$ by 2 results in another positive integer.
+\end{enumerate}
+
+
+\notocsubsection{SL Recursive Proofs}{ex:SL Recursive Proofs} 
+Prove each of the following claims using a recursive proof. 
+\begin{enumerate}
+\item In every \GSL{} sentence which is \CAPS{tff}, there is a subsentence which is \CAPS{tfc}. \emph{Hint:} The proof and the basic idea behind it is very easy; don't over-think it. 
+\item\label{localityoftruth} If two models $\IntA$ and $\IntA'$ agree on all of the sentence letters of $\CAPPHI$, then $\CAPPHI$ is $\True$ in $\IntA$ \Iff $\CAPPHI$ is $\True$ in $\IntA'$. (This is theorem \pmvref{thm:localityoftruth}.) To be explicit, we say that $\IntA$ and $\IntA'$ agree on the sentence letters of $\CAPPHI$ \Iff they assign the same truth value to each of those sentence letters, i.e. both assign $\True$ or both assign $\False$. We say that $\IntA$ and $\IntA'$ agree on a sentence \Iff they assign the same truth value to the sentence.
+\item Show that every \CAPS{tff} sentence of \GSL{} contains at least one \mention{$\NEGATION$}. \emph{Hint:}
+To prove this, it is useful to prove a more specific statement, namely that if $\CAPPHI$ is an \GSL{} sentence that does not contain any negations then $\CAPPHI$ is $\True$ on the model that assigns $\True$ to all sentence letters.
+\item For every sentence $\CAPPHI$ of \GSL{}, the number of left parentheses occurring in $\CAPPHI$ is less than the number of subsentences. In other words, if LP$\CAPPHI$ is the number of left parentheses in $\CAPPHI$ and SS$\CAPPHI$ is the number of subsentences, then LP$\CAPPHI$ $<$ SS$\CAPPHI$.
+\item The number of subsentences in any official \GSL{} sentence $\CAPPHI$ is equal to: the number of tokens of sentence letters in $\CAPPHI$ plus the number of tokens of negation in $\CAPPHI$ plus the number of tokens of left parentheses in $\CAPPHI$.
+\item For every sentence $\CAPPHI$ of \GSL{}, there is a \CAPS{tfe} sentence $\CAPPHI'$ without conditionals or biconditionals.
+\end{enumerate}
+
+\notocsubsection{DNF}{ex:DNF} 
+Put the following into disjunctive normal form.
+\begin{multicols}{2}
+\begin{enumerate}
+\item {$\disjunction{\negation{\parhorseshoe{\Ql}{\Rl}}}{\parhorseshoe{\Ql}{\negation{\Rl}}}$}
+\item {$\conjunction{\Ol}{\parhorseshoe{\Ol}{\Ql}}$}
+\item {$\horseshoe{\bparhorseshoe{\parhorseshoe{\Ql}{\Rl}}{\Ql}}{\Ql}$}
+\item {$\conjunction{\negation{\parhorseshoe{\Ql}{\Rl}}}{\pardisjunction{\Ol}{\Pl}}$}
+\end{enumerate}
+\end{multicols}
+
+
+%\theendnotes
+

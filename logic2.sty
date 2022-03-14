@@ -1,0 +1,841 @@
+\ProvidesPackage{logic2}
+\RequirePackage{xkeyval}
+\RequirePackage{fancybox}
+\RequirePackage{turnstile}
+\RequirePackage{ifthen} 
+\RequirePackage{hhline}          
+\RequirePackage{supertabular}   
+\RequirePackage{float}
+\RequirePackage{needspace}
+\restylefloat{table}   
+\RequirePackage{mleftright}
+
+%propositional constants
+\newcommand{\Al}{A}
+\newcommand{\Bl}{B}
+\newcommand{\Cl}{C}
+\newcommand{\Dl}{D}
+\newcommand{\El}{E}
+\newcommand{\Fl}{F}
+\newcommand{\Gl}{G}
+\newcommand{\Hl}{H}
+\newcommand{\Il}{I}
+\newcommand{\Jl}{J}
+\newcommand{\Kl}{K}
+\newcommand{\Ll}{L}
+\newcommand{\Ml}{M}
+\newcommand{\Nl}{N}
+\newcommand{\Ol}{O}
+\newcommand{\Pl}{P}
+\newcommand{\Ql}{Q}
+\newcommand{\Rl}{R}
+\newcommand{\Sl}{S}
+\newcommand{\Tl}{T}
+\newcommand{\Ul}{U}
+\newcommand{\Vl}{V}
+\newcommand{\Wl}{W}
+\newcommand{\Xl}{X}
+\newcommand{\Yl}{Y}
+\newcommand{\Zl}{Z}
+
+                       \DeclareOptionX{A}[A]{%
+				\renewcommand{\Al}{#1}%
+				       }
+					   \DeclareOptionX{B}[B]{%
+				\renewcommand{\Bl}{#1}%
+				       }
+					   \DeclareOptionX{C}[C]{%
+				\renewcommand{\Cl}{#1}%
+				       }
+					   \DeclareOptionX{D}[D]{%
+				\renewcommand{\Dl}{#1}%
+				       }
+					   \DeclareOptionX{E}[E]{%
+				\renewcommand{\El}{#1}%
+				       }
+					   \DeclareOptionX{F}[F]{%
+				\renewcommand{\Fl}{#1}%
+				       }
+					   \DeclareOptionX{G}[G]{%
+				\renewcommand{\Gl}{#1}%
+				       }
+					   \DeclareOptionX{H}[H]{%
+				\renewcommand{\Hl}{#1}%
+				       }
+					   \DeclareOptionX{I}[I]{%
+				\renewcommand{\Il}{#1}%
+				       }
+					   \DeclareOptionX{J}[J]{%
+				\renewcommand{\Jl}{#1}%
+				       }
+					   \DeclareOptionX{K}[K]{%
+				\renewcommand{\Kl}{#1}%
+				       }
+					   \DeclareOptionX{L}[L]{%
+				\renewcommand{\Ll}{#1}%
+				       }
+					   \DeclareOptionX{M}[M]{%
+				\renewcommand{\Ml}{#1}%
+				       }
+					   \DeclareOptionX{N}[N]{%
+				\renewcommand{\Nl}{#1}%
+				       }
+					   \DeclareOptionX{O}[O]{%
+				\renewcommand{\Ol}{#1}%
+				       }
+					   \DeclareOptionX{P}[P]{%
+				\renewcommand{\Pl}{#1}%
+				       }
+					   \DeclareOptionX{Q}[Q]{%
+				\renewcommand{\Ql}{#1}%
+				       }
+					   \DeclareOptionX{R}[R]{%
+				\renewcommand{\Rl}{#1}%
+				       }
+					   \DeclareOptionX{S}[S]{%
+				\renewcommand{\Sl}{#1}%
+				       }
+					   \DeclareOptionX{T}[T]{%
+				\renewcommand{\Tl}{#1}%
+				       }
+					   \DeclareOptionX{U}[U]{%
+				\renewcommand{\Ul}{#1}%
+				       }
+					   \DeclareOptionX{V}[V]{%
+				\renewcommand{\Vl}{#1}%
+				       }
+					   \DeclareOptionX{W}[W]{%
+				\renewcommand{\Wl}{#1}%
+				       }
+					   \DeclareOptionX{X}[X]{%
+				\renewcommand{\Xl}{#1}%
+				       }
+					   \DeclareOptionX{Y}[Y]{%
+				\renewcommand{\Yl}{#1}%
+				       }
+					   \DeclareOptionX{Z}[Z]{%
+				\renewcommand{\Zl}{#1}%
+				       }
+					  
+%predicate letters
+
+\renewcommand{\AA}{\text{A}}
+\newcommand{\BB}{\text{B}}
+\newcommand{\CC}{\text{C}}
+\newcommand{\DD}{\text{D}}
+\newcommand{\EE}{\text{E}}
+\newcommand{\FF}{\text{F}}
+\newcommand{\GG}{\text{G}}
+\newcommand{\HH}{\text{H}}
+\newcommand{\II}{\text{I}}
+\newcommand{\JJ}{\text{J}}
+\newcommand{\KK}{\text{K}}
+\newcommand{\LL}{\text{L}}
+\newcommand{\MM}{\text{M}}
+\newcommand{\NN}{\text{N}}
+\newcommand{\OO}{\text{O}}
+\newcommand{\PP}{\text{P}}
+\newcommand{\QQ}{\text{Q}}
+\newcommand{\RR}{\text{R}}
+\renewcommand{\SS}{\text{S}}
+\newcommand{\TT}{\text{T}}
+\newcommand{\UU}{\text{U}}
+\newcommand{\VV}{\text{V}}
+\newcommand{\WW}{\text{W}}
+\newcommand{\XX}{\text{X}}
+\newcommand{\YY}{\text{Y}}
+\newcommand{\ZZ}{\text{Z}}
+
+					   \DeclareOptionX{Ap}[\text{A}]{%
+				\renewcommand{\AA}{#1}%
+				       }
+					   \DeclareOptionX{Bp}[\text{B}]{%
+				\renewcommand{\BB}{#1}%
+				       }
+					   \DeclareOptionX{Cp}[\text{C}]{%
+				\renewcommand{\CC}{#1}%
+				       }
+					   \DeclareOptionX{Dp}[\text{D}]{%
+				\renewcommand{\DD}{#1}%
+				       }
+					   \DeclareOptionX{Ep}[\text{E}]{%
+				\renewcommand{\EE}{#1}%
+				       }
+					   \DeclareOptionX{Fp}[\text{F}]{%
+				\renewcommand{\FF}{#1}%
+				       }
+					   \DeclareOptionX{Gp}[\text{G}]{%
+				\renewcommand{\GG}{#1}%
+				       }
+					   \DeclareOptionX{Hp}[\text{H}]{%
+				\renewcommand{\HH}{#1}%
+				       }
+					   \DeclareOptionX{Ip}[\text{I}]{%
+				\renewcommand{\II}{#1}%
+				       }
+					   \DeclareOptionX{Jp}[\text{J}]{%
+				\renewcommand{\JJ}{#1}%
+				       }
+					   \DeclareOptionX{Kp}[\text{K}]{%
+				\renewcommand{\KK}{#1}%
+				       }
+					   \DeclareOptionX{Lp}[\text{L}]{%
+				\renewcommand{\LL}{#1}%
+				       }
+					   \DeclareOptionX{Mp}[\text{M}]{%
+				\renewcommand{\MM}{#1}%
+				       }
+					   \DeclareOptionX{Np}[\text{N}]{%
+				\renewcommand{\NN}{#1}%
+				       }
+					   \DeclareOptionX{Op}[\text{O}]{%
+				\renewcommand{\OO}{#1}%
+				       }
+					   \DeclareOptionX{Pp}[\text{P}]{%
+				\renewcommand{\PP}{#1}%
+				       }
+					   \DeclareOptionX{Qp}[\text{Q}]{%
+				\renewcommand{\QQ}{#1}%
+				       }
+					   \DeclareOptionX{Rp}[\text{R}]{%
+				\renewcommand{\RR}{#1}%
+				       }
+					   \DeclareOptionX{Sp}[\text{S}]{%
+				\renewcommand{\SS}{#1}%
+				       }
+					   \DeclareOptionX{Tp}[\text{T}]{%
+				\renewcommand{\TT}{#1}%
+				       }
+					   \DeclareOptionX{Up}[\text{U}]{%
+				\renewcommand{\UU}{#1}%
+				       }
+					   \DeclareOptionX{Vp}[\text{V}]{%
+				\renewcommand{\VV}{#1}%
+				       }
+					   \DeclareOptionX{Wp}[\text{W}]{%
+				\renewcommand{\WW}{#1}%
+				       }
+					   \DeclareOptionX{Xp}[\text{X}]{%
+				\renewcommand{\XX}{#1}%
+				       }
+					   \DeclareOptionX{Yp}[\text{Y}]{%
+				\renewcommand{\YY}{#1}%
+				       }
+					   \DeclareOptionX{Zp}[\text{Z}]{%
+				\renewcommand{\ZZ}{#1}%
+				       }
+
+\newcommand{\predparL}{}
+\newcommand{\predparR}{}
+                       \DeclareOptionX{predparL}[]{%
+				\renewcommand{\predparL}{#1}%
+				       }
+					   \DeclareOptionX{predparR}[]{%
+				\renewcommand{\predparR}{#1}%
+				       }
+					   
+%\newcommand{\comma}{{}}
+
+%\DeclareOptionX{PredArgComma}[1]{
+%\ifthenelse{1<#1}{\renewcommand{\comma}{,}}{}
+%}
+
+\newcommand{\Ap}[1]{\AA{}\predparL{} #1\predparR{}}
+\newcommand{\Bp}[1]{\BB{}\predparL{} #1\predparR{}}
+\newcommand{\Cp}[1]{\CC{}\predparL{} #1\predparR{}}
+\newcommand{\Dp}[1]{\DD{}\predparL{} #1\predparR{}}
+\newcommand{\Ep}[1]{\EE{}\predparL{} #1\predparR{}}
+\newcommand{\Fp}[1]{\FF{}\predparL{} #1\predparR{}}
+\newcommand{\Gp}[1]{\GG{}\predparL{} #1\predparR{}}
+\newcommand{\Hp}[1]{\HH{}\predparL{} #1\predparR{}}
+\newcommand{\Ip}[1]{\II{}\predparL{} #1\predparR{}}
+\newcommand{\Jp}[1]{\JJ{}\predparL{} #1\predparR{}}
+\newcommand{\Kp}[1]{\KK{}\predparL{} #1\predparR{}}
+\newcommand{\Lp}[1]{\LL{}\predparL{} #1\predparR{}}
+\newcommand{\Mp}[1]{\MM{}\predparL{} #1\predparR{}}
+\newcommand{\Np}[1]{\NN{}\predparL{} #1\predparR{}}
+\newcommand{\Op}[1]{\OO{}\predparL{} #1\predparR{}}
+\newcommand{\Pp}[1]{\PP{}\predparL{} #1\predparR{}}
+\newcommand{\Qp}[1]{\QQ{}\predparL{} #1\predparR{}}
+\newcommand{\Rp}[1]{\RR{}\predparL{} #1\predparR{}}
+\newcommand{\Sp}[1]{\SS{}\predparL{} #1\predparR{}}
+\newcommand{\Tp}[1]{\TT{}\predparL{} #1\predparR{}}
+\newcommand{\Up}[1]{\UU{}\predparL{} #1\predparR{}}
+\newcommand{\Vp}[1]{\VV{}\predparL{} #1\predparR{}}
+\newcommand{\Wp}[1]{\WW{}\predparL{} #1\predparR{}}
+\newcommand{\Xp}[1]{\XX{}\predparL{} #1\predparR{}}
+\newcommand{\Yp}[1]{\YY{}\predparL{} #1\predparR{}}
+\newcommand{\Zp}[1]{\ZZ{}\predparL{} #1\predparR{}}
+
+\newcommand{\App}[2]{\AA{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Bpp}[2]{\BB{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Cpp}[2]{\CC{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Dpp}[2]{\DD{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Epp}[2]{\EE{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Fpp}[2]{\FF{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Gpp}[2]{\GG{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Hpp}[2]{\HH{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Ipp}[2]{\II{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Jpp}[2]{\JJ{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Kpp}[2]{\KK{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Lpp}[2]{\LL{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Mpp}[2]{\MM{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Npp}[2]{\NN{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Opp}[2]{\OO{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Ppp}[2]{\PP{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Qpp}[2]{\QQ{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Rpp}[2]{\RR{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Spp}[2]{\SS{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Tpp}[2]{\TT{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Upp}[2]{\UU{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Vpp}[2]{\VV{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Wpp}[2]{\WW{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Xpp}[2]{\XX{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Ypp}[2]{\YY{}\predparL{} #1{}#2\predparR{}}
+\newcommand{\Zpp}[2]{\ZZ{}\predparL{} #1{}#2\predparR{}}
+
+\newcommand{\Appp}[3]{\AA{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Bppp}[3]{\BB{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Cppp}[3]{\CC{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Dppp}[3]{\DD{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Eppp}[3]{\EE{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Fppp}[3]{\FF{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Gppp}[3]{\GG{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Hppp}[3]{\HH{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Ippp}[3]{\II{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Jppp}[3]{\JJ{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Kppp}[3]{\KK{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Lppp}[3]{\LL{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Mppp}[3]{\MM{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Nppp}[3]{\NN{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Oppp}[3]{\OO{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Pppp}[3]{\PP{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Qppp}[3]{\QQ{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Rppp}[3]{\RR{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Sppp}[3]{\SS{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Tppp}[3]{\TT{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Uppp}[3]{\UU{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Vppp}[3]{\VV{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Wppp}[3]{\WW{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Xppp}[3]{\XX{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Yppp}[3]{\YY{}\predparL{} #1{}#2{}#3\predparR{}}
+\newcommand{\Zppp}[3]{\ZZ{}\predparL{} #1{}#2{}#3\predparR{}}
+
+
+%metalanguage constants for formula
+
+\newcommand{\ALPHA}{\alpha}
+\newcommand{\BETA}{\beta}
+\newcommand{\CHI}{\chi}
+\newcommand{\DELTA}{\delta}
+\newcommand{\EPSILON}{\epsilon}
+\newcommand{\PHI}{\phi}
+\newcommand{\GAMMA}{\gamma}
+\newcommand{\ETA}{\eta}
+\newcommand{\IOTA}{\iota}
+\newcommand{\KAPPA}{\kappa}
+\newcommand{\LAMBDA}{\lambda}
+\newcommand{\MU}{\mu}
+\newcommand{\NU}{\nu}
+\newcommand{\GreekO}{o}
+\newcommand{\PI}{\pi}
+\newcommand{\THETA}{\theta}
+\newcommand{\RHO}{\rho}
+\newcommand{\SIGMA}{\sigma}
+\newcommand{\TAU}{\tau}
+\newcommand{\UPSILON}{\upsilon}
+\newcommand{\OMEGA}{\omega}
+\newcommand{\XI}{\xi}
+\newcommand{\PSI}{\psi}
+\newcommand{\ZETA}{\zeta}
+
+					   \DeclareOptionX{alpha}[\alpha]{%
+				\renewcommand{\ALPHA}{#1}%
+				       }
+					   \DeclareOptionX{beta}[\beta]{%
+				\renewcommand{\BETA}{#1}%
+				       }
+					   \DeclareOptionX{chi}[\chi]{%
+				\renewcommand{\CHI}{#1}%
+				       }
+					   \DeclareOptionX{delta}[\delta]{%
+				\renewcommand{\DELTA}{#1}%
+				       }
+					   \DeclareOptionX{epsilon}[\epsilon]{%
+				\renewcommand{\EPSILON}{#1}%
+				       }
+					   \DeclareOptionX{phi}[\phi]{%
+				\renewcommand{\PHI}{#1}%
+				       }
+					   \DeclareOptionX{gamma}[\gamma]{%
+				\renewcommand{\GAMMA}{#1}%
+				       }
+					   \DeclareOptionX{eta}[\eta]{%
+				\renewcommand{\ETA}{#1}%
+				       }
+					   \DeclareOptionX{iota}[\iota]{%
+				\renewcommand{\IOTA}{#1}%
+				       }
+					   \DeclareOptionX{kappa}[\kappa]{%
+				\renewcommand{\KAPPA}{#1}%
+				       }
+					   \DeclareOptionX{lambda}[\lambda]{%
+				\renewcommand{\LAMBDA}{#1}%
+				       }
+					   \DeclareOptionX{mu}[\mu]{%
+				\renewcommand{\MU}{#1}%
+				       }
+					   \DeclareOptionX{nu}[\nuo]{%
+				\renewcommand{\NU}{#1}%
+				       }
+					   \DeclareOptionX{Greeko}[o]{%
+				\renewcommand{\GreekO}{#1}%
+				       }
+					   \DeclareOptionX{pi}[\pi]{%
+				\renewcommand{\PI}{#1}%
+				       }
+					   \DeclareOptionX{theta}[\theta]{%
+				\renewcommand{\THETA}{#1}%
+				       }
+					   \DeclareOptionX{rho}[\rho]{%
+				\renewcommand{\RHO}{#1}%
+				       }
+					   \DeclareOptionX{sigma}[\sigma]{%
+				\renewcommand{\SIGMA}{#1}%
+				       }
+					   \DeclareOptionX{tau}[\tau]{%
+				\renewcommand{\TAU}{#1}%
+				       }
+					   \DeclareOptionX{upsilon}[\upsilon]{%
+				\renewcommand{\UPSILON}{#1}%
+				       }
+					   \DeclareOptionX{omega}[\omega]{%
+				\renewcommand{\OMEGA}{#1}%
+				       }
+					   \DeclareOptionX{xi}[\xi]{%
+				\renewcommand{\XI}{#1}%
+				       }
+					   \DeclareOptionX{psi}[\psi]{%
+				\renewcommand{\PSI}{#1}%
+				       }
+					   \DeclareOptionX{zeta}[\zeta]{%
+				\renewcommand{\ZETA}{#1}%
+				       }
+					   
+\newcommand{\CAPALPHA}{A}
+\newcommand{\CAPBETA}{B}
+\newcommand{\CAPCHI}{X}
+\newcommand{\CAPDELTA}{\Delta}
+\newcommand{\CAPEPSILON}{E}
+\newcommand{\CAPPHI}{\Phi}
+\newcommand{\CAPGAMMA}{\Gamma}
+\newcommand{\CAPETA}{H}
+\newcommand{\CAPIOTA}{I}
+\newcommand{\CAPKAPPA}{K}
+\newcommand{\CAPLAMBDA}{\Lambda}
+\newcommand{\CAPMU}{M}
+\newcommand{\CAPNU}{N}
+\newcommand{\CAPGreekO}{O}
+\newcommand{\CAPPI}{\Pi}
+\newcommand{\CAPTHETA}{\Theta}
+\newcommand{\CAPRHO}{P}
+\newcommand{\CAPSIGMA}{\Sigma}
+\newcommand{\CAPTAU}{T}
+\newcommand{\CAPUPSILON}{\Upsilon}
+\newcommand{\CAPOMEGA}{\Omega}
+\newcommand{\CAPXI}{\Xi}
+\newcommand{\CAPPSI}{\Psi}
+\newcommand{\CAPZETA}{Z}
+
+					   \DeclareOptionX{capalpha}[A]{%
+				\renewcommand{\CAPALPHA}{#1}%
+				       }
+					   \DeclareOptionX{capbeta}[B]{%
+				\renewcommand{\CAPBETA}{#1}%
+				       }
+					   \DeclareOptionX{capchi}[X]{%
+				\renewcommand{\CAPCHI}{#1}%
+				       }
+					   \DeclareOptionX{capdelta}[\Delta]{%
+				\renewcommand{\CAPDELTA}{#1}%
+				       }
+					   \DeclareOptionX{capepsilon}[E]{%
+				\renewcommand{\CAPEPSILON}{#1}%
+				       }
+					   \DeclareOptionX{capphi}[\Phi]{%
+				\renewcommand{\CAPPHI}{#1}%
+				       }
+					   \DeclareOptionX{capgamma}[\Gamma]{%
+				\renewcommand{\CAPGAMMA}{#1}%
+				       }
+					   \DeclareOptionX{capeta}[H]{%
+				\renewcommand{\CAPETA}{#1}%
+				       }
+					   \DeclareOptionX{capiota}[I]{%
+				\renewcommand{\CAPIOTA}{#1}%
+				       }
+					   \DeclareOptionX{capkappa}[K]{%
+				\renewcommand{\CAPKAPPA}{#1}%
+				       }
+					   \DeclareOptionX{caplambda}[\Lambda]{%
+				\renewcommand{\CAPLAMBDA}{#1}%
+				       }
+					   \DeclareOptionX{capmu}[M]{%
+				\renewcommand{\CAPMU}{#1}%
+				       }
+					   \DeclareOptionX{capnu}[N]{%
+				\renewcommand{\CAPNU}{#1}%
+				       }
+					   \DeclareOptionX{capGreeko}[O]{%
+				\renewcommand{\CAPGreekO}{#1}%
+				       }
+					   \DeclareOptionX{cappi}[\Pi]{%
+				\renewcommand{\CAPPI}{#1}%
+				       }
+					   \DeclareOptionX{captheta}[\Theta]{%
+				\renewcommand{\CAPTHETA}{#1}%
+				       }
+					   \DeclareOptionX{caprho}[P]{%
+				\renewcommand{\CAPRHO}{#1}%
+				       }
+					   \DeclareOptionX{capsigma}[\Sigma]{%
+				\renewcommand{\CAPSIGMA}{#1}%
+				       }
+					   \DeclareOptionX{captau}[T]{%
+				\renewcommand{\CAPTAU}{#1}%
+				       }
+					   \DeclareOptionX{capupsilon}[\Upsilon]{%
+				\renewcommand{\CAPUPSILON}{#1}%
+				       }
+					   \DeclareOptionX{capomega}[\Omega]{%
+				\renewcommand{\CAPOMEGA}{#1}%
+				       }
+					   \DeclareOptionX{capxi}[\Xi]{%
+				\renewcommand{\CAPXI}{#1}%
+				       }
+					   \DeclareOptionX{cappsi}[\Psi]{%
+				\renewcommand{\CAPPSI}{#1}%
+				       }
+					   \DeclareOptionX{capzeta}[Z]{%
+				\renewcommand{\CAPZETA}{#1}%
+				       }
+					  
+%object language variables
+
+\newcommand{\w}{w}
+\newcommand{\x}{x}
+\newcommand{\y}{y}
+\newcommand{\z}{z}
+
+             \DeclareOptionX{w}[w]{%
+        \renewcommand{\w}{#1}%
+               }
+             \DeclareOptionX{x}[x]{%
+				\renewcommand{\x}{#1}%
+				       }
+					   \DeclareOptionX{y}[y]{%
+				\renewcommand{\y}{#1}%
+				       }
+					   \DeclareOptionX{z}[z]{%
+				\renewcommand{\z}{#1}%
+				       }
+					  
+					  
+%symbols for connectives
+
+\newcommand{\VEE}{\vee}
+\newcommand{\WEDGE}{\wedge}
+\newcommand{\HORSESHOE}{\rightarrow}
+\newcommand{\NEGATION}{{\sim}}
+\newcommand{\TRIPLEBAR}{\leftrightarrow}
+\newcommand{\quantifierparL}{(}
+\newcommand{\quantifierparR}{)}
+
+\newcommand{\BPARL}{\mleft(}
+\newcommand{\BPARR}{\mright)}
+\newcommand{\CPARL}{\mleft(}
+\newcommand{\CPARR}{\mright)}
+\newcommand{\PPARL}{\mleft(}
+\newcommand{\PPARR}{\mright)}
+
+             \DeclareOptionX{VEE}[\vee]{%
+				\renewcommand{\VEE}{#1}%
+				       }
+					   \DeclareOptionX{WEDGE}[\&]{%
+				\renewcommand{\WEDGE}{#1}%
+				       }
+					   \DeclareOptionX{HORSESHOE}[\supset]{%
+				\renewcommand{\HORSESHOE}{#1}%
+				       }
+					   \DeclareOptionX{NEGATION}[\sim]{%
+				\renewcommand{\NEGATION}{#1}%
+				       }
+					   \DeclareOptionX{TRIPLEBAR}[\equiv]{%
+				\renewcommand{\TRIPLEBAR}{#1}%
+				       }
+					   \DeclareOptionX{quantifierparL}[(]{%
+				\renewcommand{\quantifierparL}{#1}%
+				       }
+					   \DeclareOptionX{quantifierparR}[)]{%
+				\renewcommand{\quantifierparR}{#1}%
+				       }
+				     \DeclareOptionX{manybrackets}[1]{%
+				\ifthenelse{1<#1}{%
+\renewcommand{\BPARL}{\mleft(}%
+\renewcommand{\BPARR}{\mright){}}%
+\renewcommand{\CPARL}{\mleft(}%
+\renewcommand{\CPARR}{\mright)}%
+                          }%
+                          {}}				       					  
+%connectives
+
+\newcommand{\disjunction}[2]{{#1}\VEE{}{#2}}
+\newcommand{\pardisjunction}[2]{\PPARL{}{#1}\VEE{}{#2}\PPARR{}}
+\newcommand{\bpardisjunction}[2]{\BPARL{}{#1}\VEE{}{#2}\BPARR{}}
+\newcommand{\cpardisjunction}[2]{\CPARL{}{#1}\VEE{}{#2}\CPARR{}}
+
+\newcommand{\conjunction}[2]{{#1}\WEDGE{}{#2}}
+\newcommand{\parconjunction}[2]{\PPARL{}{#1}\WEDGE{}{#2}\PPARR{}}
+\newcommand{\bparconjunction}[2]{\BPARL{}{#1}\WEDGE{}{#2}\BPARR{}}
+\newcommand{\cparconjunction}[2]{\CPARL{}{#1}\WEDGE{}{#2}\CPARR{}}
+
+\newcommand{\horseshoe}[2]{{#1}\!\HORSESHOE{}\!{#2}}
+\newcommand{\parhorseshoe}[2]{\PPARL{}{#1}\!\HORSESHOE{}\!{#2}\PPARR{}}
+\newcommand{\bparhorseshoe}[2]{\BPARL{}{#1}\!\HORSESHOE{}\!{#2}\BPARR{}}
+\newcommand{\cparhorseshoe}[2]{\CPARL{}{#1}\!\HORSESHOE{}\!{#2}\CPARR{}}
+
+\newcommand{\negation}[1]{\NEGATION{}{#1}}
+\newcommand{\parnegation}[1]{\PPARL{}\NEGATION{}{#1}\PPARR{}}
+\newcommand{\bparnegation}[1]{\BPARL{}\NEGATION{}{#1}\BPARR{}}
+\newcommand{\cparnegation}[1]{\CPARL{}\NEGATION{}{#1}\CPARR{}}
+
+\newcommand{\triplebar}[2]{{#1}\!\TRIPLEBAR{}\!{#2}}
+\newcommand{\partriplebar}[2]{\PPARL{}{#1}\!\TRIPLEBAR{}\!{#2}\PPARR{}}
+\newcommand{\bpartriplebar}[2]{\BPARL{}{#1}\!\TRIPLEBAR{}\!{#2}\BPARR{}}
+\newcommand{\cpartriplebar}[2]{\CPARL{}{#1}\!\TRIPLEBAR{}\!{#2}\CPARR{}}
+
+\newcommand{\existential}[1]{\quantifierparL{}\exists #1\quantifierparR{}}
+\newcommand{\universal}[1]{\quantifierparL{}\forall #1\quantifierparR{}}
+
+%formulas
+
+\newcommand{\formulaI}{\disjunction{\parhorseshoe{\Al}{\Bl}}{\parhorseshoe{\Bl}{\Cl}}}
+\newcommand{\formulaII}{\triplebar{\negation{\conjunction{\Al}{\Bl}}}{\Cl}}
+\newcommand{\formulaIII}{\horseshoe{\PHI}{\negation{\THETA}}}
+\newcommand{\formulaIV}{\text{If }\PHI\sdtstile{}{}\horseshoe{\THETA}{\PSI}\text{, then }\THETA\sdtstile{}{}\horseshoe{\PHI}{\PSI}}
+\newcommand{\formulaV}{\text{If }\THETA\sdtstile{}{}\PSI\text{, then }\sdtstile{}{}\horseshoe{\PSI}{\THETA}}
+\newcommand{\formulaVI}{\text{If }\PHI\sdtstile{}{}\pardisjunction{\PSI}{\THETA}\text{, then }\PHI\sdtstile{}{}\PSI\text{, or }\PHI\sdtstile{}{}\THETA\text{, (or both)}}
+\newcommand{\formulaVII}{\horseshoe{\PHI}{\THETA}}
+\newcommand{\formulaVIII}{\text{If }\PSI\sdtstile{}{}\parhorseshoe{\THETA}{\PHI}\text{, then }\THETA\sdtstile{}{}\parhorseshoe{\PSI}{\PHI}}
+\newcommand{\formulaIX}{\existential{\x}\parconjunction{\Cp{\x}}{\Ap{\x}}}
+\newcommand{\formulaX}{\universal{\y}\parhorseshoe{\Ap{\y}}{\negation{\Cp{\y}}}}
+\newcommand{\formulaXI}{\horseshoe{\universal{\y}\Ap{\y}}{\universal{\z}\Cp{\z}}}
+\newcommand{\formulaXII}{\universal{\x}\universal{\y}\parhorseshoe{\parconjunction{\Cp{\x}}{\Dp{\y}}}{\App{\y}{\x}}}
+\newcommand{\formulaXIII}{\existential{\x}\parconjunction{\Cp{\x}}{\Ep{\x}}}
+\newcommand{\formulaXIV}{\universal{\y}\parhorseshoe{\Ap{\y}}{\Ep{\y}}}
+\newcommand{\formulaXV}{\existential{\x}\parhorseshoe{\Dp{\x}}{\Ep{\x}}}
+
+\newcommand{\formulaXVI}{\universal{\z}\parhorseshoe{\Dp{\z}}{\negation{\Gp{\z}}}\text{, }\universal{\z}\parhorseshoe{\Gp{\z}}{\negation{\Hp{\z}}}\sdtstile{}{}\universal{\z}\parhorseshoe{\Dp{\z}}{\negation{\Hp{\z}}}}
+\newcommand{\formulaXVII}{\existential{\z}\parconjunction{\Dp{\z}}{\Gp{\z}}\text{, }\universal{\z}\parhorseshoe{\Gp{\z}}{\negation{\Hp{\z}}}\sdtstile{}{}\existential{\z}\parconjunction{\Dp{\z}}{\negation{\Hp{\z}}}}
+\newcommand{\formulaXVIII}{\existential{\z}\Dp{\z}\text{, }\universal{\z}\parhorseshoe{\Dp{\z}}{\Gp{\z}}\text{, }\existential{\z}\parconjunction{\Gp{\z}}{\Hp{\z}}\sdtstile{}{}\existential{\z}\parconjunction{\Dp{\z}}{\Hp{\z}}}
+\newcommand{\formulaXIX}{\universal{\z}\parhorseshoe{\Gp{\z}}{\Dp{\z}}}
+\newcommand{\formulaXX}{\existential{\z}\parconjunction{\Gp{\z}}{\negation{\Dp{\z}}}}
+\newcommand{\formulaXXI}{\existential{\z}\parconjunction{\Gp{\z}}{\Dp{\z}}}
+\newcommand{\formulaXXII}{\existential{\z}\parconjunction{\Gp{\z}}{\negation{\Dp{\z}}}}
+
+\newcommand{\formulaXXIII}{\sdtstile{}{}\disjunction{\universal{\x}\parhorseshoe{\CAPPHI}{\CAPPSI}}{\universal{\x}\parhorseshoe{\CAPPSI}{\CAPPHI}}}
+\newcommand{\formulaXXIV}{\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPPSI \z/\x}\sdtstile{}{}\universal{\x}\parhorseshoe{\negation{\CAPPSI}}{\negation{\CAPPHI}}}
+\newcommand{\formulaXXV}{\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPPSI \z/\x}\sdtstile{}{}\universal{\x}\parhorseshoe{\pardisjunction{\CAPPHI}{\CAPTHETA}}{\pardisjunction{\CAPPSI}{\CAPTHETA}}}
+\newcommand{\formulaXXVI}{\universal{\x}\parhorseshoe{\parconjunction{\CAPPHI}{\CAPTHETA}}{\parconjunction{\CAPPSI}{\CAPTHETA}}\sdtstile{}{}\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPPSI \z/\x}}
+
+\newcommand{\formulaXXVII}{\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPPSI \z/\x}\text{, }\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPTHETA \z/\x}\sdtstile{}{}\existential{\x}\parconjunction{\CAPPSI}{\CAPTHETA}}
+\newcommand{\formulaXXVIII}{\universal{\x}\parhorseshoe{\CAPPHI}{\negation{\CAPPSI}}\text{, }\existential{\x}\parconjunction{\CAPPSI}{\CAPTHETA}\sdtstile{}{}\existential{\x}\parconjunction{\CAPTHETA}{\negation{\CAPPHI}}}
+\newcommand{\formulaXXIX}{\existential{\x}\parconjunction{\CAPPHI}{\negation{\CAPPSI}}\text{, }\universal{\x}\parhorseshoe{\CAPPSI}{\negation{\CAPTHETA}}\sdtstile{}{}\existential{\x}\parconjunction{\CAPPHI}{\negation{\CAPTHETA}}}
+\newcommand{\formulaXXX}{\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPPSI \z/\x}\sdtstile{}{}\horseshoe{\universal{\x}\pardisjunction{\CAPPHI}{\CAPTHETA}}{\universal{\y}\pardisjunction{\CAPPSI \y/\x}{\CAPTHETA \y/\x}}}
+\newcommand{\formulaXXXI}{\universal{\z}\parhorseshoe{\CAPPHI \z/\x}{\CAPPSI \z/\x}\text{, }\universal{\x}\pardisjunction{\CAPPHI}{\CAPTHETA}\sdtstile{}{}\universal{\y}\pardisjunction{\CAPPSI \y/\x}{\CAPTHETA \y/\x}}
+
+\newcommand{\formulaXXXII}{\sststile{}{}\horseshoe{\universal{\x}\parhorseshoe{\Fp{\x}}{\Gp{\x}}}{\parhorseshoe{\universal{\z}\parconjunction{\Fp{\z}}{\Hp{\z}}}{\universal{\y}\parconjunction{\Gp{\y}}{\Hp{\y}}}}}
+\newcommand{\formulaXXXIII}{\sststile{}{}\horseshoe{\universal{\x}\parhorseshoe{\Fp{\x}}{\Gp{\x}}}{\parhorseshoe{\existential{\z}\parconjunction{\Fp{\z}}{\Hp{\z}}}{\existential{\y}\parconjunction{\Gp{\y}}{\Hp{\y}}}}}
+\newcommand{\formulaXXXIV}{\sststile{}{}\horseshoe{\pardisjunction{\universal{\z}\Hp{\z}}{\existential{\x}\Fp{\x}}}{\universal{\z}\existential{\x}\pardisjunction{\Hp{\z}}{\Fp{\x}}}}
+\newcommand{\formulaXXXV}{\sststile{}{}\horseshoe{\universal{\z}\parconjunction{\Gp{\z}}{\existential{\x}\Fp{\x}}}{\existential{\x}\universal{\z}\parconjunction{\Gp{\z}}{\Fp{\x}}}}
+\newcommand{\formulaXXXVI}{\sststile{}{}\horseshoe{\existential{\y}\existential{\x}\pardisjunction{\Dp{\x}}{\Hp{\y}}}{\negation{\universal{z}\parconjunction{\negation{\Dp{\z}}}{\negation{\Hp{\z}}}}}}
+
+\newcommand{\formulaXXXVII}{\sststile{}{}\horseshoe{\universal{\x}\parhorseshoe{\Fp{\x}}{\Gp{\x}}}{\parhorseshoe{\universal{\z}\negation{\Gp{\z}}}{\universal{\y}\negation{\Fp{\y}}}}}
+\newcommand{\formulaXXXVIII}{\sststile{}{}\horseshoe{\pardisjunction{\universal{\z}\Hp{\z}}{\universal{\x}\Fp{\x}}}{\universal{\z}\pardisjunction{\Hp{\z}}{\Fp{\z}}}}
+\newcommand{\formulaXXXIX}{\sststile{}{}\horseshoe{\universal{\x}\parhorseshoe{\Fp{\x}}{\Gp{\x}}}{\parhorseshoe{\negation{\universal{\z}\Gp{\z}}}{\negation{\universal{\y}\Fp{\y}}}}}
+\newcommand{\formulaXXXX}{\sststile{}{}\universal{\x}\parhorseshoe{\parconjunction{\Fp{\x}}{\universal{\z}\Hp{\z}}}{\existential{\y}\parconjunction{\Fp{\y}}{\Hp{\y}}}}
+
+\newcommand{\formulaXXXXI}{\disjunction{\parhorseshoe{\A}{\B}}{\disjunction{\parhorseshoe{\B}{\C}}{\negation{\C}}}}
+\newcommand{\formulaXXXXII}{\horseshoe{\partriplebar{\negation{\A}}{\B}}{\negation{\partriplebar{\A}{\B}}}}
+\newcommand{\formulaXXXXIII}{\horseshoe{\pardisjunction{\parhorseshoe{\A}{\C}}{\parhorseshoe{\B}{\C}}}{\parhorseshoe{\parconjunction{\A}{\B}}{\C}}}
+
+\newcommand{\formulaXXXXIV}{\disjunction{\universal{\x}\existential{\y}\Dpp{\x}{\y}}{\universal{\z}\Gp{\z}}}
+\newcommand{\formulaXXXXV}{\universal{\x}\existential{\y}\universal{\z}\pardisjunction{\Dpp{\x}{\y}}{\Gp{\z}}}
+\newcommand{\formulaXXXXVI}{\existential{\y}\universal{\x}\universal{\z}\pardisjunction{\Dpp{\x}{\y}}{\Gp{\z}}}
+\newcommand{\formulaXXXXVII}{\universal{\z}\existential{\y}\universal{\x}\pardisjunction{\Dpp{\x}{\y}}{\Gp{\z}}}
+\newcommand{\formulaXXXXVIII}{\universal{\z}\universal{\x}\existential{\y}\pardisjunction{\Dpp{\x}{\y}}{\Gp{\z}}}
+\newcommand{\formulaXXXXIX}{\horseshoe{\existential{\x}\parhorseshoe{\Gp{\x}}{\Kp{\x}}}{\parhorseshoe{\existential{\x}\Gp{\x}}{\existential{\y}\Kp{\y}}}} 
+\newcommand{\formulaXXXXX}{\existential{\z}\parhorseshoe{\parhorseshoe{\Gp{\z}}{\Kp{\z}}}{\parhorseshoe{\existential{\x}\Gp{\x}}{\existential{\y}\Kp{\y}}}} 
+
+\newcommand{\formulaXXXXXI}{\sdtstile{}{}\horseshoe{\Diamond\parconjunction{\A}{\B}}{\pardisjunction{\A}{\B}}}
+\newcommand{\formulaXXXXXII}{\sdtstile{}{}\horseshoe{\parhorseshoe{\Diamond\A}{\Diamond\B}}{\Box\parhorseshoe{\Diamond\A}{\Diamond\B}}}
+\newcommand{\formulaXXXXXIII}{\sdtstile{}{}\horseshoe{\Box\parhorseshoe{\A}{\B}}{\parhorseshoe{\Diamond\parconjunction{\A}{\C}}{\Diamond\parconjunction{\B}{\C}}}}
+\newcommand{\formulaXXXXXIV}{\horseshoe{\Box\A}{\parhorseshoe{\Diamond\parconjunction{\B}{\C}}{\Box\Diamond\parconjunction{\A}{\conjunction{\B}{\C}}}}}
+\newcommand{\formulaXXXXXV}{\horseshoe{\parconjunction{\Diamond\A}{\Box\negation{\B}}}{\Diamond\parconjunction{\A}{\negation{\B}}}}
+
+\newcommand{\formulaXXXXXVI}{\horseshoe{\existential{\w}\universal{\y}\w=\y}{\parhorseshoe{\existential{\y}\Fp{\y}}{\universal{\z}\Fp{\z}}}}
+\newcommand{\formulaXXXXXVII}{\horseshoe{\universal{\x}\universal{\y}\universal{\z}\pardisjunction{\x=\y}{\disjunction{\y=\z}{\x=\z}}}{\pardisjunction{\universal{\z}\parhorseshoe{\Fp{\z}}{\Gp{\z}}}{\disjunction{\universal{\z}\parhorseshoe{\Fp{\z}}{\negation{\Gp{\z}}}}{\universal{\z}\Fp{\z}}}}}
+
+%tables
+
+\newcommand{\tableI}{
+\begin{center}
+\begin{tabular}{ p{.2in} p{.3in} p{.75in} p{.75in} p{.75in} }
+ & & & $\CAPTHETA{}$ & \\
+ & & TFT & TFI & TFF \\
+ & & & & \\
+ & TFT & & & \\
+ & & & & \\
+$\CAPPHI{}$ & TFI & & & \\
+ & & & & \\
+ & TFF & & & \\
+\end{tabular}
+\end{center}
+}
+
+\newcommand{\tableII}{
+\begin{table}[h]
+\begin{center}
+	      \begin{tabular}{ l l l | l p{.75in} p{1.75in} }
+	          Universe & Pos Int & States &   & Pos Int & States\\ \hline
+	          a & 1 & LA & A$^1$ & all pos int & midwestern\\
+	          b & 9 & ME & B$^1$ & empty set & name with $>5$ letters\\
+	          c & 72 & GA & C$^1$ & even & coastal\\
+	          d & 3 & NE & D$^1$ & odd & mountainous\\
+	          e & 1 & NM & E$^1$ & prime & \{Ohio\}\\
+	          f & 2 & TX & F$^1$ & Pos Int & states\\
+	      \end{tabular}
+\end{center}
+\end{table}
+}
+
+%syllogisms
+
+\newcommand{\syllogismI}{%
+All \Al{} are \Bl{} \\%
+Some \Bl{} are \Cl{} \\%
+--------------------- \\%
+Some \Al{} are \Cl{}%
+}
+
+%misc
+
+\newcommand{\IntA}{\text{I}}
+\newcommand{\True}{\text{T}}
+\newcommand{\False}{\text{F}}
+
+					   \DeclareOptionX{IntA}[\text{I}]{%
+				\renewcommand{\IntA}{#1}%
+				       }
+					   \DeclareOptionX{True}[\text{T}]{%
+				\renewcommand{\True}{#1}%
+				       }
+					   \DeclareOptionX{False}[\text{F}]{%
+				\renewcommand{\False}{#1}
+				       }
+%proofs
+\newenvironment{gproof}[1][]%
+{%
+%\begin{table}[H]
+\needspace{.75in}
+\begin{menumerate}
+\item{#1} $\text{ }$
+\end{menumerate}
+\vspace{-.425in}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}[c]{ l@{\hspace{.75em}} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}r@{} }%
+}%
+{%
+\end{longtable}
+%\end{table}
+%\end{menumerate}
+}%
+\newenvironment{gproofnn}[1][]%
+{%
+%\begin{table}[H]
+\needspace{.5in}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}[c]{ l@{\hspace{.75em}} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}l@{} @{}r@{} }%
+}%
+{%
+\end{longtable}
+%\end{table}
+%\end{menumerate}
+}%
+\newcommand{\gaproof}[1]%
+{%
+\hhline{~~---------~~}
+#1
+\hhline{~~---------~~}
+}%
+\newcommand{\gaaproof}[1]%
+{%
+\hhline{~~~-------~~~}
+#1
+\hhline{~~~-------~~~}
+}%
+\newcommand{\gaaaproof}[1]%
+{%
+\hhline{~~~~-----~~~~}%
+#1
+\hhline{~~~~-----~~~~}%
+}%
+\newcommand{\gaaaaproof}[1]%
+{%
+\hhline{~~~~~---~~~~~}%
+#1
+\hhline{~~~~~---~~~~~}%
+}%
+\newcommand{\gaaaaaproof}[1]%
+{%
+\hhline{~~~~~~-~~~~~~}%
+#1
+\hhline{~~~~~~-~~~~~~}%
+}%
+
+\newcommand{\gline}[3]{{#1}.\hspace{1.75em}&\multicolumn{11}{@{}l@{}}{\hspace{.25em}{#2}\hfill\hspace{.75em}}&\hspace{1.75em}{#3}\\}
+\newcommand{\glinend}[3]{{#1}\hspace{1.75em}&\multicolumn{11}{@{}l@{}}{\hspace{.25em}{#2}\hfill\hspace{.75em}}&\hspace{1.75em}{#3}\\}
+\newcommand{\galine}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\multicolumn{9}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\galineNC}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\multicolumn{9}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\galineNCnd}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\multicolumn{9}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\galinend}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\multicolumn{9}{@{}l@{}}{\vline\hspace*{.25em}{#2}\hfill\hspace{.75em}\vline}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaline}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{7}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}&\hspace*{\fill}\hspace{1.75em}\vline&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaalineNCS}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{7}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}&\hspace*{\fill}\hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaalineNCndS}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{7}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}&\hspace*{\fill}\hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaalineNC}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{7}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}}&\hspace*{\fill}\hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaalineNCnd}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{7}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}}&\hspace*{\fill}\hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaaline}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalineS}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalineSS}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalinend}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalinendS}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalinendSS}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalineNC}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}}& \hspace*{\fill} \hspace{1.75em}& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaalineNCnd}[3]{{#1}\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{5}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}}& \hspace*{\fill} \hspace{1.75em}& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaaaline}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{3}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaaalineS}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{3}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+\newcommand{\gaaaaaline}[3]{{#1}.\hspace{1.75em}&\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\vline\hspace*{1.75em}&\multicolumn{1}{@{}l@{}}{\vline\hspace*{.25em}{#2} \hspace*{\fill} \hspace{.75em}\vline}& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline& \hspace*{\fill} \hspace{1.75em}\vline&\hspace{1.75em}&\hspace{1.75em}{#3}\\}
+
+\ExecuteOptionsX{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,
+                 alpha,beta,chi,delta,epsilon,phi,gamma,eta,iota,kappa,lambda,mu,nu,Greeko,pi,
+				 theta,rho,sigma,
+				 tau,upsilon,omega,xi,psi,zeta,
+				 capalpha,capbeta,capchi,capdelta,capepsilon,capphi,capgamma,capeta,capiota,capkappa,
+				 caplambda,capmu,capnu,capGreeko,cappi,
+				 captheta,caprho,capsigma,
+				 captau,capupsilon,capomega,capxi,cappsi,capzeta,
+				 IntA,True,False,quantifierparL,quantifierparR,predparL,predparR,
+				 Ap,Bp,Cp,Dp,Ep,Fp,Gp,Hp,Ip,Jp,Kp,Lp,Mp,Np,Op,Pp,Qp,Rp,Sp,Tp,Up,Vp,Wp,Xp,Yp,Zp,
+				 w,x,y,z,manybrackets%PredArgComma,
+					   }
+	  \ProcessOptionsX
