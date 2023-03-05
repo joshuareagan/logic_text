@@ -36,7 +36,7 @@ Our new language needs symbols that represent named objects, including people li
 \noindent{}If we want to apply a predicate without invoking a name, we'll need to use a variable, which functions somewhat like a pronoun in English.  And to account for the word \mention{all} in our new language, we will need to use a \emph{quantifier}.  (We'll discuss quantifiers a bit later.)  In this chapter we outline a formal language with these features, and thus which can capture the kind of logical consequence exhibited above.
 
 Many logic texts call the following language \PL{}, for \idf{predicate language}. 
-We use \mention{\QL{}} for \idf{quantifier language}, because the quantifiers are more important than the predicates. However, before turning to the full language of \GQL{} (in the next chapter), we first consider a simpler language which we'll call \mention{\GQL{}1}.  We call it \mention{\GQL{}1} because the predicates will all be 1-place.\footnote{In \GQL{} there will be many-place predicates.  The basics of a less formal version of \GQL{}1 were developed by Aristotle over 2,000 years before Gottlob Frege and others developed the full language we're calling \GQL{}.  \GQL{} was a big step for mankind.}
+We use \mention{\QL{}} for \idf{quantifier language}, because the quantifiers are more important than the predicates. However, before turning to the full language of \GQL{} (in the next chapter), we first consider a simpler sublanguage which we'll call \mention{\GQL{}1}.  We call it \mention{\GQL{}1} because the predicates will all be 1-place.\footnote{In \GQL{} there will be many-place predicates.  The basics of a less formal version of \GQL{}1 were developed by Aristotle over 2,000 years before Gottlob Frege and others developed the full language we're calling \GQL{}.  \GQL{} was a big step for mankind.}
  
 \GQL{}1 has all the basic symbols of \GSL{}, plus a few more. 
 \begin{majorILnc}{\LnpDC{Symbols of GQL1}}
@@ -63,6 +63,7 @@ They are Roman lowercase letters that go from \mention{$\variable{u}$} to \menti
 
 
 We also have 1-place predicates in \GQL{}1. The one-place predicates are capital Roman letters going from \mention{$\Ap{'}$} to \mention{$\Tp{'}$} and then starting over with subscripted integers.  There are an infinite number of each of the individual constants, variables, and 1-place predicates. 
+This is so that however complex a sentence or argument we want to analyze, we never run out of \GQL{}1 symbols.
 
 \subsection{Formulas of \GQL{}1}\label{Formulas of GQL1}
 Our ultimate interest is in \emph{sentences} of \GQL{}1, but to get to the sentences we have to work with a larger set of strings called \mention{formulas.}\index{formulas} 
@@ -74,7 +75,7 @@ We use lowercase Greek letters to stand for variables of \GQL{}1, usually but no
 \item[Base Clauses:] \hfill{}
 \begin{cenumerate}
 \item A sentence letter (atomic sentence of \GSL{}) is a formula.
-\item\label{atomic pred} A 1-place predicate followed by an individual constant or variable is a formula.
+\item\label{atomic pred} A 1-place predicate followed by one individual constant or variable is a formula.
 \end{cenumerate}
 \item[Generating Clauses:] \hfill{}
 \begin{cenumerate}
@@ -90,20 +91,20 @@ that this generating clause is non-standard; most logic books treat conjunction 
 \noindent{}For example, $\App{'}{\constant{b}}$ is a formula, and so is $\Dpp{'}{\variable{x}_4}$. Each of these formulas is atomic.  Formulas of the form $\universal{\ALPHA}\CAPPHI$ are called \underidf{universal}{formulas} formulas and formulas of the form $\existential{\ALPHA}\CAPPHI$ are called \underidf{existential}{formulas}. 
 Here are some additional examples of \GQL{}1 formulas. 
 \begin{multicols}{2}
-\begin{menumerate}
+\begin{enumerate}
 \item $\universal{\variable{x}}\Jpp{'}{\variable{x}}$ 
 \item $\negation{\existential{\variable{y}}\Kpp{'}{\variable{x}}}$ 
 %\item $\universal{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
 %\item $\existential{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
 %\item $\universal{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
-\item $\existential{\variable{z}}\Lpp{'}{\constant{b}}$
+\item $\existential{\variable{z}}\Lpp{'_{12}}{\constant{b}}$
 \item $\existential{\variable{y}}\negation{\universal{\variable{x}}\Gpp{'}{\variable{y}}}$ 
 %\item $\existential{\variable{x}}\universal{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
 %\item $\universal{\variable{x}}\universal{\variable{y}}\Gppp{''}{\variable{x}}{\variable{y}}$ 
 \item $\universal{\variable{x}}\existential{\variable{y}}\Hpp{'}{\variable{z}}$ 
 \item $\parhorseshoe{\universal{\variable{x}}\universal{\variable{z}}\Ppp{'}{\variable{z}_{176}}}{\universal{\variable{y}}\Gpp{'}{\variable{y}}}$ 
 %\item $\universal{\variable{x}}\existential{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$
-\end{menumerate}
+\end{enumerate}
 \end{multicols}
 \noindent{}Contrarily, $\universal{\variable{x}}\universal{\x}\Gpp{'}{\variable{x}}$ is \emph{not} a formula.  That's because it's of the form $\universal{\variable{x}}\CAPPHI$ where $\CAPPHI$ is a formula that contains the expression $\universal{\variable{x}}$.\footnote{Continuing the practice started in section \ref{use mention comment}, we will not always put symbols, expressions, and sentences of \GQL{}1 that are mentioned (instead of used) in single quotes. 
 For example, the tokens of the universal and existential quantifiers in definition \mvref{Bound Variable} should, strictly speaking, be in quotes because they \emph{mention} the symbols. 
@@ -275,7 +276,7 @@ A variable token $\alpha$ in a formula $\CAPPHI$ is \underdf{bound}{variables} \
 \end{majorILnc}
 \noindent{}E.g., in the sentence $\existential{\variable{x}}\parconjunction{\Gp{'\variable{x}}}{\Hp{'\variable{x}}}$, the first token of $\variable{x}$ is bound because it's part of the quantifier expression \mention{$\existential{\variable{x}}$}.  The second and third tokens of $\variable{x}$ are bound because they are within the scope of a quantifier expression with that variable.
 
-Alternatively, a variable token is bound \Iff a quantifier with the same variable appears below or at the same level as (but still on the same branch as) that token in the construction tree of the sentence. 
+Alternatively, we can understand when a variable is bound by thinking of a tree of the sentence. A variable token is bound \Iff a quantifier with the same variable appears below or at the same level as (but still on the same branch as) that token. 
 The quantifier that binds a variable is the \emph{first} quantifier that appears below or at the same level as (but still on the same branch as) the variable. 
 \begin{majorILnc}{\LnpDC{Atomic Sentence of GQL}}
 An \underdf{atomic}{sentence} \nidf{sentence} of \GQL{}1 is an atomic formula of \GQL{}1 which is also a sentence; that is, it is an atomic formula of \GQL{}1 that has no free variable.
@@ -393,9 +394,9 @@ However, while \mention{$\ALPHA$}, \mention{$\BETA$}, etc. stand \emph{only} for
 
 At this point we could define truth for sentences without quantifiers, though for now we offer only a short sketch.  The sentence $\Gp{\constant{a}}$ is true on $\IntA$ \Iff the object $\IntA$ assigns to \mention{$\constant{a}$} is an element of the set $\IntA$ assigns to \mention{$\GG$}; i.e., \Iff $\IntA(\constant{a})\in\IntA(\GG)$.  If the object $\IntA$ assigns to \mention{$\constant{a}$} isn't a member of the set assigned to \mention{$\GG$}, $\Gp{\constant{a}}$ is false on $\IntA$.
 
-Quantifiers require more complexity.   We'll want $\universal{\variable{x}}\Gp{\variable{x}}$ to be true \Iff every object in the domain, $\integer{U}$, is an element of $\IntA(\GG)$.  For simple quantified sentences this quick definition is good enough; but it won't work for more complex sentences, such as $\universal{\variable{x}}\existential{\variable{y}}\parhorseshoe{\Hp{\variable{y}}}{\Gp{\variable{x}}}$.
+Quantifiers require more complexity. A sentence like $\universal{\variable{x}}\Ep{\variable{x}}$ is true \Iff every object in the domain, $\integer{U}$, is an element of $\IntA(\EE)$. So if $\IntA$ assigns $\integer{U}$ the set of even integers and $\IntA(\EE)=\integer{U}$, $\universal{\variable{x}}\Ep{\variable{x}}$ is true. But if instead $\IntA(\EE)=\{2, 4, 6\}$, then there are objects in the domain (e.g. $8$) not in $\IntA(\EE)$, and so $\universal{\variable{x}}\Ep{\variable{x}}$ is false. For simple quantified sentences this quick definition is good enough; but it won't work for more complex sentences, such as $\universal{\variable{x}}\existential{\variable{y}}\parhorseshoe{\Hp{\variable{y}}}{\Gp{\variable{x}}}$.
 
-Next, we want a convenient way to refer to models that make identical assignments everywhere except at one constant.
+In order to arrive at a more sophisticated definition, we first need a convenient way to refer to models that make identical assignments everywhere except at one constant.
 
 \begin{majorILnc}{\LnpDC{Variant}}
 A $\variable{t}$-\nidf{variant}\index{model!$\variable{t}$-variant} of $\As{}{}$ is any model $\As{*}{}$ making the same assignments as $\As{}{}$ for everything except possibly $\variable{t}$.\footnote{One result of this definition is that, for every term $\variable{t}$, any model $\As{}{}$ is a $\variable{t}$-variant of itself.}  If $\As{*}{}$ makes an assignment to $\variable{t}$, the $\variable{t}$-variants are $\As{*}{}$ and all of the similar models that assign something else to $\variable{t}$;  if $\As{*}{}$ does not make an assignment to $\variable{t}$, then the $\variable{t}$ variants are all the models that agree with $\As{*}{}$ and assign something to $\variable{t}$.
@@ -471,7 +472,7 @@ The following table has two example models, \emph{Pos Int} and \emph{States}:
 	%&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Interpretation}} \\ \cmidrule(l){3-4}
 	%& & \textbf{Pos Int} & \textbf{States} \\
 	%\midrule 
-	{Universe:} & & The set of positive integers & The set of US states (2017) \\ \addlinespace[.25cm]
+	{Universe:} & & The set of positive integers & The set of current US states \\ \addlinespace[.25cm]
 	{Sent. Let.:}& A&$\True$&$\False$\\
 	& B&$\True$&$\False$\\
 	& C&$\False$&$\True$\\
