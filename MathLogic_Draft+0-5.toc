@@ -130,9 +130,9 @@
 \contentsline {subsection}{\numberline {8.2.4}History of Modal Logic}{218}{subsection.8.2.4}%
 \contentsline {section}{\numberline {8.3}Quantifier Logic with Identity}{219}{section.8.3}%
 \contentsline {subsection}{\numberline {8.3.1}Introduction}{219}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}The Language GQLI}{220}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}Truth, Logical Truth, and Entailment in GQLI}{220}{subsection.8.3.3}%
-\contentsline {subsection}{\numberline {8.3.4}Derivations in GQDI}{223}{subsection.8.3.4}%
+\contentsline {subsection}{\numberline {8.3.2}The Language {\addfontfeature {LetterSpace=2.0}\MakeUppercase {qli}}{}}{220}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Truth, Logical Truth, and Entailment in GQLI}{221}{subsection.8.3.3}%
+\contentsline {subsection}{\numberline {8.3.4}Derivations in GQDI}{224}{subsection.8.3.4}%
 \contentsline {section}{\numberline {8.4}Exercises}{225}{section.8.4}%
 \contentsline {chapter}{Appendix A: List of Theorems}{229}{chapter*.3}%
 \contentsline {chapter}{Appendix B: List of Derivation Rules}{237}{chapter*.4}%

@@ -7,10 +7,12 @@
 \section{Many-Valued Logic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In developing many-valued logics, we do not assume that there are only two truth values.  We explore the possibility that there are varying degrees of truth and falsity, and hence that there are sentences that are neither wholly true nor wholly false.
+
+In previous chapters we assumed that there are only two truth values. We now set aside that assumption. This allows us to explore many-valued logics. 
+We explore the possibility that there are varying degrees of truth and falsity, such that there are sentences that are neither wholly true nor wholly false.
 (Actually it turns out that there are many possibilities because there are many many-valued logics; in fact, there are infinitely many!) 
 Among the reasons that have been given historically for rejecting the two-valuedness assumption are the beliefs that statements about the future, statements involving vague predicates, or statements about quantum-mechanical properties are not always either true or false. 
-Most many-valued logics begin by rejecting the law of excluded middle $\disjunction{\Al}{\negation{\Al}}$, though there are exceptions. 
+Most many-valued logics begin by rejecting the law of excluded middle $\disjunction{\Al}{\negation{\Al}}$, though there are exceptions.\footnote{For example, the most generally accepted logic for quantum mechanics keeps	$\disjunction{\Al}{\negation{\Al}}$ but rejects one of the distribution principles.} 
 The number of values ranges from three to various infinite sets. 
 The interpretations of the further values vary widely from author to author, as do the motivations for introducing the additional values. 
 
@@ -118,14 +120,14 @@ In all of the \L{}ukasiewicz systems the only designated value is 1.
 Excluded middle will not be logically true in any of these systems, though in the even-valued systems excluded middle is always truer than the contradiction $\conjunction{\Al}{\negation{\Al}}$. 
 Systems with more than one designated value were mentioned by Post, and this variation on \L{}ukasiewicz systems was studied by Slupecki and others. 
 
-Four-valued logic was proposed for modal logic, the values being ``necessarily true'', ``contingently true'', ``contingently false'', and ``necessarily false''. 
+Four-valued logic was proposed for modal logic, the values being ``necessarily true'', ``contingently true'', ``contingently false'', and ``necessarily false''.
 The \L{}ukasiewicz definitions of the usual connectives can be used and a modal operator added. 
-While these truth tables have some uses, they have been superseded by the possible worlds approach to modal logic. 
+While these truth tables have some uses, they have been superseded by the possible worlds approach to modal logic. We discuss possible world semantics later in this chapter.
 
 \subsection{Infinite-valued systems}
 
 The \L{}ukasiewicz $\integer{n}$-valued generalization can be systematically carried further still.
-\L{}ukasiewicz also studied the cases where the set of truth values consists of all rational numbers (fractions) in the interval $[0,1]$ and where the values consist of all real numbers (infinite decimal expansions) in the same interval. 
+\L{}ukasiewicz also studied the cases where the set of truth values consists of all rational numbers (fractions) in the interval $[0,1]$ and also where the values consist of all real numbers (infinite decimal expansions) in the same interval. 
 Conjunction, disjunction, negation, and the conditional (with the two cases) are the same as for finite-valued systems with more than three values. 
 The set of logical truths in the three-valued logic is a subset of those in our traditional logic; if a sentence can be shown to be false in a two-valued model, then that model also works in the three-valued system. 
 
@@ -211,11 +213,11 @@ Like the models for \GQL{} (and unlike the many-valued models for \GSL{}), model
 A model $\IntA$ for \MGSL{} is an ordered triple $\langle\world{w}_0,\integer{W},\integer{V}\rangle$ where:
 \begin{cenumerate}
 \item $\integer{W}$ is a set, the elements of which are thought of as ``possible worlds''
-\item $\world{w}_0\in\integer{W}$
+\item $\world{w}_0\in\integer{W}$, where $\world{w}_0$ plays the role of ``the actual world''
 \item $\integer{V}$ is a function that assigns a subset of $\integer{W}$ to each sentence letter of \MGSL{}.
 \end{cenumerate}
 \end{majorILnc}
-\noindent{}Elements of $\integer{W}$, ``possible worlds'', will be denoted by $\world{w},\world{w}_1,\world{w}_2$ and so on. 
+\noindent{}Elements of $\integer{W}$, ``possible worlds'', will be denoted by $\world{w},\world{w}_0,\world{w}_1,\world{w}_2$ and so on. 
 The subset $\integer{V}(\CAPPHI)$ of $\integer{W}$ assigned to a sentence letter $\CAPPHI$ can be the empty set $\emptyset$, a non-empty proper subset of $\integer{W}$, or all of $\integer{W}$ itself. 
 Intuitively, the set $\integer{V}(\CAPPHI)$ is the set of possible worlds in which $\CAPPHI$ is true.  And $\integer{W}-\integer{V}(\CAPPHI)$, those worlds not in $\integer{V}(\CAPPHI)$, are worlds in which $\CAPPHI$ is false.  (We use the \mention{$-$} symbol to indicate the \mention{complement} of a set.)\footnote{For example, relative to some domain, $\{ 1, 2, 3, 4\}$, the complement of the set $\{1, 2\}$ is $\{3, 4\}$.  We can indicate the latter with the following notation: $\{ 1, 2, 3, 4\}-\{1, 2\}$.}
 Thus the function $\integer{V}$ in a \MGSL{} model is like a \GSL{} model, except that it assigns truth values to sentence letters in a possible world. 
@@ -243,7 +245,7 @@ A sentence $\CAPPHI$ of \MGSL{} is \nidf{true in world $\world{w}$} in model $\I
 A sentence $\CAPPHI$ of \MGSL{} is \nidf{true} in model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ \Iff $\integer{V}^*(\CAPPHI)=\integer{W}$.
 \end{majorILnc}
 \noindent{}Perhaps it's best not to use ``truth'' here, but instead something like ``truth everywhere''; so we might say that $\CAPPHI$ is true everywhere in $\IntA$ \Iff $\integer{V}^*(\CAPPHI)=\integer{W}$, for $\integer{V}^*$ the valuation function of $\IntA$.
-But again, the more significant concept is truth in a world (def. \ref{MGSLTruthB}), not truth everywhere in a model (def. \ref{MGSLTruthC}). 
+The significant concepts are (1) truth in a world in a model (def. \ref{MGSLTruthB}), and (2) truth at all worlds in a model (def. \ref{MGSLTruthC}).
 
 The concepts of logical truth, logical falsity, and logical indeterminacy can be adapted to \MGSL{} as well:
 \begin{majorILnc}{\LnpDC{MGSLLogicalTruth}}
@@ -284,18 +286,21 @@ Since $\IntA$ was arbitrary, this means that $\integer{V}^*(\negation{\CAPPSI})\
 There are sentences $\CAPPHI$ and $\CAPPSI$ for which $\horseshoe{\BOX\pardisjunction{\CAPPHI}{\CAPPSI}}{\pardisjunction{\BOX\CAPPHI}{\BOX\CAPPSI}}$ is not a modal truth. 
 \end{majorILnc}
 \begin{PROOF}
-Consider a model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ with the set $W=\{\world{w}_1,\world{w}_2\}$. 
+Consider a model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ with the set $W=\{\world{w}_0,\world{w}_1\}$. 
 Let $\CAPPHI=\Bl$ and let $\CAPPSI=\;\negation{\Bl}$. 
-Let $\integer{V}(\Bl)=\{w_1\}$. 
-By (2) in definition \ref{MGSLTruth}, $\integer{V}^*(\negation{\Bl})=\{w_2\}$. 
-By (4) in definition \ref{MGSLTruth}, $\integer{V}^*(\disjunction{\Bl}{\negation{\Bl}})=\{w_1,w_2\}$; hence by (7) of definition \ref{MGSLTruth} $\integer{V}^*(\BOX\pardisjunction{\Bl}{\negation{\Bl}})=\{\world{w}_1,\world{w}_2\}$. 
-Thus, $\BOX\pardisjunction{\Bl}{\negation{\Bl}}$ is true at each $\world{w}$ in $W$, including world $\world{w}_1$. 
+Let $\integer{V}(\Bl)=\{w_0\}$. 
+By (2) in definition \ref{MGSLTruth}, $\integer{V}^*(\negation{\Bl})=\{w_1\}$. 
+By (4) in definition \ref{MGSLTruth}, $\integer{V}^*(\disjunction{\Bl}{\negation{\Bl}})=\{w_0,w_1\}$; hence by (7) of definition \ref{MGSLTruth} $\integer{V}^*(\BOX\pardisjunction{\Bl}{\negation{\Bl}})=\{\world{w}_0,\world{w}_1\}$. 
+Thus, $\BOX\pardisjunction{\Bl}{\negation{\Bl}}$ is true at each $\world{w}$ in $W$, including world $\world{w}_0$. 
 Consider then $\pardisjunction{\BOX\Bl}{\BOX\negation{\Bl}}$. 
-By (7) of definition \ref{MGSLTruth}, $\integer{V}^*(\BOX\Bl)=\emptyset$ since $\integer{V}^*(\Bl)=\{w_1\}\neq\integer{W}$. 
-Again, $\integer{V}^*(\BOX\negation{\Bl})=\emptyset$ since $\integer{V}^*(\negation{\Bl})=\{\world{w}_2\}\neq\integer{W}$. 
-So, by (4) in definition \ref{MGSLTruth}, $\integer{V}^*(\disjunction{\BOX\Bl}{\BOX\negation{\Bl}})=\emptyset$. Thus, $\pardisjunction{\BOX\Bl}{\BOX\negation{\Bl}}$ is false at each $\world{w}$ in $\integer{W}$, including world $\world{w}_1$. 
+By (7) of definition \ref{MGSLTruth}, $\integer{V}^*(\BOX\Bl)=\emptyset$ since $\integer{V}^*(\Bl)=\{w_0\}\neq\integer{W}$. 
+Again, $\integer{V}^*(\BOX\negation{\Bl})=\emptyset$ since $\integer{V}^*(\negation{\Bl})=\{\world{w}_1\}\neq\integer{W}$. 
+So, by (4) in definition \ref{MGSLTruth}, $\integer{V}^*(\disjunction{\BOX\Bl}{\BOX\negation{\Bl}})=\emptyset$. Thus, $\pardisjunction{\BOX\Bl}{\BOX\negation{\Bl}}$ is false at each $\world{w}$ in $\integer{W}$, including world $\world{w}_0$. 
 Therefore, $\horseshoe{\BOX\pardisjunction{\Bl}{\negation{\Bl}}}{\pardisjunction{\BOX\Bl}{\BOX\negation{\Bl}}}$ is not true in $\world{w}_1$ in $\IntA$; so it is not a modal truth. 
 \end{PROOF}
+
+You should see a strong similarity here with the fact that $\horseshoe{\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}}{\pardisjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}}$ is not a logical truth.
+
 \begin{majorILnc}{\LnpEC{MGSLTruthExampleC}}
 All of the following are modal truths, for any substitution of sentences $\CAPPHI$ and $\CAPPSI$. 
 We leave the proofs as exercises to the reader.
@@ -335,7 +340,7 @@ This follows from the iteration of the following basic facts.
 \noindent{}Again we leave the rigorous proofs to the reader.
 But, from the intuitive semantic point of view this is because the modalities $\BOX$ and $\DIAMOND$ behave like quantifiers over a fixed domain with only one variable that they can quantify. 
 Thus any quantification after the first is vacuous. 
-As we will discuss a little more below, there are other ways of defining models of \MGSL{} in which (roughly) the domain of quantification over worlds isn't always the same, and hence instances of the schemas in theorem \ref{MGSLSFiveTheorem} aren't modal truths in these modal logics.
+There are other ways of defining modal models of in which (roughly) the domain of quantification over worlds isn't always the same. The schemas in theorem \ref{MGSLSFiveTheorem} don't represent modal truths in these modal logics. We do not discuss alternative modal model definitions in this text.
 
 \subsection{Derivations in \SF{}}
 We would like a derivation system which is sound and complete for the semantics just defined in the last section, i.e. so that a sentence of \MGSL{} is a modal truth (def. \ref{MGSLLogicalTruth}) \Iff it's derivable in that system. 
@@ -416,6 +421,11 @@ It can be shown that anything we can prove using \SF{} and the following shortcu
 \end{longtable}
 \index{derivation!rule!shortcut}
 
+Proving soundness for \SF{} is very similar to proving it for \GSD{}. 
+In fact, we start with the proof for \GSD{} and add four more parts: one establishing the soundness of each new modal rule. 
+Proving completeness for \SF{} requires a more complicated modification of the methods for \GSD{}. 
+For logically valid sentences we still need only provide a derivation, but for invalid sentences we must construct a model with various worlds and a model falsifying the sentence.
+
 \subsection{History of Modal Logic}
 
 It's worth discussing some historical background. 
@@ -442,7 +452,7 @@ For handbook-style treatments, see \citep{Cresswell2001}, \citep{Bull2001}, \cit
 
 \subsection{Introduction}
 %As the following theorem says, it is a fact that 
-We aren't able to say in \GQL{} that one object is identical to another. 
+We aren't able to say in \GQL{} that one object is identical to another, which is often an important fact. We address this limitation of \GSL{} by extending the language. 
 
 %\begin{THEOREM}{\LnpTC{GQLIdentityTheorem}}
 %There exists no (possibly countably infinite) set of formulas $\Delta$ of \GQL{} each of which at most has the variables $\ALPHA$ and $\BETA$ free such that:
@@ -468,7 +478,7 @@ We aren't able to say in \GQL{} that one object is identical to another.
 %Hence, for each of these sets $\Delta^*$, it's not the case that for all models $\IntA$, $\IntA$ makes every sentence of $\Delta^*$ true iff $\IntA(\variable{t})=\IntA(\variable{s})$.
 %\end{PROOFOF}
 
-\noindent{}We may address this limitation of \GSL{} by extending the language. 
+
 %(The reader might note that the proof of theorem \ref{IdentityLemma} appealed to the method used to construct interpretations in the proof of completeness.
 %Hence if there's some way to extend \GQD{} to a derivation system for the extension of \GQL{} which fixes that problem, any )
 
@@ -506,7 +516,7 @@ Thinking about translations of English sentences again, this inability to captur
 \end{menumerate}
 So by extending \GQL{} to capture identity claims we'll also be able to capture cardinality claims, and translate sentences like these. 
 
-\subsection{The Language GQLI}
+\subsection{The Language \GQLI{}}
 To get the language \GQLI{}, we add to the basic symbols of \GQL{} (def. \pmvref{Symbols of GQL}) the identity symbol \mention{$=$} and add a new base clause to the recursive definition of a \GQL{} formula (def. \pmvref{Definition of Formula of GQL}). 
 \begin{majorILnc}{\LnpDC{Definition of Formula of GQLI}} The \nidf{formulas} \underdf{of \GQLI{}}{formulas} are given by the following recursive definition:
 \begin{description}
@@ -516,6 +526,9 @@ To get the language \GQLI{}, we add to the basic symbols of \GQL{} (def. \pmvref
 \item An $\integer{n}$-place predicate followed by $\integer{n}$ occurrences (tokens) of individual constants or variables is an atomic formula.
 \item Given two individual terms $\variable{t}$ and $\variable{s}$ (see Sec. \ref{GQL Truth in an Interpretation}), $\variable{t}=\variable{s}$ is an atomic formula.
 \end{cenumerate}
+
+So $\variable{b}=\variable{d}$, $\variable{b}=\variable{x}$, $\variable{y}=\variable{d}$, and $\variable{x}=\variable{x}$ are all examples of atomic formulas.
+
 \item[Generating Clauses:] \hfill{}
 \begin{cenumerate}
 \item If $\CAPPHI$ is a formula, then so is $\negation{\CAPPHI}$.
@@ -554,15 +567,15 @@ The definitions of quantificational truth (def. \ref{QT}), falsehood (def. \ref{
 The definition of entailment is also the same, and likewise for the other relations defined in section \ref{GQL Entailment and other Relations}.
 
 \begin{majorILnc}{\LnpEC{IdentityExampleA}}
-Consider any model $\IntA$ which includes Cicero and Tully in its universe and assigns $\constant{c}$ to Cicero and $\constant{l}$ to Tully. 
+Consider any model $\IntA$ which includes Cicero and Tully in its universe and assigns $\constant{c}$ to Cicero and $\constant{d}$ to Tully. 
 (Cicero was a great Roman orator from the first century BC, and \mention{Tully} is an anglicized version of his name.)
 Then there exists a sentence $\CAPPHI$ of \GQLI{} such that all and only those models $\IntA$ in which Cicero is Tully make $\CAPPHI$ true.
-One such sentence is $\text{c}=\text{l}$.
-Hence, $\text{c}=\text{l}$ is a reasonable translation of the English sentence \mention{Cicero is Tully.}
+One such sentence is $\text{c}=\text{d}$.
+Hence, $\text{c}=\text{d}$ is a reasonable translation of the English sentence \mention{Cicero is Tully.}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{IdentityExampleB}}
-Consider the sentence $\horseshoe{\parconjunction{\text{c}=\text{l}}{\Rp{\text{c}}}}{\Rp{\text{l}}}$ and consider just those models $\IntA$ which include Cicero and Tully in the universe, assign $\constant{c}$ to Cicero and $\constant{l}$ to Tully, and assign to $\RR$ the set of all Romans. 
-Then any of those models which make the sentence true are such that either $\IntA(\constant{l})\in\IntA(\RR)$, or either $\IntA(\constant{c})\neq\IntA(\constant{l})$ or $\IntA(\constant{c})\notin\IntA(\RR)$.
+Consider the sentence $\horseshoe{\parconjunction{\text{c}=\text{d}}{\Rp{\text{c}}}}{\Rp{\text{d}}}$ and consider just those models $\IntA$ which include Cicero and Tully in the universe, assign $\constant{c}$ to Cicero and $\constant{d}$ to Tully, and assign to $\RR$ the set of all Romans. 
+Then any of those models which make the sentence true are such that either $\IntA(\constant{d})\in\IntA(\RR)$, or either $\IntA(\constant{c})\neq\IntA(\constant{d})$ or $\IntA(\constant{c})\notin\IntA(\RR)$.
 Hence the sentence is a reasonable translation of the English sentence \mention{If Cicero is Tully and Cicero is Roman, then Tully is Roman.}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{IdentityExampleC}}
@@ -574,7 +587,8 @@ Hence the sentence is a reasonable translation of the English sentence \mention{
 Consider the sentence
 \begin{quote} $\existential{\variable{w}}\existential{\variable{z}}\bparconjunction{\Ap{\variable{w}}}{\conjunction{\Ap{\variable{z}}}{\conjunction{\variable{w}\neq\variable{z}}{\universal{\variable{v}}\parhorseshoe{\Ap{\variable{v}}}{\cpardisjunction{\variable{v}=\variable{w}}{\variable{v}=\variable{z}}}}}}$.
 \end{quote}
-A model $\IntA$ makes the sentence true \Iff $\IntA(\AA)$ contains exactly two elements.
+The two existential quantifiers with the negative identity guarantee that there are at least two instances of \Al, and the universal quantifier guarantees that these are the only ones. 
+So a model $\IntA$ makes the sentence true \Iff $\IntA(\AA)$ contains exactly two elements.
 Hence the sentence is a reasonable translation of the English sentence \mention{There exists (exactly) two apples.}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{IdentityExampleE}}
@@ -586,8 +600,8 @@ This sentence is a reasonable translation of the English sentence \mention{If th
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{IdentityExampleF}}
 Consider the sentence $\conjunction{\conjunction{\Cpp{\text{b}}{\text{a}}}{\Np{\text{b}}}}{\universal{x}\parhorseshoe{\parconjunction{\Cpp{\x}{\text{a}}}{\Np{\x}}}{\x=\text{b}}}$.
-This sentence is true in all and only those models $\IntA$ where only one element of the domain is both in the set $\IntA(\NN)$ and stands in relation $\CC$ to $\IntA(\constant{a})$. 
-So, among others, this sentence would make a reasonable translation of the English sentence \mention{Bob is Arnold's only son.}
+This sentence is true in those models $\IntA$ where only one element of the domain is both in the set $\IntA(\NN)$ and stands in relation $\CC$ to $\IntA(\constant{a})$. 
+So, if $\Cpp{\text{b}}{\text{a}}$ means ``$\text{b}$ is a child of $\text{a}$'', $\Np{\text{b}}$ means ``$\text{b}$ is male'', $\text{a}$ is Arnold, and $\text{b}$ is Bob, this sentence would make a reasonable translation of the English sentence \mention{Bob is Arnold's only son.}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{IdentityExampleG}}
 Consider the sentence $\existential{\y_1}\existential{\y_2}\universal{\x}\pardisjunction{\x=\y_1}{\x=\y_2}$.
@@ -614,7 +628,7 @@ $\universal{\x}\{\Gp{\x}\HORSESHOE\universal{\y}[(\Pp{\y}\WEDGE\Rpp{\y}{\x})\HOR
 It would make a reasonable translation of the English sentence \mention{Every genie grants anyone who releases them at least three wishes.}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{IdentityExampleK}}
-Even with identity, there's no one sentence of GQLI which is true in all and only those models with infinite domains.\footnote{There are some single sentences of GQLI which are such that the only models that make them true have infinite domains, but not every model with an infinite domain makes these true. So, these sentences can't really be thought of as saying that there exists an infinite number of things. They say more than that.} But, there's an infinite set of sentences $\Delta$ such that an model makes every sentence of $\Delta$ true iff it has an infinite domain. Define: %\[\underset{i\neq j}{\overset{n}{\BWEDGE}}\x_i\neq\x_j\Leftrightarrow \parconjunction{\x_1\neq\x_2}{\conjunction{\x_1\neq\x_3}{\conjunction{\ldots}{\conjunction{\x_1\neq\x_{\integer{n}}}{\conjunction{\x_2\neq\x_3}{\conjunction{\x_2\neq\x_4}{\conjunction{\ldots}{\conjunction{\x_2\neq\x_{\integer{n}}}{\conjunction{\ldots\ldots}{\x_{n-1}\neq\x_{\integer{n}}}}}}}}}}}\]
+Even with identity, there's no one sentence of GQLI which is true in all and only those models with infinite domains.\footnote{There are some single sentences of GQLI which are such that the only models that make them true have infinite domains, but not every model with an infinite domain makes these true. So, these sentences can't really be thought of as saying that there exists an infinite number of things. They say more than that.} But, there's an infinite set of sentences $\Delta$ such that a model makes every sentence of $\Delta$ true iff it has an infinite domain. Define: %\[\underset{i\neq j}{\overset{n}{\BWEDGE}}\x_i\neq\x_j\Leftrightarrow \parconjunction{\x_1\neq\x_2}{\conjunction{\x_1\neq\x_3}{\conjunction{\ldots}{\conjunction{\x_1\neq\x_{\integer{n}}}{\conjunction{\x_2\neq\x_3}{\conjunction{\x_2\neq\x_4}{\conjunction{\ldots}{\conjunction{\x_2\neq\x_{\integer{n}}}{\conjunction{\ldots\ldots}{\x_{n-1}\neq\x_{\integer{n}}}}}}}}}}}\]
 
 \begin{center}
 \begin{tabular}{ r c l }
@@ -683,16 +697,19 @@ We can still use the general approach from section \mvref{Sec:Completeness of GQ
 Here we briefly mention where changes need to be made without describing how those changes can be made.
 
 The first difference concerns our search for contradictions (recall Step 4 from Sec. \pmvref{The Method Section}). 
-It's note enough to take the conjunction of all the matrix instances (by \Rule{$\WEDGE\!$-Intro}), use \Rule{Distribution} to get the conjunction into \CAPS{dnf} and check whether every disjunct contains a contradiction. 
+It's not enough to take the conjunction of all the matrix instances (by \Rule{$\WEDGE\!$-Intro}), use \Rule{Distribution} to get the conjunction into \CAPS{dnf} and check whether every disjunct contains a contradiction. 
 The reason is that there might be some disjuncts that don't contain a contradiction, but do contain an ion $\CAPPHI$, an ion $\negation{\CAPPSI}$ where $\CAPPHI=\CAPPHI\variable{t}/\variable{s}$, and the ion $\variable{t}=\variable{s}$. 
-Clearly a contradiction can be derived from these disjuncts using \Rule{$=$-Elim}, so we need to adjust our procedure accordingly. 
+For example, consider the disjunct $\conjunction{\Gp{\constant{a}}}{\conjunction{\negation{\Gp{\constant{b}}}}{\constant{a}=\constant{b}}}$.
+A contradiction can be derived from these disjuncts using \Rule{$=$-Elim}, so we need to adjust our procedure accordingly. 
 
 The second difference concerns how we construct the model when The Method (or The Strong Method) doesn't produce a contradiction. 
-This should be clear from theorem \mvref{IdentityLemma}.
 The old procedure works by assigning distinct elements to each constant that appears in the list of sentences produced by The Method. 
-So, if we could construct an model that made all the sentences produced by The Method (when it doesn't end in a contradiction) true by the old procedure, that model would assign distinct elements to each constant.
+So, if we could construct a model that made all the sentences produced by The Method (when it doesn't end in a contradiction) true by the old procedure, that model would assign distinct elements to each constant.
 But there are sets $\Delta$ of \GQLI{} sentences that both contain ions of the form $\variable{t}=\variable{s}$ and are consistent. 
 Clearly no model that assigns distinct elements to the constants $\variable{t}$ and $\variable{s}$ could make all the sentences in such a set $\Delta$ true. 
+
+Our procedure is to take the model generated by the previous method and modify it by systematically changing the constant assignments so that if $\constant{s}=\constant{t}$ is in the Master Matrix list
+$\constant{s}$ and $\constant{t}$ are both assigned the same constant.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{G\"odel's Theorem}
