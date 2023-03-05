@@ -46,7 +46,7 @@ Lastly, we end with the following theorem:
 
 Recall from section \mvref{Derivation Preliminaries} that we want to use derivations as a way of showing that a sentence is a logical truth, or of showing that some set of sentences entails some other sentence.
 Specifically, we want to use derivations in \GSD{} and \GQD{} to show that sentences of \GSL{} and \GQL{} are \CAPS{tft} and \CAPS{qt}, or to show entailments between sentences of \GSL{} or between sentences of \GQL{}.  
-But derivations can only fill this role if our derivation systems are sound.  Gnerally speaking, a derivation system is only totally satisfactory if it is also complete.
+But derivations can only fill this role if our derivation systems are sound.  Generally speaking, a derivation system is only totally satisfactory if it is also complete.
 Let \Language{L} be some formal language for which we have defined some kind of models.
 \begin{majorILnc}{\LnpDC{LSoundness}}
 A derivation system \DerivationSystem{D} for \Language{L} is \nidf{sound}\index{soundness|textbf} \Iff for every set $\Delta$ of sentences of \Language{L} and every sentence $\CAPPHI$ of \Language{L}, if $\Delta\sststile{}{}\CAPPHI$, then $\Delta\sdtstile{}{}\CAPPHI$.
@@ -62,7 +62,7 @@ We begin by proving the soundness of \GSD{}.\index{soundness!of \GSD{}}
 \begin{THEOREM}{\LnpTC{Soundness of Sentential Logic} \GSD{} Soundness Theorem:}
 \GSD{} is sound; i.e., for every set $\Delta$ of sentences of \GSL{} and every sentence $\CAPPHI$ of \GSL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
 \end{THEOREM}
-\noindent{}To prove that \GSD{} is sound we will first prove the following result about derivations:
+\noindent{}We will first prove the following result about derivations:
 \begin{THEOREM}{\LnpTC{Main GSL Soundness Lemma} Soundness Lemma:}
 For any sequence of derivation lines that is a derivation (see definition \pmvref{Recursive definition of Derivation}), the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assumption}. 
 \end{THEOREM}
@@ -334,7 +334,7 @@ In this section we first prove the completeness of \GSD{}.
 \begin{majorILnc}{\LnpDC{LWCompleteness}}
 	A derivation system \DerivationSystem{D} for \Language{L} is \nidf{weakly complete}\index{completeness!weak|textbf} \Iff for every sentence $\CAPPHI$ of \Language{L}, if $\sdtstile{}{}\CAPPHI$, then $\sststile{}{}\CAPPHI$.
 \end{majorILnc} 
-\noindent{}The following theorem can be proved using basic results we already have.  For other systems of logic, what we are calling completeness and weak completeness are not equivalent.  Because they equivalent are in our systems, we will not always distinguish them in what follows.  Strong completeness also holds for our systems, but is not trivially equivalent to completeness.  As in the first cases, there are systems that are complete but not strongly complete.
+\noindent{}The following theorem can be proved using basic results we already have.  For other systems of logic, what we are calling completeness and weak completeness are not equivalent.  Because they are equivalent in our systems, we will not always distinguish them in what follows.  Strong completeness also holds for our systems, but is not trivially equivalent to completeness.  As in the first cases, there are systems that are complete but not strongly complete.
 \begin{THEOREM}{\LnpTC{RegWeakCompletenessEquiv}}
 	\GSD{} is weakly complete \Iff it's complete; and likewise for \GQD{}.
 \end{THEOREM}
@@ -359,7 +359,7 @@ In this section we first prove the completeness of \GSD{}.
 	Hence $\sdtstile{}{}\horseshoe{\DELTA}{\CAPPHI}$, and so by weak completeness, $\sststile{}{}\horseshoe{\DELTA}{\CAPPHI}$.
 	It should be clear to the reader that if $\sststile{}{}\horseshoe{\DELTA}{\CAPPHI}$, then $\DELTA\sststile{}{}\CAPPHI$.
 	Hence, $\DELTA\sststile{}{}\CAPPHI$.
-	Finally, it should be clear that $\Delta\sststile{}{}\DELTA$, and since $\sststile{}{}$ is transitive, $\Delta\sststile{}{}\CAPPHI$.
+	Finally, since $\Delta\sststile{}{}\DELTA$ and $\sststile{}{}$ is transitive, $\Delta\sststile{}{}\CAPPHI$.
 	%To show that $\Delta\sststile{}{}\CAPPHI$, first write each sentence in $\Delta$ (which are the conjuncts of $\DELTA$) as an assumption on a line in a derivation.
 	%Then derive $\horseshoe{\DELTA}{\CAPPHI}$, which we know can be done without any assumptions. 
 	%Next, use \Rule{$\WEDGE\!$-Intro} to conjoin all the assumptions from $\Delta$; this will result in $\DELTA$ on a line in the derivation. 
@@ -739,13 +739,13 @@ For all Prenex Exchange Rules \Rule{R}, any two \GQL{} formulas got by substitut
 Our goal is to prove the strong completeness of \GQD{}; 
 that is, we want to prove that for any set $\Delta$ of \GQL{} sentences and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$. 
 Our strategy will be to first prove the completeness of \GQD{} and then show how to modify the method to prove the strong completeness.
-Our strategy for proving  completeness will be to show that for any sentence we can either find a derivation of it or we can construct a model that makes it false. 
+Our strategy for proving  completeness will be to show that for any sentence we can either (1) find a derivation of it or (2) prove that there is a model that makes it false. 
 (This part of the strategy is more or less the same as what we did to show that \GSD{} is  complete.)
 In other words, $\CAPPHI$ is either derivable or not quantificationally true, from which it immediately follows that if $\CAPPHI$ is quantificationally true, then it is derivable. 
 
 The method,\index{method, the} in brief, is to negate the sentence $\CAPPHI$ and begin a derivation.
 Then we transform the negation of the sentence into prenex normal form, using the steps outlined in section \ref{Prenex Definition and Steps}. 
-Next we transform the inner part of he sentence (remember the quantifiers are all up front) into \CAPS{dnf} form, using our standard method for that (see Sec. \pmvref{Disjunctive Normal Form}).
+Next we transform the inner part of the sentence (remember the quantifiers are all up front) into \CAPS{dnf} form, using our standard method for that (see Sec. \pmvref{Disjunctive Normal Form}).
 This will not introduce any new assumptions. 
 We then systematically take instances of the bound variables and try to derive a contradiction.
 If we can derive a contradiction we can then (assuming all goes well) use \Rule{$\NEGATION$-Elim} to obtain a derivation of $\CAPPHI$.
@@ -764,7 +764,7 @@ To put some of our jargon together, the matrix of the sentence will consist of d
 
 \subsection{The Method and Completeness Lemmas}\label{The Method Section}
 In this section we describe the method sketched above.\index{method, the} 
-Say we're given a sentence $\CAPTHETA$. The Method either produces a derivation of $\CAPTHETA$ or indicates a model that makes it false:
+Given a sentence $\CAPTHETA$, the Method either produces a derivation of $\CAPTHETA$ or indicates a model that makes it false:
 
 \begin{description}
 \item[Step 0:] Write $\negation{\CAPTHETA}$ on line 1 as an assumption.
@@ -796,14 +796,16 @@ Note that with this step we are adding new instances with new constants in new a
 Officially, the way to do this is to take the conjunction of them all by \Rule{$\WEDGE\!$-Intro}, use \Rule{Distribution} to get the conjunction into \CAPS{dnf} and check whether every disjunct contains a contradiction. 
 If so, then by a process of \Rule{$\VEE$-Elim} and \Rule{Any Contradiction} we can eventually produce the line $\conjunction{\Al}{\negation{\Al}}$. 
 
+This step can be cumbersome in practice. We will give some unofficial short cuts to make this more manageable soon.
+
 \item[Step 5:] \hfill
 \begin{cenumerate}
-\item If the matrices are contradictory we stop.
+\item If the matrices are contradictory (see step 4) we stop.
 \item Or if the conjunction of the matrix instances is consistent and the last applications of Steps 2 and 3 produce no new sentences, we stop.
 \item Or if the conjunction of the matrix instance is consistent and the last applications of Steps 2 and 3 produced new sentences, then we return to Step 2 and reapply those steps.
 \end{cenumerate}
 \end{description}
-Thus, there are three possible outcomes of applying this method to a sentence:
+There are three possible outcomes of applying this method to a sentence:
 \begin{cenumerate}
 \item The method might reach a contradiction.
 \item The method might stop without a contradiction.
@@ -819,11 +821,12 @@ Step 3 left us with $\conjunction{\Al}{\negation{\Al}}$ on a line with its assum
 We want to shift those assumptions so that we end up with the contradiction from the first assumption, $\negation{\CAPTHETA}$, alone.
 We know by considering our method that other assumptions entered only by Step 2, where we added instances of existentials using new constants. 
 We eliminate the last assumption by a \Rule{$\HORSESHOE$-Intro}. 
-We know that our last assumption introduced a \emph{new} constant, and therefore we know that that constant did not appear in any earlier assumption or in the existential of which we are taking an instance.
+We know that this eliminated assumption introduced a \emph{new} constant from an existential. 
+Therefore we know that this constant did not appear in any earlier assumption or in the existential of which we are taking an instance.
 It also (obviously) does not occur in $\conjunction{\Al}{\negation{\Al}}$.
-Thus the \Rule{$\exists$-Elim} step in legitimate. 
+Thus we are allowed to use the rule \Rule{$\exists$-Elim} on the existential claim from which we assumed that instance. 
 
-Thus we can repeat the contradiction $\conjunction{\Al}{\negation{\Al}}$, sanctioning it by \Rule{$\exists$-Elim}. 
+So we derive the contradiction $\conjunction{\Al}{\negation{\Al}}$ again, by \Rule{$\exists$-Elim}. 
 We continue this process, repeating $\conjunction{\Al}{\negation{\Al}}$ as often as necessary to shift the dependence back to the assumption on line 1. 
 This gives us a derivation of $\conjunction{\Al}{\negation{\Al}}$ from the first assumption, $\negation{\CAPTHETA}$, only. 
 
@@ -908,6 +911,12 @@ By Lemma 1 (Thm. \ref{MethodLemmaA}), all sentences on the master matrix list $M
 \begin{THEOREM}{\LnpTC{MethodLemmaC} The Method Lemma 3:}
 All quantified sentences in the derivation are true in the matrix model $\IntA_M$.
 \end{THEOREM}
+
+Informally, every universal has been instantiated with all the relevant constants, and every existential by at least one. 
+Since $\IntA_M$ is a census, it follows that all the sentences in the derivation are true.
+
+More rigorously...
+
 \begin{PROOF}
 We prove this lemma using a recursive proof on the number of quantifiers in each sentence.
 \begin{description}
@@ -992,8 +1001,8 @@ Thus we will use some additional short cut rules to speed the process of detecti
 Our first shortcut rule is \Rule{Greg's Rule}. We\index{Greg's Rule} know that if a conjunction contains an atomic formula and the negation of that atomic formula then we can derive the negation of the conjunction.
 E.g., we can derive the negation of $\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}$.
 So if we have a disjunction, one disjunct of which contains a contradiction of this kind, we can derive he negation of that disjunct and use disjunctive syllogism to prune that disjunct.
-For example, given $\disjunction{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$ on a line we can derive $\negation{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}$ and then $\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}$. 
-Greg's Rule lets us accomplish those steps by crossing out the contradictory and writing down the remaining ones.
+For example, assume the Method ends at the sentence $\disjunction{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$. We can independently derive $\negation{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}$. From these two we derive  $\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}$. 
+Greg's Rule lets us accomplish those steps by crossing out the contradictory part and writing down the remaining ones.
 
 It\index{$\VEE$/$\WEDGE$-Elim} is helpful to have a short cut rule which combines \Rule{$\WEDGE\!$-Elim} steps with \Rule{$\VEE$-Elim} steps to go from a disjunction of which each disjunct contains a particular sentence to that sentence itself on a later line;
 we will call it \Rule{$\VEE$/$\WEDGE\!$-Elim} and it sanctions the step from $\disjunction{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{c}}}}}}}{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$ to $\Gp{\constant{b}}$. 
@@ -1087,7 +1096,7 @@ If the strong method halts in a contradiction, then $\Delta\sststile{}{}\CAPPHI$
 \begin{PROOF}
 If the strong method halts in a contradiction, then it will have produced a derivation of a contradiction $\conjunction{\Al}{\negation{\Al}}$ from $\negation{\CAPPHI}$ and some subset $\Delta'$ of $\Delta$.  We want to show that $\Delta\sststile{}{}\CAPPHI$; to do this, we first want to show that $\Delta'\sststile{}{}\CAPPHI$.
 
-We might think that $\negation{\CAPPHI},\Delta'\sststile{}{}\conjunction{\Al}{\negation{\Al}}$, but in fact, there are additional open assumptions that we made; the Strong Method tells us to make an additional assumption for each line containing an existentially quantified sentence. For these lines, we assume an instance of the existentially quantified sentence.  We want to discharge these assumptions by using \Rule{$\exists$-Elim}, but these assumptions may come prior to some of the assumptions we made from $\Delta'$.  We want to keep the sentences of $\Delta'$ as assumptions, because the contradiction we reached depends on them. 
+We might think we already know that $\negation{\CAPPHI},\Delta'\sststile{}{}\conjunction{\Al}{\negation{\Al}}$, but in fact, there are additional open assumptions that we made; the Strong Method tells us to make an additional assumption for each line containing an existentially quantified sentence. For these lines, we assume an instance of the existentially quantified sentence.  We want to discharge these assumptions by using \Rule{$\exists$-Elim}, but these assumptions may come prior to some of the assumptions we made from $\Delta'$.  We want to keep the sentences of $\Delta'$ as assumptions, because the contradiction we reached depends on them. 
 
 We can discharge the assumed instances of existentially quantified sentences only by additionally discharging all the assumptions that come later in the derivation.  Accordingly, we want to extend our derivation so that we discharge \emph{all} our assumptions and then repeat all the assumptions \emph{except} for the instances of existentially quantified sentences. 
 
@@ -1164,7 +1173,7 @@ Thus by the Main \GQD{} Strong Completeness Lemma (Thm. \ref{MainGQDSCompletenes
 It follows by theorem \mvref{GQD Shortcut Theorem3} that $\Delta\sststile{}{}\CAPPHI$ in \GQD{}.
 \end{PROOFOF}
 
-Our Method for proving completeness for QD is short of being a decision procedure.  If $\CAPPHI$ is a logical truth, then The Method will produce a derivation of it.  And if $\CAPPHI$ is not a logical truth, then in many cases it produces a model that makes $\CAPPHI$ false.  But sometimes it just doesn't stop.  We know that if it doesn't stop there is a model that makes the original sentence false, but at each stage we don't know whether it will stop (soon?) or not.   And we know that it can't stop at a finite stage for some sentences because those sentences are only false in an infinite model.
+Our Method for proving completeness for QD is short of being a decision procedure.  If $\CAPPHI$ is a logical truth, then The Method will produce a derivation of it.  And if $\CAPPHI$ is not a logical truth, then in many cases it produces a model that makes $\CAPPHI$ false.  But sometimes it just doesn't stop.  We know that if it doesn't stop there is a model that makes the original sentence false, but at each stage we may not know whether it will stop (soon?) or not.   And we know that it can't stop at a finite stage for some sentences because those sentences are only false in an infinite model.
 
 All we know from our work so far is that The Method works as described above. We don't know that there isn't a better method that provides a decision procedure.  Church's Theorem, proved by more advanced methods that involve clarifying what counts as a ``method'' or ``algorithm'' tells us that our result is as good as we can do for all of \GQL{}.
 
@@ -1207,7 +1216,8 @@ But, we will be done then since no more new constants will be added.
 The general principle is that if one quantifier occurs within the scope of another then it cannot be moved in front of the other quantifier. 
 You may remember that the scope of a quantifier, say $\forall$ in $\universal{\variable{x}}\CAPPHI$, is the subformula $\CAPPHI$ of which it is the main connective. 
 We can say two quantifiers are \niidf{independent}\index{quantifier!s, independent} if neither is in the scope of the other.
-With this terminology, we can notice that for any sentence all of whose quantifiers are independent of each other that they can be brought forward in any order, and thus we have a decision procedure for such sentences. 
+Let's say we have a sentence all of whose universal quantifiers are independent of each other.
+Notice that these quantifiers can be brought forward in any order, and thus that we have a decision procedure for such sentences. 
 
 The critical result to prove is that every sentence of \GQL{}1 is equivalent to a sentence whose quantifiers are independent. 
 We can show this by appeal to the reverse of our procedure for putting sentences into prenex form, i.e. by moving quantifiers inward, but we use most of the same rules as for standard prenex (remember they are exchange rules).
