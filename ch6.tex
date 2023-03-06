@@ -17,7 +17,7 @@ Can we find a \emph{formal} method for establishing logical truth and entailment
 
 For this purpose we'll introduce formal rules for manipulating \GSL{} and \GQL{} sentences which will allow us to write formal derivations. 
 Roughly, a \emph{derivation} is a finite sequence of sentences, with rules governing which sentences may follow which. 
-For every sentence in the derivation there is a rule which sanctions (or permits) us to write it down, given the previous sentences in the derivation.%
+For every sentence in the derivation there is a rule which sanctions (or permits) us to write it down next, usually depending on the previous sentences in the derivation.%
 \footnote{%
 Often times the terms \mention{derivation} and \mention{proof} (or \mention{formal proof}) are used interchangeably. 
 The subfield of logic that studies derivations is even called proof theory.
@@ -71,8 +71,10 @@ The basic rules\index{derivation!rule!basic}\index{basic rule} make up what we c
 \GSD{} consists of two special rules, \Rule{Assumption} and \Rule{Repetition}, and a pair of basic rules for each of the logical connectives in \GSL{}. 
 When we move on to \GQL{} we'll add more basic rules for the logical connectives unique to \GQL{}, i.e. the quantifiers. 
 One of the pair will be an \emph{introduction} rule,\index{derivation!rule!introduction}\index{introduction rule} the other will be an \emph{elimination} rule.\index{derivation!rule!elimination}\index{elimination rule} 
-For conjunction, $\WEDGE$, the introduction rule will tell us that to derive $\conjunction{\CAPPHI}{\CAPPSI}$, we must already have the sentences $\CAPPHI$ and $\CAPPSI$ in the derivation. 
-The elimination rule for a connective usually tells us what sort of sentences we can write down in our derivation if we already have a sentence of that form.  The conjunction elimination rule allows us to write either $\CAPPHI$ or $\CAPPSI$ if we have $\conjunction{\CAPPHI}{\CAPPSI}$ in a previous line.
+
+For example, consider the conjunction, $\WEDGE$. If we earlier derived the sentences $\CAPPHI$ and $\CAPPSI$, we may introduce their conjunction $\conjunction{\CAPPHI}{\CAPPSI}$ with the $\WEDGE$ introduction rule. 
+Alternatively, if we have derived $\conjunction{\CAPPHI}{\CAPPSI}$, the $\WEDGE$ elimination rule lets us take out a part of the conjunction and write either $\CAPPHI$ or $\CAPPSI$.
+Elimination rules typically give us a choice for the next step, and learning to use the system effectively partly involves learning strategies for choosing the next step.
 Table \mvref{GSD} gives all the basic SD rules.\footnote{As mentioned in the preface, this kind of introduction and elimination rule-based derivation system is called a \idf{natural deduction} system.
 Natural deduction systems were first invented by Stanislaw Jaskowski in 1926, though he did not publish until 1934.  Other important developments are due to Gerhard Gentzen \citeyearpar{Gentzen1934}; other influential natural deduction systems are given by J. M. Anderson and H. W. Johnstone \citeyearpar{Anderson1962}, Frederic Fitch \citeyearpar{Fitch1952}, Donald Kalish and Richard Montague \citeyearpar{Kalish1964}, Lemmon E. J. \citeyearpar{Lemmon1965}, Dag Prawitz \citeyearpar{Prawitz1965}, Willard Quine \citeyearpar{Quine1950}, Patrick Suppes \citeyearpar{Suppes1957}, Neil Tennant \citeyearpar{Tennant1978}, R. H. Thomason \citeyearpar{Thomason1970}, and Dirk van Dalen \citeyearpar{Dalen1980} \citep[28]{Hodges2001}.  Unlike many systems, ours uses boxes to discharge assumptions; Jaskowski mentions in the 1934 article that he used boxes in 1926, but they aren't part of his official system in 1934.}
 %\begin{table}[!ht]
@@ -129,10 +131,13 @@ Natural deduction systems were first invented by Stanislaw Jaskowski in 1926, th
 %\label{GSD}
 %\end{table}
 
-Before doing some examples, two notes about the rules in this table are in order. 
-First, for \Rule{Assumption}, each new assumption you add must start a new vertical line to the right of all the previous (still open) vertical assumption lines (see example \pmvref{secondexample}).  Assumption lines are an accounting device.  You may assume any sentence you like, but generally these assumptions (usually all of them) will need to be discharged.  Vertical assumption lines are like your credit card balance.  As with a credit card, managing assumptions wisely is a skill to be acquired.
+Before doing some examples, two notes about the rules are in order. 
+First, to use the \Rule{Assumption} rule, you must draw a new vertical line to the left of your assumption (and to the right of any other vertical lines from previous steps). 
+The vertical lines are assumption lines; assumption lines are an accounting device to keep track of what you have assumed as opposed to what you have derived (see example \pmvref{secondexample}). You may assume any sentence you like, but generally these assumptions (usually all of them) will need to be discharged.  Vertical assumption lines are like your credit card balance.  As with a credit card, managing assumptions wisely is a skill to be acquired.
 
-Second, assumptions are discharged using the \Rule{$\HORSESHOE$-Intro} rule.  For \Rule{$\HORSESHOE$-Intro} you need a (part of a) derivation that begins with an unboxed assumption \mbox{| $\CAPTHETA$} and ends with \mbox{| $\CAPPSI$}. 
+How do you get rid of an assumption? And how do you keep track of them when you are adding some and eliminating others? We have a second accounting device: boxes. When an assumption is discharged, the relevant assumption line is turned into a box containing everything derived from the originating assumption. Writing boxes can sometimes seem tedious, but we have found that using them significantly reduces student error.
+
+Assumptions are discharged using the \Rule{$\HORSESHOE$-Intro} rule.  For \Rule{$\HORSESHOE$-Intro} you need a (part of a) derivation that begins with an unboxed assumption \mbox{| $\CAPTHETA$} and ends with \mbox{| $\CAPPSI$}. 
 After you've added $\horseshoe{\CAPTHETA}{\CAPPSI}$ to your derivation, you \emph{must} box off the part of the derivation that began with assumption | $\CAPTHETA$ and ended with | $\CAPPSI$.  That is, if we have the following:
 
 \begin{gproof}[\label{conditionalintro}]
@@ -187,7 +192,7 @@ We continue:
 \galineNC{3}{$\Cl$}{\Rule{$\WEDGE$-Elim}, 1}
 \galineNC{4}{$\conjunction{\Cl}{\Bl}$}{\Rule{$\WEDGE\!$-Intro}, 2,3}
 \end{gproof}
-\noindent{}This is a four-line derivation of $\conjunction{\Cl}{\Bl}$ from $\conjunction{\Bl}{\Cl}$. 
+\noindent{}This is a four-line derivation of $\conjunction{\Cl}{\Bl}$ from $\conjunction{\Bl}{\Cl}$. Notice that steps 2 and 3 could have been done in opposite order. In many cases the order of sentences in a derivation doesn’t matter, but in other cases it is crucial. Learning the difference is an important skill.
 
 Just as we used the double turnstile to represent when one sentence (or a set of sentences) entailed another, we use what's called the \emph{single turnstile}, \mention{\:$\sststile{}{}\:$}, to represent when one sentence is derivable from another, or from another (finite) set of sentences. 
 The four-line derivation shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\conjunction{\Cl}{\Bl}$. 
@@ -202,7 +207,7 @@ Next, as an example of how assumption lines stack up in a derivation, consider t
 \gaalineNC{4}{$\conjunction{\Cl}{\Dl}$}{\Rule{$\HORSESHOE$-Elim}, 2,3}
 \gaalineNC{5}{$\Dl$}{\Rule{$\WEDGE$-Elim}, 4}
 \end{gproof}
-\noindent{}As is shown, any time an assumption is added it must be placed to the right of the previous (unboxed) assumptions and given a new line to track its scope. (We discuss this example a little more in the next section, while discussing the basic top-down and bottom-up strategies for $\HORSESHOE$.)
+\noindent{}As is shown, any time a new assumption line is added it must be placed to the right of the previous (unboxed) assumption lines. (We discuss this example a little more in the next section, while discussing the basic top-down and bottom-up strategies for $\HORSESHOE$.)
 
 The last major point about the mechanics of writing a derivation is how the assumptions are closed, or discharged, when \Rule{$\HORSESHOE$-Intro} is used. This rule says that if you have a sentence $\CAPPSI$ on a line as an assumption, and you've worked your way down to a line with sentence $\CAPTHETA$, then you can ``close off'' the assumption by drawing a box around that part of the proof and writing $\horseshoe{\CAPPSI}{\CAPTHETA}$ on the next line. We can demonstrate this by applying the rule to close off the assumptions in the previous two proofs:
 \begin{gproof}[\label{simpleconjunctionclosed}]
@@ -251,11 +256,13 @@ But it should be easy to see that $\horseshoe{\Al}{\Bl}\sdtstile{}{}\Bl$ does no
 
 \subsection{*The Recursive Definition of a Derivation}\label{RecDefOfDerv}
 Now that we've done some examples, we give an explicit definition of a derivation. 
-The definition of a derivation is a recursive definition. 
+The definition of a derivation is recursive. 
 The explicit definition we give here is mainly for the sake of proving soundness in the next chapter. 
 Although the actual definition is complicated, the basic idea is straightforward: 
 A single \GSL{} sentence that's an assumption is a derivation (e.g., derivation \ref{onelinederivation}), and any finite sequence of \GSL{} sentences every one of which (after the first) is either an assumption or sanctioned by some rule of \GSD{} is a derivation. 
-We have to complicate this to handle the rule \Rule{$\HORSESHOE$-Intro} and \Rule{Assumption}, neither of which quite work like the other rules.% the extra features of derivations: 
+We have to complicate this to handle the rule \Rule{$\HORSESHOE$-Intro} and \Rule{Assumption}, neither of which quite work like the other rules.
+To understand these rules we must first define what an \emph{open assumption} is. An assumption is open \Iff it appears on an assumption line and is not in a box.
+% the extra features of derivations: 
 %the numbers we write on the left to keep track of the sentences, the vertical lines we use to track the scope of the assumptions, and the rules we note on the right along with the numbers of the lines they were applied to. 
 %\begin{majorILnc}{\LnpDC{Derivation Line}}
 %A \nidf{derivation} \underdf{line}{derivation} consists of:
@@ -291,7 +298,7 @@ then the sequence of derivation lines you get by adding a new line $\integer{n}+
 \gline{$\integer{n}$}{$\CAPPSI$}{\Rule{R}, $\integer{j}_1,\ldots,\integer{j}_k$}
 \gline{$\integer{n}+1$}{$\CAPTHETA$}{\Rule{R$'$}, $\integer{h}_1,\ldots,\integer{h}_l$}
 \end{gproofnn}
-so long as $\CAPTHETA$ is sanctioned by some rule \Rule{R$'$} (for \Rule{R$'$} $\neq$ \Rule{$\HORSESHOE$-Intro}) when applied to previous lines $\integer{h}_1,\ldots,\integer{h}_l$ already in the derivation. 
+so long as $\CAPTHETA$ is sanctioned by some rule \Rule{R$'$} (other than \Rule{$\HORSESHOE$-Intro}) when applied to previous lines $\integer{h}_1,\ldots,\integer{h}_l$ already in the derivation. 
 
 \item[Case 2:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to lines $\integer{j}_1,\ldots,\integer{j}_k$, 
 \begin{gproofnn}
@@ -394,10 +401,12 @@ At any point in applying the algorithm you'll have neither produced a derivation
 Enderton \citeyearpar{Enderton2010} provides a general, contemporary introduction to computability and decision procedures. Kleene \citeyearpar[ch.~5]{Kleene1967} provides a lucid and concise discussion within roughly the framework devolved here.
 
 \subsection{Some Strategies}\label{Sec:Some Strategies}
-So the upshot is that we don't want to use these sorts of algorithms to find derivations, if we can avoid it. 
+We don't want to use these sorts of algorithms to find derivations, if we can avoid it. 
 But there are general strategies we will use. 
 For each logical connective there are two types of strategies: those for what to do if you already have sentences with that as their main connective, and those for what to do if you want to get a sentence with that as its main connective. 
 We'll call the first top-down strategies and the second bottom-up strategies.
+In many cases, doing a derivation is like planning a plane trip. The top-down method is like figuring out the nearest convenient airport from your current location, and the bottom-up method is like figuring out which airport is convenient for getting to your destination. In derivations, sometimes you have to go through intermediate sentences (as with intermediate cities in travel).
+
 We will begin with some basic top-down and bottom-up strategies for each connective, adding more later in section \ref{Sec:Shortcut Rule Strategies} when we add shortcut rules.
 
 \subsubsection*{Conjunction} 
@@ -432,7 +441,7 @@ The basic strategies for biconditionals are similar to those for conditionals, a
 \item first derive the \CAPS{rhs} $\CAPPSI$ and then break it apart using \Rule{$\TRIPLEBAR$-Elim} to get the \CAPS{lhs} $\CAPPHI$ on a new line,
 \item or do both.
 \end{enumerate}
-\item[$\TRIPLEBAR$ Bottom-down:] If you want to get a sentence of the form $\triplebar{\CAPPHI}{\CAPPSI}$, then first derive both $\horseshoe{\CAPPHI}{\CAPPSI}$ and $\horseshoe{\CAPPSI}{\CAPPHI}$ and then use \Rule{$\TRIPLEBAR$-Intro} to write the biconditional on the next line.
+\item[$\TRIPLEBAR$ Bottom-up:] If you want to get a sentence of the form $\triplebar{\CAPPHI}{\CAPPSI}$, then first derive both $\horseshoe{\CAPPHI}{\CAPPSI}$ and $\horseshoe{\CAPPSI}{\CAPPHI}$ and then use \Rule{$\TRIPLEBAR$-Intro} to write the biconditional on the next line.
 \end{description}
 
 \subsubsection*{Negations}
@@ -519,11 +528,13 @@ Of course, we haven't yet derived $\negation{\!\parconjunction{\bparhorseshoe{\A
 \subsubsection*{Disjunctions}
 Our last pair of strategies is for disjunctions. As with conjunctions, we give the strategies for the case where there are only two disjuncts. Generalizing the strategies for disjunctions with more than two disjuncts is left to the reader.
 \begin{description}
-\item[$\VEE$ Top-down:] If you have a sentence of the form $\disjunction{\CAPPHI}{\CAPPSI}$ and you want to derive a sentence $\CAPTHETA$, then first derive the conditional $\horseshoe{\CAPPHI}{\CAPTHETA}$, then derive the conditional $\horseshoe{\CAPPSI}{\CAPTHETA}$, and then use \Rule{$\VEE$-Elim} to write down $\CAPTHETA$ on the next line.
+\item[$\VEE$ Top-down:] If you have a sentence of the form $\disjunction{\CAPPHI}{\CAPPSI}$ and you want to derive a sentence $\CAPTHETA$, first derive the conditionals $\horseshoe{\CAPPHI}{\CAPTHETA}$ and $\horseshoe{\CAPPSI}{\CAPTHETA}$, and then use \Rule{$\VEE$-Elim} to write down $\CAPTHETA$ on the next line. The order in which you derive the intermediate conditionals doesn't matter.
 \item[$\VEE$ Bottom-up:] If you want a sentence of the form $\disjunction{\CAPPHI}{\CAPPSI}$, then first derive either $\CAPPHI$ or derive $\CAPPSI$, and then use \Rule{$\VEE$-Intro} to write it down.
 \end{description}
 The basic bottom-up strategy isn't always the right tool for deriving disjunctions, because usually you can't derive one of the disjuncts. 
 This is an important point: it might be that a disjunction is derivable even if neither disjunct is. 
+It's important that we can derive disjunctions without first deriving one or the other disjunct, since $\disjunction{\Bl}{\negation{\Bl}}$ is a logical truth. We would like to be able to derive it, though neither $\Bl$ nor $\negation{\Bl}$ is a logical truth.
+
 Later on we'll get more useful bottom-up strategies for disjunctions. For now we'll focus on the top-down strategy. 
 
 As an example, say we want to derive $\negation{\parconjunction{\bpardisjunction{\negation{\Al}}{\negation{\Bl}}}{\bparconjunction{\Al}{\Bl}}}$. 
@@ -763,49 +774,6 @@ This is the main reason why we want to introduce shortcut rules.
 Shortcut rules can be thought of as ways of cutting out parts of derivations that we find ourselves doing repeatedly. 
 The basic rules of \GSD{} plus the shortcut rules (both those in table \pncmvref{GSDplus1} and table \pncmvref{GSDplus2}) make up the derivation system which we call \GSDP{}.
 
-%\begin{table}[!ht]
-%\renewcommand{\arraystretch}{1.5}
-%\begin{center}
-%\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
-%\toprule
-%\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
-%\midrule
-%\begin{table}[!ht]
-\renewcommand{\arraystretch}{1.5}
-\begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
-\toprule
-\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
-\midrule
-\endfirsthead
-\multicolumn{3}{c}{\emph{Continued from Previous Page}}\\
-\toprule
-\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
-\midrule
-\endhead
-\bottomrule
-\caption{Standard Shortcut Rules for \GSD{}}\\[-.15in]
-\multicolumn{3}{c}{\emph{Continued next Page}}\\
-\endfoot
-\bottomrule
-\caption{Standard Shortcut Rules for \GSD{}}\\
-\endlastfoot
-\label{GSDplus1}\Rule{M.T.} & $\horseshoe{\CAPPHI}{\CAPTHETA}$, $\negation{\CAPTHETA}$ & $\negation{\CAPPHI}$ \\
-\Rule{D.S.} & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_i}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, $\negation{\CAPPHI_i}$ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{i-1}}{\disjunction{\CAPPHI_{i+1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
-\nopagebreak
- & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\negation{\CAPPHI_i}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{i-1}}{\disjunction{\CAPPHI_{i+1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
-\Rule{A.C.} & ${\CAPPHI},{\negation{\CAPPHI}}$ & $\CAPPSI$ \\
-\Rule{$\NEGATION$/$\TRIPLEBAR$-Intro} & $\triplebar{\CAPPHI}{\CAPPSI}$ & $\triplebar{\negation{\CAPPHI}}{\negation{\CAPPSI}}$ \\
-\Rule{Ext. $\WEDGE$-Elim} &{}$\conjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$&{}Conjunction of any\\[-.25cm]
-\nopagebreak
-& &{}subset of the conjuncts\\
-\end{longtable}
-%\bottomrule
-%\end{tabular}
-%\end{center}
-%\caption{Standard Short-Cut Rules for \GSD{} (\GSD{})}
-% \label{GSDplus1}
-%\end{table}
-
 For example, consider lines 10--14 of proof \pmvref{cangetlong}. Here we have two sentences, $\Al$ and $\negation{\Al}$, and we used them to derive the sentence $\conjunction{\Bl}{\negation{\Bl}}$. 
 We can rewrite the relevant parts of the proof here, putting them in a less idiosyncratic order:
 \begin{gproof}
@@ -837,11 +805,55 @@ So we can introduce a new rule which says that given two sentences $\CAPPHI$ and
 We call this new rule \Rule{Any Contradiction}, or \Rule{A.C.} for short. 
 The key feature of this rule is that in any derivation where we use the rule, we could have gotten the same results without it. 
 All we'd have to do is insert the appropriate instance of \ref{anycontradictionSC} into the derivation. (We leave it to the reader to rewrite derivation \pncmvref{cangetlong} using \Rule{A.C.})
+
+%\begin{table}[!ht]
+%\renewcommand{\arraystretch}{1.5}
+%\begin{center}
+%\begin{tabular}{ p{1in} l l } %p{2.2in} p{2in}
+%\toprule
+%\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+%\midrule
+%\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
+	\toprule
+	\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+	\midrule
+	\endfirsthead
+	\multicolumn{3}{c}{\emph{Continued from Previous Page}}\\
+	\toprule
+	\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+	\midrule
+	\endhead
+	\bottomrule
+	\caption{Standard Shortcut Rules for \GSD{}}\\[-.15in]
+	\multicolumn{3}{c}{\emph{Continued next Page}}\\
+	\endfoot
+	\bottomrule
+	\caption{Standard Shortcut Rules for \GSD{}}\\
+	\endlastfoot
+	\label{GSDplus1}\Rule{M.T.} & $\horseshoe{\CAPPHI}{\CAPTHETA}$, $\negation{\CAPTHETA}$ & $\negation{\CAPPHI}$ \\
+	\Rule{D.S.} & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_i}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, $\negation{\CAPPHI_i}$ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{i-1}}{\disjunction{\CAPPHI_{i+1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+	\nopagebreak
+	& $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\negation{\CAPPHI_i}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{i-1}}{\disjunction{\CAPPHI_{i+1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+	\Rule{A.C.} & ${\CAPPHI},{\negation{\CAPPHI}}$ & $\CAPPSI$ \\
+	\Rule{$\NEGATION$/$\TRIPLEBAR$-Intro} & $\triplebar{\CAPPHI}{\CAPPSI}$ & $\triplebar{\negation{\CAPPHI}}{\negation{\CAPPSI}}$ \\
+	\Rule{Ext. $\WEDGE$-Elim} &{}$\conjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$&{}Conjunction of any\\[-.25cm]
+	\nopagebreak
+	& &{}subset of the conjuncts\\
+\end{longtable}
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%\caption{Standard Short-Cut Rules for \GSD{} (\GSD{})}
+% \label{GSDplus1}
+%\end{table}
  
 The idea will be the same for all the shortcut rules we'll introduce here. These come in two types, standard and exchange, and are listed in table \pmvref{GSDplus1} and \pmvref{GSDplus2}. The idea is, (i) for each shortcut rule \Rule{R}, for given any application of \Rule{R} we can derive, using only the basic rules, the sentence $\CAPPHI$ (which \Rule{R} allows us to write down) from the sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ to which we applied \Rule{R}. 
 And, (ii) in general, anything we can derive using a rule, any application of which can be derived using only basic rules, can itself be derived using only basic rules.  
 So, (iii) anything we can derive using the basic rules of \GSD{} and any of the shortcut rules can be derived from just the basic rules alone.
 We have restated (ii) more precisely below as theorem \mvref{GSD Shortcut Theorem}, (i) as theorem \mvref{GSD Shortcut Theorem2}, and (iii) as theorem \mvref{GSD Shortcut Theorem3}. 
+Exchange rules are short cut rules that work in both directions.
 
 %\begin{table}[!ht]
 %\renewcommand{\arraystretch}{1.5}
@@ -1300,7 +1312,7 @@ We now add new strategies based on shortcut rules to this basic stock.
 \item[\Rule{DeM} Top-down:] If you have a sentence of the form $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$, then convert it using \Rule{DeM} to get $\disjunction{\negation{\CAPPHI_1}}{\disjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$ on a new line.
 \item[\Rule{DeM} Top-down:] If you have a sentence of the form $\negation{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$, then convert it using \Rule{DeM} to get $\conjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$ on a new line.
 \item[\Rule{$\NEGATION\NEGATION$-Elim} Top-down:] If you have a sentence of the form $\negation{\negation{\CAPPHI}}$, then convert it using \Rule{$\NEGATION\NEGATION$-Elim} to get $\CAPPHI$ on a new line.
-\item[\Rule{$\NEGATION/\HORSESHOE$-Exchange} Top-down:] If you have a sentence of the form $\negation{\horseshoe{\CAPPHI}{\CAPPSI}}$, then convert it using \Rule{$\NEGATION/\HORSESHOE$-Exchange} to get $\conjunction{\CAPPHI}{\negation{\CAPPSI}}$ on a new line.
+\item[\Rule{$\NEGATION/\HORSESHOE$-Exchange} Top-down:] If you have a sentence of the form $\negation{\parhorseshoe{\CAPPHI}{\CAPPSI}}$, then convert it using \Rule{$\NEGATION/\HORSESHOE$-Exchange} to get $\conjunction{\CAPPHI}{\negation{\CAPPSI}}$ on a new line.
 \item[\Rule{$\NEGATION\NEGATION$-Intro} Bottom-up:] If you want to get a sentence of the form $\negation{\negation{\CAPPHI}}$, then first derive $\CAPPHI$ and then use \Rule{$\NEGATION\NEGATION$-Intro} to derive it. 
 \end{description} 
 \subsubsection*{Conditionals} 
@@ -1442,7 +1454,9 @@ Note that just as with \Rule{$\forall$-Elim} there are no restrictions on \Rule{
 Also note that we could have used \Rule{$\HORSESHOE$-Elim} to generalize the constant $\constant{b}$, getting $\existential{\variable{x}}\Dpp{\constant{a}}{\variable{x}}$, but that wouldn't have helped us.
 Also, we could have generalized using a different variable, getting, say $\existential{\variable{z}}\Dpp{\variable{z}}{\constant{b}}$.
 But again that wouldn't have helped us. 
-Next, we now have the right setup for \Rule{$\HORSESHOE$-Elim}:
+Any constant is legal to instantiate with \Rule{$\forall$-Elim}, but often only one is a wise choice.
+
+We now have the right setup for \Rule{$\HORSESHOE$-Elim}:
 \begin{gproof}[\label{GQDExampleG}]
 \galineNC{1}{$\universal{\variable{y}}\bparhorseshoe{\existential{\variable{x}}\Dpp{\variable{x}}{\variable{y}}}{\Bp{\variable{y}}}$}{\Rule{Assume}}
 \gaalineNC{2}{$\Dpp{\constant{a}}{\constant{b}}$}{\Rule{Assume}}
@@ -1614,7 +1628,8 @@ Now getting to $\Hp{\constant{a}}$ is just a matter of using \Rule{$\HORSESHOE$-
 \gaalineNC{8}{$\horseshoe{\Ap{\constant{a}}}{\Hp{\constant{a}}}$}{\Rule{$\HORSESHOE$-Intro}, 3--7}
 \gaalineNC{9}{$\universal{\variable{x}}\parhorseshoe{\Ap{\variable{x}}}{\Hp{\variable{x}}}$}{\Rule{$\forall$-Intro}, 8}
 \end{gproof}
-And this completes the derivation. 
+And this completes the derivation. Notice that since there are infinitely many constants in \GQL{}, and any of them would have worked in the derivation, there are infinitely many derivations of this
+sentence.
 
 \subsection{Shortcut Rules for \GQD{}}
 
@@ -1707,7 +1722,7 @@ To do this we will use (1) an extended (and generalized) version of the Restrict
 \begin{THEOREM}{\LnpTC{GQD Replacement Theorem} The Replacement Theorem for \GQD{}:}
 If $\CAPPHI$ and $\CAPPHI^*$ are provably equivalent formulas of \GQL{}, and $\CAPTHETA$ and $\CAPTHETA^*$ differ only in that $\CAPTHETA$ contains the subformula $\CAPPHI$ in one place where $\CAPTHETA^*$ contains the subformula $\CAPPHI^*$, then $\CAPTHETA$ and $\CAPTHETA^*$ are provably equivalent.
 \end{THEOREM}
-\noindent{}Before proving this theorem, we need to define when two formulas of \GQL{} are provably equivalent. 
+\noindent{}Before proving this theorem, we need to define when two \emph{formulas} of \GQL{} are provably equivalent. 
 The definition given for \GSL{} sentences (def. \pmvref{GSDprovablyequivalent}) will not carry over to \GQL{} formulas, since formulas just aren't the sort of thing which can be derived. 
 For example, we would like to be able to say that $\parhorseshoe{\Qp{\variable{x}}}{\Gp{\variable{y}}}$ and $\pardisjunction{\negation{\Qp{\variable{x}}}}{\Gp{\variable{y}}}$ are provably equivalent even though we cannot derive the formula $\triplebar{\parhorseshoe{\Qp{\variable{x}}}{\Gp{\variable{y}}}}{\pardisjunction{\negation{\Qp{\variable{x}}}}{\Gp{\variable{y}}}}$ (because it's not a sentence). 
 
@@ -1879,9 +1894,9 @@ It is probably a good idea to do the problems in order, as the earlier ones tend
 \item $\sststile{}{}\horseshoe{\Al}{\parhorseshoe{\Bl}{\Al}}$
 \item $\sststile{}{}\horseshoe{\parhorseshoe{\Al}{\Bl}}{\bparhorseshoe{\parhorseshoe{\Bl}{\Cl}}{\parhorseshoe{\Al}{\Cl}}}$
 \item $\sststile{}{}\horseshoe{\parhorseshoe{\Al}{\Bl}}{\bparhorseshoe{\pardisjunction{\Al}{\Cl}}{\pardisjunction{\Bl}{\disjunction{\Cl}{\Dl}}}}$
-\item $\sststile{}{}\disjunction{\parhorseshoe{\Al}{\Bl}}{\parhorseshoe{\Bl}{\Cl}}$
 \item $\sststile{}{}\horseshoe{\parconjunction{\conjunction{\bparhorseshoe{\Al}{\Bl}}{\Cl}}{\bpartriplebar{\Cl}{\Al}}}{\Bl}$
 \item $\sststile{}{}\disjunction{\negation{\Al}}{\parhorseshoe{\Bl}{\Al}}$
+\item $\sststile{}{}\disjunction{\parhorseshoe{\Al}{\Bl}}{\parhorseshoe{\Bl}{\Cl}}$
 \end{enumerate}
 \end{multicols}
 \begin{enumerate}[start=7]
