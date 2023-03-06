@@ -1,6 +1,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Quantifier Logic II}\label{quantifierlogic}
+\chapter{Quantifier Language II}\label{quantifierlogic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \AddToShipoutPicture*{\BackgroundPicB}
 
@@ -46,7 +46,7 @@ Therefore,
 \item Socrates is older than Aristotle.
 \end{menumerate}
 
-\noindent{}This argument is a good one, but we cannot represent it as an entailment in \GQL{}1.  The full language of \GQL{} can handle such arguments because it can simulate the \mention{older than} relation with a 2-place predicate.  One caveat is necessary---the last sentence isn't a logical consequence of the first two.  The first two sentences only entail the third if we also assume that the \mention{older than} relation is transitive.  Roughly, the way to express this transitivity would be as follows:
+\noindent{}This argument is a good one, but we cannot represent it as an entailment in \GQL{}1.  The full language of \GQL{} can handle such arguments because it can represent the \mention{older than} relation with a 2-place predicate.  One caveat is necessary---the last sentence isn't a logical consequence of the first two.  The first two sentences only entail the third if we also assume that the \mention{older than} relation is transitive.  Roughly, the way to express this transitivity would be as follows:
 
 \begin{center}
 For any $x$, $y$, and $z$ such that $x$ is older than $y$ and $y$ is older than $z$, \\ $x$ is older than $z$.
@@ -115,7 +115,7 @@ From base clause 2 we know that $\Gppp{''}{\variable{x}}{\variable{y}}$ is a for
 \end{multicols}
 \noindent{}But $\universal{\variable{x}}\universal{\x}\Gppp{''}{\variable{x}}{\variable{y}}$ is \emph{not} a formula, because it's of the form $\universal{\variable{x}}\CAPPHI$ where $\CAPPHI$ is a formula that contains the expression $\universal{\variable{x}}$.
 
-As in \GSL{} and \GQL{}1, we have unofficial formulas to improve sentence readability.
+As in \GSL{} and \GQL{}1, we have unofficial formulas to improve readability.
 \begin{majorILnc}{\LnpDC{Unofficial Formula of GQL}}
 A string of symbols is an \nidf{unofficial} formula\index{formulas!unofficial|textbf} \Iff we can obtain it from an official formula by
 \begin{cenumerate}
@@ -124,6 +124,8 @@ A string of symbols is an \nidf{unofficial} formula\index{formulas!unofficial|te
 \item omitting primes $'$ on a predicate letter.
 \end{cenumerate}
 \end{majorILnc}
+
+A unique official formula can always be reconstructed from an unofficial formula.
 
 \subsection{Other Properties of Formulas}\label{Other Properties of Formulas} 
 The concepts of subformula, order, main connective, and construction tree for formulas of \GQL{} are the same as in \GQL{}1.\footnote{See section \ref{Other Properties of Formulas1} of the last chapter.} 
@@ -534,7 +536,7 @@ $\CAPPSI$ is false on $\As{}{1}$ iff $\CAPPSI^*$ is false on $\As{}{2}$.
 Using this and the earlier result in this clause, we substitute to get that
 \begin{center}
 $\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$
-  iff  either // 
+  iff  either  
 	  (i) $\CAPPSI^*$ is false on $\As{}{2}$,
         or (ii) $\CAPTHETA$ is true on $\As{}{1}$.
 \end{center}
@@ -545,7 +547,7 @@ $\CAPTHETA$ is true on $\As{}{1}$ iff $\CAPTHETA^*$ is true on $\As{}{2}$.
 We substitute again to get:
 \begin{center}
 $\parhorseshoe{\CAPPSI}{\CAPTHETA}$ is true on $\As{}{1}$
- iff either //
+ iff either 
   (i) $\CAPPSI^*$ is false on $\As{}{2}$,
  or (ii) $\CAPTHETA^*$ is true on $\As{}{2}$.
 \end{center}
