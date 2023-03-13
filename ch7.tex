@@ -17,7 +17,7 @@ In the previous chapter, we stipulated restrictions for the rule applications of
 \begin{majorILnc}{\LnpDC{RuleSchemas}}
 	A \nidf{formal derivation rule}\index{derivation!rule|textbf} is a sequence of sentence schemas, the first through the second last of which is called the \df{given schemas} and the last is called the \df{may-add schema}. 
 \end{majorILnc}
-\noindent{}As the names suggest, table \mvref{GSD} lists rules by putting the first through second last schemas in the left column, labeled ``Given'', and the last schema in the right column, labeled ``May Add''. 
+\noindent{}As the names suggest, table \mvref{GSD} lists rules by putting the first through second to last schemas in the left column, labeled ``Given'', and the last schema in the right column, labeled ``May Add''. 
 We only bring out that we can think of rules as sequences of sentence schemas, and call them the given schemas and the may-add schema so the next definition is easier to state.
 \begin{majorILnc}{\LnpDC{RuleSanctioning}}
 	A rule \Rule{R}, applied to unboxed lines $\integer{m}_1,\ldots,\integer{m}_{\integer{j}}$ with, respectively, sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{j}}$, \df{sanctions} writing the sentence $\CAPPHI$ \Iff there's some substitution of \GSL{} sentences that, for the given schemas of \Rule{R}, results in $\CAPPSI_1,\ldots,\CAPPSI_{\integer{j}}$ and, for the may-add schema, results in $\CAPPHI$. 
@@ -201,7 +201,7 @@ So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
 Like \Rule{Assumption}, the assumptions change in \Rule{$\HORSESHOE$-Intro}. 
 If the new line sanctioned by \Rule{$\HORSESHOE$-Intro} has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$ and unboxed assumptions $\Delta^*$, then earlier we have an assumption line (now in a box) that starts with $\CAPPHI$ and $\Delta^*$ as its other assumptions, and we have a line (now at the bottom of the box) with $\CAPTHETA$ on it with assumptions $\CAPPHI,\Delta^*$. 
 By the recursive assumption we have that $\CAPPHI,\Delta^*\sdtstile{}{}\CAPTHETA$. 
-Consider any model $\IntA{}$ that makes $\Delta_{\integer{i}}$ true;
+Consider any model $\IntA{}$ that makes $\Delta^*$ true;
 if it also makes $\CAPPHI$ true, then $\CAPTHETA$ is true in $\IntA{}$ as well and so is $\horseshoe{\CAPPHI}{\CAPTHETA}$. 
 If $\IntA{}$ makes $\CAPPHI$ false, then $\horseshoe{\CAPPHI}{\CAPTHETA}$ is true. 
 (Notice that this step only works because we defined the conditional to be true when the \CAPS{lhs} is false.)
@@ -345,9 +345,8 @@ In this section we first prove the completeness of \GSD{}.
 	By definition, this includes the case when $\Delta$ is the empty set. 
 	Hence \GSD{}/\GQD{} is weakly complete. 
 	
-	$(\Rightarrow)$ Assume that \GSD{}/\GQD{} is weakly complete. 
-	Hence for any sentence $\CAPPSI$, if $\sdtstile{}{}\CAPPSI$, then $\sststile{}{}\CAPPSI$. 
-	Now assume that, for some finite set $\Delta$ of sentences and sentence $\CAPPSI$, $\Delta\sdtstile{}{}\CAPPHI$.
+	$(\Rightarrow)$ Assume that \GSD{}/\GQD{} is weakly complete: for any sentence $\CAPPHI$, if $\sdtstile{}{}\CAPPHI$, then $\sststile{}{}\CAPPHI$. 
+	Now assume that, for some finite set $\Delta$ of sentences and sentence $\CAPPHI$, $\Delta\sdtstile{}{}\CAPPHI$.
 	Since $\Delta$ is finite, we can consider the conjunction of all the sentences in $\Delta$.
 	Let $\DELTA$ be this conjunction. 
 	%From the \GQL{} Entailment-Exponentiation Theorem (Thm. \pmvref{Exponentiation of Entailment GQL}) we know that $\DELTA\sdtstile{}{}\CAPPHI$ \Iff $\sdtstile{}{}\horseshoe{\DELTA}{\CAPPHI}$.
@@ -605,7 +604,7 @@ We can do this since none occur in both modes.
 This model makes each element of the conjunction true and thus makes the entire conjunction true. 
 Since the sentence containing it is a disjunction, this is sufficient to make the entire sentence true.
 Thus we can make the last line of the derivation true.
-Observe now that all of the steps we used in the derivation were replacement of provably equivalence steps;
+Observe now that all of the steps we used in the derivation were replacement of provably equivalence sentences;
 that is, they used exchange shortcut rules.
 Thus, we know that we could also construct a derivation by \mention{turning this proof upside down}, so to speak.  In other words, we could construct a new derivation, with the last step of the original derivation as the initial assumption step.  Then we could use the exchange shortcut rules to work back to $\CAPPHI$ of the original derivation.
 
@@ -1000,7 +999,7 @@ Thus we will use some additional short cut rules to speed the process of detecti
 
 Our first shortcut rule is \Rule{Greg's Rule}. We\index{Greg's Rule} know that if a conjunction contains an atomic formula and the negation of that atomic formula then we can derive the negation of the conjunction.
 E.g., we can derive the negation of $\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}$.
-So if we have a disjunction, one disjunct of which contains a contradiction of this kind, we can derive he negation of that disjunct and use disjunctive syllogism to prune that disjunct.
+So if we have a disjunction, one disjunct of which contains a contradiction of this kind, we can derive the negation of that disjunct and use disjunctive syllogism to prune that disjunct.
 For example, assume the Method ends at the sentence $\disjunction{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$. We can independently derive $\negation{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{b}}}}}}}$. From these two we derive  $\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}$. 
 Greg's Rule lets us accomplish those steps by crossing out the contradictory part and writing down the remaining ones.
 

@@ -431,10 +431,14 @@ We demonstrate some informal ones in the following examples, and then develop a 
 		\tikzset{every tree node/.style={align=center,anchor=north}}
 		\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
 		[.{$\conjunction{\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}}{\negation{\Gl}}$ /$\FalseB$}
-		[.{$\Gl$ /$\TrueB$\\ $\negation{\Gl}$ /$\FalseB$} %!{\qsetw{3in}}
-		%   [.{$\Gl$ /$\TrueB$}
-		%   ]
+		[.{$\negation{\Gl}$ /$\FalseB$} %!{\qsetw{3in}}
+		[.{$\Gl$ /$\TrueB$}
 		]
+		]
+		%[.{$\Gl$ /$\TrueB$\\ $\negation{\Gl}$ /$\FalseB$} %!{\qsetw{3in}}
+		%%   [.{$\Gl$ /$\TrueB$}
+		%%   ]
+		%]
 		[.{$\disjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ /$\TrueB$} 
 		[.{$\horseshoe{\Dl}{\Bl}$ /$\TrueB$} 
 		[.{$\Bl$ /$\FalseB$} 
@@ -775,7 +779,7 @@ $\parconjunction{\Al}{\Bl}\sdtstile{}{}\Bl$, that is, any model that makes $\par
 \end{majorILnc}
 \begin{PROOF}
 We must show that for all models $\IntA$, if $\IntA$ makes $\parconjunction{\Al}{\Bl}$ true, then it also makes $\Bl$ true. 
-Assume an model $\IntA$ makes $\parconjunction{\Al}{\Bl}$ true. 
+Assume a model $\IntA$ makes $\parconjunction{\Al}{\Bl}$ true. 
 By the definition of truth for $\WEDGE$---clause 3, \mvref{True on a GSL interpretation}---both $\Al$ and $\Bl$ are true in $\IntA$ as well. 
 \end{PROOF}
 \begin{majorILnc}{\LnpEC{GSLEntailmentExB}}

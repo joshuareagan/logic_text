@@ -320,7 +320,7 @@ In each of the following three formulas the free variable tokens are underlined,
 \smallskip
 \begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
 labelindent=.35\parindent, labelsep=*, itemsep=8pt]
-\item $\universal{\variable{x}}\parhorseshoe{\parconjunction{\Bl}{\existential{\variable{z}}\Kpp{'}{\variable{x}\NextLineRefF[black, distance=17, out=135, in=45]}}}{\existential{\variable{x}}\Np{\variable{x}}\NextLineRefK[black, out=-50, in=-50]}$
+\item $\universal{\variable{x}}\horseshoe{\parconjunction{\Bl}{\existential{\variable{z}}\Kpp{'}{\variable{x}\NextLineRefF[black, distance=17, out=135, in=145]}}}{\existential{\variable{x}}\Np{\variable{x}}\NextLineRefK[black, out=-50, in=-50]}$
 \item $\conjunction{\Dl}{\pardisjunction{\existential{\variable{u}}\universal{\variable{w}}\Ppp{'}{\variable{u}\NextLineRefC[black, distance=12, out=135, in=45]}}{\Cpp{'}{\underline{\variable{y}}}}}$
 \item $\existential{\variable{z}}\partriplebar{\parconjunction{\Hpp{'}{\underline{\variable{x}}}}{\Gl}}{\Dp{\variable{z}}\NextLineRefI[black, distance=25, out=205, in=315]}$
 \end{enumerate}
@@ -396,12 +396,14 @@ At this point we could define truth for sentences without quantifiers, though fo
 
 Quantifiers require more complexity. A sentence like $\universal{\variable{x}}\Ep{\variable{x}}$ is true \Iff every object in the domain, $\integer{U}$, is an element of $\IntA(\EE)$. So if $\IntA$ assigns $\integer{U}$ the set of even integers and $\IntA(\EE)=\integer{U}$, $\universal{\variable{x}}\Ep{\variable{x}}$ is true. But if instead $\IntA(\EE)=\{2, 4, 6\}$, then there are objects in the domain (e.g. $8$) not in $\IntA(\EE)$, and so $\universal{\variable{x}}\Ep{\variable{x}}$ is false. For simple quantified sentences this quick definition is good enough; but it won't work for more complex sentences, such as $\universal{\variable{x}}\existential{\variable{y}}\parhorseshoe{\Hp{\variable{y}}}{\Gp{\variable{x}}}$.
 
-In order to arrive at a more sophisticated definition, we first need a convenient way to refer to models that make identical assignments everywhere except at one constant.
+To define truth for quantified sentences more precisely, we first need a convenient way to refer to models that make identical assignments everywhere except at one constant.
 
 \begin{majorILnc}{\LnpDC{Variant}}
-A $\variable{t}$-\nidf{variant}\index{model!$\variable{t}$-variant} of $\As{}{}$ is any model $\As{*}{}$ making the same assignments as $\As{}{}$ for everything except possibly $\variable{t}$.\footnote{One result of this definition is that, for every term $\variable{t}$, any model $\As{}{}$ is a $\variable{t}$-variant of itself.}  If $\As{*}{}$ makes an assignment to $\variable{t}$, the $\variable{t}$-variants are $\As{*}{}$ and all of the similar models that assign something else to $\variable{t}$;  if $\As{*}{}$ does not make an assignment to $\variable{t}$, then the $\variable{t}$ variants are all the models that agree with $\As{*}{}$ and assign something to $\variable{t}$.
+A $\variable{t}$-\nidf{variant}\index{model!$\variable{t}$-variant} of $\As{}{}$ is any model $\As{*}{}$ that makes any assignment to $\variable{t}$ but otherwise makes exactly the same assignments as $\As{}{}$.\footnote{One result of this definition is that, for every term $\variable{t}$, any model $\As{}{}$ that assigns something to $\variable{t}$ is a $\variable{t}$-variant of itself.}
 \end{majorILnc}
-\noindent{}We will generally denote $\variable{t}$-variants of a model $\As{}{}$ by affixing $\variable{t}$ as a superscript to \mention{$\As{}{}$}. For example, $\As{\constant{c}}{}$ is a $\constant{c}$-variant of $\As{}{}$.  On this example $\As{\constant{c}}{}$ and $\As{}{}$ make all the same assignments, except possibly to the constant $\constant{c}$.
+\noindent{}Put another way, a $\variable{t}$-variant of $\As{}{}$ makes all the same assignments as $\As{}{}$ except possibly at constant $\variable{t}$. But what if $\As{}{}$ doesn't assign anything to $\variable{t}$? In that case, the $\variable{t}$-variants are all the models that are identical with $\As{}{}$ but that also assign something to $\variable{t}$.
+
+We will generally denote $\variable{t}$-variants of a model $\As{}{}$ by affixing $\variable{t}$ as a superscript to \mention{$\As{}{}$}. For example, $\As{\constant{c}}{}$ is a $\constant{c}$-variant of $\As{}{}$.  On this example $\As{\constant{c}}{}$ and $\As{}{}$ make all the same assignments, except possibly to the constant $\constant{c}$.
 We extend this notation when the symbol denoting the original model is itself complex.
 So, given an $\constant{c}$-variant of model $\As{}{}$, i.e., $\As{\constant{c}}{}$, $\As{\constant{cd}}{}$ is a $\constant{d}$-variant of $\As{\constant{c}}{}$.  For another example, if $\As{\constant{e}}{4}$ is an $\constant{e}$-variant of $\As{}{4}$, then $\As{\constant{e}}{4}$ and $\As{}{4}$ make identical assignments to everything except maybe $\constant{e}$. 
 
@@ -569,7 +571,7 @@ Similar reasoning holds for the other conjunct.  $\existential{\variable{x}}\Dp{
 
 We may calculate the truth value of a \GQL{}1 sentence $\CAPPHI$ on some $\IntA$ \Iff $\IntA$ is a model for $\CAPPHI$.  If $\IntA$ \emph{isn't} a model for $\CAPPHI$, then $\CAPPHI$ has no truth value on it.  Be careful!  Even if $\As{}{1}$ is a model for some sentence $\CAPPHI$ and $\As{}{2}$ is a model for some sentence $\CAPPSI$, it doesn't follow that either $\As{}{1}$ or $\As{}{2}$ is a model for, say, $\horseshoe{\CAPPHI}{\CAPPSI}$.
 
-We were able to calculate the truth values of the previous example problems using the two models in table \mvref{table:Partial Models} because the none of the sentences contained sentence letters, constants, or predicates that weren't given an assignment in the table.  Those assignments not mentioned, in effect, don't matter for truth evaluation.  The following theorem proves that the unmentioned assignments won't make a difference.
+We were able to calculate the truth values of the previous example problems using the two models in table \mvref{table:Partial Models} because none of the sentences contained sentence letters, constants, or predicates that weren't given an assignment in the table.  Those assignments not mentioned, in effect, don't matter for truth evaluation.  The following theorem proves that the unmentioned assignments won't make a difference.
 
 As with \GSL{}, we have \emph{minimal models} in \GQL{}1:
 
