@@ -133,7 +133,7 @@ Natural deduction systems were first invented by Stanislaw Jaskowski in 1926, th
 
 Before doing some examples, two notes about the rules are in order. 
 First, to use the \Rule{Assumption} rule, you must draw a new vertical line to the left of your assumption (and to the right of any other vertical lines from previous steps). 
-The vertical lines are assumption lines; assumption lines are an accounting device to keep track of what you have assumed as opposed to what you have derived (see example \pmvref{secondexample}). You may assume any sentence you like, but generally these assumptions (usually all of them) will need to be discharged.  Vertical assumption lines are like your credit card balance.  As with a credit card, managing assumptions wisely is a skill to be acquired.
+The vertical lines are assumption lines; assumption lines are an accounting device to keep track of what you have assumed as opposed to what you have derived (see example \pmvref{secondexample}). You may assume any sentence you like, but generally these assumptions (usually all of them) will need to be discharged.\footnote{Leaving an assumption undischarged is tantamount to treating it as a premise in an argument.}  Vertical assumption lines are like your credit card balance.  As with a credit card, managing assumptions wisely is a skill to be acquired.
 
 How do you get rid of an assumption? And how do you keep track of them when you are adding some and eliminating others? We have a second accounting device: boxes. When an assumption is discharged, the relevant assumption line is turned into a box containing everything derived from the originating assumption. Writing boxes can sometimes seem tedious, but we have found that using them significantly reduces student error.
 
@@ -197,7 +197,7 @@ We continue:
 Just as we used the double turnstile to represent when one sentence (or a set of sentences) entailed another, we use what's called the \emph{single turnstile}, \mention{\:$\sststile{}{}\:$}, to represent when one sentence is derivable from another, or from another (finite) set of sentences. 
 The four-line derivation shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\conjunction{\Cl}{\Bl}$. 
 It's also worth noting that each of the two partially completed pieces of the derivation just given are derivations themselves. 
-The first (\ref{onelinederivation}) is a one-line derivation that shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\conjunction{\Bl}{\Cl}$, while the second (\ref{onelinederivation}) is a three-line derivation that shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\Cl$.
+The first (\ref{onelinederivation}) is a one-line derivation that shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\conjunction{\Bl}{\Cl}$, while the second (\ref{threelinederivation}) is a three-line derivation that shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\Cl$.
 
 Next, as an example of how assumption lines stack up in a derivation, consider the following derivation of $\Dl$ from $\conjunction{\Al}{\Bl}$ and $\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$.
 \begin{gproof}[\label{secondexample}]
@@ -209,7 +209,7 @@ Next, as an example of how assumption lines stack up in a derivation, consider t
 \end{gproof}
 \noindent{}As is shown, any time a new assumption line is added it must be placed to the right of the previous (unboxed) assumption lines. (We discuss this example a little more in the next section, while discussing the basic top-down and bottom-up strategies for $\HORSESHOE$.)
 
-The last major point about the mechanics of writing a derivation is how the assumptions are closed, or discharged, when \Rule{$\HORSESHOE$-Intro} is used. This rule says that if you have a sentence $\CAPPSI$ on a line as an assumption, and you've worked your way down to a line with sentence $\CAPTHETA$, then you can ``close off'' the assumption by drawing a box around that part of the proof and writing $\horseshoe{\CAPPSI}{\CAPTHETA}$ on the next line. We can demonstrate this by applying the rule to close off the assumptions in the previous two proofs:
+The last major point about the mechanics of writing a derivation is how the assumptions are closed, or discharged, when \Rule{$\HORSESHOE$-Intro} is used. This rule says that if you have a sentence $\CAPPSI$ as an assumption on the first row of vertical line L, and you've worked your way down to a sentence $\CAPTHETA$, also on L, then you can ``close off'' the assumption by drawing a box around that part of the proof and writing $\horseshoe{\CAPPSI}{\CAPTHETA}$ on the next line. We can demonstrate this by applying the rule to close off the assumptions in the previous two proofs:
 \begin{gproof}[\label{simpleconjunctionclosed}]
 \gaproof{
 \galine{1}{$\conjunction{\Bl}{\Cl}$}{\Rule{Assume}}
@@ -281,7 +281,7 @@ To understand these rules we must first define what an \emph{open assumption} is
 \end{gproofnn}
 \item[Generating Clause:] \hfill{}
 \begin{description}
-\item[Case 1:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to lines $\integer{j}_1,\ldots,\integer{j}_k$, 
+\item[Case 1:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to a subset of lines $\integer{j}_1,\ldots,\integer{j}_k$, 
 \begin{gproofnn}
 \gline{1}{}{}
 \glinend{}{}{}
@@ -298,9 +298,9 @@ then the sequence of derivation lines you get by adding a new line $\integer{n}+
 \gline{$\integer{n}$}{$\CAPPSI$}{\Rule{R}, $\integer{j}_1,\ldots,\integer{j}_k$}
 \gline{$\integer{n}+1$}{$\CAPTHETA$}{\Rule{R$'$}, $\integer{h}_1,\ldots,\integer{h}_l$}
 \end{gproofnn}
-so long as $\CAPTHETA$ is sanctioned by some rule \Rule{R$'$} (other than \Rule{$\HORSESHOE$-Intro}) when applied to previous lines $\integer{h}_1,\ldots,\integer{h}_l$ already in the derivation. 
+so long as $\CAPTHETA$ is sanctioned by some rule \Rule{R$'$} (other than \Rule{$\HORSESHOE$-Intro}) when applied to a subset of previous lines $\integer{h}_1,\ldots,\integer{h}_l$ already in the derivation. 
 
-\item[Case 2:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to lines $\integer{j}_1,\ldots,\integer{j}_k$, 
+\item[Case 2:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to a subset of lines $\integer{j}_1,\ldots,\integer{j}_k$, 
 \begin{gproofnn}
 \gline{1}{}{}
 \glinend{}{}{}
@@ -318,7 +318,7 @@ then, for any sentence $\CAPTHETA$, the sequence of derivation lines you get by 
 \gaalineNC{$\integer{n}+1$}{$\CAPTHETA$\qquad}{\Rule{Assume}}
 \end{gproofnn}
 
-\item[Case 3:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to lines $\integer{j}_1,\ldots,\integer{j}_k$, and in which the $\integer{k}$th assumption was opened on line $\integer{m}$, 
+\item[Case 3:] If you have some $\integer{n}$-line derivation with $\integer{k}$ assumptions still open at line $\integer{n}$, and in which the sentence $\CAPPSI$ on $\integer{n}$ is sanctioned by rule $\Rule{R}$ when applied to a subset of lines $\integer{j}_1,\ldots,\integer{j}_k$, and in which the $\integer{k}$th assumption was opened on line $\integer{m}$, 
 \begin{gproofnn}
 \gline{1}{}{}
 \glinend{}{}{}
@@ -475,7 +475,7 @@ The bottom-up strategy for $\!\WEDGE\!$ says to get this we should derive both $
 \galineNC{$\integer{n}-1$}{$\negation{\Bl}$}{}
 \galineNC{$\integer{n}$}{$\conjunction{\Bl}{\negation{\Bl}}$}{\Rule{$\WEDGE$-Intro}, $\integer{n}-$1,$\integer{n}-$2}
 \end{gproof}
-\noindent{}The bottom-down strategy for $\!\WEDGE\!$ is our only option at this point, so we break line 1 apart using \Rule{$\WEDGE$-Elim}.
+\noindent{}The top-down strategy for $\!\WEDGE\!$ is our only option at this point, so we break line 1 apart using \Rule{$\WEDGE$-Elim}.
 \begin{gproof}
 \galineNC{1}{$\parconjunction{\bparhorseshoe{\Al}{\negation{\Bl}}}{\bparconjunction{\Al}{\Bl}}$}{\Rule{Assume}}
 \galineNC{2}{$\bparhorseshoe{\Al}{\negation{\Bl}}$}{\Rule{$\WEDGE$-Elim}, 1}
@@ -487,7 +487,7 @@ The bottom-up strategy for $\!\WEDGE\!$ says to get this we should derive both $
 \galineNC{$\integer{n}-1$}{$\negation{\Bl}$}{}
 \galineNC{$\integer{n}$}{$\conjunction{\Bl}{\negation{\Bl}}$}{\Rule{$\WEDGE$-Intro}, $\integer{n}-$1,$\integer{n}-$2}
 \end{gproof}
-\noindent{}Now we continue to work bottom-down, using \Rule{$\WEDGE$-Elim} to break apart line 3. Note that in this step we've partway joined up the top and bottom of the proof, since breaking apart line 3 gets us what we were calling line $\integer{n}-$2.
+\noindent{}Now we continue to work top-down, using \Rule{$\WEDGE$-Elim} to break apart line 3. Note that in this step we've partway joined up the top and bottom of the proof, since breaking apart line 3 gets us what we were calling line $\integer{n}-$2.
 \begin{gproof}
 \galineNC{1}{$\parconjunction{\bparhorseshoe{\Al}{\negation{\Bl}}}{\bparconjunction{\Al}{\Bl}}$}{\Rule{Assume}}
 \galineNC{2}{$\bparhorseshoe{\Al}{\negation{\Bl}}$}{\Rule{$\WEDGE$-Elim}, 1}
@@ -918,7 +918,7 @@ Exchange rules are short cut rules that work in both directions.
 %\end{table}
 
 Theorem \mvref{GSD Shortcut Theorem} is a general claim that doesn't require a different proof for each new rule we introduce. 
-The proof for it fills out the quick argument given when \Rule{A.C.} was introduced. There we argued that since any application of the rule can be derived using just the basic rules, we can eliminate that application of the rule from the proof by cutting and pasting the derivation of that application into the original proof. 
+The proof for it fills out the quick argument given when \Rule{A.C.} was introduced. There we argued that since any application of \Rule{A.C.} can be derived using just the basic rules, we can eliminate that application of the rule from the proof by cutting and pasting the derivation of that application into the original proof. 
 \begin{majorILnc}{\LnpDC{RuleInstanceDerivability}}
 We say that every application of a rule \Rule{R$_1$} is derivable using the rules \Rule{R$_2$}, $\ldots$, \Rule{R$_\integer{p}$} and the basic rules of \GSD{} \Iff for all \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ and $\CAPPSI$, if \Rule{R$_1$} sanctions writing down $\CAPPSI$ when applied to $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ on previous unboxed lines, then $\CAPPSI$ can be derived from $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ using only rules \Rule{R$_2$}$,\ldots,$\Rule{R$_\integer{p}$} and the basic rules of \GSD{}.
 \end{majorILnc}
@@ -1299,7 +1299,7 @@ We now add new strategies based on shortcut rules to this basic stock.
 \subsubsection*{Conjunction} 
 \begin{description}
 \item[\Rule{DeM} Top-down:] If you have a sentence of the form $\conjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$, then convert it using \Rule{DeM} to get $\negation{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ on a new line.
-\item[\Rule{$\NEGATION/\HORSESHOE$-Exchange} Top-down:] If you have a sentence of the form $\conjunction{\CAPPHI}{\negation{\CAPPSI}}$, then convert it using \Rule{$\NEGATION/\HORSESHOE$-Exchange} to get $\negation{\horseshoe{\CAPPHI}{\CAPPSI}}$ on a new line. 
+\item[\Rule{$\NEGATION/\HORSESHOE$-Exchange} Top-down:] If you have a sentence of the form $\conjunction{\CAPPHI}{\negation{\CAPPSI}}$, then convert it using \Rule{$\NEGATION/\HORSESHOE$-Exchange} to get $\negation{\parhorseshoe{\CAPPHI}{\CAPPSI}}$ on a new line. 
 \end{description} 
 \subsubsection*{Disjunction} 
 \begin{description}
@@ -1384,13 +1384,17 @@ We explain these in the examples below.
 \nopagebreak
  &  &  not occur in $\CAPPHI$  \\[-.25cm]
  \nopagebreak
- &  & nor in any unboxed assumption \\
+ &  & nor in any unboxed line \\[-.25cm]
+ \nopagebreak
+& &  justified by Assumption\\
 \Rule{$\exists$-Intro} & $\CAPPHI\constant{a}/\BETA$ & $\existential{\BETA}\CAPPHI$ \\
 \Rule{$\exists$-Elim} & $\existential{\BETA}\CAPPHI$, $\horseshoe{\CAPPHI{\constant{a}/\BETA}}{\CAPTHETA}$ & $\CAPTHETA$, \Iff \mention{a} does \\[-.25cm]
 \nopagebreak
  &  &  not occur in $\CAPPHI$ or $\CAPTHETA$, \\[-.25cm]
 \nopagebreak
- & &  nor in any unboxed assumption\\
+ & &  nor in any unboxed line\\[-.25cm]
+ \nopagebreak
+ & &  justified by Assumption\\
 \end{longtable}
 %\bottomrule
 %\end{tabular}
@@ -1474,8 +1478,9 @@ As before, we start by setting out the assumptions.
 \galineNC{1}{$\universal{\variable{x}}\negation{\Qpp{\variable{x}}{\constant{b}}}$}{\Rule{Assume}}
 \gaalineNC{2}{$\existential{\variable{z}}\pardisjunction{\Qpp{\variable{z}}{\constant{b}}}{\Gp{\variable{z}}}$}{\Rule{Assume}}
 \end{gproof}
-When using both \Rule{$\exists$-Elim} and \Rule{$\forall$-Elim}, it's generally best to do what needs to be done for \Rule{$\exists$-Elim} first and use \Rule{$\forall$-Elim} only when necessary.
-The reason for this has to do with the restriction on \Rule{$\exists$-Elim} and will become apparent with some practice. 
+
+When using both \Rule{$\exists$-Elim} and \Rule{$\forall$-Elim}, it’s generally best to take the instance of the existential for \Rule{$\exists$-Elim} first and use \Rule{$\forall$-Elim} after. In some cases
+you want the \Rule{$\forall$-Elim} instance to match the \Rule{$\exists$-Elim} constant, but in other cases you want it to be different.
 Now, according to \Rule{$\exists$-Elim}, we can get a sentence $\CAPTHETA$ in this case by showing that $\horseshoe{\pardisjunction{\Qpp{\variable{t}}{\constant{b}}}{\Gp{\variable{t}}}}{\CAPTHETA}$, for some constant $\variable{t}$ that fits the restriction on \Rule{$\exists$-Elim}.
 (Just what constants will work and what sentence $\CAPTHETA$ we want will take some thought.)
 So, we need to use \Rule{$\HORSESHOE$-Intro}. 
@@ -1675,7 +1680,7 @@ These are found in table \ref{GQDplus}.
 
 Just as we had to slightly modify the definition of sanctioning used in \GSD{} for the basic (intro and elimination) rules and standard shortcut rules for \GQD{}, we also have to slightly modify the definition of sanctioning used in \GSDP{} (Def. \pmvref{ExchangeRuleSanctioning}) for the exchange shortcut rules for \GQD{} that make up \GQDP{}.
 \begin{majorILnc}{\LnpDC{GQDExchangeRuleSanctioning}}
-An exchange shortcut rule \Rule{R} of \GQDP{} (a rule from table \pmvref{GSDplus2}, or table \pmvref{GQDplus}), applied to a line with a \GQL{} sentence $\CAPPSI$, \emph{sanctions} writing down sentence $\CAPPSI^*$ \Iff
+An exchange shortcut rule \Rule{R} of \GQDP{} (a rule from table \pmvref{GSDplus2}, or table \pmvref{GQDplus}), applied to a line with a \GQL{} formula $\CAPPSI$, \emph{sanctions} writing down sentence $\CAPPSI^*$ \Iff
 \begin{cenumerate}
 \item there is some substitution of \GQL{} formulas that, for the given schema of \Rule{R}, results in a formula $\CAPPHI$ and, for the may-add schema, results in a formula $\CAPPHI^*$,
 \item $\CAPPHI$ is a subformula of $\CAPPSI$, and
