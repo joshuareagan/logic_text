@@ -35,24 +35,20 @@ The 2-place predicates correspond roughly to what you get if you take an English
 	\item \mention{Three is between two and four} $\Rightarrow$ \mention{\_\_\_\_\_\_ is between \_\_\_\_\_\_ and \_\_\_\_\_\_}
 \end{menumerate}
 
-For any $n\geq2$, an $n$-place predicate can mirror a corresponding $n$-place relation.  The introduction of many-place predicates significantly increases the power of our formal language.  Consider the following argument:
+For any $n\geq2$, an $n$-place predicate can mirror a corresponding $n$-place relation. 
+The introduction of many-place predicates significantly increases the power of our formal language. 
+Consider the following argument:
 
 \begin{menumerate}
-\item Socrates is older than Plato.
-\item Plato is older than Aristotle.
+\item All horses are animals.
 
 Therefore,
 
-\item Socrates is older than Aristotle.
+\item All horses' tails are animals' tails.
 \end{menumerate}
 
-\noindent{}This argument is a good one, but we cannot represent it as an entailment in \GQL{}1.  The full language of \GQL{} can handle such arguments because it can represent the \mention{older than} relation with a 2-place predicate.  One caveat is necessary---the last sentence isn't a logical consequence of the first two.  The first two sentences only entail the third if we also assume that the \mention{older than} relation is transitive.  Roughly, the way to express this transitivity would be as follows:
-
-\begin{center}
-For any $x$, $y$, and $z$ such that $x$ is older than $y$ and $y$ is older than $z$, \\ $x$ is older than $z$.
-\end{center}
-
-\noindent{}Thankfully, we can express this in \GQL{}, using quantifiers and 2-place predicates.
+\noindent{}This argument is a good one, but we cannot represent it as an entailment in either \GSL{} or \GQL{}1. 
+The full language of \GQL{} can handle such arguments because it can represent the \mention{is the tail of} relation with a 2-place predicate. 
 
 \GQL{} has all the basic symbols of \GQL{}1, plus predicate letters for $n$-placed predicates, for every integer $n$ such that $n\geq2$. 
 \begin{majorILnc}{\LnpDC{Symbols of GQL}}
@@ -239,16 +235,33 @@ The following clauses fix when a \GQL{} sentence $\CAPTHETA$ is \nidf{$\True$} (
 \end{cenumerate}
 \end{majorILnc}
 
-\noindent{}Let's look at a simple example to see how \GQL{} truth works for a two-place predicate.  Consider a model $\IntA$ with the following assignments:\\
+\noindent{}Clause (3) is the only change from the corresponding definition of \GQL{}1.
+
+Let's look at a simple example to see how \GQL{} truth works for a two-place predicate.  Consider a model $\IntA$ with the following assignments:\\
 
 \noindent{}$\IntA(\constant{j})=$ Jack\\
 \noindent{}$\IntA(\constant{i})=$ Jill\\
 \noindent{}$\IntA(\constant{b})=$ Bill\\
 \noindent{}$\IntA(\Ap{''})=\{\langle$Jack, Jill$\rangle, \langle$Jill, Bill$\rangle, \langle$Jack, Bill$\rangle\}$\\
 
-\noindent{}Is the \GQL{} sentence $\Ap{''\constant{j}\constant{b}}$ true on $\IntA$?  To find out, we must check the set $\IntA(\Ap{''})$ to see if $\langle\IntA(\constant{j}),\IntA(\constant{b})\rangle$ is a member.  We see that $\langle\IntA(\constant{j}),\IntA(\constant{b})\rangle=\langle$Jack, Bill$\rangle$.  We then find that $\langle$Jack, Bill$\rangle$ is a member of $\IntA(\Ap{''})$, so $\Ap{''\constant{j}\constant{b}}$ is true on $\IntA$.
+\begin{majorILnc}{\LnpEC{GQLTruthEasyExampleA}}
+Show that the sentence $\Ap{''\constant{j}\constant{b}}$ is true on $\IntA$.
+\end{majorILnc}
+\begin{PROOF}
+	To determine the truth value, we must check the set $\IntA(\Ap{''})$ to see if $\langle\IntA(\constant{j}),\IntA(\constant{b})\rangle$ is a member. 
+	We see that $\langle\IntA(\constant{j}),\IntA(\constant{b})\rangle=\langle$Jack, Bill$\rangle$. 
+	We then find that $\langle$Jack, Bill$\rangle$ is a member of $\IntA(\Ap{''})$, so $\Ap{''\constant{j}\constant{b}}$ is true on $\IntA$.
+\end{PROOF}
 
-Next, consider the sentence $\Ap{''\constant{b}\constant{i}}$ on the same model.  This sentence is true on $\IntA$ \Iff $\langle\IntA(\constant{b}),\IntA(\constant{i})\rangle$ is a member of the set $\IntA(\Ap{''})$.  We know that $\langle\IntA(\constant{b}),\IntA(\constant{i})\rangle=\langle$Bill, Jill$\rangle$.  But $\langle$Bill, Jill$\rangle$ is not a member of $\IntA(\Ap{''})$, so $\Ap{''\constant{b}\constant{i}}$ is false on $\IntA$.  (Remember that $\langle$Bill, Jill$\rangle$ is not the same as $\langle$Jill, Bill$\rangle$.  Order matters!)
+\begin{majorILnc}{\LnpEC{GQLTruthEasyExampleB}}
+Show that the sentence $\Ap{''\constant{b}\constant{i}}$ is false on $\IntA$.
+\end{majorILnc}
+\begin{PROOF}
+	This sentence is true on $\IntA$ \Iff $\langle\IntA(\constant{b}),\IntA(\constant{i})\rangle$ is a member of the set $\IntA(\Ap{''})$. 
+	We know that $\langle\IntA(\constant{b}),\IntA(\constant{i})\rangle=\langle$Bill, Jill$\rangle$. 
+	But $\langle$Bill, Jill$\rangle$ is not a member of $\IntA(\Ap{''})$, so $\Ap{''\constant{b}\constant{i}}$ is false on $\IntA$. 
+	(Remember that $\langle$Bill, Jill$\rangle$ is not the same as $\langle$Jill, Bill$\rangle$.  Order matters!)
+\end{PROOF}
 
 Let's try more complicated examples, using the models provided on the table below:
 
@@ -311,33 +324,64 @@ Let's try more complicated examples, using the models provided on the table belo
 	%\bottomrule
 \end{longtable}
 
-While looking over the many-place predicates in the table, you'll notice that we don't actually list sets of $n$-tuples.  Instead, for each many-place predicate we provide a brief description of some relation which could be used to identify such a set.  This will be our usual practice.  Writing out all the specific $n$-tuples in our chart would be excessively tedious for the model \emph{States}, and impossible for the model \emph{Pos Int}.\footnote{Finite beings often have difficulty performing tasks with an infinite number of steps.}
+While looking over the many-place predicates in the table, you'll notice that we don't actually list sets of $n$-tuples. 
+Instead, for each many-place predicate we provide a brief description of some relation which could be used to identify such a set. 
+This will be our usual practice. 
+Writing out all the specific $n$-tuples in our chart would be excessively tedious for the model \emph{States}, and impossible for the model \emph{Pos Int}.\footnote{Finite beings often have difficulty performing tasks with an infinite number of steps.}
 
-\begin{majorILnc}{\LnpEC{GQLTruthExampleA}}
-Determine the truth values of the sentences $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ and $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ on the model \emph{Pos Int} in table \ref{table:Example Interpretations}.  The only difference between these two sentences is the order of the quantifiers.  If we can show that they differ in truth value on the same model, then we will have established that quantifier order matters for assessing truth in a model.
+\begin{majorILnc}{\LnpEC{GQLTruthExampleA1}}
+Determine the truth value of the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ on model \emph{Pos Int} in table \ref{table:Example Interpretations}.
 \end{majorILnc}
 \begin{PROOF}
-First, let's consider the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$.
+	Intuitively, this sentence can be read as \mention{For each $\variable{y}$, there is some $\variable{x}$ such that $\variable{x}>\variable{y}$}.
+	That is, for each positive integer there is another that is greater.
+	Thus, we may expect that $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int}.
+	This insight cannot serve as a proof that the sentence is true, but it can help guide our efforts as we work according to the proper definitions.
 
-(i)  $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int} \Iff $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}.  The sentence $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on an $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, \Iff $\App{''\constant{b}}{\constant{a}}$ is true on some $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ (definition of truth, $\exists$).  \emph{Pos Int} assigns to $\App{''}{}$ the set of ordered pairs such that the first is greater than the second.  So, $\App{''\constant{b}}{\constant{a}}$ is true on some $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ when it assigns a larger number to $\constant{b}$ than it assigns to $\constant{a}$.
+	$\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int} \Iff $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}. 
+	So, to establish the truth of the sentence we can show that all assignments to $\constant{a}$ make $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ true.
 
-It doesn't really matter what $\emph{Pos Int}^{\constant{a}}$ assigns to $\constant{a}$.  There is some larger number that a $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ can assign to $\constant{b}$.  Hence, regardless of what number $\emph{Pos Int}^{\constant{a}}(\constant{a})$ is, $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on $\emph{Pos Int}^{\constant{a}}$.
+	The sentence $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on an $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, \Iff $\App{''\constant{b}}{\constant{a}}$ is true on some $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ (definition of truth, $\exists$).
+	So, to show that an $\constant{a}$-assignment makes $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ true, we can provide any $\constant{b}$-assignment that makes $\App{''\constant{b}}{\constant{a}}$ true.
+	
+	\emph{Pos Int} assigns to $\App{''}{}$ the set of ordered pairs such that the first is greater than the second. 
+	So, $\App{''\constant{b}}{\constant{a}}$ is true on some $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ when it assigns a larger number to $\constant{b}$ than it assigns to $\constant{a}$.
+	It doesn't really matter what $\emph{Pos Int}^{\constant{a}}$ assigns to $\constant{a}$. 
+	There is always some larger number that a $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ can assign to $\constant{b}$. 
+	
+	Hence, regardless of what number $\emph{Pos Int}^{\constant{a}}(\constant{a})$ is, $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on $\emph{Pos Int}^{\constant{a}}$.
 
-For every assignment to $\constant{a}$, there is some assignment to $\constant{b}$ that is larger.  So $\existential\variable{x}\App{''\variable{x}}{\constant{a}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}.  Thus, the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int}.
-
-(ii) $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int} \Iff $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is true on some $\constant{a}$-variant of \emph{Pos Int}.  The sentence $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is true on some $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, \Iff $\App{''\constant{a}}{\constant{b}}$ is true on all $\constant{b}$-variants of $\emph{Pos Int}^{\constant{a}}$.
-
-But no matter how large of a number that a $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ assigns to $\constant{a}$, there will always be some larger number that it could assign to $\constant{b}$.  So, $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is false on all $\constant{a}$-variants of \emph{Pos Int}.  Thus, $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is false on \emph{Pos Int}.
+	Because nothing about this argument depends upon the value assigned to $\variable{a}$, it holds for all $\constant{a}$-variants of \emph{Pos Int}. 
+	Thus, the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int}.
 \end{PROOF}
-The different quantifier order affects the meanings of the sentences.  The sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ relative to \emph{Pos Int} means, roughly, that \mention{for every positive integer there is a larger positive integer.}  The sentence $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ relative to \emph{Pos Int} means, roughly, that \mention{there is some positive integer that is larger than every positive integer.}  Clearly the former is true and the latter isn't.\footnote{We will further discuss translations of sentences in formal languages in Chapter \ref{Translations}.}
 
+\begin{majorILnc}{\LnpEC{GQLTruthExampleA2}}
+	Determine the truth value of the sentence $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ on model \emph{Pos Int}.
+\end{majorILnc}
+\begin{PROOF}
+	Intuitively, this sentence can be read as \mention{There is some $\variable{x}$ such that for all $\variable{y}$, $\variable{x}>\variable{y}$}.
+	That is, there is some positive integer that is greater than all others.
+	This is false, so we expect that $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is false on \emph{Pos Int}.
+	But, as before, intuition is no substitute for proof.
 
+	$\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is true on \emph{Pos Int} \Iff $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is true on some $\constant{a}$-variant of \emph{Pos Int}. 
+	So, to show that it is false we must find an assignment to $\constant{a}$ such that $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is false.
 
+	The sentence $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is true on some $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, \Iff $\App{''\constant{a}}{\constant{b}}$ is true on all $\constant{b}$-variants of $\emph{Pos Int}^{\constant{a}}$.
+	So, to show that $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is false on some $\constant{a}$-assignment, we need some additional $\constant{b}$-assignment that makes $\App{''\constant{a}}{\constant{b}}$ false.
 
+	But no matter how large of a number that a $\constant{b}$-variant of $\emph{Pos Int}^{\constant{a}}$ assigns to $\constant{a}$, there will always be some larger number that it could assign to $\constant{b}$. 
+	So, $\universal\variable{y}\App{''\constant{a}}{\variable{y}}$ is false on all $\constant{a}$-variants of \emph{Pos Int}. 
+	Thus, $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is false on \emph{Pos Int}.
+\end{PROOF}
 
-
-
-
+Notice that the only difference between $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ and $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ is the order of their quantifiers. 
+That simple change is enough to transform the meaning of the sentence completely. 
+As we noted, the sentence $\universal\variable{y}\existential\variable{x}\App{''\variable{x}}{\variable{y}}$ relative to \emph{Pos Int} means, roughly, that \mention{for every positive integer there is a larger positive integer.}. 
+And the sentence $\existential\variable{x}\universal\variable{y}\App{''\variable{x}}{\variable{y}}$ means, roughly, that \mention{there is some positive integer that is larger than every positive integer.}\footnote{We will further discuss translations of sentences in formal languages in Chapter \ref{Translations}.}
+When stated in English, the difference is obvious. 
+The above two examples show that the difference is provable from the definition of truth in a model for \GQL{}.
+Quantifier order matters!
 
 \begin{majorILnc}{\LnpEC{GQLTruthExampleB}}
 The sentence $\universal{\variable{x}}\universal{\variable{y}}\universal{\variable{z}}\parhorseshoe{\parconjunction{\Cpp{\variable{x}}{\variable{y}}}{\Dppp{\variable{x}}{\variable{y}}{\variable{z}}}}{\Bppp{\variable{y}}{\variable{x}}{\variable{z}}}$ is (i) true in the model \emph{Pos Int} given in table \mvref{table:Example Interpretations}, but (ii) is false in the model \emph{States}. 
