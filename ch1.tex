@@ -49,7 +49,7 @@ Consider the following two sentences:
 	\item George Washington was in the Continental Army and Nathanael Green was in the Continental Army.
 	\item Nathanael Green was in the Continental Army.
 \end{smenumerate}
-The second sentence is a logical consequence of the first---if the first is true the second must be too. The next two sentences share the same structure as the last two:
+The second sentence is a logical consequence of the first. If the first is true the second must be too. The next two sentences share the same structure as the last two:
 \begin{menumerate}
 	\item Benjamin Franklin was a delegate to the Continental Congress and Thomas Jefferson was a delegate to the Continental Congress.
 	\item Thomas Jefferson was a delegate to the Continental Congress.
@@ -110,7 +110,7 @@ Calling English a \niidf{natural}\index{language!natural} language is only meant
 English, Greek, German, Russian, Spanish, Mandarin, and Hindi are all natural in this sense. 
 
 Let's examine some of the obstacles to achieving mathematical precision in natural language. 
-First, it's indeterminate which collections of words and letters are genuine sentences. 
+First, it is indeterminate which collections of words and letters are genuine sentences. 
 The following strings are, perhaps, neither clearly sentences nor clearly not sentences of English:\footnote{Sentences \ref{Chom1} and \ref{Chom2} are from \citealp{Chomsky1957}.}
 \begin{menumerate}
 \item\label{Chom1} Colorless green ideas sleep furiously. 
@@ -274,8 +274,8 @@ In \mention{radar} there are five letter tokens and three letter types.
 The third distinction is that between an object language and a metalanguage. 
 Returning to the \distinction{use}{mention} distinction, if one mentions a word, then the \idf{object language}\index{language!object} is the language of the word being mentioned and the \idf{metalanguage}\index{language!meta-} is the language in which that word is mentioned. 
 For example, if I say \q{The German word for dog is \mention{Hund},} I've used English (the metalanguage) to talk about German (the object language). 
-In this text the metalanguage will be English plus some mathematical tools and symbols. 
-The object language will be some formal language. 
+In this text the metalanguage will always be English augmented with some carefully selected mathematical notation. 
+The object language will be a formal language. 
 
 Usually there's a little more to being a metalanguage than the mere fact that it's the language used to talk about another. 
 Often there's some specific purpose. 
@@ -285,37 +285,37 @@ For example, the metalanguage might be used to give definitions of words in the 
 \section{MathEnglish}\label{MathEnglish}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As stated previously, the various formal languages in this text are to be object languages.  However, before we can define our first formal language (\GSL{}), we need some mathematical tools for our metalanguage.  The metalanguage will contain a mix of English, additional symbols (e.g., the Greek letters), and other jargon.  We will call our metalanguage \idf{MathEnglish}.   
+The various formal languages in this text are to be object languages.  However, before we can define our first formal language (\GSL{}) we need to familiarize the reader with certain mathematical concepts.  The metalanguage contains a mix of English, mathematical symbols (e.g., set theory operators), and other technical jargon.  We call our metalanguage \idf{MathEnglish}.   
 
 \subsection{Metavariables}\label{metavariables}
 One important tool for MathEnglish is the \emph{metavariable}, which we define as a variable for strings of the object language.\index{variables!MathEnglish}  
-We will use lowercase Greek letters as our metavariables, as we did in the schemas given at the beginning of the chapter.
+We use lowercase Greek letters as our metavariables, as we did in the schemas given at the beginning of the chapter.
 The three we'll use most commonly are \mention{$\CAPPHI$} (phi), pronounced \q{fie}, \mention{$\CAPTHETA$} (theta), pronounced \q{theta}, and \mention{$\CAPPSI$} (psi), pronounced \q{sigh}.
 These Greek letters are not in the object language, but instead are used in the metalanguage for talking about the object language. 
 
-An example will make their role more clear.  Let's say that MathEnglish is our metalanguage and (regular) English is our object language.\footnote{As discussed earlier, in future chapters we will use a formal language and not English as our object language, but for the purpose of illustration we temporarily ignore the problems of natural language.}  Recall the logically true sentence from the beginning of the chapter:
+An example will make their role more clear.  Let's say that MathEnglish is our metalanguage and (regular) English is our object language.\footnote{As discussed earlier, in later chapters we use a formal language and not English as our object language, but for the purpose of illustration we temporarily ignore the problems of natural language.}  Recall the logically true sentence from the beginning of the chapter:
 
 \begin{quote}
 \noindent{}If the sun is shining then the sun is shining.
 \end{quote}
 
-\noindent{}We noticed that we could replace `the sun is shining' with any other assertion and get another logically true sentence.  With this in mind, consider the following claim of MathEnglish: 
+\noindent{}We can replace `the sun is shining' with any other assertion and get another logically true sentence.  With this in mind, consider the following claim of MathEnglish: 
 
 \noindent{}\begin{quote}All English sentences of the form \mention{If $\CAPPHI$ then $\CAPPHI$} are logical truths.\end{quote}
 
-\noindent{}Here we have introduced the character `$\CAPPHI$' as a metavariable. The use of `$\CAPPHI$' helps us talk about \emph{all} English sentences of a certain form as logically true, or at least all English sentences of a certain kind. 
+\noindent{}The use of `$\CAPPHI$' helps us talk about \emph{all} English sentences of a certain form as logically true, or at least all English sentences of a certain kind. 
 As logicians we are concerned with truth and truth-preservation, so we are only going to address strings with plausible truth values, i.e. declarative sentences. 
 A declarative sentence is one that makes an assertion. 
 By restricting the substitutions to declaratives, we rule out substitutions such as `Ergle bergle barfle narfle,' 'nef34fwjh9ufh32,' `Kentucky fried chicken,' and `Are you cooking?'. 
 We cannot legitimately affirm truth or falsity of these non-assertions. 
-In the rest of the text, when we refer to \mention{all} sentences of a natural language we only mean the declarative ones but won't repeat it explicitly.
+In the rest of the text, when we refer to \mention{all} sentences of a natural language we only mean the declarative ones.
 
 In any case, metavariables are indispensable tools for making general claims about object languages.
 
 
 \subsection{Sets}\label{sets}
 
-MathEnglish also makes use of a set theory.  A \emph{set} is just some collection of items, which we'll call \emph{elements}. These items can be anything, like animals, people, planets, cartoon characters, or even abstract objects such as numbers.  We can indicate a set using curly brackets, as in the following set of integers from 1 to 4:
+MathEnglish makes use of set theory.  A \emph{set} is just a collection of items called \emph{elements}. Elements can be anything, like animals, people, planets, cartoon characters, or even abstract objects such as numbers.  A set can be specified using curly brackets, as in the following set of integers from 1 to 4:
 
 \begin{center}
 \noindent{}$\{1, 2, 3, 4\}$
@@ -327,7 +327,7 @@ MathEnglish also makes use of a set theory.  A \emph{set} is just some collectio
 \noindent{}$\{2, 3, 1, 4\}$
 \end{center}
 
-\noindent{}Furthermore, repetition of an element in set notation is to be disregarded---an element can only be in the set once.  Accordingly, the following sets are actually just the same set as the last two:
+\noindent{}Furthermore, repetition of an element in set notation is to be disregarded; an element can only be in the set once.  Accordingly, the following sets are the same set as the last two:
 
 \begin{center}
 \noindent{}$\{1, 2, 2, 3, 3, 3, 4, 4, 4, 4\}$\\
@@ -340,9 +340,9 @@ MathEnglish also makes use of a set theory.  A \emph{set} is just some collectio
 \noindent{}$\{1, 2, 3, 4, ..., 1002, 1003, 1004, ... \}$
 \end{center}
 
-There is one set that doesn't have any elements, and it's called either the \emph{null set} or the \emph{empty set}.  Symbolically we can express the empty set as either $\{ \}$ or $\emptyset$.
+There is one set that doesn't have any elements, and it's called either the \emph{null set} or the \emph{empty set}.  Symbolically the empty set is denoted by either $\{ \}$ or $\emptyset$.
 
-To express set membership, we use the `$\in$' symbol.  Let the Greek letters $\Delta$ and $\Gamma$ stand for some arbitrary sets. (They are pronounced \mention{delta} and \mention{gamma}, respectively.)  We may assert that $7$ is an element of set $\Delta$ and $3$ is an element of $\Gamma$ as follows: $7 \in \Delta$, $3 \in \Gamma$. On this notation,
+Set membership is expressed with the `$\in$' symbol.  Let the Greek letters $\Delta$ and $\Gamma$ stand for arbitrary sets. (They are pronounced \mention{delta} and \mention{gamma}, respectively.)  We assert that $7$ is an element of set $\Delta$ and $3$ is an element of $\Gamma$ as follows: $7 \in \Delta$, $3 \in \Gamma$. On this notation,
 
 \begin{center}
 	\noindent{}$2\in\{1, 2, 3\}$
@@ -356,12 +356,12 @@ To express set membership, we use the `$\in$' symbol.  Let the Greek letters $\D
 
 \noindent{}is false.
 
-We use lowercase Greek letters $\alpha$ and $\beta$ (pronounced \mention{alpha} and \mention{beta}, respectively) as metavariables for objects. For example, we can affirm that if $\alpha$ and $\beta$ are odd numbers and $\Delta$ is the set of even numbers, $\alpha + \beta \in \Delta$.
+We use lowercase Greek letters $\alpha$ and $\beta$ (pronounced \mention{alpha} and \mention{beta}, respectively) as metavariables for elements. For example, if $\alpha$ and $\beta$ are odd numbers and $\Delta$ is the set of even numbers, then $\alpha + \beta \in \Delta$.
 
 \begin{majorILnc}{\LnpDC{Subset}} For any two sets $\Delta$ and $\Gamma$, $\Delta$ is a \df{subset} of $\Gamma$ \Iff for each $\alpha$ such that $\alpha \in \Delta$, $\alpha \in \Gamma$.
 \end{majorILnc} 
 
-\noindent{}For example, $\{1, 2, 3\}$ is a subset of $\{1, 2, 3, 4\}$. The set $\{1, 2\}$ is a subset of each of the two previous sets.  We use the symbol `$\subseteq$' to stand for the subset relation.  So when $\Delta$ is a subset of $\Gamma$, $\Delta \subseteq \Gamma$. From the definition of subset it follows that every set is a subset of itself.
+\noindent{}For example, $\{1, 2, 3\}$ is a subset of $\{1, 2, 3, 4\}$. The set $\{1, 2\}$ is a subset of each of the two previous sets.  The symbol `$\subseteq$' denotes the subset relation.  So if $\Delta$ is a subset of $\Gamma$, $\Delta \subseteq \Gamma$. Note that by the above definition every set is a subset of itself.
 
 \begin{majorILnc}{\LnpDC{Proper Subset}} For any two sets $\Delta$ and $\Gamma$, $\Delta$ is a \df{proper subset} of $\Gamma$ \Iff 
 	\begin{cenumerate}
@@ -385,7 +385,7 @@ Take care to avoid confusing the membership, subset, and proper subset relations
 
 \subsection{More on Sets: Union and Intersection}\label{moreonsets}
 
-Sometimes we'll want to define a set by reference to other sets. Say we have two sets, $\Gamma_1$ and $\Gamma_2$, and there is a third set, $\Delta$, that contains all the members of the first two, but nothing else. Under these conditions we say that $\Delta$ is the \emph{union} of $\Gamma_1$ and $\Gamma_2$. Let's give a strict definition:
+Sometimes a set is defined by reference to other sets. Say that there is a set $\Delta$ that contains all the members of two other sets, $\Gamma_1$ and $\Gamma_2$, and nothing else. Then $\Delta$ is said to be the \emph{union} of $\Gamma_1$ and $\Gamma_2$. Let's give a strict definition:
 
 \begin{majorILnc}{\LnpDC{Union}} $\Delta=\Gamma_1\cup\Gamma_2$ \Iff 
 	\begin{cenumerate}
@@ -427,7 +427,7 @@ The intersection of $\{$Mercury, Jupiter$\}$ and $\{$Mars, Saturn$\}$ is the emp
 	\noindent{}$\{$1, 5, 6, 9$\}\cap\{$2, 3, 5, 6$\}=\{$5, 6$\}$.
 \end{center}
 
-\noindent{}For another example:
+\noindent{}Another example:
 
 \begin{center}
 	\noindent{}$\{$Carnap, Quine$\}=\{$Anscombe, Quine, Carnap$\}\cap\{$Carnap, Lewis, Quine$\}$.
@@ -435,30 +435,29 @@ The intersection of $\{$Mercury, Jupiter$\}$ and $\{$Mars, Saturn$\}$ is the emp
 
 \subsection{Ordered Pairs and Ordered n-tuples}\label{orderedpairs}
 
-What if we want to describe a collection in which, unlike sets, the order does matter?  For that purpose we have \emph{ordered pairs} and \emph{ordered $n$-tuples}.  An ordered pair is a two-place collection in which the order matters.  To differentiate ordered pairs from sets, we indicate them using angled brackets rather than curly brackets.  So, while the sets $\{$1, 2$\}$ and $\{$2, 1$\}$ are identical, the ordered pairs $\langle$1, 2$\rangle$ and $\langle$2, 1$\rangle$ are not.
+Sometimes we would like to describe a collection in which, unlike sets, the order does matter.  For that purpose we have \emph{ordered pairs} and \emph{ordered $n$-tuples}.  An ordered pair is a two-place collection in which the order matters.  To differentiate ordered pairs from sets, we indicate them using angled brackets rather than curly brackets.  So, while the sets $\{$1, 2$\}$ and $\{$2, 1$\}$ are identical, the ordered pairs $\langle$1, 2$\rangle$ and $\langle$2, 1$\rangle$ are not.
 
-If we want to put together an ordered collection having more than two places, we can use an ordered $n$-tuple, where $n$ is the number of places needed.  So, $\langle$Mercury, Venus, Earth$\rangle$ is a 3-tuple, $\langle$Jupiter, Saturn, Uranus, Neptune$\rangle$ is a 4-tuple, and so on.
+An ordered collection having more than two places is an $n$-tuple, where $n$ is the number of places needed.  So, $\langle$Mercury, Venus, Earth$\rangle$ is a 3-tuple, $\langle$Jupiter, Saturn, Uranus, Neptune$\rangle$ is a 4-tuple, and so on.
 
 Also unlike sets, for ordered pairs and $n$-tuples, repetition makes a difference. For example, $\langle 1, 2, 3\rangle$ is different from $\langle 1, 2, 3, 3, 3\rangle$.
 
 \subsection{Mathematical Proofs}\label{Mathematical Proofs}
 
 We use proofs to establish that something has certain mathematical properties. 
-A proof works from one or more definitions to some result, which we sometimes call a \emph{theorem}. 
-If we want to prove an intermediate result that isn't by itself particularly interesting but which will be handy to have for one or more later proofs, we sometimes call it a \emph{lemma}.
+A proof works from one or more definitions to some interesting result, called a \emph{theorem}. 
+Much of this textbook is filled with proofs of theorems about the various formal languages defined in later chapters.
+If we want to prove an intermediate result that isn't by itself particularly interesting but which is handy for use in one or more other proofs, we sometimes call it a \emph{lemma}.
 
-Let's illustrate with an easy proof.
+To illustrate, let's look at a simple proof.
 
 \begin{THEOREM}{\LnpTC{Transitivity of Subset}}
 	If $\Delta_1\subseteq\Delta_2$ and $\Delta_2\subseteq\Delta_3$ then $\Delta_1\subseteq\Delta_3$.
 \end{THEOREM}
 \begin{PROOF}
-	This is a conditional statement. To prove statements like these, assume first part and try to show that the second part follows.
-	In this case we assume that there are some sets $\Delta_1$, $\Delta_2$, and $\Delta_3$ such that $\Delta_1\subseteq\Delta_2$ and $\Delta_2\subseteq\Delta_3$. 
-	
-	Next we use the definition of subset to show that $\Delta_1\subseteq\Delta_3$ follows from the assumption. 
-	By the definition of $\subseteq$: Any $\alpha$ in $\Delta_1$ is also in $\Delta_2$, and any $\alpha$ in $\Delta_2$ is also be in $\Delta_3$. 
-	It's clear that if $\alpha\in\Delta_1$ then $\alpha\in\Delta_3$. 
+	Let there be three sets, $\Delta_1$, $\Delta_2$, and $\Delta_3$, such that $\Delta_1\subseteq\Delta_2$ and $\Delta_2\subseteq\Delta_3$.
+	Since $\Delta_1\subseteq\Delta_2$, then by the definition of $\subseteq$, any $\alpha$ in $\Delta_1$ is also in $\Delta_2$.
+	And since $\Delta_2\subseteq\Delta_3$, any $\alpha$ in $\Delta_2$ is also in $\Delta_3$.
+	It then follows that if $\alpha\in\Delta_1$ then $\alpha\in\Delta_3$. 
 	Thus, by the definition of $\subseteq$, $\Delta_1\subseteq\Delta_3$.
 \end{PROOF}
 
@@ -466,28 +465,26 @@ Let's illustrate with an easy proof.
 Having achieved this result, we permit ourselves to use it throughout the rest of the text without proving it again. 
 The end of a completed proof is indicated with a black box: $\blacksquare$.
 
-Later in the book we will show how to prove more complicated (and more interesting) theorems.
-
 \subsection{Recursive Definitions}\label{Recursive Definitions}
 
 In later chapters we use MathEnglish to define concepts such as \emph{sentence}, \emph{truth}, and \emph{entailment} for a given object language. 
 Many of these definitions are recursive. 
-Recursive definitions can be understood as defining which objects are in a given set.
+Recursive definitions can be understood as defining which elements are in a given set.
 
 \begin{majorILnc}{\LnpDC{Definition of Recursive Definition}}
 A \df{recursive definition} of $\Delta$ has three clauses:
 \begin{cenumerate}
-\item the \df{base clause(s)}, which specifies one or more objects which are elements of $\Delta$,
+\item the \df{base clause(s)}, which specifies one or more objects as elements of $\Delta$,
 \item the \df{generating clause(s)}, which specifies one or more ways of generating (or finding) other objects that are elements of $\Delta$, and
 \item the \df{closure clause}, which specifies that something is in $\Delta$ only if it can be shown to be so by applications of the first two clauses.
 \end{cenumerate}
 \end{majorILnc}
 
-One concept that we can define recursively is \emph{natural number}.
+\noindent{}One concept that we can define recursively is \emph{natural number}.
 \begin{majorILnc}{\LnpDC{Natural Number}} The set $\mathbb{N}$ of natural numbers:
 	\begin{cenumerate}
 		\item Base Clause: Let $0$ be a natural number. I.e. $0 \in \mathbb{N}$.
-		\item Generating Clause: If $\integer{n} \in \mathbb{N}$, then $\integer{n}+1 \in \mathbb{N}$.
+		\item Generating Clause: If $\integer{n} \in \mathbb{N}$ then $\integer{n}+1 \in \mathbb{N}$.
 		\item Closure Clause: Nothing else is in $\mathbb{N}$.  
 	\end{cenumerate}
 \end{majorILnc}
@@ -527,6 +524,30 @@ Now we have most of the mathematical tools we need to define our first formal la
     \item True or false: $\{1, 2, 3\}=\{3, 3, 1, 2, 3, 2, 2, 1\}$
 \end{enumerate}
 
+\notocsubsection{Unions and Intersections}{ex:Unions and Intersections}
+
+\begin{enumerate}
+	\item True or false: $\{2,4,6\}\cup\{1,2,3\}\subseteq\{1,2,3,4,5,6\}$
+	\item True or false: $\{2,4,6\}\cap\{1,2,3\}=\{1,2,3,4,5,6\}$
+    \item True or false: $\{1,2\}\cap\{3,4\}\subseteq\{1,2\}\cup\{3,4\}$
+	\item True or false: $\{1\}\cup\{2, 3\}=\{1, \{2, 3\}\}$
+\end{enumerate}
+
+\notocsubsection{Proofs}{ex:Simple Proofs}
+Prove each of the following.
+\begin{enumerate}
+	\item $\Delta_1\cap\Delta_2\subseteq\Delta_1\cup\Delta_2$.
+	\item If $\Delta_1\subseteq\Delta_2$ then $\Delta_1\cup\Delta_3\subseteq\Delta_2\cup\Delta_3$.
+    \item If $\Delta_1\subseteq\Delta_2$ then $\Delta_1\cap\Delta_3\subseteq\Delta_2\cap\Delta_3$.
+\end{enumerate}
+
+\notocsubsection{Recursive Definitions}{ex:Recursive Definitions}
+Define the following recursively.
+\begin{enumerate}
+	\item The ancestors of George Washington.
+	\item All integers.
+    \item All even numbers.
+\end{enumerate}
 
 %\theendnotes
 
