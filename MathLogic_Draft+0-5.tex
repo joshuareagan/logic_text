@@ -9,7 +9,7 @@
 %\usepackage[firstpage]{draftwatermark}
 % % % % % XeTeX and other font stuff:
 \usepackage{amsmath,amssymb}
-\usepackage{fontspec} 
+\usepackage{fontspec}
 \setmainfont[
 Ligatures = {Required, Common, Contextual},
 Numbers = {Monospaced}, %Proportional, OldStyle
@@ -32,6 +32,7 @@ Mapping=tex-text
 \newcommand{\osf}[1]{{\addfontfeatures{Numbers={OldStyle}}{#1}}}
 \newcommand{\proportional}[1]{{\addfontfeatures{Numbers={Proportional}}{#1}}}
 \newcommand{\tabluarnumbers}[1]{{\addfontfeatures{Numbers=Monospaced}#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
 \usepackage{realscripts}
    % gives commands: 
       % \textsuperscript
@@ -52,6 +53,7 @@ Mapping=tex-text
 %% \rfrac is a command to allow slanted fractions, here used only sparingly in the many-valued logic section.
 \usepackage{xfrac}
 \newcommand{\rfrac}[2]{\sfrac{#1}{#2}}
+\newcommand{\entails}{\sdtstile{}{}}
 % % % % 
 \usepackage{turnstile}
 %for shorter turnstiles:
@@ -74,6 +76,11 @@ Mapping=tex-text
 \definecolor{DDarkBlue}{HTML}{003399}
 \definecolor{RRed}{HTML}{812811}
 \definecolor{LightGray}{HTML}{444444}               
+\usepackage{tcolorbox}
+\newcommand{\commentaryspace}{
+
+    \vspace{5mm}
+}
 \usepackage[font=sf]{caption}
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -290,10 +297,11 @@ labelindent=.35\parindent, labelsep=*, itemsep=0pt]%,start=1, parsep=0pt
 {
 
 \medskip
-\noindent{#1}\itshape{}}%
+\noindent{#1}}% \itshape{}
 { %\hfill \ensuremath{\blacktriangleleft}
 
 \medskip}
+\newenvironment{commentary}{\begin{tcolorbox}}{\end{tcolorbox}}
 \newenvironment{minor}[1]
 {\emph{{#1}:}}%
 {\par}
@@ -467,12 +475,17 @@ False=\text{false}
 \newcommand{\TrueB}{\mathsf{T}}
 \newcommand{\FalseB}{\mathsf{F}}
 \renewcommand{\IntA}{\mathfrak{m}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\tfe}{\CAPS{tfe} }
+\newcommand{\lhs}{\CAPS{lhs} }
+\newcommand{\rhs}{\CAPS{rhs} }
 \newcommand{\LP}{\text{LP}}
 \newcommand{\HHH}{\text{AR}}
 \newcommand{\ORD}[1]{\text{ORD}#1}
 \newcommand{\Derivation}[1]{\mathit{#1}}
 \newcommand{\e}{\text{e}}
 \newcommand{\As}[2]{\mathfrak{m^{\mathrm{#1}}_{\mathrm{#2}}}}
+\newcommand{\model}[2]{\mathfrak{m^{\mathrm{#1}}_{\mathrm{#2}}}}
 %\newcommand{\As}{\mathfrak{a}}
 \newcommand{\PosIntEM}[2]{Pos Int^{#1+}_{\mathit{#2}}}
 \newcommand{\BWEDGE}{\mathlarger{\mathlarger{\WEDGE}}}

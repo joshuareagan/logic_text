@@ -451,15 +451,28 @@ If we want to prove an intermediate result that isn't by itself particularly int
 To illustrate, let's look at a simple proof.
 
 \begin{THEOREM}{\LnpTC{Transitivity of Subset}}
+	Let $\Delta_1$, $\Delta_2$, and $\Delta_3$ be sets.
 	If $\Delta_1\subseteq\Delta_2$ and $\Delta_2\subseteq\Delta_3$ then $\Delta_1\subseteq\Delta_3$.
 \end{THEOREM}
 \begin{PROOF}
-	Let there be three sets, $\Delta_1$, $\Delta_2$, and $\Delta_3$, such that $\Delta_1\subseteq\Delta_2$ and $\Delta_2\subseteq\Delta_3$.
+	Assume that $\Delta_1\subseteq\Delta_2$ and $\Delta_2\subseteq\Delta_3$.
 	Since $\Delta_1\subseteq\Delta_2$, then by the definition of $\subseteq$, any $\alpha$ in $\Delta_1$ is also in $\Delta_2$.
 	And since $\Delta_2\subseteq\Delta_3$, any $\alpha$ in $\Delta_2$ is also in $\Delta_3$.
 	It then follows that if $\alpha\in\Delta_1$ then $\alpha\in\Delta_3$. 
 	Thus, by the definition of $\subseteq$, $\Delta_1\subseteq\Delta_3$.
 \end{PROOF}
+
+\begin{commentary}
+	Some students are not used to the structure and rigor of mathematical proofs.
+	As an aid to understanding we sometimes include commentary to explain how a particular proof works.
+	We use a grayed box to signify that this commentary is not itself part of the proof.
+
+	\commentaryspace
+	Here we are trying to prove a \emph{conditional} theorem, i.e., a statement of the form ``If $\Al$ then $\Bl$.''
+	The typical way to demonstrate such theorems is to start by assuming the antecedent, $\Al$.
+	Then we work from that assumption to show that the consequent, $\Bl$, must follow.
+	Each step is justified by reference to a given definition or by mathematical reasoning, often in the language of set theory.
+\end{commentary}
 
 \noindent{}We have proved that \mention{$\subseteq$} is transitive. 
 Having achieved this result, we permit ourselves to use it throughout the rest of the text without proving it again. 
@@ -468,8 +481,9 @@ The end of a completed proof is indicated with a black box: $\blacksquare$.
 \subsection{Recursive Definitions}\label{Recursive Definitions}
 
 In later chapters we use MathEnglish to define concepts such as \emph{sentence}, \emph{truth}, and \emph{entailment} for a given object language. 
-Many of these definitions are recursive. 
-Recursive definitions can be understood as defining which elements are in a given set.
+Many of these definitions are recursive.
+Recursive definitions are an invaluable tool for logic because they enable us to give a rigorous finite definition of an infinite set.
+They can be understood as defining which elements are in a given set.
 
 \begin{majorILnc}{\LnpDC{Definition of Recursive Definition}}
 A \df{recursive definition} of $\Delta$ has three clauses:
@@ -480,7 +494,12 @@ A \df{recursive definition} of $\Delta$ has three clauses:
 \end{cenumerate}
 \end{majorILnc}
 
-\noindent{}One concept that we can define recursively is \emph{natural number}.
+\noindent{}Think of the base clause as the place to specify specific elements for inclusion in the set.
+The generating clause is more powerful.
+It defines elements of the set by reference to more basic elements already included.
+The closure clause is usually a simple statement, but it is essential to specify what isn't in the set.
+
+One concept that we can define recursively is \emph{natural number}.
 \begin{majorILnc}{\LnpDC{Natural Number}} The set $\mathbb{N}$ of natural numbers:
 	\begin{cenumerate}
 		\item Base Clause: Let $0$ be a natural number. I.e. $0 \in \mathbb{N}$.
@@ -545,8 +564,8 @@ Prove each of the following.
 Define the following recursively.
 \begin{enumerate}
 	\item The ancestors of George Washington.
+    \item All positive even numbers.
 	\item All integers.
-    \item All even numbers.
 \end{enumerate}
 
 %\theendnotes
