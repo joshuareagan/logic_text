@@ -11,7 +11,7 @@
 %\setcounter{DefThm}{0}
 
 \subsection{Sentences of \GQL{}1}\label{Sec:GQLSymbols1}
-\GSL{} allows us to investigate certain aspects of logical consequence and English-language inference well, but leaves out a great deal of interest.  The \mention{atoms} of \GSL{} are sentence letters, which are each assigned either $\TrueB$ or $\FalseB$ by a model.  Sentence letters can only represent declarative sentences of the English language, which means that \GSL{} is too coarse-grained to mimic the \emph{parts} of a sentence.  While \GSL{} can capture some forms of logical consequence in English, it neglects others.  For example:
+\GSL{} allows us to investigate certain aspects of logical consequence, but leaves out a great deal of interest.  The \mention{atoms} of \GSL{} are sentence letters, which are each assigned either $\TrueB$ or $\FalseB$ by a model.  Sentence letters can only represent declarative sentences of the English language, which means that \GSL{} is too coarse-grained to capture the logical meaning of certain \emph{parts} of a sentence.  For example:
 
 \begin{RESTARTmenumerate}
 \item All women are mortal.
@@ -22,10 +22,10 @@ Therefore,
 \item Ophelia is mortal.
 \end{RESTARTmenumerate}
 
-\noindent{}The third sentence is a logical consequence of the first two, but \GSL{} isn't capable of representing this as an entailment.  Let sentence letter $\Al$ stand for \mention{All women are mortal,} let $\Bl$ stand for \mention{Ophelia is a woman,} and let $\Cl$ stand for \mention{Ophelia is mortal}.  
+\noindent{}The third sentence is a logical consequence of the first two, but we cannot use \GSL{} to represent this as an entailment.  Let sentence letter $\Al$ stand for \mention{All women are mortal,} let $\Bl$ stand for \mention{Ophelia is a woman,} and let $\Cl$ stand for \mention{Ophelia is mortal}.  
 The entailment claim $\Al, \Bl \:\sdtstile{}{}\: \Cl$ does not hold, because there is a model $\IntA$ that assigns $\TrueB$ to $\Al$ and $\Bl$, but assigns $\FalseB$ to $\Cl$.  We need a formal language more expressive than \GSL{}.
 
-Our new language needs symbols that represent named objects, including people like Ophelia.  It also needs symbols that mimic the predicates of English.  Predicates correspond roughly to what you get if you take an English sentence and remove a name, leaving a blank, e.g.: 
+This new language needs symbols that represent named objects, including people like Ophelia.  It also needs symbols that stand for the predicates of English.  Predicates correspond roughly to what you get if you take an English sentence and remove the subject, leaving a blank, e.g.: 
 
 \begin{menumerate}
 	\item \mention{John is tall} $\Rightarrow$ \mention{\_\_\_\_\_\_ is tall}
@@ -33,7 +33,7 @@ Our new language needs symbols that represent named objects, including people li
 	\item \mention{Ophelia is mortal} $\Rightarrow$ \mention{\_\_\_\_\_\_ is mortal}	
 \end{menumerate}
 
-\noindent{}To apply a predicate without invoking a name we'll use a variable, which functions somewhat like a pronoun in English.  And to account for the word \mention{all} in our new language, we will use a \emph{quantifier}.  (We'll discuss quantifiers a bit later.)  In this chapter we outline a formal language with these features, and thus which can capture the kind of logical consequence exhibited above.
+\noindent{}To apply a predicate without invoking a name we use a variable, which functions somewhat like a pronoun in English.  And to account for the word \mention{all} in our new language, we use a \emph{quantifier}.  (We discuss quantifiers a bit later.)  In this chapter we outline a formal language with these features, and thus which can capture the kind of logical consequence exhibited above.
 
 Many logic texts call the following language \PL{}, for \idf{predicate language}. 
 We use \mention{\QL{}} for \idf{quantifier language}, because the quantifiers are more important than the predicates. However, before turning to the full language of \GQL{} (in the next chapter), we first consider a simpler sublanguage which we'll call \mention{\GQL{}1}.  We call it \mention{\GQL{}1} because the predicates will all be 1-place.\footnote{In \GQL{} there will be many-place predicates.  The basics of a less formal version of \GQL{}1 were developed by Aristotle over 2,000 years before Gottlob Frege and others developed the full language we're calling \GQL{}.  \GQL{} was a big step for mankind.}
@@ -51,38 +51,35 @@ The \df{basic symbols} of \GQL{}1 are:
 \end{cenumerate}
 \end{majorILnc}
 \noindent{}The most prominent additions are the new logical connectives, the two quantifiers.  The first, \mention{$\forall$}, is called the \idf{universal quantifier}. 
-It corresponds roughly to the words \mention{all} or \mention{every} in English. 
+It corresponds to the words \mention{all} or \mention{every} in English. 
 The second, \mention{$\exists$}, is called the \idf{existential quantifier}. 
-It corresponds roughly to \mention{there exists}, \mention{there is}, or \mention{some}, as in \mention{Some elephants live a long time.}\footnote{Although Frege, Peirce, and Mitchell first introduced quantifiers, the notation used here comes from Russell, who Church \citeyearpar[288]{Church1956} says modified Peano's notation.}
+It corresponds to \mention{there exists}, \mention{there is}, or \mention{some}, as in \mention{Some elephants live a long time.}\footnote{Although Frege, Peirce, and Mitchell first introduced quantifiers, the notation used here comes from Russell, who Church \citeyearpar[288]{Church1956} says modified Peano's notation.}
 
 The individual constants of \GQL{} correspond roughly to names in English. 
-They are lowercase Roman letters that start at \mention{$\constant{a}$} and stop at \mention{$\constant{p}$}, and then they start over with subscripted integers.  So we have, for example, $\constant{a_1}$, $\constant{a_2}$, $\constant{a_3}$, and so on. 
+They are lowercase Roman letters that start at \mention{$\constant{a}$} and stop at \mention{$\constant{p}$}, and then they start at \mention{$\constant{a}$} again with subscripted integers. So we have, for example, $\constant{a_1}$, $\constant{a_2}$, $\constant{a_3}$, and so on. 
 
 Next, the individual variables correspond roughly to pronouns in English. 
-They are Roman lowercase letters that go from \mention{$\variable{u}$} to \mention{$\variable{z}$} and then start over with subscripted positive integers. 
+They are Roman lowercase letters that go from \mention{$\variable{u}$} to \mention{$\variable{z}$} and then start at \mention{$\variable{u}$} again with subscripted positive integers, e.g. \mention{$\variable{u}_1$}. 
 
-
-We also have 1-place predicates in \GQL{}1. The one-place predicates are capital Roman letters going from \mention{$\Ap{'}$} to \mention{$\Tp{'}$} and then starting over with subscripted integers.  There are an infinite number of each of the individual constants, variables, and 1-place predicates. 
-This is so that however complex a sentence or argument we want to analyze, we never run out of \GQL{}1 symbols.
+We also have 1-place predicates in \GQL{}1. The one-place predicates are capital Roman letters going from \mention{$\Ap{'}$} to \mention{$\Tp{'}$} and then starting from \mention{$\Ap{'}$} again with subscripted integers, e.g. \mention{$\Ap{'}_{1}$}.  There are an infinite number of each of the individual constants, variables, and 1-place predicates. 
+This is so we never run out of \GQL{}1 symbols when analyzing some sentence or argument, no matter how complex or long it is.
 
 \subsection{Formulas of \GQL{}1}\label{Formulas of GQL1}
-Our ultimate interest is in \emph{sentences} of \GQL{}1, but to get to the sentences we have to work with a larger set of strings called \mention{formulas.}\index{formulas} 
-Formulas are defined recursively, starting with the atomic formulas (that is, those given by the base clause of the recursive definition).  
-But before giving the definition we need to expand MathEnglish and add another kind of metavariable for \GQL{}1 individual variables.\index{variables!MathEnglish}\footnote{MathEnglish variables are symbols of the metalanguage while individual variables of \GQL{}1 are symbols of the object language.} 
+Before we can define \emph{sentences} of \GQL{}1 we must first define a larger set of strings called \mention{formulas.}\index{formulas} 
+But before that we must introduce another kind of metavariable to MathEnglish, one that ranges over for \GQL{}1 individual variables.\index{variables!MathEnglish}\footnote{MathEnglish variables are symbols of the metalanguage while individual variables of \GQL{}1 are symbols of the object language.} 
 We use lowercase Greek letters to stand for variables of \GQL{}1, usually but not necessarily always from the beginning of the Greek alphabet (e.g., \mention{$\ALPHA$} and \mention{$\BETA$}). Although we also used lowercase Greek letters as variables for \GSL{} sentences and will continue to do so for \GQL{}1 sentences and formulas, confusion shouldn't arise as we typically use \mention{$\CAPPHI$}, \mention{$\CAPPSI$}, and \mention{$\CAPTHETA$} for \GSL{} and \GQL{}1 sentences and use \mention{$\ALPHA$} and \mention{$\BETA$} for \GQL{}1 variables. 
 \begin{majorILnc}{\LnpDC{Definition of Formula of GQL1}} The \nidf{formulas} \underdf{of \GQL{}1}{formulas} are given by the following recursive definition:
 \begin{description}
 \item[Base Clauses:] \hfill{}
 \begin{cenumerate}
-\item A sentence letter (atomic sentence of \GSL{}) is a formula.
+\item A sentence letter is a formula.
 \item\label{atomic pred} A 1-place predicate followed by one individual constant or variable is a formula.
 \end{cenumerate}
 \item[Generating Clauses:] \hfill{}
 \begin{cenumerate}
 \item If $\CAPPHI$ is a formula, then so is $\negation{\CAPPHI}$.
 \item If $\CAPPHI$ and $\CAPTHETA$ are formulas, then so are $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\partriplebar{\CAPPHI}{\CAPTHETA}$.
-\item\label{GQL conj disj} If all of $\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\CAPPHI_4,\ldots,\CAPPHI_{\integer{n}}$ are formulas (the list must include at least two formulas and be finite), then so are $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\conjunction{\CAPPHI_4}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ and $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\CAPPHI_3}{\disjunction{\CAPPHI_4}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$.\footnote{Remember 
-that this generating clause is non-standard; most logic books treat conjunction and disjunction as binary (two-place) operations. Our definition is closer to English and avoids unnecessary parentheses.}
+\item\label{GQL conj disj} If all of $\CAPPHI_1,\CAPPHI_2,\CAPPHI_3,\CAPPHI_4,\ldots,\CAPPHI_{\integer{n}}$ are formulas (where $n$ is an integer $\geq 2$), then so are $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\CAPPHI_3}{\conjunction{\CAPPHI_4}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ and $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\CAPPHI_3}{\disjunction{\CAPPHI_4}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$.
 \item\label{GQL quant} If $\ALPHA$ is a \GQL{}1 variable and $\CAPPHI$ is a formula that does not contain an expression of the form $\universal{\ALPHA}$ or $\existential{\ALPHA}$, then $\universal{\ALPHA}\CAPPHI$ and $\existential{\ALPHA}\CAPPHI$ are formulas.
 \end{cenumerate}
 \item[Closure Clause:] A string of symbols is a formula only if it can be generated by the clauses above.
@@ -106,10 +103,10 @@ Here are some additional examples of \GQL{}1 formulas.
 %\item $\universal{\variable{x}}\existential{\variable{z}}\Gppp{''}{\variable{x}}{\variable{y}}$
 \end{enumerate}
 \end{multicols}
-\noindent{}Contrarily, $\universal{\variable{x}}\universal{\x}\Gpp{'}{\variable{x}}$ is \emph{not} a formula.  That's because it's of the form $\universal{\variable{x}}\CAPPHI$ where $\CAPPHI$ is a formula that contains the expression $\universal{\variable{x}}$.\footnote{Continuing the practice started in section \ref{use mention comment}, we will not always put symbols, expressions, and sentences of \GQL{}1 that are mentioned (instead of used) in single quotes. 
+\noindent{}Contrarily, $\universal{\variable{x}}\universal{\x}\Gpp{'}{\variable{x}}$ is \emph{not} a formula.  That's because it's of the form $\universal{\variable{x}}\CAPPHI$ where $\CAPPHI$ is a formula that contains the expression $\universal{\variable{x}}$.\footnote{Continuing the practice started in section \ref{use mention comment}, we do not always put symbols, expressions, and sentences of \GQL{}1 that are mentioned (instead of used) in single quotes. 
 For example, the tokens of the universal and existential quantifiers in definition \mvref{Bound Variable} should, strictly speaking, be in quotes because they \emph{mention} the symbols. 
-Being stringent in the use of single quotes---and overly sensitive to the \distinction{use}{mention} distinction in general---tends to cloud what are relatively clear and straightforward concepts.  Accordingly, we will tend to favor conceptual clarity over notational rigor. 
-Wherever it may be helpful, we will provide footnotes with more rigorous and detailed explanation.} Neither is $\universal{\constant{a}}\Gp{'}\constant{a}$, because $\forall$ \emph{must} be paired with a variable, and \mention{$\constant{a}$} is a constant.
+Being stringent in the use of single quotes---and overly sensitive to the \distinction{use}{mention} distinction in general---can cloud what are relatively clear and straightforward concepts.
+Wherever it may be helpful, we provide footnotes with more rigorous and detailed explanation.} Neither is $\universal{\constant{a}}\Gp{'}\constant{a}$, because $\forall$ \emph{must} be paired with a variable, but \mention{$\constant{a}$} is a constant.
 
 Finally, we have unofficial formulas, just as we had unofficial sentences in \GSL{} (compare with def. \pmvref{Unofficial Sentence of GSL}).
 \begin{majorILnc}{\LnpDC{Unofficial Formula of GQL}}
@@ -123,28 +120,49 @@ A string of symbols is an \nidf{unofficial} formula\index{formulas!unofficial|te
 \noindent{}As in \GSL{}, from an unofficial sentence we can unambiguously reconstruct the corresponding official
 sentence.
 \subsection{Other Properties of Formulas}\label{Other Properties of Formulas1} 
-As in section \ref{Other Properties of GSL Sentences} for sentences of \GSL{}, we can define the concepts of subformula, order, main connective, and construction tree for formulas of \GQL{}1. 
+As in section \ref{Other Properties of GSL Sentences} for sentences of \GSL{}, we define the concepts of subformula, order, main connective, and construction tree for formulas of \GQL{}1. 
 \begin{majorILnc}{\LnpDC{GQL Subformulas}}
-The \df{subformulas} of a formula are defined parallel to that of an \GSL{} sentence (see definition \pmvref{Subsentences}) with the extra clauses that adding a quantifier adds one new subformula, the whole formula. 
+The following clauses define when one formula is a \df{subformula} of another:
+\begin{cenumerate}
+	\item Every formula is a subformula of itself.
+	\item $\CAPPHI$ is a subformula of $\negation{\CAPPHI}$.
+	\item $\CAPPHI$ and $\CAPTHETA$ are subformulas of $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ and $\partriplebar{\CAPPHI}{\CAPTHETA}$.
+	\item Each of $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}$ is a subformula of $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$\\ and $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$.
+	\item $\CAPPHI$ is a subformula of $\universal{\ALPHA}\CAPPHI$ and $\existential{\ALPHA}\CAPPHI$.
+	\item (Transitivity) If $\CAPPHI$ is a subformula of $\CAPTHETA$ and $\CAPTHETA$ is a subformula of $\CAPPSI$, then $\CAPPHI$ is a subformula of $\CAPPSI$.
+	\item That's all. 
+\end{cenumerate}
+
 \end{majorILnc}
 \noindent{}Importantly, the quantifier phrase is \emph{not} a subformula. 
 Thus, $\universal{\variable{x}}\universal{\variable{z}}\Gpp{'}{\variable{x}}$ has three subformulas: $\universal{\variable{x}}\universal{\variable{z}}\Gpp{'}{\variable{x}}$, $\universal{\variable{z}}\Gpp{'}{\variable{x}}$, and $\Gpp{'}{\variable{x}}$. 
-$\universal{\variable{x}}$ is not a subformula, and neither is $\universal{\variable{x}}\Gpp{'}{\variable{x}}$.
+Neither $\universal{\variable{x}}$ nor $\universal{\variable{x}}\universal{\variable{z}}$ is a subformula.
+Middle parts of the sentence cannot be removed to form a subformula. So $\universal{\variable{x}}\Gpp{'}{\variable{x}}$ isn't one either.
 \begin{majorILnc}{\LnpDC{GQL Order}}
 The \df{order} of a formula is defined parallel to that of an \GSL{}
 sentence (see def. \pmvref{Order}) with the extra clauses that adding a quantifier adds one to the order of the new formula.
+The following clauses define the \df{order} of a formula. Let $\ORD{\CAPPHI}$ be the order of $\CAPPHI$. Then: 
+\begin{cenumerate}
+\item If $\CAPPHI$ is a sentence letter then $\ORD{\CAPPHI}=1$.
+\item If $\Ppp{'}{}$ is a predicate letter and $\ALPHA$ is a constant or variable then $\ORD{\Ppp{'}{\ALPHA}}=1$.
+\item For any formula $\CAPPHI$, $\ORD{\negation{\CAPPHI}}=\ORD{\CAPPHI}+1$.
+\item For any formulas $\CAPPHI$ and $\CAPTHETA$, $\ORD{\parhorseshoe{\CAPPHI}{\CAPTHETA}}$ is one greater than the max of $\ORD{\CAPPHI}$ and $\ORD{\CAPTHETA}$. Likewise, $\ORD{\partriplebar{\CAPPHI}{\CAPTHETA}}$ is one greater than the max of $\ORD{\CAPPHI}$ and $\ORD{\CAPTHETA}$.
+\item For any formulas $\CAPPHI_1,\ldots,\CAPPHI_\integer{n}$, $\ORD{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_\integer{n}}}}$ is one greater than the max of $\ORD{\CAPPHI_1}$, $\ldots$, $\ORD{\CAPPHI_\integer{n}}$.
+\item For any formulas $\CAPPHI_1,\ldots,\CAPPHI_\integer{n}$, $\ORD{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_\integer{n}}}}$ is one greater than the max of $\ORD{\CAPPHI_1}$, $\ldots$, $\ORD{\CAPPHI_\integer{n}}$. 
+\item For formulas $\universal{\ALPHA}\CAPPHI$ and $\existential{\ALPHA}\CAPPHI$, $\ORD{\universal{\ALPHA}\CAPPHI}=\ORD{\existential{\ALPHA}\CAPPHI}=\ORD{\CAPPHI}+1$.
+\item That's all.
+\end{cenumerate}
 \end{majorILnc}
 \begin{majorILnc}{\LnpDC{GQL Main Connective}}
-The \nidf{main connective}\index{main connective!of GQL|textbf} for a formula is defined as before (def. \pmvref{GSL Main connective}). 
-It is the connective token (or tokens) that occur(s) in the formula but in no proper subformula.
+The \nidf{main connective}\index{main connective!of GQL|textbf} of a formula is the connective token (or tokens) that occur(s) in the formula but in no proper subformula.
 \end{majorILnc}
 \begin{majorILnc}{\LnpDC{GQL Construction Tree}}
-The \df{construction tree} for a formula is defined as before (def. \pmvref{Construction Tree}) with the obvious extensions. 
-As before, the order of a formula is the height of the construction tree's longest branch, measured by counting nodes.  Each node in the tree (including the bottom node) is a subsentence, and the main connective is the connective added at the very bottom of the tree. 
+The \df{construction tree} of a formula is defined as with \GSL{} (def. \pmvref{Construction Tree}) but with the obvious extension for quantifiers. 
+The order of a formula is the height of the construction tree's longest branch, measured by counting nodes.  Each node in the tree (including the bottom node) is a subformula, and the main connective is the connective added at the very bottom of the tree. 
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{GQL1SubformulaPropertiesExampleA}}
 Consider the (unofficial) formula $\horseshoe{\universal{\variable{x}}\Hp{'\variable{x}}}{\universal{\variable{x}}\Gp{'\variable{x}}}$. 
-It's a conditional; i.e., its main connective is the arrow.  The construction tree of the formula is:
+Its construction tree is:
 \begin{center}
 	\begin{tikzpicture}[grow=up]
 	\tikzset{level distance=50pt}
@@ -152,16 +170,20 @@ It's a conditional; i.e., its main connective is the arrow.  The construction tr
 	\tikzset{every tree node/.style={align=center,anchor=north}}
 	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
 	[.{$\horseshoe{\universal{\variable{x}}\Hp{'\variable{x}}}{\universal{\variable{x}}\Gp{'\variable{x}}}$}
-	[.{$\Gp{'\variable{x}}$\\ $\universal{\variable{x}}\Gp{'\variable{x}}$} %!{\qsetw{3in}} 
+	[.{$\universal{\variable{x}}\Gp{'\variable{x}}$} %!{\qsetw{3in}} 
+	  [.{$\Gp{'\variable{x}}$}
+	  ]
 	]
-	[.{$\Hp{'\variable{x}}$\\ $\universal{\variable{x}}\Hp{'\variable{x}}$}     
+	[.{$\universal{\variable{x}}\Hp{'\variable{x}}$}
+	  [.{$\Hp{'\variable{x}}$}
+	  ]
 	]
 	]%
 	%\caption{Example formula tree}
 	%\label{fig:ExampleFormulaTree}
 	\end{tikzpicture}
 \end{center}
-We can read off from this construction tree that the order of the formula is 3.  It has five subformulas:
+The height of the construction tree is $3$, so that's the order of the formula.  It has five subformulas:
 \begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
 labelindent=.35\parindent, labelsep=*, itemsep=0pt]%,start=1
 \item $\horseshoe{\universal{\variable{x}}\Hp{'\variable{x}}}{\universal{\variable{x}}\Gp{'\variable{x}}}$
@@ -178,26 +200,30 @@ labelindent=.35\parindent, labelsep=*, itemsep=0pt, start=2]
 \end{multicols}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{GQL1SubformulaPropertiesExampleB}}
-Next consider the formula $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$, which many people confuse with the conditional from example \ref{GQL1SubformulaPropertiesExampleA}. 
+Next consider the formula $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$.
+It is not to be confused with the formula from example \ref{GQL1SubformulaPropertiesExampleA}. 
 Consider carefully the differences between the two.
-This is a universal formula; i.e., its main connective is the universal quantifier.  The construction tree of the formula is:
+The formula in \ref{GQL1SubformulaPropertiesExampleA} has \mention{$\HORSESHOE$} as its main connective, but the main connective of this formula is \mention{$\forall$}.
+Its construction tree is:
 \begin{center}
 	\begin{tikzpicture}[grow=up]
 	\tikzset{level distance=50pt}
 	\tikzset{sibling distance=40pt}
 	\tikzset{every tree node/.style={align=center,anchor=north}}
 	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
-	[.{$\horseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$\\ $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$} %!{\qsetw{3in}}
-	[.{$\Gp{'\variable{x}}$}
-	] 
-	[.{$\Hp{'\variable{x}}$}
-	] 
+	[.{$\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$} %!{\qsetw{3in}}
+	[.{$\horseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$}
+	  [.{$\Gp{'\variable{x}}$}
+	  ] 
+	  [.{$\Hp{'\variable{x}}$}
+	  ] 
+	]
 	]%
 	%\caption{Example formula tree}
 	%\label{fig:ExampleFormulaTree}
 	\end{tikzpicture}
 \end{center}
-And we can read off from this construction tree that the order of the formula is 3.  It has four subformulas:
+The height of the tree is $3$ so the order of the formula is $3$. It has four subformulas:
 \begin{multicols}{2}
 \begin{cenumerate}
 \item $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$
@@ -208,8 +234,8 @@ And we can read off from this construction tree that the order of the formula is
 \end{multicols}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{GQLSubformulaPropertiesExampleC}}
-For a more complicated example consider $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\App{'}{\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$.
-This is a disjunction; i.e., its main connective is vee, $\VEE$.  The construction tree of the formula is:
+Consider the formula $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\App{'}{\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$.
+Its construction tree is:
 \begin{center}
 	\begin{tikzpicture}[grow=up]
 	\tikzset{level distance=50pt}
@@ -218,24 +244,32 @@ This is a disjunction; i.e., its main connective is vee, $\VEE$.  The constructi
 	\tikzset{every tree node/.style={align=center,anchor=north}}
 	\Tree%http://angasm.org/papers/qtree/    http://www.ling.upenn.edu/advice/latex/qtree/qtreenotes.pdf
 	[.{$\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$}
-	[.{$\horseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$\\ $\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$}
-	[.{$\text{ }$\\ $\Gp{'\variable{x}}$}
+	[.{$\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$}
+	[.{$\horseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}$}
+	[.{$\Gp{'\variable{x}}$}
 	]    
-	[.{$\Hp{'\constant{a}}$\\ $\existential{\variable{y}}\Hp{'\constant{a}}$}
+	[.{$\existential{\variable{y}}\Hp{'\constant{a}}$}
+	  [.{$\Hp{'\constant{a}}$}		
+	  ]
 	]
 	]
-	[.{$\conjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}$\\ $\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}$} %!{\qsetw{3in}}
-	[.{$\text{ }$\\ $\Ap{'\variable{x}}$}
+	]
+	[.{$\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}$} %!{\qsetw{3in}}
+	[.{$\conjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}$}
+	[.{$\Ap{'\variable{x}}$}
 	]    
-	[.{$\Epp{'}{\variable{y}}$\\ $\universal{y}\Epp{'}{\variable{y}}$}
+	[.{$\universal{y}\Epp{'}{\variable{y}}$}
+	  [.{$\Epp{'}{\variable{y}}$}		
+	  ]
 	] 
+	]
 	]
 	]%
 	%\caption{Example formula tree}
 	%\label{fig:ExampleFormulaTree}
 	\end{tikzpicture}
 \end{center}
-We can read off from this construction tree that the order of the formula is 5. It has eleven subformulas:
+The height of the construction tree is $5$, so that's the order of the formula. It has eleven subformulas:
 \begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
 labelindent=.35\parindent, labelsep=*, itemsep=0pt]%,start=1
 \item $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$
@@ -259,27 +293,37 @@ labelindent=.35\parindent, labelsep=*, itemsep=0pt, start=2]%,start=1
 \end{majorILnc}
 
 \subsection{Sentences of \GQL{}1}\label{Sentences of GQL1} 
-Now that we have defined which strings of basic symbols are formulas of \GQL{}1 we can define which are sentences. 
-The definition of a sentence depends on a few supporting definitions. We'll give the supporting definitions afterwards.
-\begin{majorILnc}{\LnpDC{GQL1 Sentence}}
-A string of \GQL{} symbols is a \nidf{sentence}\index{sentence!of \GQL{}1|textbf} \Iff it is a formula that contains no free variables.
-\end{majorILnc}
-\begin{majorILnc}{\LnpDC{Free Variable}}
-A variable (token) in a formula $\CAPPHI$ is \underdf{free}{variables} \Iff it is not bound.
-\end{majorILnc}
+\GQL{}1 sentences are defined in terms of \GQL{}1 formulas, but we need a few other definitions before we can proceed: \emph{scope}, and \emph{free} vs. \emph{bound} variables.
+
 \begin{majorILnc}{\LnpDC{Scope Definition}}
 	In a formula $\existential{\alpha}\CAPPHI$ or $\universal{\alpha}\CAPPHI$, we say that $\CAPPHI$ is the \df{scope} of the quantifier $\existential{\alpha}$ or $\universal{\alpha}$. 
 \end{majorILnc}
-\noindent{}This definition applies whether $\existential{\alpha}\CAPPHI$ or $\universal{\alpha}\CAPPHI$ is a stand-alone formula or is instead a proper subformula of some other formula.
-\begin{majorILnc}{\LnpDC{Bound Variable}}
-A variable token $\alpha$ in a formula $\CAPPHI$ is \underdf{bound}{variables} \Iff either (i) it appears as part of a quantifier expression with that variable, $\existential{\alpha}$ or $\universal{\alpha}$; or (ii) it occurs within the scope of a quantifier expression with that variable, $\existential{\alpha}$ or $\universal{\alpha}$. 
-\end{majorILnc}
-\noindent{}E.g., in the sentence $\existential{\variable{x}}\parconjunction{\Gp{'\variable{x}}}{\Hp{'\variable{x}}}$, the first token of $\variable{x}$ is bound because it's part of the quantifier expression \mention{$\existential{\variable{x}}$}.  The second and third tokens of $\variable{x}$ are bound because they are within the scope of a quantifier expression with that variable.
+\noindent{}For example, in the formula $\universal{y}\Epp{'}{\variable{y}}$, $\Epp{'}{\variable{y}}$ is the scope of $\universal{y}$.
+Note that the scope of a quantifier may be only a small subformula of a much larger whole.
+Consider $\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}$.
+The scope of $\universal{y}$ is just $\Epp{'}{\variable{y}}$, but the scope of $\existential{\variable{x}}$ is $\parconjunction{\universal{y}\Epp{'}{\variable{y}}}{\Ap{'\variable{x}}}$.
 
-Alternatively, we can understand when a variable is bound by thinking of a tree of the sentence. A variable token is bound \Iff a quantifier with the same variable appears below or at the same level as (but still on the same branch as) that token. 
-The quantifier that binds a variable is the \emph{first} quantifier that appears below or at the same level as (but still on the same branch as) the variable. 
+\begin{majorILnc}{\LnpDC{Bound Variable}}
+	A variable token $\alpha$ in a formula $\CAPPHI$ is \underdf{bound}{variables} \Iff either (i) it's part of a quantifier expression, $\existential{\alpha}$ or $\universal{\alpha}$; or (ii) it occurs within the scope of a quantifier expression with variable $\alpha$. 
+\end{majorILnc}
+
+\begin{majorILnc}{\LnpDC{Free Variable}}
+	A variable token in a formula $\CAPPHI$ is \underdf{free}{variables} \Iff it is not bound.
+\end{majorILnc}
+
+\noindent{}In the formula $\existential{\variable{x}}\parconjunction{\Gp{'\variable{x}}}{\Hp{'\variable{x}}}$, the first token of $\variable{x}$ is bound because it's part of the quantifier expression \mention{$\existential{\variable{x}}$}.  The second and third tokens of $\variable{x}$ are bound because they are within the scope of \mention{$\existential{\variable{x}}$}.\footnote{
+	We can also determine whether a variable is bound by thinking of a tree of the formula. A variable token is bound \Iff a quantifier with the same variable appears below or at the same level as (but still on the same branch as) that token. 
+	The quantifier that binds a variable is the \emph{first} quantifier that appears below or at the same level as (but still on the same branch as) the variable. 
+}
+
+Now we are ready for the definition of a \GQL{}1 sentence:
+
+\begin{majorILnc}{\LnpDC{GQL1 Sentence}}
+A string of \GQL{}1 symbols is a \nidf{sentence}\index{sentence!of \GQL{}1|textbf} \Iff it is a formula that contains no free variables.
+\end{majorILnc}
+
 \begin{majorILnc}{\LnpDC{Atomic Sentence of GQL}}
-An \underdf{atomic}{sentence} \nidf{sentence} of \GQL{}1 is an atomic formula of \GQL{}1 which is also a sentence; that is, it is an atomic formula of \GQL{}1 that has no free variable.
+An \underdf{atomic}{sentence} \nidf{sentence} of \GQL{}1 is an atomic formula of \GQL{}1 that has no free variable.
 \end{majorILnc}
 \noindent{}We have unofficial sentences too, just as we have unofficial formulas.
 \begin{majorILnc}{\LnpDC{Unofficial Sentence of GQL}}
@@ -291,20 +335,19 @@ A string of symbols is an \nidf{unofficial} sentence\index{sentence!unofficial (
 \end{cenumerate}
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{GQLSentenceFreeVariableExampleA}}
-Both formulas $\horseshoe{\universal{\variable{x}}\Hp{'\variable{x}}}{\universal{\variable{x}}\Gp{'\variable{x}}}$ and $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$ from examples \ref{GQL1SubformulaPropertiesExampleA} and \ref{GQL1SubformulaPropertiesExampleB} are sentences, because in both formulas all variables are bound.
-The following arrows point from each variable to the quantifier that binds it.  (We'll ignore the variables in quantifier expressions; it's obvious which quantifiers they belong to.)
+Both formulas $\horseshoe{\universal{\variable{x}}\Hp{'\variable{x}}}{\universal{\variable{x}}\Gp{'\variable{x}}}$ and $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}}{\Gp{'\variable{x}}}$ from examples \ref{GQL1SubformulaPropertiesExampleA} and \ref{GQL1SubformulaPropertiesExampleB} are sentences, because in each all variables are bound.
+Below we have arrows pointing from each variable token to the quantifier that binds it.  (There are no arrows for the variables in quantifier expressions since it's obvious which quantifiers they belong to.)
 \begin{cenumerate}
 \item $\horseshoe{\universal{\variable{x}}\Hp{'\variable{x}}\NextLineRef[black, distance=6, out=-70, in=-50]}{\universal{\variable{x}}\Gp{'\variable{x}}}\NextLineRef[black, distance=6, out=-70, in=-50]$
-\item $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}\NextLineRefJ[black, out=-50, in=-50]}{\Gp{'\variable{x}}\NextLineRefB[black, distance=9, out=205, in=315]}$
+\item $\universal{\variable{x}}\parhorseshoe{\Hp{'\variable{x}}\NextLineRefJ[black, out=-50, in=-50]}{\Gp{'\variable{x}}\NextLineRefB[black, distance=9, out=205, in=315]}$\footnote{
+	You can also use trees to show that these variables are all bound. Look at the construction trees of the formulas from examples \ref{GQL1SubformulaPropertiesExampleA} and \ref{GQL1SubformulaPropertiesExampleB}. You will see that in each case the indicated quantifier is the first that appears below, but still on the same branch as, the token variable.
+}
 \end{cenumerate}
 
-\medskip
-\noindent{}To see that these variables are bound by those quantifiers, look at the construction trees of the formulas from examples \ref{GQL1SubformulaPropertiesExampleA} and \ref{GQL1SubformulaPropertiesExampleB}. You will see that in each case the indicated quantifier is the first that appears below, but still on the same branch as, the token variable.
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{GQLSentenceFreeVariableExampleB}}
-The formula $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{x}}}{\Ap{'\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$ is not a sentence.
-That's because it has a free variable. 
-The free variable in the formula is underlined, while arrows point from each bound variable to the quantifier that binds it (again, ignoring variables in quantifier expressions). 
+The formula $\disjunction{\existential{\variable{x}}\parconjunction{\universal{y}\Epp{'}{\variable{x}}}{\Ap{'\variable{x}}}}{\universal{\variable{z}}\parhorseshoe{\existential{\variable{y}}\Hp{'\constant{a}}}{\Gp{'\variable{x}}}}$ is not a sentence. There is a free variable in it. 
+The free variable is underlined, while arrows point from each bound variable to the quantifier that binds it (again, ignoring variables in quantifier expressions). 
 
 \smallskip
 \begin{cenumerate}
@@ -326,88 +369,119 @@ labelindent=.35\parindent, labelsep=*, itemsep=8pt]
 \end{enumerate}
 
 \medskip
-\noindent{}Because (1) has no free variables while (2) and (3) do, (1) is a sentence but (2) and (3) are not. 
+\noindent{}Formula (1) has no free variables but (2) and (3) do, so (1) is a sentence but (2) and (3) aren't. 
 \end{majorILnc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Models}\label{GQL1 Interpretations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As with \GSL{}, sentences of \GQL{}1 have no inherent semantics.  
-But, also as with \GSL{}, we can give models for sentences of \GQL{}1, and these models allow us to investigate entailment for \GQL{}1.  There are many ways to carry out the details of \GQL{}1 semantics (i.e., give models), but each leads to essentially the same results.  They all end up with the same set of logical truths and the same entailment relation.\footnote{See \citealt[49ff]{Hodges2001}, \citeyear{Hodges1997}.}
+As with \GSL{}, sentences of \GQL{}1 have no inherent meaning.  
+But, also as with \GSL{}, we give \mention{models} for sentences of \GQL{}1.
+These models allow us to define and investigate entailment for \GQL{}1.
 
-\emph{Sentences} of \GQL{}1 correspond roughly to the sentences of English, and we need a definition for \mention{model} such that each model gives each \GQL{}1 sentence a determinate truth value.   Formulas that aren't sentences correspond to grammatical sentences of English that don't have a determinate truth value, because they contain pronouns. For example, consider the English sentence \mention{He is the author of Waverley.}  The sentence may be either true or false, depending on who \mention{he} is.  Often we implicitly invoke context in order to determine the referent of a pronoun. Someone reading a biography of the English author Sir Walter Scott may read the above sentence and evaluate it as true.  However, in a conversation in which \mention{he} refers to Aristotle, we'll evaluate the sentence as false.  By itself, however, it can't be evaluated without further specification.  As with pronouns of English, the unbound variables of \GQL{}1 formulas aren't going to have any context-independent \mention{referent} (i.e., assignment).  We don't want formulas of \GQL{}1 that aren't sentences to get determinate truth values from the models of \GQL{}1.  
+Our goal is to define \mention{model} such that each \GQL{}1 sentence has a determinate truth value on each model.
+Note that only sentences of \GQL{}1 have true values, and not formulas.
+A formula that isn't a sentence has some free variable.
+Accordingly, it corresponds to a grammatical sentence of English that doesn't have a determinate truth value, because it contains one or more pronouns.
+For example, the sentence \mention{He is the author of Waverley,} may be either true or false, depending on who \mention{he} is.
+In ordinary conversation we use context to determine the referent of a pronoun.
+Someone discussing the English author Sir Walter Scott may read the above sentence and evaluate it as true.
+However, in a conversation in which \mention{he} refers to Aristotle, the sentence would be evaluated as false.
+The sentence cannot, however, be evaluated without a referent specified.
+Analogously, the unbound variables of \GQL{}1 formulas don't have any context-independent \mention{referent} (i.e., assignment).
+Therefore non-sentence formulas of \GQL{}1 are not to have determinate truth values on the models of \GQL{}1.  
 
 \subsection{Models in \GQL{}1}\label{Interpretations in GQL1}
-All that is required for an \GSL{} model for $\CAPPHI$ is the assignment of a truth value to each sentence letter in $\CAPPHI$. 
-\GQL{}1 has predicate letters and constants, which will require a different kinds of assignments. 
-Furthermore, \GQL{}1 has quantifiers.  As we noted before, the quantifiers roughly correspond to English words such as \emph{all} or \emph{some}, so each model must specify a set of objects that the quantifiers are about.  In more technical language, a \GQL{}1 model must fix a domain of objects over which we can quantify. 
+An \GSL{} model for $\CAPPHI$ assigns a truth value to each sentence letter in $\CAPPHI$, and that's it. 
+\GQL{}1 has predicate letters and constants, which will require different kinds of assignments. 
+Furthermore, \GQL{}1 has quantifiers.
+The quantifiers roughly correspond to English words such as \emph{all} or \emph{some}, so each model must specify a set of objects that the quantifiers range over.
+In other words, a \GQL{}1 model must fix a domain of objects over which to quantify. This is sometimes called a \mention{universe of discourse}.
 \begin{majorILnc}{\LnpDC{GQL1 Interpretation}} 
 A \df{model} for $\CAPPHI$, $\IntA$, consists of:
 \begin{cenumerate}
 \item an assignment of a truth value $\TrueB$ or $\FalseB$ to each sentence letter in $\CAPPHI$; 
 \item a single, non-empty set $\integer{U}$, called the \df{universe} or \df{domain};
 \item an assignment of a subset of $\integer{U}$ to each 1-place predicate in $\CAPPHI$;
-\item an assignment of an object from $\integer{U}$ to each individual constant in $\CAPPHI$.\footnote{Recall the discussions of \mention{set}, \mention{subset}, and \mention{element} in section \ref{sets} in chapter \ref{introduction}.}
+\item an assignment of an element from $\integer{U}$ to each individual constant in $\CAPPHI$.
 \end{cenumerate}
 \end{majorILnc}
-\noindent{}As with \GSL{} models, we use the following notational conventions: 
-Given some sentence letter, like $\PP$, $\IntA(\PP)$ is the truth value $\IntA$ assigns to $\PP$.
-Given an individual constant, like $\constant{a}$, $\IntA(\constant{a})$ is the object from $\integer{U}$ assigned by $\IntA$ to $\constant{a}$. 
-Given a 1-place predicate, like $\Gp{'}$, $\IntA(\Gp{'})$ is the set of objects from $\integer{U}$ that are assigned to $\Gp{'}$ by $\IntA$.%
-\footnote{%
-We pause here to make two points for those keeping careful score:
-\begin{enumerate*}[label=(\arabic*)]
-\item For those comfortable with the abstract notion of a function, we can think of models as functions from the set of basic symbols of \GQL{}1 (less the logical operators, variables, and parentheses) to the kinds of objects mentioned in definition \mvref{GQL1 Interpretations} (objects or subsets of $\integer{U}$). 
-Thought of in this way, this notation is just the normal notation for functions.
-\item\label{pointtwo} Those trying to keep careful track of the \distinction{use}{mention} distinction\index{\distinction{use}{mention} distinction}\index{single quotes} should note that here we've been especially loose. 
-Because it's the symbols \mention{$\PP$}, \mention{$\constant{a}$}, \mention{$\Gp{'}$} (etc) themselves that the model maps to some object (a truth value, subset of $\integer{U}$, etc), we really should put the argument of the model (construed as a function) in single quotes. E.g., we should write \mention{$\IntA(\text{`}\PP\text{'})$}, not \mention{$\IntA(\PP)$}, when denoting the object from $\integer{U}$ assigned to the \emph{symbol} \mention{$\PP$} by $\IntA$. 
-\end{enumerate*}
-\label{Int Footnote}
-} 
+\noindent{}We use the following notational conventions: 
 
+\begin{cenumerate}
+	\item Given some sentence letter, like $\PP$, $\IntA(\PP)$ is the truth value $\IntA$ assigns to $\PP$.
+	\item $\IntA(\integer{U})$ is the set $\m$ assigns to $\integer{U}$.
+	\item Given a 1-place predicate, like $\Gp{'}$, $\IntA(\Gp{'})$ is the subset of $\integer{U}$ assigned to $\Gp{'}$ by $\IntA$.
+	\item Given an individual constant, like $\constant{a}$, $\IntA(\constant{a})$ is the element from $\integer{U}$ assigned by $\IntA$ to $\constant{a}$.\footnote{%
+		We pause here to make two points for those keeping careful score:
+		\begin{enumerate*}[label=(\arabic*)]
+		\item We can think of models as functions from the set of basic symbols of \GQL{}1 (less the logical operators, variables, and parentheses) to the kinds of objects mentioned in definition \mvref{GQL1 Interpretations} (objects or subsets of $\integer{U}$). 
+		\item\label{pointtwo} Those trying to keep careful track of the \distinction{use}{mention} distinction\index{\distinction{use}{mention} distinction}\index{single quotes} should note that here we've been especially loose. 
+		We justify our laxity on the grounds that strict adherence to the distinction would clutter up our notation with confusing layers of quotes. 
+		\end{enumerate*}
+		\label{Int Footnote}
+	} 
+\end{cenumerate}
 
-Earlier we said that the individual constants are roughly similar to proper names in English.  One difference is that, in \GQL{}1, each individual constant in $\CAPPHI$ corresponds to exactly one object in the domain.  In English, on the other hand, some proper names---e.g., \mention{John Smith}---correspond to more than one person, and some---e.g., \mention{Mordecai Alonzo Frazzle III}---do not correspond to any person.  While we require that each constant in $\CAPPHI$ is assigned an object from the domain, we do not require that different constants be assigned different objects. 
+\noindent{}Earlier we said that the individual constants are roughly similar to proper names in English.
+One difference is that, in \GQL{}1, each individual constant in $\CAPPHI$ corresponds to exactly one object in the domain.
+In English, on the other hand, some proper names---e.g., \mention{John Smith}---correspond to more than one person, and some---e.g., \mention{Mordecai Alonzo Frazzle III}---do not correspond to any person.
+While each constant in $\CAPPHI$ is assigned an object from the domain, it is not required that different constants be assigned different objects. 
 
 We distinguish different models by affixing integers as subscripts to the symbol \mention{$\As{}{}$}.  So, for example, $\As{}{1}$, $\As{}{2}$, $\As{}{3}$, \ldots, $\As{}{316}$, etc., are each different models.
 
 As with \GSL{}, we have \GQL{}1 models for sets of sentences:
 
 \begin{majorILnc}{\LnpDC{Definition of Model for QL1 Set}}
-	Given that $\Delta$ is a set of \GQL{}1 sentences, $\IntA$ is a \df{model for $\Delta$} \Iff $\IntA$ is a model for each sentence in $\Delta$.
+	$\IntA$ is a \df{model for a set of \GQL{}1 sentences $\Delta$} \Iff $\IntA$ is a model for each sentence in $\Delta$.
 \end{majorILnc}
 
-There are also models that make assignments to all the sentence letters, constants, and 1-place predicates of \GQL{}1.  Any such model is a model for every \GQL{}1 sentence.  Let's call these \emph{models for \GQL{}1}:
+There are also models that make assignments to all the sentence letters, constants, and 1-place predicates of \GQL{}1.
+Any such model is a model for every \GQL{}1 sentence.
+Let's call these \emph{models for \GQL{}1}:
 
 \begin{majorILnc}{\LnpDC{Definition of Model for QL1}}
 	$\IntA$ is a \df{model for \GQL{}1} \Iff $\IntA$ is a model for every sentence of \GQL{}1.
 \end{majorILnc}
 
-As we define truth in \GQL{}1, we need to make sure every model for $\CAPPHI$ fixes a unique truth value for $\CAPPHI$.\footnote{We define truth so that it applies only to \emph{sentences}, not \emph{formulas}.  Almost all other textbooks define truth (or a related concept) for formulas, and then in turn use that to define truth of a sentence.  We find this an unnecessarily circuitous way of defining truth in \GQL{}1.  Following \citealp{Mates1972}, we instead define truth of a sentence directly, bypassing truth for formulas altogether.} 
-But there is a price we must pay for \GQL{}1's superior models.  \GQL{}1 is more complicated than \GSL{}, and will require some additional metalinguistic tools.  Before defining truth for all \GQL{}1 sentences, we must define \mention{terms} and \mention{model variants}.
+We define truth in \GQL{}1 so that every model for $\CAPPHI$ fixes a unique truth value for $\CAPPHI$.
+But there is a price we must pay for \GQL{}1's superior models.
+\GQL{}1 is more complicated than \GSL{}, so its definition of truth requires some additional metalinguistic tools.
+We must first define \mention{terms} and \mention{model variants}.
 
 \begin{majorILnc}{\LnpDC{Terms}}
-The \idf{individual terms} of \GQL{}1 are the constants and variables of \GQL{}1.  We will use \mention{$\variable{q}$},\mention{$\variable{r}$}, \mention{$\variable{s}$}, and \mention{$\variable{t}$}  (along with subscripts) as MathEnglish variables for them.
+The \idf{individual terms} of \GQL{}1 are the constants and variables of \GQL{}1.
 \end{majorILnc}
-\noindent{}This means that italic roman \mention{$\variable{q}$}, \mention{$\variable{r}$}, \mention{$\variable{s}$}, \mention{$\variable{t}$}, and the Greek \mention{$\ALPHA$}, \mention{$\BETA$}, etc., can be MathEnglish variables for \GQL{} variables.
-However, while \mention{$\ALPHA$}, \mention{$\BETA$}, etc. stand \emph{only} for variables, the italic roman letters can also range over \GQL{}1 constants.  The use of metavariables for individual terms in the object language simplifies our notation considerably.
+\noindent{}We typically use \mention{$\variable{q}$},\mention{$\variable{r}$}, \mention{$\variable{s}$}, and \mention{$\variable{t}$}  (along with subscripts) as MathEnglish metavariables for terms. This means that italic Roman \mention{$\variable{q}$}, \mention{$\variable{r}$}, \mention{$\variable{s}$}, \mention{$\variable{t}$}, and the Greek \mention{$\ALPHA$}, \mention{$\BETA$}, etc., can all be MathEnglish variables for \GQL{} variables.
+However, while \mention{$\ALPHA$}, \mention{$\BETA$}, etc. stand \emph{only} for variables, the italic Roman letters can also range over \GQL{}1 constants.
+The use of metavariables for individual terms in the object language simplifies our notation considerably.
 
-At this point we could define truth for sentences without quantifiers, though for now we offer only a short sketch.  The sentence $\Gp{\constant{a}}$ is true on $\IntA$ \Iff the object $\IntA$ assigns to \mention{$\constant{a}$} is an element of the set $\IntA$ assigns to \mention{$\GG$}; i.e., \Iff $\IntA(\constant{a})\in\IntA(\GG)$.  If the object $\IntA$ assigns to \mention{$\constant{a}$} isn't a member of the set assigned to \mention{$\GG$}, $\Gp{\constant{a}}$ is false on $\IntA$.
+At this point we could define truth for sentences without quantifiers, though for now we offer only a short sketch.
+The sentence $\Gp{\constant{a}}$ is true on $\IntA$ \Iff the element $\IntA$ assigns to \mention{$\constant{a}$} is in the set $\IntA$ assigns to \mention{$\GG$}; i.e., \Iff $\IntA(\constant{a})\in\IntA(\GG)$.
+If the element $\IntA$ assigns to \mention{$\constant{a}$} isn't in the set assigned to \mention{$\GG$}, $\Gp{\constant{a}}$ is false on $\IntA$.
 
-Quantifiers require more complexity. A sentence like $\universal{\variable{x}}\Ep{\variable{x}}$ is true \Iff every object in the domain, $\integer{U}$, is an element of $\IntA(\EE)$. So if $\IntA$ assigns $\integer{U}$ the set of even integers and $\IntA(\EE)=\integer{U}$, $\universal{\variable{x}}\Ep{\variable{x}}$ is true. But if instead $\IntA(\EE)=\{2, 4, 6\}$, then there are objects in the domain (e.g. $8$) not in $\IntA(\EE)$, and so $\universal{\variable{x}}\Ep{\variable{x}}$ is false. For simple quantified sentences this quick definition is good enough; but it won't work for more complex sentences, such as $\universal{\variable{x}}\existential{\variable{y}}\parhorseshoe{\Hp{\variable{y}}}{\Gp{\variable{x}}}$.
+Quantifiers require more complexity.
+A sentence like $\universal{\variable{x}}\Ep{\variable{x}}$ is true \Iff every element in the domain, $\integer{U}$, is an element of $\IntA(\EE)$.
+So if $\IntA$ assigns $\integer{U}$ the set of even integers and $\IntA(\EE)=\integer{U}$, $\universal{\variable{x}}\Ep{\variable{x}}$ is true.
+But if instead $\IntA(\EE)=\{2, 4, 6\}$, then there are objects in the domain (e.g. $8$) not in $\IntA(\EE)$, and so $\universal{\variable{x}}\Ep{\variable{x}}$ is false.
+For simple quantified sentences this quick definition is good enough; but it won't work for more complex sentences, such as $\universal{\variable{x}}\existential{\variable{y}}\parhorseshoe{\Hp{\variable{y}}}{\Gp{\variable{x}}}$.
 
-To define truth for quantified sentences more precisely, we first need a convenient way to refer to models that make identical assignments everywhere except at one constant.
+To define truth for quantified sentences more precisely, we need a convenient notation for two models that make identical assignments everywhere except at one constant.
 
 \begin{majorILnc}{\LnpDC{Variant}}
-A $\variable{t}$-\nidf{variant}\index{model!$\variable{t}$-variant} of $\As{}{}$ is any model $\As{*}{}$ that makes any assignment to $\variable{t}$ but otherwise makes exactly the same assignments as $\As{}{}$.\footnote{One result of this definition is that, for every term $\variable{t}$, any model $\As{}{}$ that assigns something to $\variable{t}$ is a $\variable{t}$-variant of itself.}
+	Let $\m$ and $\m^{\variable{t}}$ be \GQL{}1 models and $\variable{t}$ be a term that is given some assignment by $\m^{\variable{t}}$. Then $\m^{\variable{t}}$ is a $\variable{t}$-\nidf{variant}\index{model!$\variable{t}$-variant} of $\m$ \Iff for every term $\variable{r}$ such that $\variable{r}\not=\variable{t}$, $\m(r)=\m^{\variable{t}}(r)$.
 \end{majorILnc}
-\noindent{}Put another way, a $\variable{t}$-variant of $\As{}{}$ makes all the same assignments as $\As{}{}$ except possibly at constant $\variable{t}$. But what if $\As{}{}$ doesn't assign anything to $\variable{t}$? In that case, the $\variable{t}$-variants are all the models that are identical with $\As{}{}$ but that also assign something to $\variable{t}$.
+\noindent{}Put another way, a $\variable{t}$-variant of $\As{}{}$ is a model that makes all the same assignments as $\As{}{}$ except possibly at constant $\variable{t}$.
+One result of this definition is that any model $\As{}{}$ that assigns something to $\variable{t}$ is a $\variable{t}$-variant of itself.
+But what if $\As{}{}$ doesn't assign anything to $\variable{t}$? In that case, the $\variable{t}$-variants are all the models that are identical with $\As{}{}$ except with an additional assignment to $\variable{t}$.
 
-We will generally denote $\variable{t}$-variants of a model $\As{}{}$ by affixing $\variable{t}$ as a superscript to \mention{$\As{}{}$}. For example, $\As{\constant{c}}{}$ is a $\constant{c}$-variant of $\As{}{}$.  On this example $\As{\constant{c}}{}$ and $\As{}{}$ make all the same assignments, except possibly to the constant $\constant{c}$.
+We generally denote $\variable{t}$-variants of a model $\As{}{}$ by affixing $\variable{t}$ as a superscript to \mention{$\As{}{}$}. For example, $\As{\constant{c}}{}$ is a $\constant{c}$-variant of $\As{}{}$.
+Then $\As{\constant{c}}{}$ and $\As{}{}$ make all the same assignments, except possibly to the constant $\constant{c}$.
 We extend this notation when the symbol denoting the original model is itself complex.
 So, given an $\constant{c}$-variant of model $\As{}{}$, i.e., $\As{\constant{c}}{}$, $\As{\constant{cd}}{}$ is a $\constant{d}$-variant of $\As{\constant{c}}{}$.  For another example, if $\As{\constant{e}}{4}$ is an $\constant{e}$-variant of $\As{}{4}$, then $\As{\constant{e}}{4}$ and $\As{}{4}$ make identical assignments to everything except maybe $\constant{e}$. 
 
-We need one more piece of notation before we can get to the definition of truth.
+We need one more piece of notation before we get to the definition of truth.
 \begin{majorILnc}{\LnpDC{MathEnglishVariableSub1}}
 	If $\CAPPHI$ is a \GQL{}1 formula and $\variable{t}$ and $\variable{s}$ are terms, then $\CAPPHI\variable{s}/\variable{t}$ is the formula you get by replacing each unbound token of $\variable{t}$ in $\CAPPHI$ with a token of $\variable{s}$.
 \end{majorILnc}
@@ -429,26 +503,27 @@ We need one more piece of notation before we can get to the definition of truth.
 %\subsection{Truth in a Model: Preliminary Ideas}\label{GQL Truth in an Interpretation Prelims}
 
 \subsection{Truth in a Model}\label{GQL1 Truth in an Interpretation}
-We are finally ready to define truth in a model for \GQL{}1.
+We now define truth in a \GQL{}1 model.
 
 \begin{majorILnc}{\LnpDC{Truth for GQL1 Sentence}}
 The following clauses fix when a \GQL{}1 sentence $\CAPTHETA$ is \nidf{$\True$} (or \nidf{$\False$}) on a model for $\CAPTHETA$, $\IntA$:
 \begin{cenumerate}
-\item A sentence letter $\CAPPHI$ is $\True$ on $\IntA$ \Iff $\As{}{}$ assigns $\True$ to it, i.e. \Iff $\As{}{}(\CAPPHI)=\TrueB$.
-\item An atomic sentence $\Pp{\variable{t}}$ with a 1-place predicate $\PP$ and an individual term $\variable{t}$ is $\True$ on $\IntA$ \Iff what $\IntA$ assigns to the individual term $\variable{t}$ is in the set $\IntA$ assigns to the predicate, i.e. \Iff $\IntA(\variable{t})\in\IntA(\PP)$.
+\item A sentence letter $\CAPPHI$ is $\True$ on $\IntA$ \Iff $\As{}{}(\CAPPHI)=\TrueB$.
+\item An atomic sentence $\Pp{\variable{t}}$ with a 1-place predicate $\PP$ and an individual term $\variable{t}$ is $\True$ on $\IntA$ \Iff $\IntA(\variable{t})\in\IntA(\PP)$.
 \item A negation $\negation{\CAPPHI}$ is $\True$ on $\IntA$ \Iff the unnegated formula $\CAPPHI$ is $\False$ on $\IntA$.
 \item A conjunction $\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is $\True$ on $\IntA$ \Iff all conjuncts $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ are $\True$ on $\IntA$.
 \item A disjunction $\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}$ is $\True$ on $\IntA$ \Iff at least one disjunct $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ is $\True$ on $\IntA$.
 \item A conditional $\parhorseshoe{\CAPPSI}{\CAPPHI}$ is $\True$ on $\IntA$ \Iff the \CAPS{lhs} $\CAPPSI$ is $\False$ or the \CAPS{rhs} $\CAPPHI$ is $\True$ on $\IntA$, or both.
 \item A biconditional $\partriplebar{\CAPPSI}{\CAPPHI}$ is $\True$ on $\IntA$ \Iff both sides, $\CAPPSI$ and $\CAPPHI$, have the same truth value on $\IntA$.
-\item\label{GQL1TruthUnvQuant} A universal quantification $\universal{\ALPHA}\CAPPHI$ is $\True$ on $\IntA$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is $\True$ on \emph{all} $\variable{t}$-variants of $\IntA$ (where $\variable{t}$ is the first constant not in $\CAPPHI$).
-\item An existential quantification $\existential{\ALPHA}\CAPPHI$ is $\True$ on $\IntA$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is $\True$ on \emph{some} $\variable{t}$-variant of $\IntA$ (where $\variable{t}$ is the first constant not in $\CAPPHI$).
+\item\label{GQL1TruthUnvQuant} A universal quantification $\universal{\ALPHA}\CAPPHI$ is $\True$ on $\IntA$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is $\True$ on \emph{all} $\variable{t}$-variants of $\IntA$, where $\variable{t}$ is the first constant not in $\CAPPHI$.
+\item An existential quantification $\existential{\ALPHA}\CAPPHI$ is $\True$ on $\IntA$ \Iff $\CAPPHI\variable{t}/\ALPHA$ is $\True$ on \emph{some} $\variable{t}$-variant of $\IntA$, where $\variable{t}$ is the first constant not in $\CAPPHI$.
 \item A sentence $\CAPPHI$ is $\False$ on $\IntA$ \Iff $\CAPPHI$ is not $\True$ on $\IntA$.
 \end{cenumerate}
 \end{majorILnc}
 
-The following table has two example models, \emph{Pos Int} and \emph{States}:
+\noindent{}For the following examples consult the models \emph{Pos Int} and \emph{States}, given in figure \mvref{table:Partial Models}.
 
+\begin{figure}
 \begin{longtable}[c]{ l l l l } %p{2.2in} p{2in}
 	\toprule
 	&\textbf{Symbol} & \multicolumn{2}{c}{\textbf{Model}} \\ \cmidrule(l){3-4}
@@ -495,154 +570,215 @@ The following table has two example models, \emph{Pos Int} and \emph{States}:
 	&$\Gp{'}$&multiple of 7&\{Ohio,Alabama\}\\ \addlinespace[.25cm]
 	%\bottomrule
 \end{longtable}
+\caption{Two models}
+\end{figure}
 
 \begin{majorILnc}{\LnpEC{GQL1TruthExamplePA}}
-	The sentence $\negation{\Gp{\constant{b}}}$ is true on the model \emph{Pos Int} given in table \mvref{table:Partial Models}. 
+	The sentence $\negation{\Gp{\constant{b}}}$ is true on the model \emph{Pos Int}. 
 \end{majorILnc}
 \begin{PROOF}
-	The model \emph{Pos Int} has as its domain (or universe) the set of positive integers.  
-	Pos Int assigns $9$ to $\constant{b}$, and the set of multiples of $7$ (i.e., $\{7, 14, 21, 28, ...\}$) to $\GG$. 
-	
-	The number $9$ is not a multiple of $7$, so $\emph{Pos Int}(\constant{b})\notin\emph{Pos Int}(\GG)$.\footnote{As a reminder, $\emph{Pos Int}(\constant{b})\notin\emph{Pos Int}(\GG)$ asserts that what \emph{Pos Int} assigns to $\constant{b}$ is not an element of the set that \emph{Pos Int} assigns to $\GG$.}  To see this, we need only to look at the set assigned to $\GG$ and see if $7$ is a member; it's not.  So, $\Gp{\constant{b}}$ is false on \emph{Pos Int}.  It follows that \emph{Pos Int} makes $\negation{\Gp{\constant{b}}}$ true. 
+	The model \emph{Pos Int} assigns $9$ to $\constant{b}$, and the set of multiples of $7$ to $\GG$.
+	The number $9$ is not a multiple of $7$, so $\emph{Pos Int}(\constant{b})\notin\emph{Pos Int}(\GG)$.
+	So, by the definition of truth, $\Gp{\constant{b}}$ is false on \emph{Pos Int}.
+	Therefore, by the definition of truth for $\NEGATION$, \emph{Pos Int} makes $\negation{\Gp{\constant{b}}}$ true.
+
 \end{PROOF}
+\begin{commentary}
+	$\emph{Pos Int}(\constant{b})\notin\emph{Pos Int}(\GG)$ asserts that what \emph{Pos Int} assigns to $\constant{b}$, $9$, is not an element of the set that \emph{Pos Int} assigns to $\GG$.
+	To check this, we need only to look at the set assigned to $\GG$ and see whether $7$ is a member; it's not, since $9$ is not a multiple of $7$.
+\end{commentary}
 
 \begin{majorILnc}{\LnpEC{GQL1TruthExampleA}}
-The sentence ${\parhorseshoe{\Gp{\constant{d}}}{\Dp{\constant{e}}}}$ is true on the model \emph{Pos Int} given in table \mvref{table:Partial Models}. 
+The sentence ${\parhorseshoe{\Gp{\constant{d}}}{\Dp{\constant{e}}}}$ is true on the model \emph{Pos Int} (\ref{table:Partial Models}). 
 \end{majorILnc}
 \begin{PROOF}
-$\parhorseshoe{\Gp{\constant{d}}}{\Dp{\constant{e}}}$ is true on \emph{Pos Int} \Iff the \CAPS{LHS} is false or the \CAPS{RHS} is true.  The \CAPS{LHS}, $\Gp{\constant{d}}$, is true on \emph{Pos Int} \Iff what the model assigns to $\constant{d}$ is a member of the set assigned to $\GG$.  \emph{Pos Int} assigns the number $3$ to $\constant{d}$, but $3$ isn't a multiple of $7$.  So, $\emph{Pos Int}(\constant{d})\notin\emph{Pos Int}(\GG)$, and $\Gp{\constant{d}}$ is false on \emph{Pos Int}.  It follows that $\parhorseshoe{\Gp{\constant{d}}}{\Dp{\constant{e}}}$ is true on \emph{Pos Int}.
+$\parhorseshoe{\Gp{\constant{d}}}{\Dp{\constant{e}}}$ is true on \emph{Pos Int} \Iff the \CAPS{LHS} is false or the \CAPS{RHS} is true.
+\emph{Pos Int} assigns the number $3$ to $\constant{d}$ and the set of multiples of $7$ to $\GG$.
+But $3$ isn't a multiple of $7$, so $\emph{Pos Int}(\constant{d})\notin\emph{Pos Int}(\GG)$.
+It follows that $\Gp{\constant{d}}$ is false on \emph{Pos Int}.
+Therefore $\parhorseshoe{\Gp{\constant{d}}}{\Dp{\constant{e}}}$ is true on \emph{Pos Int}.
 \end{PROOF}
 
 \begin{majorILnc}{\LnpEC{GQL1TruthExampleB}}
-The sentence $\disjunction{\Ap{\constant{a}}}{\Gp{\constant{c}}}$ is false on the model \emph{States} given in table \mvref{table:Partial Models}.
+The sentence $\disjunction{\Ap{\constant{a}}}{\Gp{\constant{c}}}$ is false on the model \emph{States} (\ref{table:Partial Models}).
 \end{majorILnc}
 \begin{PROOF}
 The model \emph{States} assigns Louisiana to $\constant{a}$, Georgia to $\constant{c}$, the set of Midwestern states to $\AA$, and the set $\{$Ohio, Alabama$\}$ to $\GG$.
 
-$\Ap{\constant{a}}$ is true on \emph{States} \Iff what the model assigns to $\constant{a}$ is a member of the set assigned to $\AA$, i.e., $\emph{States}(\constant{a})\in\emph{States}(\AA)$.  But Louisiana isn't in the set of Midwestern states; while it might be unclear exactly which states are genuinely Midwestern, Louisiana definitely doesn't belong.  So $\Ap{\constant{a}}$ is false on \emph{States}.
+$\Ap{\constant{a}}$ is true on \emph{States} \Iff $\emph{States}(\constant{a})\in\emph{States}(\AA)$.
+But Louisiana isn't a Midwestern state.
+So $\Ap{\constant{a}}$ is false on \emph{States}.
+$\Gp{\constant{c}}$ is true on \emph{States} \Iff $\emph{States}(\constant{c})\in\emph{States}(\GG)$.
+But \emph{States} assigns $\{$Ohio, Alabama$\}$ to $\GG$.
+Georgia isn't in that set, so \emph{States} makes $\Gp{\constant{c}}$ false.
 
-$\Gp{\constant{c}}$ is true on \emph{States} \Iff what the model assigns to $\constant{c}$ is in the set assigned to $\GG$; i.e., \Iff $\emph{States}(\constant{c})\in\emph{States}(\GG)$.  But \emph{States} assigns $\{$Ohio, Alabama$\}$ to $\GG$.  \emph{States} assigns Georgia to $\constant{c}$, and Georgia isn't in that set.  Thus, \emph{States} makes $\Gp{\constant{c}}$ false.
-
-Both disjuncts are false on \emph{States}, so \emph{States} makes $\disjunction{\Ap{\constant{a}}}{\Gp{\constant{c}}}$ false.
+$\Ap{\constant{a}}$ and $\Gp{\constant{c}}$ are false on \emph{States}, so \emph{States} makes $\disjunction{\Ap{\constant{a}}}{\Gp{\constant{c}}}$ false.
 \end{PROOF}
-\noindent{}Often, whether a sentence is true depends on the model selected.  Because the above models involve things such as numbers and states, whether the given sentence is true depends on facts about numbers and states. 
-When we're trying to compute the truth value of a sentence in a given model, the truth value depends not only on our definitions, but also on facts about the objects in the universe of the model. 
+\noindent{}Pay attention to the full structure of a sentence when assessing its truth value.
+The sentences $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ and $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ may look similar, but they mean very different things.
+Note that the first has \mention{$\HORSESHOE$} as its main connective, whereas the main connective of the second is \mention{$\forall$}.
+We show that their truth values come apart on \emph{Pos Int} in the next two examples.
 
 \begin{majorILnc}{\LnpEC{GQL1TruthExampleC}}
-(i) The sentence $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on the model \emph{Pos Int}, given in table \mvref{table:Partial Models}, while (ii) the sentence $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ is false on that same model.
+$\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on the model \emph{Pos Int} (\ref{table:Partial Models}).
 \end{majorILnc}
 \begin{PROOF}
-These two sentences look deceptively similar, but they have different truth values on the model \emph{Pos Int}.  
-
-(i) $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on \emph{Pos Int} \Iff \emph{Pos Int} either makes the \CAPS{lhs} is false or the \CAPS{RHS} true.
-
-$\universal{\variable{x}}\Dp{\variable{x}}$ is true on \emph{Pos Int} \Iff for the first constant not in the sentence, $\constant{t}$, every $\constant{t}$-variant of \emph{Pos Int} makes $\Dp{\constant{t}}$ true.\footnote{Remember that $\variable{t}$ isn't itself a constant---it's a metavariable that stands for a constant in the object language, \GQL{}1.}  We \emph{must} use \mention{$\constant{a}$} as our constant; there are no constants in $\Dp{\variable{x}}$, so we pick the first one available. Thus, $\universal{\variable{x}}\Dp{\variable{x}}$ is true on \emph{Pos Int} \Iff every object in the domain of \emph{Pos Int} that could be assigned to $\constant{a}$ makes $\Dp{\constant{a}}$ come out true.
-
-\emph{Pos Int} assigns the set of odd numbers to $\DD$.  But what happens when we consider the $\constant{a}$-variant of \emph{Pos Int} such that $\emph{Pos Int}^{\constant{a}}(\constant{a})=2$?  The number $2$ isn't in the set of odd numbers; i.e., $\emph{Pos Int}^{\constant{a}}(\constant{a})\notin\emph{Pos Int}^{\constant{a}}(\DD)$.  So, there is a $\emph{Pos Int}^{\constant{a}}$ such that $\Dp{\constant{a}}$ is false.  That means, in turn, that \emph{Pos Int} makes $\universal{\variable{x}}\Dp{\variable{x}}$ false.  Thus, $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on \emph{Pos Int}.
-
-(ii) $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ is true on \emph{Pos Int} \Iff every $\constant{a}$-variant of \emph{Pos Int} makes $\horseshoe{\Dp{\constant{a}}}{\Gp{\constant{a}}}$ true.  
-
-Is there any $\constant{a}$-variant of \emph{Pos Int} that makes $\Dp{\constant{a}}$ true and $\Gp{\constant{a}}$ false?  Yes.  \emph{Pos Int} assigns the set of odd numbers to $\DD$ and the set of multiples of $7$ to $\GG$.  Let $\emph{Pos Int}^{\constant{a}}(\constant{a})=3$.  The number $3$ is odd, but it isn't a multiple of $7$.  So, $\emph{Pos Int}^{\constant{a}}(\constant{a})\in\emph{Pos Int}^{\constant{a}}(\DD)$ and $\emph{Pos Int}^{\constant{a}}(\constant{a})\notin\emph{Pos Int}^{\constant{a}}(\GG)$.  Thus, $\emph{Pos Int}^{\constant{a}}$ makes $\Dp{\constant{a}}$ true and $\Gp{\constant{a}}$ false, which in turn makes $\horseshoe{\Dp{\constant{a}}}{\Gp{\constant{a}}}$ false.  Because there is a $\constant{a}$-variant of \emph{Pos Int} that makes $\horseshoe{\Dp{\constant{a}}}{\Gp{\constant{a}}}$ false, $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ is false on \emph{Pos Int}.
+	$\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on \emph{Pos Int} \Iff \emph{Pos Int} either makes the \CAPS{lhs} is false or the \CAPS{RHS} true.
+	By the definition of truth for $\forall$, $\universal{\variable{x}}\Dp{\variable{x}}$ is true on \emph{Pos Int} \Iff $\Dp{\constant{a}}$ is true on all $\constant{a}$-variants of \emph{Pos Int}.
+	\begin{commentary}
+		The definition of truth for $\forall$ has us substitute the first constant not in $\Dp{\variable{x}}$.
+		Since it has no constant we use the first one: $\constant{a}$.
+		The result of the substitution is $\Dp{\constant{a}}$.
+	\end{commentary}
+	\noindent{}\emph{Pos Int} assigns the set of odd numbers to $\DD$.
+	Consider the $\constant{a}$-variant of \emph{Pos Int}, \emph{Pos Int}\textsuperscript{a}, such that \emph{Pos Int}\textsuperscript{a}($\constant{a}$) is $2$.
+	Clearly $2$ is not an odd number.
+	It follows that $\Dp{\constant{a}}$ is false on \emph{Pos Int}\textsuperscript{a}, and so $\universal{\variable{x}}\Dp{\variable{x}}$ is false on \emph{Pos Int}.
+	Therefore $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on \emph{Pos Int}.
 \end{PROOF}
 
-
-\begin{majorILnc}{\LnpEC{GQLTruthExampleD}}
-	On the model \emph{Pos Int}, given in table \mvref{table:Partial Models}, (i) the sentence $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ is false but (ii) $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ is true.
+\begin{majorILnc}{\LnpEC{GQL1TruthExampleC2}}
+	$\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ is false on \emph{Pos Int} (\ref{table:Partial Models}).
 \end{majorILnc}
 \begin{PROOF}
-	As with the last example, these two sentences are deceptively similar.  They have different truth on \emph{Pos Int}, however.
-	
-(i) First let's consider the sentence $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$.  $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ is true on \emph{Pos Int} \Iff there is an $\constant{a}$-variant of \emph{Pos Int} that makes $\conjunction{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ true.  
+	By the definition of truth for $\forall$, $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ is true on \emph{Pos Int} \Iff every $\constant{a}$-variant of \emph{Pos Int} makes $\horseshoe{\Dp{\constant{a}}}{\Gp{\constant{a}}}$ true.
+	\emph{Pos Int} assigns the set of odd numbers to $\DD$ and the set of multiples of $7$ to $\GG$.
+	Let there be an $\constant{a}$-variant of \emph{Pos Int}, $\emph{Pos Int}^{\constant{a}}$, such that $\emph{Pos Int}^{\constant{a}}(\constant{a})=3$.
+	The number $3$ is odd and not a multiple of $7$.
+	So $\emph{Pos Int}^{\constant{a}}(\constant{a})\in\emph{Pos Int}^{\constant{a}}(\DD)$ and $\emph{Pos Int}^{\constant{a}}(\constant{a})\notin\emph{Pos Int}^{\constant{a}}(\GG)$.
+	Thus, $\emph{Pos Int}^{\constant{a}}$ makes $\Dp{\constant{a}}$ true and $\Gp{\constant{a}}$ false, which in turn makes $\horseshoe{\Dp{\constant{a}}}{\Gp{\constant{a}}}$ false.
+	Therefore $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Gp{\variable{x}}}$ is false on \emph{Pos Int}.
+\end{PROOF}
 
-Is there an $\constant{a}$-variant of $\emph{Pos Int}$ such that $\conjunction{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ is true?  No.  The only way an $\constant{a}$-variant can make $\conjunction{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ true is if it makes both conjuncts true.  But \emph{Pos Int} assigns the even numbers to $\CC$ and the odd numbers to $\DD$.  There is no number that is both even and odd!  It follows that every variant must make either $\Cp{\constant{a}}$ or $\Dp{\constant{a}}$ false.
+\noindent{}Let's compare another pair of superficially similar sentences, this time with existential quantifiers: $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ and $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$.
 
-$\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ is false on \emph{Pos Int}.
-
-(ii) $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ is true on \emph{Pos Int} \Iff both conjuncts are true on \emph{Pos Int}.
-
-$\existential{\variable{x}}\Cp{\variable{x}}$ is true on \emph{Pos Int} \Iff there is an $\constant{a}$-variant of \emph{Pos Int} that makes $\Cp{\constant{a}}$ true.  Is there any such $\constant{a}$-variant?  Yes; consider the variant $\emph{Pos Int}^{\constant{a}}$ that assigns $4$ to $\constant{a}$.  $\emph{Pos Int}^{\constant{a}}$ assigns the even numbers to $\CC$, just like $\emph{Pos Int}$.  The number $4$ is even, so $\emph{Pos Int}^{\constant{a}}(\constant{a})\in\emph{Pos Int}^{\constant{a}}(\CC)$.  Thus, $\emph{Pos Int}^{\constant{a}}$ makes $\Cp{\constant{a}}$ true, and so \emph{Pos Int} makes $\existential{\variable{x}}\Cp{\variable{x}}$ true.
-
-Similar reasoning holds for the other conjunct.  $\existential{\variable{x}}\Dp{\variable{x}}$ is true on \emph{Pos Int} \Iff there is an $\constant{a}$-variant of \emph{Pos Int} that makes $\Dp{\constant{a}}$ true.  $\emph{Pos Int}^{\constant{a}}$ assigns the odd numbers to $\DD$.  The number $3$ is odd, so when $\emph{Pos Int}^{\constant{a}}(\constant{a})=3$, $\emph{Pos Int}^{\constant{a}}(\constant{a})\in\emph{Pos Int}^{\constant{a}}(\DD)$.  Thus, $\emph{Pos Int}^{\constant{a}}$ makes $\Dp{\constant{a}}$ true. It follows that \emph{Pos Int} makes $\existential{\variable{x}}\Dp{\variable{x}}$ true.
-	
-\emph{Pos Int} makes $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ true.
+\begin{majorILnc}{\LnpEC{GQLTruthExampleD}}
+	$\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ is false on \emph{Pos Int} (\ref{table:Partial Models}).
+\end{majorILnc}
+\begin{PROOF}
+By the definition of truth for $\exists$, $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ is true on \emph{Pos Int} \Iff there is an $\constant{a}$-variant of \emph{Pos Int} that makes $\conjunction{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ true.  
+\emph{Pos Int} assigns the even numbers to $\CC$ and the odd numbers to $\DD$.
+There is no element in the domain of \emph{Pos Int} that is both odd and even.
+So there is no $\constant{a}$-variant of \emph{Pos Int} that makes both $\Cp{\constant{a}}$ and $\Dp{\constant{a}}$ true.
+Hence $\conjunction{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ is false on all $\constant{a}$-variants.
+Therefore $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ is false on \emph{Pos Int}.
 \end{PROOF}	
+
+\begin{majorILnc}{\LnpEC{GQLTruthExampleD2}}
+	$\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ is true on \emph{Pos Int} (\ref{table:Partial Models}).
+\end{majorILnc}
+\begin{PROOF}
+$\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ is true on \emph{Pos Int} \Iff $\existential{\variable{x}}\Cp{\variable{x}}$ and $\existential{\variable{x}}\Dp{\variable{x}}$ are true on \emph{Pos Int}.
+
+By the definition of truth for $\exists$, $\existential{\variable{x}}\Cp{\variable{x}}$ is true on \emph{Pos Int} \Iff there is an $\constant{a}$-variant of \emph{Pos Int} that makes $\Cp{\constant{a}}$ true.
+$\emph{Pos Int}$ assigns the even numbers to $\CC$.
+Let $\emph{Pos Int}^{\constant{a}}$ be an $\constant{a}$-variant that assigns $4$ to $\constant{a}$.
+The number $4$ is even, so $\emph{Pos Int}^{\constant{a}}(\constant{a})\in\emph{Pos Int}^{\constant{a}}(\CC)$.
+Thus, $\emph{Pos Int}^{\constant{a}}$ makes $\Cp{\constant{a}}$ true, and so \emph{Pos Int} makes $\existential{\variable{x}}\Cp{\variable{x}}$ true.
+
+By the definition of truth for $\exists$, $\existential{\variable{x}}\Dp{\variable{x}}$ is true on \emph{Pos Int} \Iff there is an $\constant{a}$-variant of \emph{Pos Int} that makes $\Dp{\constant{a}}$ true.
+$\emph{Pos Int}$ assigns the odd numbers to $\DD$.
+Let $\emph{Pos Int}^{\constant{a}}$ be an $\constant{a}$-variant that assigns $3$ to $\constant{a}$.
+The number $3$ is odd, so $\emph{Pos Int}^{\constant{a}}(\constant{a})\in\emph{Pos Int}^{\constant{a}}(\DD)$.
+Thus, $\emph{Pos Int}^{\constant{a}}$ makes $\Dp{\constant{a}}$ true.
+It follows that \emph{Pos Int} makes $\existential{\variable{x}}\Dp{\variable{x}}$ true.
+	
+Therefore \emph{Pos Int} makes $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ true.
+\end{PROOF}
+
+\noindent{}On model \emph{Pos Int} we can interpret $\existential{\variable{x}}\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ as saying, roughly that there is some positive integer that is both even and odd.
+That's clearly false.
+By contrast, $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$ means, roughly, that there is some even positive integer and there is some odd positive integer, which is true.
+
+We can calculate the truth value of a \GQL{}1 sentence $\CAPPHI$ on some $\IntA$ \Iff $\IntA$ is a model for $\CAPPHI$.  If $\IntA$ \emph{isn't} a model for $\CAPPHI$, then $\CAPPHI$ has no truth value on it.  Be careful: if $\As{}{1}$ is a model for $\CAPPHI$ and $\As{}{2}$ is a model for $\CAPPSI$, it doesn't follow that either $\As{}{1}$ or $\As{}{2}$ is a model for, say, $\horseshoe{\CAPPHI}{\CAPPSI}$.
 
 \subsection{Minimal Models in \GQL{}1}\label{Minimal Models in GQL1}
 
-We may calculate the truth value of a \GQL{}1 sentence $\CAPPHI$ on some $\IntA$ \Iff $\IntA$ is a model for $\CAPPHI$.  If $\IntA$ \emph{isn't} a model for $\CAPPHI$, then $\CAPPHI$ has no truth value on it.  Be careful!  Even if $\As{}{1}$ is a model for some sentence $\CAPPHI$ and $\As{}{2}$ is a model for some sentence $\CAPPSI$, it doesn't follow that either $\As{}{1}$ or $\As{}{2}$ is a model for, say, $\horseshoe{\CAPPHI}{\CAPPSI}$.
-
-We were able to calculate the truth values of the previous example problems using the two models in table \mvref{table:Partial Models} because none of the sentences contained sentence letters, constants, or predicates that weren't given an assignment in the table.  Those assignments not mentioned, in effect, don't matter for truth evaluation.  The following theorem proves that the unmentioned assignments won't make a difference.
-
-As with \GSL{}, we have \emph{minimal models} in \GQL{}1:
+For the examples above we used models with assignments that are not referenced in the sentences we evaluated.
+The Minimal Model theorem below proves that assignments to irrelevant predicates, constants, etc. don't matter for the truth value of a sentence.
 
 \begin{majorILnc}{\LnpDC{Definition of Minimal QL1 Model}}
-	Model $\IntA$ is a \df{minimal model for $\CAPPHI$} \Iff $\IntA$ makes the minimum assignments necessary for $\IntA$ to be a model for $\CAPPHI$; i.e., makes assignments to the universe $\integer{U}$, to each sentence letter, constant, and 1-place predicate in $\CAPPHI$, but to nothing else.
+	Model $\IntA$ is a \df{minimal model for $\CAPPHI$} \Iff $\IntA$ makes the minimum assignments necessary for $\IntA$ to be a model for $\CAPPHI$.
 \end{majorILnc}
 
-For an example minimal model, consider the sentence $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$.  This sentence has two 1-place predicates, $\CC$ and $\DD$, and no sentence letters or constants.  A minimal model $\IntA$ will not make assignments to any sentence letter or constant.  $\IntA$ will assign subsets of $\integer{U}$ to $\CC$ and $\DD$, but won't make an assignment to any other 1-place predicate.
+\noindent{}That is, a minimal model makes assignments to the universe $\integer{U}$, to each sentence letter, constant, and 1-place predicate in $\CAPPHI$, but to nothing else.
+Consider the sentence $\parconjunction{\existential{\variable{x}}\Cp{\variable{x}}}{\existential{\variable{x}}\Dp{\variable{x}}}$.
+This sentence has two 1-place predicates, $\CC$ and $\DD$, and no sentence letters or constants.
+A minimal model makes no assignment to any sentence letter or constant.
+It assigns subsets of $\integer{U}$ to $\CC$ and $\DD$, but makes no assignment to any other 1-place predicate.
 
-When calculating the value of a sentence $\CAPPHI$ on a model, we only need to worry about the assignments to the symbols in $\CAPPHI$ and the universe.  We can ignore the other assignments.  The following theorem demonstrates this.  (This is the \GQL{}1 version of theorem \ref{thm:localityoftruth} in chapter \ref{sententiallogic}.)
+When calculating the value of a sentence $\CAPPHI$ on a model, we only need to worry about the assignments to the symbols in $\CAPPHI$ and the universe.
+We can ignore the other assignments.
+The following theorem demonstrates this.
+This is the \GQL{}1 version of theorem \ref{thm:localityoftruth} in chapter \ref{sententiallogic}.
 
 \begin{THEOREM}{\LnpTC{Two Models}} 
 	Let $\CAPPHI$ be any \GQL{}1 sentence.  If there are two models for $\CAPPHI$, $\As{}{1}$ and $\As{}{2}$, that have the same domain, $\integer{U}$, and make the same assignments for all the sentence letters, individual constants, and 1-place predicates contained in $\CAPPHI$, then $\CAPPHI$ is true on $\As{}{1}$ \Iff $\CAPPHI$ is true on $\As{}{2}$.
 \end{THEOREM}	
 \begin{PROOF}
 	\begin{description}
-		\item[Base Step:]  Let $\CAPTHETA$ be a sentence of order 1.  $\CAPTHETA$ must be either (i) a sentence letter, or (ii), a 1-place predicate followed by a constant.
+		\item[Base Step:]  Let $\CAPTHETA$ be a sentence of order 1.  $\CAPTHETA$ is either (i) a sentence letter, or (ii), a 1-place predicate followed by a constant.
 		
-		(i) If $\CAPTHETA$ is a sentence letter, and, as we assumed, $\As{}{1}$ and $\As{}{2}$ make the same assignments for all the sentence letters, then $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
+		(i) $\CAPTHETA$ is a sentence letter.
+		We assume that $\As{}{1}$ and $\As{}{2}$ make the same assignments to all the sentence letters.
+		Then $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
 		
-		(ii) If $\CAPTHETA$ is a 1-place predicate, $\PP$, followed by a constant, $\variable{t}$, and, as we assumed, $\As{}{1}$ and $\As{}{2}$ make the same assignments for all the constants and 1-place predicates, then $\As{}{1}(\PP)=\As{}{2}(\PP)$ and $\As{}{1}(\variable{t})=\As{}{2}(\variable{t})$.  It follows that $\As{}{1}(\variable{t})\in\As{}{1}(\PP)$ \Iff $\As{}{2}(\variable{t})\in\As{}{2}(\PP)$.  Thus, $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
+		(ii) $\CAPTHETA=\PP\variable{t}$, where $\PP$ is a 1-place predicate and $\variable{t}$ is a constant.
+		We assume that $\As{}{1}$ and $\As{}{2}$ make the same assignments to all the constants and 1-place predicates.
+		Then $\As{}{1}(\PP)=\As{}{2}(\PP)$ and $\As{}{1}(\variable{t})=\As{}{2}(\variable{t})$.
+		It follows that $\As{}{1}(\variable{t})\in\As{}{1}(\PP)$ \Iff $\As{}{2}(\variable{t})\in\As{}{2}(\PP)$.
+		Thus, $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
 		
-		Either way, $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
-		
-		\item[Inheritance Step:] 
+		\item[Inheritance Step:]  \hfill{}
 		\begin{description}
-			\item[Recursive Assumption:] Assume that for each \GQL{}1 sentence $\CAPTHETA$ of order $n$, $\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.  Let $\CAPPSI$ be of order $n+1$.
+			\item[Recursive Assumption:] Assume that $\CAPTHETA$ is a \GQL{}1 sentence of order $n$.
+			Assume also that $\As{}{1}$ and $\As{}{2}$ are any two models for $\CAPTHETA$ that make the same assignments to all the sentence letters, individual constants, and 1-place predicates contained in $\CAPTHETA$.
+			Then let $\CAPTHETA$ be true on $\As{}{1}$ \Iff $\CAPTHETA$ is true on $\As{}{2}$.
 			
-			\item[Negation:]  The reasoning here is exactly the same reasoning in the corresponding clause of theorem \ref{thm:localityoftruth} in chapter \ref{sententiallogic}.
+			\item[Negation, Conditional, Biconditional, Disjunction, Conjunction:]  The reasoning for these is the same as in the corresponding clauses of theorem \ref{thm:localityoftruth} in chapter \ref{sententiallogic}.
 			
-			\item[Conditional, Biconditional, Disjunction, Conjunction:] Same as above.
-			
-			\item[Universal Quantification:]  Say that the sentence $\CAPPSI$ is of the form $\universal{\ALPHA}\CAPTHETA$.  Because $\universal{\ALPHA}\CAPTHETA$ is a sentence, it has no unbound variables.  So, dropping the quantifier, $\CAPTHETA$ has a lone free variable: $\ALPHA$.
-			
-			$\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA\variable{t}/\ALPHA$ is true on every $\variable{t}$-variant of $\As{}{1}$, where $\variable{t}$ is the first constant not in $\CAPTHETA$ (definition of truth, $\forall$).  The same holds for $\As{}{2}$.  
-			
-			Recall that $\As{}{1}$ and $\As{}{2}$ have the same domain, $\integer{U}$.  It follows that for each $\variable{t}$-variant of $\As{}{1}$, there is a corresponding $\variable{t}$-variant of $\As{}{2}$ that assigns the same object from $\integer{U}$ to $\variable{t}$; i.e., for each $\As{\constant{t}}{1}$ there is a $\As{\constant{t}}{2}$ such that $\As{\constant{t}}{1}(\variable{t})=\As{\constant{t}}{2}(\variable{t})$.  By Recursive Assumption (RA), $\universal{\ALPHA}\CAPTHETA$ is of order $n+1$, so $\CAPTHETA\variable{t}/\ALPHA$ is of order $n$.  Also by RA, for each $\variable{t}$-variant of $\As{}{1}$ and its corresponding $\variable{t}$-variant of $\As{}{2}$, $\CAPTHETA\variable{t}/\ALPHA$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
-			
-			Either (i) $\CAPTHETA\variable{t}/\ALPHA$ is true on every $\variable{t}$-variant of $\As{}{1}$ or (ii) it isn't.  
-			
-			(i)  Assume $\CAPTHETA\variable{t}/\ALPHA$ \emph{is} true on every $\variable{t}$-variant of $\As{}{1}$.  It follows that for each $\variable{t}$-variant of $\As{}{1}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ true, the corresponding $\variable{t}$-variant of $\As{}{2}$ also makes $\CAPTHETA\variable{t}/\ALPHA$ true.  Thus, $\CAPTHETA\variable{t}/\ALPHA$ is true on every $\variable{t}$-variant of $\As{}{2}$.  Therefore $\universal{\ALPHA}\CAPTHETA$ is true on both $\As{}{1}$ and $\As{}{2}$.
-			
-			(ii)  Assume $\CAPTHETA\variable{t}/\ALPHA$ \emph{isn't} true on every $\variable{t}$-variant of $\As{}{1}$.  There must be a $\variable{t}$-variant of $\As{}{1}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ false.  Call it $\As{}{1}\'$.  So, there is some element in $\integer{U}$ such that when it is assigned to $\variable{t}$ by $\As{}{1}\'$, $\CAPTHETA\variable{t}/\ALPHA$ comes out false.  It follows that there is a corresponding $\variable{t}$-variant of $\As{}{2}$ that makes the same assignment to $\variable{t}$, call it $\As{}{2}\'$.  Therefore, $\CAPTHETA\variable{t}/\ALPHA$ is false on $\As{}{2}\'$, and so $\universal{\ALPHA}\CAPTHETA$ is false on both $\As{}{1}$ and $\As{}{2}$.
-			
-			From (i) and (ii), we may conclude that $\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$ \Iff $\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{2}$.			
-			
-			\item[Existential Quantification:] Say that $\CAPPSI$ is of the form $\existential{\ALPHA}\CAPTHETA$.  As in the last clause, $\existential{\ALPHA}\CAPTHETA$ is a sentence, so it has no unbound variables.  $\CAPTHETA$ has one free variable, $\ALPHA$.
-			
-			$\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$ \Iff $\CAPTHETA\variable{t}/\ALPHA$ is true on at least one $\variable{t}$-variant of $\As{}{1}$, where $\variable{t}$ is the first constant not in $\CAPTHETA$ (definition of truth, $\exists$).  The same holds for $\As{}{2}$.
-			
-			As before, $\As{}{1}$ and $\As{}{2}$ have the same domain.  For each $\variable{t}$-variant of $\As{}{1}$, there is a corresponding $\variable{t}$-variant of $\As{}{2}$ that assigns the same object from $\integer{U}$ to $\variable{t}$. That is, for each $\As{\constant{t}}{1}$ there is a $\As{\constant{t}}{2}$ such that $\As{\constant{t}}{1}(\variable{t})=\As{\constant{t}}{2}(\variable{t})$.  By Recursive Assumption (RA), $\existential{\ALPHA}\CAPTHETA$ is of order $n+1$, so $\CAPTHETA\variable{t}/\ALPHA$ is of order $n$.  Also by RA, for each $\variable{t}$-variant of $\As{}{1}$ and its corresponding $\variable{t}$-variant of $\As{}{2}$, $\CAPTHETA\variable{t}/\ALPHA$ is true on $\As{}{1}$ \Iff it's true on $\As{}{2}$.
-			
-			Either (i) $\CAPTHETA\variable{t}/\ALPHA$ is true on some $\variable{t}$-variant of $\As{}{1}$ or (ii) it isn't.  
-			
-			(i)  Assume $\CAPTHETA\variable{t}/\ALPHA$ is true on some $\variable{t}$-variant of $\As{}{1}$.  Call this $\variable{t}$-variant $\As{}{1}\'$.  There is some element in $\integer{U}$ such that when it is assigned to $\variable{t}$ by $\As{}{1}\'$, $\CAPTHETA\variable{t}/\ALPHA$ comes out true.  There is a corresponding $\variable{t}$-variant of $\As{}{2}$ that makes the same assignment to $\variable{t}$; let's call it $\As{}{2}\'$.  So, $\CAPTHETA\variable{t}/\ALPHA$ is true on $\As{}{2}\'$.  Therefore $\existential{\ALPHA}\CAPTHETA$ is true on both $\As{}{1}$ and $\As{}{2}$.
-			
-			(ii)  Assume $\CAPTHETA\variable{t}/\ALPHA$ is false on \emph{every} $\variable{t}$-variant of $\As{}{1}$.  For each $\variable{t}$-variant of $\As{}{1}$, there is a corresponding $\variable{t}$-variant of $\As{}{2}$ that makes the same assignment from the domain to $\variable{t}$.  Thus, for each $\variable{t}$-variant of $\As{}{1}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ false, the corresponding $\variable{t}$-variant of $\As{}{2}$ also makes $\CAPTHETA\variable{t}/\ALPHA$ false.  Therefore, $\CAPTHETA\variable{t}/\ALPHA$ is false on every $\variable{t}$-variant of $\As{}{2}$, and $\existential{\ALPHA}\CAPTHETA$ is false on both $\As{}{1}$ and $\As{}{2}$.
-			
-			By (i) and (ii), $\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$ \Iff $\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{2}$.
+			\item[Quantifier Preface:] Let $\universal{\ALPHA}\CAPTHETA$ and $\existential{\ALPHA}\CAPTHETA$ be sentences of order $n+1$.
+			By RA, $\model{}{1}$ and $\model{}{2}$ have the same universe, $\integer{U}$.
+			It follows that for each element $u\in\integer{U}$, there is a $\variable{t}$-variant of $\model{}{1}$, $\model{\variable{t}}{1}$, and a $\variable{t}$-variant of $\model{}{2}$, $\model{\variable{t}}{2}$, such that $\model{\variable{t}}{1}(t)=\model{\variable{t}}{2}(t)=u$.
+			Since $\As{}{1}$ is a model for $\universal{\ALPHA}\CAPTHETA$ and $\existential{\ALPHA}\CAPTHETA$, each $\model{\variable{t}}{1}$ is a model for $\CAPTHETA\variable{t}/\ALPHA$.
+			By similar reasoning each $\model{\variable{t}}{2}$ is a model for $\CAPTHETA\variable{t}/\ALPHA$.
+			$\CAPTHETA\variable{t}/\ALPHA$ is of order $n$.
+			So by RA, for each pair of $\variable{t}$-variants such that $\model{\variable{t}}{1}(t)=\model{\variable{t}}{2}(t)$, $\CAPTHETA\variable{t}/\ALPHA$ is true on $\model{\variable{t}}{1}$ \Iff it's true on $\model{\variable{t}}{2}$.
+
+			\begin{description}
+
+				\item[Universal Quantification:] ($\Rightarrow$) Let $\universal{\ALPHA}\CAPTHETA$ be true on $\As{}{1}$.
+				Then, by the definition of truth of $\forall$, all $\variable{t}$-variants of $\model{}{1}$ make $\CAPTHETA\variable{t}/\ALPHA$ true.
+				Since by the quantifier preface there is a corresponding $\variable{t}$-variant of $\model{}{2}$ for each $\variable{t}$-variant of $\model{}{1}$, it follows that all $\variable{t}$-variants of $\model{}{2}$ make $\CAPTHETA\variable{t}/\ALPHA$ true.
+				So, by the definition of truth for $\forall$, $\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{2}$.
+
+				($\Leftarrow$) Let $\universal{\ALPHA}\CAPTHETA$ be true on $\As{}{2}$.
+				Then, by the definition of truth of $\forall$, all $\variable{t}$-variants of $\model{}{2}$ make $\CAPTHETA\variable{t}/\ALPHA$ true.
+				Since by the quantifier preface there is a corresponding $\variable{t}$-variant of $\model{}{1}$ for each $\variable{t}$-variant of $\model{}{2}$, it follows that all $\variable{t}$-variants of $\model{}{1}$ make $\CAPTHETA\variable{t}/\ALPHA$ true.
+				So, by the definition of truth for $\forall$, $\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$.
+
+				Thus $\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$ \Iff $\universal{\ALPHA}\CAPTHETA$ is true on $\As{}{2}$.
+
+				\item[Existential Quantification:] ($\Rightarrow$) Let $\existential{\ALPHA}\CAPTHETA$ be true on $\As{}{1}$.
+				Then, by the definition of truth of $\exists$, there is some $\variable{t}$-variant of $\model{}{1}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ true.
+				Since by the quantifier preface there is a corresponding $\variable{t}$-variant of $\model{}{2}$ for each $\variable{t}$-variant of $\model{}{1}$, it follows that there is some $\variable{t}$-variant of $\model{}{2}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ true.
+				So, by the definition of truth for $\exists$, $\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{2}$.
+
+				($\Leftarrow$) Let $\existential{\ALPHA}\CAPTHETA$ be true on $\As{}{2}$.
+				Then, by the definition of truth of $\exists$, there is some $\variable{t}$-variant of $\model{}{2}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ true.
+				Since by the quantifier preface there is a corresponding $\variable{t}$-variant of $\model{}{1}$ for each $\variable{t}$-variant of $\model{}{2}$, it follows that there is some $\variable{t}$-variant of $\model{}{1}$ that makes $\CAPTHETA\variable{t}/\ALPHA$ true.
+				So, by the definition of truth for $\exists$, $\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$.
+
+				Thus $\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{1}$ \Iff $\existential{\ALPHA}\CAPTHETA$ is true on $\As{}{2}$.
+			\end{description}
 			
 		\end{description}
 		\item[Closure Step:] There is no other way to form a \GQL{}1 sentence $\CAPPHI$, so the above clauses are sufficient to show that if $\As{}{1}$ and $\As{}{2}$ have the same domain and make the same assignments, then $\CAPPHI$ is true on $\As{}{1}$ \Iff $\CAPPHI$ is true on $\As{}{2}$.
 	\end{description}
 \end{PROOF}
 
-
-
-
-
 \subsection{Logical Truth: QT, QF, \& QC}\label{QT QT QI}
-Just as we have a rigorous notion of \emph{logical truth}, \emph{falsity}, and \emph{contingency} for \GSL{} (see section \ref{TFT TFF TFI}), we have analogous notions for \GQL{}1.
+Just as we have the notions of \emph{logical truth}, \emph{falsity}, and \emph{contingency} for \GSL{} (see section \ref{TFT TFF TFI}), we have analogous notions for \GQL{}1.
 \begin{majorILnc}{\LnpDC{QT}}
 A sentence $\CAPPHI$ of \GQL{} is \nidf{quantificationally true}\index{truth!quantificational|textbf} (\CAPS{qt})\index{QT|see{truth, quantificational}} iff it is true on every model for $\CAPPHI$.
 \end{majorILnc} 
@@ -653,50 +789,74 @@ A sentence $\CAPPHI$ of \GQL{} is \nidf{quantificationally false}\index{falsehoo
 A sentence $\CAPPHI$ of \GQL{} is \nidf{quantificationally contingent}\index{indeterminate!quantificational|textbf} (\CAPS{qc})\index{QI|see{indeterminate, quantificational}} iff there's at least one model $\As{}{1}$ on which it's true and at least one model $\As{}{2}$ on which it's false.
 \end{majorILnc} 
 \begin{majorILnc}{\LnpEC{GQL1LogicallTruthExampleA}}
-(i) The sentence $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qt}, but (ii) $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qf}.
+	Prove that $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qt}.
 \end{majorILnc}
 \begin{PROOF}
-(i) $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on $\IntA$ \Iff every $\constant{a}$-variant of $\IntA$, $\As{\constant{a}}{}$, makes $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ true.
-
-One of two things must be true for each $\As{\constant{a}}{}$.  Either what $\As{\constant{a}}{}$ assigns to $\constant{a}$ is in the set it assigns to $\BB$ or it isn't.  I.e., either $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\BB)$ or  $\As{\constant{a}}{}(\constant{a})\notin\As{\constant{a}}{}(\BB)$.  If it is, then $\Bp{\constant{a}}$ is true on $\As{\constant{a}}{}$, and so is $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.  If it isn't, then $\negation{\Bp{\constant{a}}}$ is true on $\As{\constant{a}}{}$, and so is $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.  So, $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ is true on every $\As{\constant{a}}{}$.
-
-Therefore, $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on $\IntA$.  Because we assumed nothing particular about $\IntA$, it makes no difference for our argument what assignments it makes.  Thus what we concluded of $\IntA$---that $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true---holds for all models.  Thus, $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qt}.
-
-(ii) $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on $\IntA$ \Iff every $\constant{a}$-variant of $\IntA$, $\As{\constant{a}}{}$, makes $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ true.
-
-As before, either $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\BB)$ or  $\As{\constant{a}}{}(\constant{a})\notin\As{\constant{a}}{}(\BB)$.  If the former, then $\negation{\Bp{\constant{a}}}$ is false on $\As{\constant{a}}{}$, and so is $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.  If the latter, then $\Bp{\constant{a}}$ is false on $\As{\constant{a}}{}$, and so is $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.  So, $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ is false on every $\As{\constant{a}}{}$.
-
-Thus, $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is false on $\IntA$.  We assumed nothing particular about $\IntA$, so its assignments don't matter for our argument.  What we concluded of $\IntA$---that $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is false---holds for all models.  Therefore, $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qf}.
+	$\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on $\IntA$ \Iff every $\constant{a}$-variant of $\IntA$, $\As{\constant{a}}{}$, makes $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ true.
+	One of two things must be true of each $\As{\constant{a}}{}$.
+	Either $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\BB)$ or $\As{\constant{a}}{}(\constant{a})\notin\As{\constant{a}}{}(\BB)$.
+	If $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\BB)$, then $\Bp{\constant{a}}$ is true on $\As{\constant{a}}{}$, and so is $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.
+	If $\As{\constant{a}}{}(\constant{a})\notin\As{\constant{a}}{}(\BB)$, then $\negation{\Bp{\constant{a}}}$ is true on $\As{\constant{a}}{}$, and so is $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.
+	So, $\disjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ is true on every $\As{\constant{a}}{}$.
+	It follows that $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on $\IntA$.
+	Nothing particular was assumed about $\IntA$, so $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on all models.
+	Therefore, $\universal{\variable{x}}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qt}.
 \end{PROOF}
-In the last example, we gave sustained arguments to prove that sentences were either \CAPS{qt} or \CAPS{qf}.  To show that a \GQL{}1 sentence is \CAPS{qc}, we use a different strategy.  A sentence is \CAPS{qc} \Iff it's true on one model and false on another (definition of \CAPS{qc}).  That means all we have to do is provide two appropriate models to demonstrate that a sentence is \CAPS{qc}.
 
-For example, we determined earlier that $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on the model \emph{Pos Int}.  If we can find a model in which it is false, we will have shown it is \CAPS{qc}.  We can modify \emph{Pos Int} to make a new falsifying model, \emph{Pos Int$^*$}.  Let \emph{Pos Int$^*$} assign the entire domain to $\DD$ so that it makes $\universal{\variable{x}}\Dp{\variable{x}}$ true.  We can keep the assignment \emph{Pos Int} makes to $\GG$, the multiples of 7.  So, on \emph{Pos Int$^*$}, $\universal{\variable{x}}\Gp{\variable{x}}$ is false.  Thus, $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is false on \emph{Pos Int$^*$}.
+\begin{majorILnc}{\LnpEC{GQL1LogicallTruthExampleA2}}
+	Prove that $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qf}.
+\end{majorILnc}
+\begin{PROOF}
+	$\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is true on $\IntA$ \Iff every $\constant{a}$-variant of $\IntA$, $\As{\constant{a}}{}$, makes $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$ true.
+	There is some $\constant{a}$-variant $\As{\constant{a}}{}$ such that either $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\BB)$ or $\As{\constant{a}}{}(\constant{a})\notin\As{\constant{a}}{}(\BB)$.
+	If $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\BB)$ then $\negation{\Bp{\constant{a}}}$ is false on $\As{\constant{a}}{}$, and so is $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.
+	Otherwise $\As{\constant{a}}{}(\constant{a})\notin\As{\constant{a}}{}(\BB)$, in which case $\Bp{\constant{a}}$ is false on $\As{\constant{a}}{}$, and so is $\conjunction{\Bp{\constant{a}}}{\negation{\Bp{\constant{a}}}}$.
+	In both cases it follows that $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is false on $\IntA$.
+	Nothing particular was assumed about $\IntA$, so $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is false on all models.
+	Therefore, $\universal{\variable{x}}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is \CAPS{qf}.
+\end{PROOF}
 
-The definition of model only requires that predicates be assigned a subset of the domain; the assigned subset can be the entire domain, as in this example, or the empty set.  You will find that using the empty set or the entire domain as assignments is often helpful in  constructing models for a desired outcome.
+\noindent{}In the last two examples we give proofs that the sentences in question are either \CAPS{qt} or \CAPS{qf}.
+To show that a \GQL{}1 sentence $\CAPPHI$ is \CAPS{qc}, we use a different strategy: provide one model on which $\CAPPHI$ is true and another on which $\CAPPHI$ is false.
+
+For example, we determined earlier that $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is true on the model \emph{Pos Int}.
+To show that it's \CAPS{qc} we must provide another model in which it's false.
+We can modify \emph{Pos Int} to make a new model, \emph{Pos Int$^*$}.  Let \emph{Pos Int$^*$} assign the entire domain to $\DD$ so that it makes $\universal{\variable{x}}\Dp{\variable{x}}$ true.  We can keep the assignment \emph{Pos Int} makes to $\GG$, the multiples of 7.  So, on \emph{Pos Int$^*$}, $\universal{\variable{x}}\Gp{\variable{x}}$ is false.  Thus, $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$ is false on \emph{Pos Int$^*$}.
+
+The definition of model only requires that predicates be assigned a subset of the domain.
+The assigned subset can be the entire domain or the empty set.
+You will find that using the empty set or the entire domain as assignments is often helpful in constructing models for a desired outcome.
 
 \begin{majorILnc}{\LnpEC{GQL1LogicallTruthExampleB}}
 	The sentence $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ is \CAPS{qc}.
 \end{majorILnc}
 \begin{PROOF}
-Let $\IntA_1$ be a model with a single element universe $\integer{U}=\{1\}$ such that $\IntA_1(\BB)=\{1\}$. 
-This makes $\universal{\variable{x}}\Bp{\variable{x}}$ true, which in turn makes $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ true in $\IntA_1$.  Everything in the domain--keeping in mind that \mention{everything} is just the object \mention{1}---is also in the set assigned to $\BB$.  So, when we look at the part of the sentence $\universal{\variable{x}}\Bp{\variable{x}}$ governed by the quantifier and replace the variable with a constant (i.e., $\Bp{\constant{a}}$), then no matter what the model assigns to the constant, the result is true.
-
-Let $\IntA_2$ be a model with a two element universe $\integer{U}=\{1,2\}$ such that $\IntA_2(\BB)=\{1\}$.
-Then $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ is false in $\IntA_2$, because both disjuncts are false.  $\universal{\variable{x}}\Bp{\variable{x}}$ is false on $\IntA_2$ because not everything in the domain is in the set assigned to $\BB$; and $\universal{\variable{x}}\negation{\Bp{\variable{x}}}$ is false on $\IntA_2$ because the model doesn't make $\BB$ the empty set.
-
-Thus, the sentence $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ is \CAPS{qc}.
+Let $\IntA_1$ be a model such that the universe $\integer{U}=\{1\}$ and $\IntA_1(\BB)=\{1\}$. 
+$\IntA_1$ makes $\universal{\variable{x}}\Bp{\variable{x}}$ true, which in turn makes $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ true.
+\begin{commentary}
+	When we remove the quantifier from $\universal{\variable{x}}\Bp{\variable{x}}$ and replace the variable with a constant, the result is $\Bp{\constant{a}}$.
+	Everything in the universe is also in the set assigned to $\BB$.
+	So, no matter what an $\constant{a}$-variant assigns to the constant, the result is true.
+\end{commentary}
+\noindent{}Let $\IntA_2$ be a model such that the universe $\integer{U}=\{1,2\}$ and $\IntA_2(\BB)=\{1\}$.
+$\universal{\variable{x}}\Bp{\variable{x}}$ is false on $\IntA_2$ because not everything in the domain is in the set assigned to $\BB$.
+And $\universal{\variable{x}}\negation{\Bp{\variable{x}}}$ is false on $\IntA_2$ because the model doesn't make $\BB$ the empty set.
+Then $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ is false in $\IntA_2$, because both disjuncts are false.  
+Therefore, the sentence $\disjunction{\universal{\variable{x}}\Bp{\variable{x}}}{\universal{\variable{x}}\negation{\Bp{\variable{x}}}}$ is \CAPS{qc}.
 \end{PROOF}
+
 \begin{majorILnc}{\LnpEC{GQL1LogicallTruthExampleC}}
-The sentence $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ is \CAPS{qt}.
+Prove that $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ is \CAPS{qt}.
 \end{majorILnc}
 \begin{PROOF}
-Assume that some model $\IntA$ makes $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ false. $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ is false on $\IntA$ \Iff the \CAPS{lhs} is true and the \CAPS{rhs} is false. Thus, $\universal{\variable{x}}\Dp{\variable{x}}$ is true on $\IntA$ and $\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}$ is false on $\IntA$. 
-
-From the truth of $\universal{\variable{x}}\Dp{\variable{x}}$, it follows that every $\constant{a}$-variant of $\IntA$ makes $\Dp{\constant{a}}$ true.
-
-Because $\IntA$ makes $\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}$ false, it follows that $\existential{\variable{x}}\negation{\Dp{\variable{x}}}$ is true.  Given that $\IntA$ makes $\existential{\variable{x}}\negation{\Dp{\variable{x}}}$ true, there must be some $\constant{a}$-variant, $\As{\constant{a}}{}$, that makes $\negation{\Dp{\constant{a}}}$ true.  On $\As{\constant{a}}{}$, $\Dp{\constant{a}}$ must be false.
-
-But we already concluded that every $\constant{a}$-variant of $\IntA$ makes $\Dp{\constant{a}}$ true!  It's contradictory for $\As{\constant{a}}{}$ to make $\Dp{\constant{a}}$ both true and false.  Our original assumption, that some model makes $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ false, must be wrong.  Therefore, $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ is true on all models, and is thus \CAPS{qt}.
+Assume for indirect proof there is some model $\IntA$ that makes $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ false.
+Thus, $\universal{\variable{x}}\Dp{\variable{x}}$ is true on $\IntA$ and $\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}$ is false on $\IntA$. 
+From the truth of $\universal{\variable{x}}\Dp{\variable{x}}$ it follows that every $\constant{a}$-variant of $\IntA$ makes $\Dp{\constant{a}}$ true.
+Because $\IntA$ makes $\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}$ false, it follows that $\existential{\variable{x}}\negation{\Dp{\variable{x}}}$ is true.  Given that $\IntA$ makes $\existential{\variable{x}}\negation{\Dp{\variable{x}}}$ true, there must be some $\constant{a}$-variant, $\As{\constant{a}}{}$, that makes $\negation{\Dp{\constant{a}}}$ true.
+On $\As{\constant{a}}{}$, $\Dp{\constant{a}}$ must be false.
+But it was already shown that every $\constant{a}$-variant of $\IntA$ makes $\Dp{\constant{a}}$ true.
+Thus there is no model such that $\horseshoe{\universal{\variable{x}}\Dp{\variable{x}}}{\negation{\existential{\variable{x}}\negation{\Dp{\variable{x}}}}}$ is false.
+It is therefore true on all models, and so is \CAPS{qt}.
 \end{PROOF}
 
 
@@ -704,70 +864,95 @@ But we already concluded that every $\constant{a}$-variant of $\IntA$ makes $\Dp
 \section{Entailment and other Relations}\label{GQL1 Entailment and other Relations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We defined the following notions in \GSL{}: entailment, equivalence, contradictory, contrary, subcontrary, and logical independence. 
-Now we extend these notions to \GQL{}1 sentences. 
-While the definitions for \GSL{} refer to models of \GSL{} sentences, the corresponding definitions for \GQL{}1 refer to models of \GQL{}1 sentences. 
-To remind ourselves of this difference, we will talk of \emph{truth functional} entailment, \emph{truth functional} equivalence, etc., for \GSL{} sentences, but talk of \emph{quantificational} entailment, \emph{quantificational} equivalence, etc., for \GQL{}1. 
-Nevertheless, we don't want to overstate the differences: the concepts underlying the definitions are exactly the same whether we're working in \GSL{} or \GQL{}1.
+We defined the following terms in \GSL{}: entailment, equivalence, contradictory, contrary, subcontrary, and logical independence. 
+Now we define these for \GQL{}1 sentences. 
+While the \GSL{} definitions refer to models of \GSL{} sentences, their \GQL{}1 counterparts refer to models of \GQL{}1 sentences. 
+To mark this difference, we talk of \emph{truth functional} entailment, \emph{truth functional} equivalence, etc., for \GSL{} sentences, and \emph{quantificational} entailment, \emph{quantificational} equivalence, etc., for \GQL{}1. 
+We don't want to overstate the difference; the concepts underlying the definitions are essentially the same.
 
 \begin{majorILnc}{\LnpDC{GQL1 Definition of Entailment}}
- A set $\Delta$ of \GQL{}1 sentences, possibly empty or infinite, quantificationally {entails} another \GQL{}1 sentence $\CAPTHETA$ \Iff every model for $\Delta$ and $\CAPTHETA$ either makes at least one sentence in $\Delta$ $\False$ or makes $\CAPTHETA$ $\True$; i.e. \Iff every model for $\Delta$ and $\CAPTHETA$ which makes all sentences in $\Delta$ $\True$ also makes $\CAPTHETA$ $\True$.
+ A set $\Delta$ of \GQL{}1 sentences \df{quantificationally entails} a \GQL{}1 sentence $\CAPTHETA$ \Iff every model for $\Delta$ and $\CAPTHETA$ either makes at least one sentence in $\Delta$ $\False$ or makes $\CAPTHETA$ $\True$.
 \end{majorILnc}
 
-\noindent{}As we did with \GSL{} (section \ref{Entailment}), we'll give two narrower consequences of this definition. 
+\noindent{}Put another way, $\Delta$ entails $\CAPTHETA$ \Iff every model that makes all sentences in $\Delta$ $\True$ also makes $\CAPTHETA$ $\True$.
+As we did with \GSL{} (section \ref{Entailment}), we give two narrower consequences of this definition. 
 
 \begin{cenumerate}
-\item A finite set of \GQL{}1 sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ quantificationally {entails} another \GQL{}1 sentence $\CAPTHETA$ \Iff every model for $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$, and $\CAPTHETA$ either makes at least one of $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ $\False$ or makes $\CAPTHETA$ $\True$; i.e. \Iff every model for $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$, and $\CAPTHETA$ that makes all of $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ $\True$ also makes $\CAPTHETA$ $\True$.
-\item A sentence $\CAPPHI$ of \GQL{} \df{quantificationally entails} another sentence $\CAPTHETA$ of \GQL{}1 \Iff every model for $\CAPPHI$ and $\CAPTHETA$ either makes $\CAPPHI$ $\False$ or makes $\CAPTHETA$ $\True$; i.e. \Iff every model for $\CAPPHI$ and $\CAPTHETA$ that makes $\CAPPHI$ $\True$ also makes $\CAPTHETA$ $\True$.
+\item A finite set of \GQL{}1 sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ quantificationally entails another \GQL{}1 sentence $\CAPTHETA$ \Iff every model for $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$, and $\CAPTHETA$ either makes at least one of $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ $\False$ or makes $\CAPTHETA$ $\True$.
+\item A sentence $\CAPPHI$ of \GQL{} quantificationally entails another sentence $\CAPTHETA$ of \GQL{}1 \Iff every model for $\CAPPHI$ and $\CAPTHETA$ either makes $\CAPPHI$ $\False$ or makes $\CAPTHETA$ $\True$.
 \end{cenumerate}
 
-\noindent{}Also as before we'll use the double turnstile to represent the entailment relation. 
-Thus if $\CAPPHI$ quantificationally entails $\CAPTHETA$, we'll write \mention{$\CAPPHI\sdtstile{}{}\CAPTHETA$}. 
-If the finite set of sentences  $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ quantificationally {entails} $\CAPTHETA$, we'll write \mention{$\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPTHETA$}. 
-And, if a set $\Delta$ of \GQL{} sentences quantificationally {entails} $\CAPTHETA$ we'll write \mention{$\Delta\sdtstile{}{}\CAPTHETA$}.
+\noindent{}We continue to use the double turnstile to represent the entailment relation. 
+So if $\CAPPHI$ entails $\CAPTHETA$, we write \mention{$\CAPPHI\sdtstile{}{}\CAPTHETA$}. 
+If the sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$ entail $\CAPTHETA$, we write \mention{$\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPTHETA$}.
+And if a set $\Delta$ of sentences entails $\CAPTHETA$ we write \mention{$\Delta\sdtstile{}{}\CAPTHETA$}.
 
 \begin{majorILnc}{\LnpEC{GQL Entailment Example}}
 	Show whether the following holds: $\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\constant{a}}$.
 \end{majorILnc}
 \begin{PROOF}
-	Assume a model for $\universal{\variable{x}}\Gp{\variable{x}}$ and $\Gp{\constant{a}}$, $\IntA$, such that $\universal{\variable{x}}\Gp{\variable{x}}$ is true.
-	By the definition of truth for $\forall$, it follows that $\Gp{\constant{a}}$ is true on all $\constant{a}$-variants of $\IntA$.  The model $\IntA$ is an $\constant{a}$-variant of itself,\footnote{For any term $\constant{t}$ and for any model $\IntA$, $\IntA$ is a $\constant{t}$-variant of itself!} so $\Gp{\constant{a}}$ is true on $\IntA$.
-	
-	Our only assumption is that the model $\IntA$ makes the \CAPS{lhs} of the double turnstile true.  It follows that $\Gp{\constant{a}}$ is true, so the entailment holds.
+	Assume a model $\IntA$ such that $\universal{\variable{x}}\Gp{\variable{x}}$ is true.
+	By the definition of truth for $\forall$, it follows that $\Gp{\constant{a}}$ is true on all $\constant{a}$-variants of $\IntA$.
+	The model $\IntA$ is an $\constant{a}$-variant of itself, so $\Gp{\constant{a}}$ is true on $\IntA$.
+	Nothing was assumed about the assignments $\IntA$ makes, so for each model on which the \CAPS{lhs} is true, the \CAPS{rhs} is also true.
+	Therefore $\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\constant{a}}$.
 \end{PROOF}
 \begin{majorILnc}{\LnpEC{GQL Entailment Example 2}}
-	$\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\constant{b}}$
+	Show that $\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\constant{b}}$.
+	\begin{commentary}
+		This entailment is slightly harder to prove than the last.
+		It's a quirk of our definition of truth that makes the last so easy to establish.
+		By changing the constant in the sentence on the \CAPS{rhs} from \mention{$\constant{a}$} to \mention{$\constant{b}$}, we add a few steps to our proof.
+	\end{commentary}
 \end{majorILnc}
 \begin{PROOF}
-	This entailment is slightly harder to prove than the last.  It's a quirk of our definition of truth that makes the last so easy to establish.  By changing the constant in the sentence on the \CAPS{rhs} from \mention{$\constant{a}$} to \mention{$\constant{b}$}, we add a few steps to our proof.
-	
 	Assume a model $\IntA$ such that $\universal{\variable{x}}\Gp{\variable{x}}$ is true.
-	So $\Gp{\constant{a}}$ is true on all $\constant{a}$-variants of $\IntA$.  
-	
-	There is some $\constant{a}$-variant, $\As{\constant{a}}{}$, that assigns to $\constant{a}$ the exact same object from $\integer{U}$ that $\IntA$ assigns to $\constant{b}$.  (All $\constant{a}$-variants of $\IntA$ have the same domain as $\IntA$ itself.)  So, we know that $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\GG)$.  $\As{\constant{a}}{}$ and $\IntA$ assign the same set to $\GG$, so $\As{\constant{a}}{}(\constant{a})\in\As{}{}(\GG)$.  And because $\As{\constant{a}}{}(\constant{a})$ is the same object as $\IntA(\constant{b})$, it follows that $\As{}{}(\constant{b})\in\As{}{}(\GG)$.  And so $\Gp{\constant{b}}$ is true on $\IntA$.  The entailment holds.
+	Then $\Gp{\constant{a}}$ is true on all $\constant{a}$-variants of $\IntA$.
+	All $\constant{a}$-variants of $\IntA$ have the same universe as $\IntA$.
+	So there is some $\constant{a}$-variant, $\As{\constant{a}}{}$, such that $\As{\constant{a}}{}(a)=\IntA(\constant{b})$.
+	It follows that $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\GG)$.
+	$\As{\constant{a}}{}$ and $\IntA$ assign the same set to $\GG$, so $\As{\constant{a}}{}(\constant{a})\in\As{}{}(\GG)$.
+	And because $\As{\constant{a}}{}(\constant{a})$ is the same element as $\IntA(\constant{b})$, it follows that $\As{}{}(\constant{b})\in\As{}{}(\GG)$.
+	And so $\Gp{\constant{b}}$ is true on $\IntA$.
+	Nothing was assumed about the assignments $\IntA$ makes, so for each model on which the \CAPS{lhs} is true, the \CAPS{rhs} is also true.
+	Therefore $\universal{\variable{x}}\Gp{\variable{x}}\sdtstile{}{}\Gp{\constant{b}}$.
 \end{PROOF}
 
 \begin{majorILnc}{\LnpEC{GQL1Entailment}}
-	$\universal{\variable{x}}\parhorseshoe{\Cp{\variable{x}}}{\Dp{\variable{x}}}, \Cp{\constant{o}}\sdtstile{}{}\Dp{\constant{o}}$
+	Show whether $\universal{\variable{x}}\parhorseshoe{\Cp{\variable{x}}}{\Dp{\variable{x}}}, \Cp{\constant{o}}\sdtstile{}{}\Dp{\constant{o}}$.
 \end{majorILnc}
 \begin{PROOF}
-	The entailment holds.  Assume some model $\IntA$ such that $\universal{\variable{x}}\parhorseshoe{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ and $\Cp{\constant{o}}$ are true.  By the definition of truth for $\forall$, it follows that $\parhorseshoe{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ is true on all $\constant{a}$-variants of $\IntA$.  Let's take the object that $\IntA$ assigns to \mention{$\constant{o}$} and name it \mention{Ophelia}.  Now take the $\constant{a}$-variant that assigns Ophelia to \mention{$\constant{a}$} and call it $\As{\constant{a}}{}$.  (We know there is such an assignment because $\IntA$ and $\As{\constant{a}}{}$ have the same universe.)  Thus, $\IntA(\constant{o})=\As{\constant{a}}{}(\constant{a})$.  And $\As{\constant{a}}{}$ is an $\constant{a}$-variant of $\IntA$, so they make all the same assignments to the predicate letters.
+	The entailment holds.
+	Assume some model $\IntA$ such that $\universal{\variable{x}}\parhorseshoe{\Cp{\variable{x}}}{\Dp{\variable{x}}}$ and $\Cp{\constant{o}}$ are true.
+	By the definition of truth for $\forall$, it follows that $\parhorseshoe{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ is true on all $\constant{a}$-variants of $\IntA$.
+	All $\constant{a}$-variants of $\IntA$ have the same universe as $\IntA$.
+	So there is an $\constant{a}$-variant such that $\As{\constant{a}}{}(\constant{a})=\IntA(\constant{o})$.
 	
-	The model $\IntA$ makes $\Cp{\constant{o}}$ true, therefore $\IntA(\constant{o})\in\IntA(\Cp{})$.  Because $\As{\constant{a}}{}(\constant{a})=\IntA(\constant{o})$ and $\As{\constant{a}}{}(\Cp{})=\IntA(\Cp{})$, it follows by substitution that $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\Cp{})$.  Hence, $\As{\constant{a}}{}$ makes $\Cp{\constant{a}}$ true.  And because $\parhorseshoe{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ is also true on $\As{\constant{a}}{}$, it follows that $\As{\constant{a}}{}$ makes $\Dp{\constant{a}}$ true.
-	
-	From this it follows that $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\Dp{})$.  We know that $\As{\constant{a}}{}(\constant{a})=\IntA(\constant{o})$ and $\As{\constant{a}}{}(\Dp{})=\IntA(\Dp{})$, so by substitution we get: $\IntA(\constant{o})\in\IntA(\Dp{})$.  Thus, $\IntA$ makes $\Dp{\constant{o}}$ true.
-	
-	Any model that makes the LHS true also makes the RHS true.  Therefore, the entailment holds.\footnote{This entailment resembles the argument discussed at the beginning of the chapter: (1) All women are mortal, (2) Ophelia is a woman, therefore (3) Ophelia is mortal.  To see this, interpret $\CC$ as the set of women and $\DD$ as the set of mortals.}
+	The model $\IntA$ makes $\Cp{\constant{o}}$ true, so $\IntA(\constant{o})\in\IntA(\Cp{})$.
+	Because $\IntA(\constant{o})=\As{\constant{a}}{}(\constant{a})$ and $\As{\constant{a}}{}(\Cp{})=\IntA(\Cp{})$, it follows by substitution that $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\Cp{})$.
+	Hence, $\As{\constant{a}}{}$ makes $\Cp{\constant{a}}$ true.
+	And because $\parhorseshoe{\Cp{\constant{a}}}{\Dp{\constant{a}}}$ is true on $\As{\constant{a}}{}$, it follows that $\As{\constant{a}}{}$ makes $\Dp{\constant{a}}$ true.
+	From this it follows that $\As{\constant{a}}{}(\constant{a})\in\As{\constant{a}}{}(\Dp{})$.  $\As{\constant{a}}{}(\constant{a})=\IntA(\constant{o})$ and $\As{\constant{a}}{}(\Dp{})=\IntA(\Dp{})$, so by substitution we get: $\IntA(\constant{o})\in\IntA(\Dp{})$.
+	Thus, $\IntA$ makes $\Dp{\constant{o}}$ true.
+
+	Any model that makes the LHS true also makes the RHS true.  Therefore the entailment holds.
 \end{PROOF}	
+\begin{commentary}
+	This entailment resembles the argument discussed at the beginning of the chapter: (1) All women are mortal, (2) Ophelia is a woman, therefore (3) Ophelia is mortal.
+	To see this, interpret $\constant{o}$ as Ophelia, $\CC$ as the set of women, and $\DD$ as the set of mortals.
+\end{commentary}
 
-
-Assume that we have an entailment that holds when the set $\Delta$ is empty; i.e., $\sdtstile{}{}\CAPPHI$.  When an entailment holds, every model $\IntA$ must either make a sentence on the left false or the sentence on the right true (definition of $\sdtstile{}{}$).  Because, in this case, there are no sentences on the \CAPS{lhs}, every model must make the \CAPS{rhs}, $\CAPPHI$, true.  Therefore, as was the case with \GSL{} in chapter \ref{sententiallogic}, $\sdtstile{}{}\CAPPHI$ \Iff $\CAPPHI$ is \CAPS{qt}.
+Consider an entailment $\Delta\sdtstile{}{}\CAPPHI$ that holds when the set $\Delta$ is empty, i.e. such that $\sdtstile{}{}\CAPPHI$.
+By the definition of $\sdtstile{}{}$ every model must either make a sentence on the left false or the sentence on the right true.
+But in this case there are no sentences on the \CAPS{lhs}.
+So every model must make the \CAPS{rhs}, $\CAPPHI$, true.
+Therefore, as was the case with \GSL{} in chapter \ref{sententiallogic}, $\sdtstile{}{}\CAPPHI$ \Iff $\CAPPHI$ is \CAPS{qt}.
 
 \begin{majorILnc}{\LnpDC{GQL1 TFE}}
-Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally equivalent}\index{equivalent sentences!quantificational|textbf} \Iff all models for $\CAPTHETA$ and $\CAPPHI$ assign them the same truth value, which is the same as saying they entail each other, i.e. $\CAPTHETA\sdtstile{}{}\CAPPHI$ and $\CAPPHI\sdtstile{}{}\CAPTHETA$.
+Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally equivalent}\index{equivalent sentences!quantificational|textbf} \Iff all models for $\CAPTHETA$ and $\CAPPHI$ assign them the same truth value.
 \end{majorILnc}
 \begin{majorILnc}{\LnpDC{GQL1 contradictory}}
-Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally contradictory}\index{contradictory!quantificational|textbf} \Iff all models for $\CAPTHETA$ and $\CAPPHI$ assign them opposite truth values, which is the same as saying that each sentence is equivalent to the negation of the other.
+Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally contradictory}\index{contradictory!quantificational|textbf} \Iff all models for $\CAPTHETA$ and $\CAPPHI$ assign them opposite truth values.
 \end{majorILnc}
 \begin{majorILnc}{\LnpDC{GQL1 contrary}}
 Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally contrary}\index{contraries!quantificational|textbf} \Iff they cannot both be $\True$ in the same model $\IntA$.
@@ -776,7 +961,7 @@ Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally con
 Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally subcontrary}\index{subcontraries!quantificational|textbf} \Iff they cannot both be $\False$ in the same model $\IntA$.
 \end{majorILnc}
 \begin{majorILnc}{\LnpDC{GQL1 Independent}}
-Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally independent}\index{independent sentences!quantificational|textbf} \Iff none of the above hold (including entailment), i.e. \Iff there are four models:
+Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally independent}\index{independent sentences!quantificational|textbf} \Iff there are four models:
 \begin{cenumerate}
 	\item A model in which both $\CAPTHETA$ and $\CAPPHI$ are $\True$; 
 	\item A model in which both $\CAPTHETA$ and $\CAPPHI$ are $\False$;
@@ -786,27 +971,29 @@ Two \GQL{}1 sentences $\CAPTHETA$ and $\CAPPHI$ are \nidf{quantificationally ind
 \end{majorILnc}
 
 First, a minor note.
-In \GQL{}1 we have both formulas and sentences. 
-(Remember that all sentences are also formulas, but not all formulas are sentences.) 
-Because we do not assess formulas that \emph{aren't} sentences for truth value, none of the definitions above apply to them. 
-These definitions only make sense for \GQL{}1 sentences. 
+These definitions only make sense for \GQL{}1 sentences.
+We do not assess formulas that \emph{aren't} sentences for truth value, so none of the definitions above apply to them. 
 
-Except for the fact that we're considering sentences of \GQL{}1 instead of \GSL{}, and models for \GQL{}1 sentences instead of models for \GSL{} sentences, these definitions are exactly the same as the corresponding ones for \GSL{}. 
+Except for the fact that these definitions apply to sentences of \GQL{}1 instead of \GSL{}, and models for \GQL{}1 sentences instead of models for \GSL{} sentences, they are the same as the corresponding ones for \GSL{}. 
 We might say that these definitions have the same \sq{structure}. 
-The \emph{ideas} of equivalence, being contradictory, etc., haven't changed, even though the details of the definitions are a little different.
+The \emph{ideas} of equivalence, being contradictory, etc., haven't changed, even though the details of the definitions are slightly different.
 
-The following four facts from \GSL{} also hold for \GQL{}1 (compare with the examples in section \ref{Other Relations}).
-(1) Contradictory sentences are also contrary, but sentences can be contrary without being contradictory: e.g. $\conjunction{\Cl}{\Dl}$ and $\conjunction{\Cl}{\negation{\Dl}}$.
-(2) Contradictory sentences are also subcontrary, but sentences can be subcontrary without being contradictory: e.g. $\Dl$ and $\disjunction{\Cl}{\negation{\Dl}}$.
-(3) If two sentences are both contrary and subcontrary, they are contradictory.
-(4) Any two atomic sentences are independent of each other.
-Because every sentence of \GSL{} is also a sentence of \GQL{}1, the examples given here still work. 
+The following four facts from \GSL{} also hold in \GQL{}1 (compare with the examples in section \ref{Other Relations}):
 
-Finally, recall from section \ref{Basic Results on Entailment} that in \GSL{} we have the important simple theorem (Thm. \pmvref{Exponentiation of Entailment}) that for all \GSL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$ \Iff $\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$. 
-The same theorem holds for \GQL{}1 sentences, and the proof is more or less the same. 
+\begin{cenumerate}
+	\item Contradictory sentences are also contrary, but sentences can be contrary without being contradictory: e.g. $\conjunction{\Cl}{\Dl}$ and $\conjunction{\Cl}{\negation{\Dl}}$.
+	\item Contradictory sentences are also subcontrary, but sentences can be subcontrary without being contradictory: e.g. $\Dl$ and $\disjunction{\Cl}{\negation{\Dl}}$.
+	\item If two sentences are both contrary and subcontrary, they are contradictory.
+	\item Any two atomic sentences are independent of each other.
+\end{cenumerate}
+
+\noindent{}Because every sentence of \GSL{} is also a sentence of \GQL{}1 we can reuse the examples from the previous chapter. 
+
+Finally, recall that in \GSL{} we have theorem \pmvref{Exponentiation of Entailment}: for all \GSL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$ \Iff $\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$. 
+The same theorem holds for \GQL{}1 sentences and the proof is essentially the same. 
 \begin{THEOREM}{\LnpTC{Exponentiation of Entailment GQL} \GQL{}1 Exportation Theorem:} For all \GQL{}1 sentences $\CAPPHI$ and $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$ \Iff $\:\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$.
 \end{THEOREM}
-\noindent{}In addition, all the generalizations of this theorem given in the next (Thm. \ref{expo generalizations}) also hold for \GQL{}1 sentences, and again the proofs are more or less the same. We will not explicitly restate this theorem for \GQL{}1.
+\noindent{}In addition, all the generalizations of this theorem (\ref{expo generalizations}) also hold for \GQL{}1 sentences, and again the proofs are essentially same.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -898,7 +1085,7 @@ How many subformulas does each have?
 \end{multicols}
 
 \notocsubsection{Quantificational Truth Problems}{ex:Quantificational Truth Problems} 
-For each sentence below, say whether or not it's a quantificational truth. 
+For each sentence below, say whether it's a quantificational truth. 
 If so, prove it. 
 If not, give a model $\IntA$ that makes it false.
 \begin{multicols}{2}
@@ -939,7 +1126,7 @@ If not, give a model $\IntA$ that makes it false.
 \item {$\universal{\variable{y}}\parhorseshoe{\Ap{\variable{y}}}{\Bp{\variable{y}}}\text{, }\existential{\variable{y}}\parhorseshoe{\Bp{\variable{y}}}{\Cp{\variable{y}}}\sdtstile{}{}\existential{\variable{y}}\parhorseshoe{\Ap{\variable{y}}}{\Cp{\variable{y}}}$}
 \end{enumerate}
 
-\notocsubsection{Relations Between \GQL{}1 Sentences}{ex:Relations Between GQL1 Sentences} For each sentence below, say whether it entails, it's entailed by, is equivalent to, contradicts, is contrary to, is subcontrary to, or is independent from each of the other sentences. 
+\notocsubsection{Relations Between \GQL{}1 Sentences}{ex:Relations Between GQL1 Sentences} For each sentence below, say whether it entails, is entailed by, is equivalent to, contradicts, is contrary to, is subcontrary to, or is independent from each of the other sentences. 
 \begin{multicols}{2}
 \begin{enumerate}
 \item {$\universal{\variable{z}}\parhorseshoe{\Gp{\variable{z}}}{\Dp{\variable{z}}}$}
