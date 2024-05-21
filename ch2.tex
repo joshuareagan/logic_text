@@ -14,9 +14,11 @@
 Our first task is to define the syntax of the basic formal language \GSL{}.\footnote{Work on modern sentential logic originated with George Boole \citeyearpar{Boole1854} and Augustus De Morgan \citeyearpar{DeMorgan1847,DeMorgan1860}. 
 	As Christine Ladd-Franklin notes \citeyearpar[17]{LaddFranklin1883} before giving her own, variations quickly followed from William S. Jevons, Ernst Schr\"oder, Hugh McColl, and Charles S. Peirce.} 
 This language is variously called \idf{sentential logic} or \niidf{propositional logic}\index{propositional logic|see{sentential logic}}. 
-We use the former name because it's easier to get a grasp on what a sentence is. What a proposition is is a matter of intense philosophical debate.\footnote{For historical and contemporary discussions of propositions, see \citealt{Frege1892}, \citealt[13,47]{Russell1903}, \citealt[26]{Church1956}, \citealt[ch.~1]{Quine1986}, \citealt[ch.~3]{Schiffer1987}, \citealt{Grandy1993}, \citealt{Bealer1998b}, \citealp{King2007}, \citealt{Soames2010}.}
+We use the former name because it's easier to get a grasp on what a sentence is.
+Our choice allows us to sidestep the intense philosophical debate over what a proposition is.\footnote{For historical and contemporary discussions of propositions, see \citealt{Frege1892}, \citealt[13,47]{Russell1903}, \citealt[26]{Church1956}, \citealt[ch.~1]{Quine1986}, \citealt[ch.~3]{Schiffer1987}, \citealt{Grandy1993}, \citealt{Bealer1998b}, \citealp{King2007}, \citealt{Soames2010}.}
 
-As stated in the previous chapter, each formal language\index{language} requires (1) a list of basic symbols, and (2) a specification of which sequences of those symbols count as sentences\index{sentence}. Think of these as determining the proper grammar or syntax of the language. 
+As stated in the previous chapter, each formal language\index{language} requires (1) a list of basic symbols, and (2) a specification of which sequences of those symbols count as sentences\index{sentence}.
+These determine the proper grammar or syntax of the language. 
 
 \begin{majorILnc}{\LnpDC{Basic Symbols of GSL}} The \df{basic symbols} of \GSL{} are of three kinds:\footnote{The commas and ellipses are \emph{not} symbols of \GSL{}.}
 \begin{cenumerate}
@@ -25,13 +27,25 @@ As stated in the previous chapter, each formal language\index{language} requires
 \item Sentence Letters: $\Al,\Bl, \ldots, \Tl, \Al_1,\Bl_1, \ldots, \Tl_1, \Al_2, \Bl_2, \ldots$  
 \end{cenumerate}
 \end{majorILnc} 
-\noindent{}Logical connectives are sometimes called logical symbols, logical operators, logical terms, or logical functors.%
-\footnote{%
-In other textbooks there are sometimes different symbols used for these connectives. 
-Along with $\NEGATION$, $\neg$ and $-$ are used for negation, $\&$ and $\cdot$ for conjunction, $\supset$ and $\Rightarrow$ for conditionals, and $\equiv$ for biconditionals. $\VEE$ is almost universally the symbol for disjunction.
+\noindent{}Logical connectives are sometimes called logical symbols, logical operators, logical terms, or logical functors.\footnote{%
+	In other textbooks there are sometimes different symbols used for these connectives. 
+	Along with $\NEGATION$, $\neg$ and $-$ are used for negation, $\&$ and $\cdot$ for conjunction, $\supset$ and $\Rightarrow$ for conditionals, and $\equiv$ for biconditionals. $\VEE$ is almost universally the symbol for disjunction.
 } 
 One could draw important distinctions between symbols, terms, and operators, but the names are just as often used interchangeably.
-The \emph{sentence letters} are italicized capital letters of the Roman alphabet from \mention{$\Al$} to \mention{$\Tl$}.  To give ourselves an infinite supply, any of these letters with a subscripted positive integer is also a sentence letter; e.g. $\Cl$ and a subscripted $7$ can be combined to get the new sentence letter $\Cl_7$. Keep in mind that $\Cl_7$ and $\Cl$ are different sentences.
+The \emph{sentence letters} are italicized capital letters of the Roman alphabet from \mention{$\Al$} to \mention{$\Tl$}.
+To give ourselves an infinite supply, any of these letters with a subscripted positive integer is also a sentence letter.
+E.g. $\Cl$ and a subscripted $7$ can be combined to get the new sentence letter $\Cl_7$.
+Remember that $\Cl_7$ and $\Cl$ are different sentences.
+
+The following list gives the name of each connective symbol:
+
+\begin{cenumerate}
+	\item $\NEGATION$: ``tilde'',
+	\item $\WEDGE$: ``wedge'',
+	\item $\VEE$: ``vee'',
+	\item $\HORSESHOE$: ``arrow'',
+	\item $\TRIPLEBAR$: ``double-arrow''.
+\end{cenumerate}
 
 \begin{majorILnc}{\LnpDC{Recursive definition of Sentences of GSL}} The \nidf{sentences} \underdf{of \GSL{}}{sentence} are given by the following recursive definition:
 \begin{description}
@@ -97,7 +111,7 @@ And, finally, from $\cpardisjunction{\Al}{\parhorseshoe{\Dl}{\Bl}}$ and $\negati
 \subsection{Official and Unofficial Sentences of \GSL{}}\label{Unofficial Sentences of GSL}
 
 Definition \ref{Recursive definition of Sentences of GSL} is the definition of an \emph{official} sentence of \GSL{}.
-For convenience' sake we often work with \emph{un}official sentences. 
+For convenience we often work with \emph{un}official sentences. 
 \begin{majorILnc}{\LnpDC{Unofficial Sentence of GSL}}
 A string of symbols is an \nidf{unofficial} sentence\index{sentence!unofficial (of \GSL{})|textbf} \Iff we can obtain it from an official sentence by
 \begin{cenumerate}
@@ -385,7 +399,10 @@ We often speak informally of \emph{models} without making reference to any parti
 Consider a model $\IntA$ that makes a truth value assignment to every sentence letter of \GSL{}.  No sentence letter lacks an assignment, so it follows that $\IntA$ is a model for the set of all \GSL{} sentences.  The following definition characterizes such models as \emph{models of \GSL{}}.
 
 \begin{majorILnc}{\LnpDC{Definition of Model for SL}}
-	$\IntA$ is a \df{model of \GSL{}} \Iff $\IntA$ is a model of every sentence of \GSL{}.
+	$\IntA$ is a \df{model of \GSL{}} \Iff $\IntA$ is a model of every sentence of \GSL{}.\footnote{
+		This is the definition of ``model'' in many logic textbooks.
+		We prefer to include models that make assignments to only a subset of sentence letters.
+	}
 \end{majorILnc}
 
 Models can be uniform; for example, there is a model that assigns $\True$ to every sentence letter.
@@ -1696,6 +1713,9 @@ If not, then it isn't.
 As before, this process is entirely mechanical or \emph{formal}.
 Note that, along with the truth table method in section \ref{Proceduresfortesting}, we now have two different formal methods for determining logical truth in \GSL{}.
 In later chapters our methods are closer to the \CAPS{dnf} approach.
+
+Finally, these two methods can be combined to make a mechanical test of whether some sentence $\CAPPHI$ is \CAPS{tfc}.
+If $\CAPPHI$ is neither \CAPS{tft} nor \CAPS{tff} then it is \CAPS{tfc}.
 
 Any given sentence of \GSL{} is truth functionally equivalent to more than one \CAPS{dnf} sentence. 
 A sentence has \CAPS{dnf}s that differ slightly for at least two reasons.
