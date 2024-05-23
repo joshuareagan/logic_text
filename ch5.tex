@@ -8,52 +8,129 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Sentences in English have meanings.  Declarative sentences say something about the world and in virtue of that they have truth conditions: ways the world must be for them to be true.  By contrast, the sentences of \GSL{} (and \GQL{}) are, considered in isolation, meaningless strings of symbols. To the extent that we can ascribe meaning to \GSL{} (and \GQL{}) sentences at all, that meaning comes from a model.  The way that we specify models in Chapter \ref{sententiallogic} does not distinguish between different sentences with the same truth value, because for the purposes of assessing logical truth in \GSL{}, truth value is all that matters.  But if we want to translate English into \GSL{} we must specify the models less directly: by associating English sentences with the sentence letters.  If we are careful in our selection of English sentences we may assign each of them unambiguous truth values.  We then take these values as the assignments that some model $\IntA$ makes to the corresponding sentence letters.  We assign truth values to the sentences according to what we know about reality, in which case $\IntA$ would be a \mention{model} of reality, or at least that part of reality described by those English sentences.  Alternatively, we may assign truth values to English sentences so that they do not match what we know about reality, in which case $\IntA$ would be a model of a non-actual state of affairs.  Finally, we could consider sentences whose values we don't know and assign them values, in which case $\IntA$ would be a model of a hypothetical state of affairs.
+Sentences in English have meanings.
+Declarative sentences say something about the world, and in virtue of their various meanings they are either true or false.
+By contrast, the sentences of \GSL{} and \GQL{} are, in themselves, meaningless strings of symbols.
+Any meaning ascribed to \GSL{} and \GQL{} sentences must come from a model.
 
-Ideally, the English sentences in question should be unambiguous, not vague, and will not have a truth value that changes over time. 
-More practically, if we use sentences that are unambiguous in the appropriate context, specific enough to have determinate truth values, and whose truth values will not change during the discussion, we can analyze them with the tools of logic without going astray.
-One source of sentences with these characteristics is mathematics.  For other sentences, we can usually add enough detail about context to meet our criteria.  For example, we might casually say that \mention{Texas is a US state} is a true sentence of English.  The context would normally indicate that we mean Texas is a US state at the time the sentence is uttered.  If we consider the sentence apart from some context of utterance matters aren't so clear.  The sentence was false in 1844 and is true now, so its truth value has varied over time. Officially we prefer a less ambiguous sentence, such as \mention{Texas was a US state at noon CDT on May 1, 1983.}  Unofficially, we often make background assumptions about what is relevant, who is being discussed, the time of assessment, and so on.  For similar reasons, \mention{Washington was elected President} has an obvious and natural interpretation, one that's distinct from \mention{Joan Washington was elected President of the Montrose Dog Walkers Association.}
+The models in Chapter \ref{sententiallogic} do not distinguish between different sentences with the same truth value, because for the purposes of assessing logical truth in \GSL{}, truth value is all that matters.
+But if we want to translate English into \GSL{} we must specify the models less directly: by associating English sentences with sentence letters.
 
-There is a controversy in philosophy of logic and philosophy of language over which objects are the most fundamental bearers of truth value: sentence types, sentence tokens, propositions, judgments, or statements.  We regard sentences, whether types or tokens, as better objects to work with than the alternatives.  We have a better understanding of what a sentence is than what propositions, judgments, or statements are.  That is why in Chapter \ref{sententiallogic} we use the name \mention{Sentential Logic} rather than \mention{Propositional Logic}, which is used by some logic texts.  For our purposes we can be agnostic as to whether it's sentence types or tokens because, given our restrictions, all tokens of a type will have the same truth value in our specific translation context. 
+\subsection{Using \GSL{} Models for Translation}\label{GSLTranslationModels}
 
-We mentioned associating English sentences with \GSL{} sentence letters.  To do this, we give a \idf{translation key} that maps sentence letters from \GSL{} to sentences of English.  A translation key is different from a model, but a good translation key will help fix a specific model for the relevant sentences of \GSL{}.  We just need to supply the truth values of the English sentences of the key.  Once we've mapped sentences of English to sentence letters we can use the key to translate more complex English sentences into \GSL{}.  We may think of complex sentences of English as being composed of (i) simpler English sentences and (ii) logical connectives of English.
+Let's say we have some declarative sentences of English that we would like to translate and model in \GSL{}.
+First, we look for the smallest declarative clauses, i.e. the \mention{atomic} parts, and we associate each of these with a sentence letter.
+We decide whether each of these atoms is true or false, and then define a model $\IntA$ that makes the appropriate assignment to the corresponding sentence letter.
+If truth values are assigned according to what we know about reality, then $\IntA$ is a \mention{model} of reality, or at least that part of reality described by the English sentences.
+Alternatively, we can assign truth values so that they do not match reality, in which case $\IntA$ is a model of a non-actual state of affairs.
+Finally, we can assign values to sentences about which the facts are unknown, in which case $\IntA$ is a model of a hypothetical state of affairs.
 
-But how do we know when a sentence of English is sufficiently simple to be assigned to a sentence letter?  The answer is that in putting together a key we should capture as much of the relevant logical structure of the English as is practical and useful.  All else being equal, translation keys that hide important logical structure in a sentence letter are deficient.  For example, the following sentence is not ordinarily a good candidate for sentence letter assignment:
+English sentences are not all equally suitable for translation to \GQL{}.
+Ideal English sentences are unambiguous, not vague, and do not have a truth value that changes over time.
+More practically, we can also model sentences that are unambiguous in the appropriate context, specific enough to have determinate truth values, and whose truth values do not change during some period of interest.
+One source of well-behaved sentences is mathematics.
+For other sentences we can usually supply enough context to meet our criteria.
+
+To illustrate, we might say that \mention{Texas is a US state,} is a true sentence of English.
+We mean that Texas is a US state at the time the sentence is uttered.
+By convention, English sentences in the present tense are assessed relative to the time of utterance.
+But without such context matters aren't so clear.
+The sentence is false of Texas in 1844 and true of Texas now, so its truth value has varied over time.
+The sentence \mention{Texas was a US state at noon CDT on May 1, 1983,} is less ambiguous, and does not require any context-sensitive judgment about time to assess.
+
+In practice, however, we make background assumptions about what is relevant, who is being discussed, the time of assessment, and so on.
+E.g., \mention{Washington was elected President,} has an obvious and natural interpretation, one that's distinct from \mention{Joan Washington was elected President of the Montrose Dog Walkers Association.}
+
+Note that we speak of translating \emph{sentences} and not, e.g., propositions.
+There is a controversy in the philosophy of logic over which objects are the most fundamental bearers of truth value: sentences, propositions, judgments, statements, etc.
+Without weighing in on that debate, we prefer sentences over the alternatives for a logic textbook.
+We argued in Chapter \ref{introduction} that there is no uncontroversial definition of a sentence of English.
+Even so, there is less dispute about what a sentence is than what propositions, judgments, or statements are.
+
+There is difference between sentence tokens and sentence types.
+We prefer not to deal with the difficulties associated with that distinction in this text.
+We assume that all sentence tokens of a type have the same truth value, but that isn't true in general.\footnote{
+	See \citealt{Grandy1993} for details.
+}
+
+\subsection{\GSL{} Translation Keys}\label{GSLTranslationKeys}
+
+We use a \idf{translation key} to associate atomic English sentences with \GSL{} sentence letters.
+A translation key is different from a model, but it determines which sentence letter assignments a \GSL{} model has to make.
+A complete model also needs the truth value of each sentence, which isn't supplied by the translation key.
+Once we've mapped atomic sentences of English to sentence letters we can use the key to translate complex English sentences into \GSL{}.
+Complex sentences are composed of (i) atomic sentences and (ii) logical connectives of English.
+
+When is a sentence of English simple enough to be considered \mention{atomic}?
+In putting together a key we should capture as much of the logical structure of the English as is practical and useful.  
+All else being equal, translation keys that hide logical structure in a sentence letter are deficient.
+For example, the following is not ordinarily a good candidate for sentence letter assignment:
 
 \begin{smenumerate}
 	\item Mares eat oats and does eat oats and little lambs eat ivy.
 \end{smenumerate}
 
-\noindent{}The word \mention{and} plays a truth-functional role in this sentence, analogous to the role that \mention{$\WEDGE$} plays in \GSL{}.  A better translation key would assign each of \mention{Mares eat oats}, \mention{Does eat oats}, and \mention{Little lambs eat ivy} its own sentence letter, so that the original sentence of English could be expressed as a conjunction in \GSL{}.
+\noindent{}The word \mention{and} plays a truth-functional role in this sentence, analogous to the role that \mention{$\WEDGE$} plays in \GSL{}.
+A better translation key would assign each of \mention{Mares eat oats}, \mention{Does eat oats}, and \mention{Little lambs eat ivy} its own sentence letter.
+The original sentence of English can then be expressed as a conjunction in \GSL{}.
+In general, the goal of translation to \GSL{} is to replace the truth-functional connectives of English sentences with appropriate logical connectives from \GSL{}.
 
-More generally, we want to translate the truth-functional connectives of English sentences with appropriate logical connectives from \GSL{}. 
-But before considering other examples, we need to say a little more about connectives.\index{logical connectives} 
-In Chapter \ref{sententiallogic} (in definition \pmvref{Basic Symbols of GSL}) we simply listed what we called the \sq{logical connectives} of \GSL{}.  We've seen the role they play in building the sentences of \GSL{} and in fixing the truth value of those sentences in a model. 
-But we haven't said anything explicit about what connectives are. 
-The basic idea of a sentential \idf{connective}---whether a \sq{logical} one in some formal language or an expression in a natural language like English---is a bit of a language that can be used to combine, or connect, one or more sentences of the language into a new sentence.\footnote{Other connectives play a subtler role, as with the quantifiers of QL.  In QL quantifiers can be used to combine predicates to make a more complex predicate.} 
-We say that one connective is within the \idf{scope} of a second connective iff the first connective is within a sentence directly connected with the second connective.  The \idf{main connective} is the one connective of the sentence that's not within the scope of any other connectives. 
+
+\begin{description}[itemsep=0em]
+	\item[Translation Key:] \hfill{} 
+	\begin{description}[itemsep=0em]
+		\item $\Ml$: Mares eat oats.
+		\item $\Dl$: Does eat oats.
+		\item $\Ll$: Little lambs eat ivy.
+	\end{description} 
+\end{description}
+
+\subsection{Connectives}\label{GSLConnectives and Trans}
+
+Before considering other examples we need to say a little more about connectives.\index{logical connectives} 
+In Chapter \ref{sententiallogic} (in definition \pmvref{Basic Symbols of GSL}) we listed the \sq{logical connectives} of \GSL{}.
+We've seen the role they play in constructing sentences of \GSL{} and in fixing their truth values in a model. 
+But we haven't said anything about what connectives are in general. 
+
+The essential idea of a sentential \idf{connective}---whether a \sq{logical} one in some formal language or an expression in a natural language like English---is that it's a part of language that can be used to combine one or more sentences of the language into a new sentence.\footnote{Other connectives play a subtler role, as with the quantifiers of QL.
+In QL quantifiers can be used to combine predicates to make a more complex predicate.} 
+We say that one connective is within the \idf{scope} of a second connective iff the first connective is within a sentence directly connected with the second connective.
+The \idf{main connective} is the one connective of the sentence that's not within the scope of any other connectives. 
 
 A connective is \niidf{truth-functional}\index{connective!truth-functional} iff the truth value of every new sentence formed by that connective depends solely on the truth value of the constituent sentences. 
 (If we're talking about a connective in a formal language like \GSL{}, we mean the truth value of a sentence \emph{in a model}.)
-Not all connectives of English are truth-functional. In particular, modal connectives---such as \mention{necessarily} and \mention{possibly}, among others---defy truth-functional characterization.  For example, the sentence
+Not all connectives of English are truth-functional.
+In particular, there are modal connectives---such as \mention{necessarily} and \mention{possibly}---that defy truth-functional characterization.
+For example, the sentence
 
 \begin{menumerate}
-	\item Necessarily, $2+2=4$.
+	\item Necessarily, bachelors are unmarried.
 \end{menumerate}
 
-\noindent{}seems plausibly true.  If we replace \mention{$2+2=4$} with another true claim, however, the result may not be so plausible:
+\noindent{}seems plausibly true.  If we replace \mention{bachelors are unmarried} with another true claim, however, the result is not so plausible:
 
 \begin{menumerate}
 	\item Necessarily, there is life on earth.
 \end{menumerate}
 
-\noindent{}Both \mention{$2+2=4$} and \mention{There is life on earth} are true. But it is easier to imagine all life on earth perishing than for $2+2$ not to be $4$. That there is life on earth is clearly contingent. These examples make clear that the truth of a sentence with a modal main connective depends on more than the truth value of the part of the sentence governed by the modal connective.  
+\noindent{}Both \mention{bachelors are unmarried} and \mention{There is life on earth} are true.
+But it is easier to imagine all life on earth perishing than for bachelors to be married.
+That there is life on earth is contingent.
+The truth of a sentence with a modal main connective depends on more than the truth value of the part of the sentence governed by the modal connective.  
 
-On the other hand, our definition of truth in a model (def. \pmvref{True on a GSL interpretation}) makes it apparent that the five logical connectives of \GSL{} are all truth-functional.  This disparity means that \GSL{} is not capable of capturing all of the logical structure of English; the best it can do is to approximate certain features of English.  Some formal languages have the resources to capture the logical structure of modal claims.  We consider one such language in Chapter \ref{furtherdirections}.  We hasten to add, however, that \GSL{} has sufficient resources to render many English sentences without significantly distorting their basic meaning.
+By contrast, the five logical connectives of \GSL{} are all truth-functional.
+This disparity means that \GSL{} is not capable of capturing all of the logical structure of English.
+The best it can do is to approximate certain features of English.
+Some formal languages have the resources to capture the logical structure of modal claims.
+We introduce one such language in Chapter \ref{furtherdirections}.
+We hasten to add, however, that \GSL{} has sufficient resources to render many English sentences without significantly distorting their basic meaning.
 
-\subsection{Connectives and Translations}\label{GSLConnectives and Trans}
+\subsection{Conjunctions and Negations}\label{Translating GSLConjunctionsAndNegations}
 
-A logical connective of \GSL{} is a suitable translation of a (truth-functional) connective of English iff they express the same truth function (see section \pmvref{Truth Functions Truth Tables and Boolean Operators})---that is, iff the new sentences formed by those connectives share the same truth value whenever the constituent sentences that made them up share the same truth values.  We've already mentioned one such pair of corresponding connectives: \mention{and} and \mention{$\WEDGE$}.  We know that the English sentence
+A logical connective of \GSL{} is a suitable translation of a (truth-functional) connective of English iff they express the same truth function (see section \pmvref{Truth Functions Truth Tables and Boolean Operators}).
+That is, iff the new sentences formed by those connectives share the same truth value whenever the constituent sentences that make them up share the same truth values.
+We've already mentioned one such pair of corresponding connectives: \mention{and} and \mention{$\WEDGE$}.
+The sentence
 
 \begin{menumerate}
 	\item\label{GSLTransConjunction1} The sun is shining \emph{and} the birds are chirping.
@@ -66,50 +143,70 @@ A logical connective of \GSL{} is a suitable translation of a (truth-functional)
 	\item The birds are chirping.
 \end{menumerate}
 
-\noindent{}The same holds of other conjunctions in English.  The \GSL{} connective \mention{$\WEDGE$} is a good translation of \mention{and} most of the time.  Sometimes the structure of English conjunctions is more hidden, as in the following example:
+\noindent{}The same holds of other conjunctions in English.  The \GSL{} connective \mention{$\WEDGE$} is a good translation of \mention{and} most of the time.
+Sometimes the structure of English conjunctions is more hidden, as in the following example:
 
 \begin{menumerate}
 	\item\label{GSLTransConjunction2} Nathanael Green \emph{and} `Light Horse Harry' Lee were officers in the Continental Army.
 \end{menumerate}
 
-\noindent{}We see here the word \mention{and}, but a translation key should not break the sentence at that word and then give the \CAPS{lhs}---\mention{Nathanael Green}---its own sentence letter.  The \CAPS{lhs} is not a declarative sentence.  It's instead clear that (\ref{GSLTransConjunction2}) expresses the conjunction of the following two sentences:
+\noindent{}A translation key should not break the sentence at the word \mention{and} and give the \CAPS{lhs}---\mention{Nathanael Green}---its own sentence letter.
+The \CAPS{lhs} is not a declarative sentence.
+It's clear that \ref{GSLTransConjunction2} expresses the conjunction of the following two sentences:
 
 \begin{menumerate}
 	\item Nathanael Green was an officer in the Continental Army.
 	\item `Light Horse Harry' Lee was an officer in the Continental Army.
 \end{menumerate}
 
-\noindent{}It is thus appropriate to map each of these latter sentences to a sentence letter---say, $\Nl$ and $\Ll$, respectively---and express \mention{Nathanael Green and `Light Horse Harry' Lee were officers in the Continental Army} as a conjunction of these sentence letters---e.g., $\parconjunction{\Nl}{\Ll}$.  Other words of English also play the role of conjunction.  Consider the sentence:
+\noindent{}It is appropriate to map each of these latter sentences to a sentence letter---say, $\Nl$ and $\Ll$, respectively---and express \mention{Nathanael Green and `Light Horse Harry' Lee were officers in the Continental Army} as a conjunction of these sentence letters---e.g., $\parconjunction{\Nl}{\Ll}$.
+
+Other words of English also play the role of conjunction. Consider:
 
 \begin{menumerate}
 	\item\label{GSLTransConjunction3} Mary wants to drive her mother's car, \emph{but} she is \emph{not} old enough.
 \end{menumerate}
 
-\noindent{}Here the word \mention{but} connects two independent claims.  The sentence as a whole is true \Iff the \CAPS{lhs} and the \CAPS{rhs} are each true.  So \mention{but} also plays the same truth-functional role as \mention{$\WEDGE$} in \GSL{}. The word \mention{not} is another connective.  As you can probably guess, it corresponds to the \mention{$\NEGATION$} of \GSL{}. 
+\noindent{}The word \mention{but} connects two independent claims.
+The sentence as a whole is true \Iff the \CAPS{lhs} and the \CAPS{rhs} are each true.
+So \mention{but} plays the same truth-functional role as \mention{$\WEDGE$} in \GSL{}.
 
-Negations are not always this obvious. The words ``not'' and ``no'' are easy to translate with $\NEGATION$. 
-But the connective also appears in many other forms in English. ``Innumerable'' is not numerable, ``unmistakable'' is not mistakable, ``never'' is not ever, ``immoral'' is not moral, ``clueless'' is to have no clue, and so on. 
-One of the things that makes translating complex is that while the prefix ``in-'' is often negation, as in ``inevitable'', it is also often a direction, as in ``influx''. The latter case is not one of negation.
+The word \mention{not} is another connective; it corresponds to the \mention{$\NEGATION$} of \GSL{}. 
+The words ``not'' and ``no'' are typically translated with $\NEGATION$. 
 
-Notice that for the \CAPS{rhs} of \ref{GSLTransConjunction3}, context indicates that \mention{she} is Mary, and that mention of her being not \mention{old enough} is about the fact that she is not old enough \emph{to drive her mother's car}. English is, in this respect, more efficient than \GSL{}. So, to translate this sentence into \GSL{} we'll need to use something like the following:
+Negations in English are not always so obvious.
+``Innumerable'' is not numerable, ``unmistakable'' is not mistakable, ``never'' is not ever, ``immoral'' is not moral, ``clueless'' is to have no clue, and so on. 
+Yet while the prefix ``in-'' is often negation, as in ``inevitable'', it is also often a direction, as in ``influx''.
+The latter case is not one of negation.
 
+Notice that in the \CAPS{rhs} of \ref{GSLTransConjunction3}, context indicates that \mention{she} is Mary, and that mention of her being not \mention{old enough} is about the fact that she is not old enough \emph{to drive her mother's car}.
+English is, in this respect, more efficient than \GSL{}.
+To translate this sentence into \GSL{} we need something like:
+
+\begin{description}[itemsep=0em]
+	\item[Translation Key:] \hfill{} 
 	\begin{description}[itemsep=0em]
-		\item[Translation Key:] \hfill{} 
-		\begin{description}[itemsep=0em]
-			\item $\Al$: Mary wants to drive her mother's car.
-			\item $\Ol$: Mary is old enough to drive her mother's car.
-		\end{description} 
-	\end{description}
+		\item $\Al$: Mary wants to drive her mother's car.
+		\item $\Ol$: Mary is old enough to drive her mother's car.
+	\end{description} 
+\end{description}
 
-\noindent{}We took out the \mention{not} because we can represent that with the \mention{$\NEGATION$} So now we may render the original sentence in \GSL{} as $\parconjunction{\Al}{\negation{\Ol}}$.  This is indistinguishable from the result that we would give if we were instead translating
+\noindent{}We take out the \mention{not} because we can represent that with \mention{$\NEGATION$}.
+We render the original sentence in \GSL{} as $\parconjunction{\Al}{\negation{\Ol}}$.
+This is indistinguishable from the result of translating
 
 \begin{menumerate}
 	\item Mary wants to drive her mother's car \emph{and} she is not old enough to drive her mother's car.
 \end{menumerate}
 
-\noindent{}We typically say \mention{$\PHI$ but $\negation{\THETA}$} when we think \mention{$\PHI$ and $\negation{\THETA}$} is true and we think that our listeners will expect \mention{$\THETA$} when they hear \mention{$\PHI$}.  Often the latter conjunct in a \mention{but} sentence has an implicit or explicit negation, as in sentence (\ref{GSLTransConjunction3}); though occasionally the negation may be on the left, as in \mention{John didn't study, but he passed the exam}.  In other cases, the latter conjunct has no negation but draws a contrast or expresses something that the speaker thinks will defy the expectations of the listeners, given the earlier conjunct(s).  This difference from the word \mention{and} cannot be captured in \GSL{}---it will be lost in translation.  Remember that these \GSL{} translations are approximations of English, and as such they can't always preserve all of the original meaning.
+\noindent{}In English we typically say \mention{$\PHI$ but $\THETA$} instead of \mention{$\PHI$ and $\THETA$} to signal to listeners that they are about to hear something surprising.
+They may expect that $\PHI$ and $\THETA$ are an unlikely pairing.
+This difference from the word \mention{and} cannot be captured in \GSL{}---it is lost in translation.
+\GSL{} translations are approximations of English, and as such they can't always preserve the original meaning.
 
-The word \mention{and} can do more than serve as a conjunction.  Sometimes the order of the conjuncts makes a difference in how we interpret meaning. Compare the following two sentences:
+The word \mention{and} can do more than serve as a conjunction.
+Sometimes the order of the conjuncts affects meaning.
+Compare:
 
 \begin{menumerate}
 	\item\label{GSLTransConjunction4} John took off his clothes and went to bed.
@@ -118,7 +215,12 @@ The word \mention{and} can do more than serve as a conjunction.  Sometimes the o
 	\item\label{GSLTransConjunction5} John went to bed and took off his clothes.
 \end{menumerate}
 
-The order of the conjuncts suggests that John performed these actions in a different order.  Yet if we were to translate (\ref{GSLTransConjunction4}) and (\ref{GSLTransConjunction5}) into \GSL{}, the resulting sentences will be truth-functionally equivalent.  We think this equivalence is defensible, because (\ref{GSLTransConjunction4}) and (\ref{GSLTransConjunction5}) don't literally describe the order of events; we tend to read order into them because it's usual in conversation to recount events in chronological order.  Notice that there is nothing contradictory about the following sentence:
+The order of the conjuncts suggests that John performed these actions in a different order.
+Yet if we translate \ref{GSLTransConjunction4} and \ref{GSLTransConjunction5} into \GSL{} the results are truth-functionally equivalent.
+We think this equivalence is defensible, because \ref{GSLTransConjunction4} and \ref{GSLTransConjunction5} don't explicitly describe the order of events.
+We tend to read order into them because it's usual in conversation to recount events in chronological order.
+This is not a requirement, however.
+There is nothing contradictory about the following:
 
 \begin{menumerate}
 	\item John went to bed and took off his clothes, but I don't know in which order.
@@ -143,90 +245,167 @@ The order of the conjuncts suggests that John performed these actions in a diffe
 	\end{center}
 \end{table}
 
+\subsection{Disjunctions}\label{Translating GSLDisjunctions}
+
 Another connective of English is the word \mention{or}:
 
 \begin{menumerate}
 	\item \emph{Either} the tigers will get us \emph{or} the lions will.
 \end{menumerate}
 
-\noindent{}Here the word \mention{or} connects two claims.  The sentence as a whole is true \Iff a claim on either side of the \mention{or} is true.  This is analogous to the truth-function of the \mention{$\VEE$} connective in \GSL{}, and so that's how we'll translate it.
+\noindent{}The sentence as a whole is true \Iff a clause on either side of the \mention{or} is true.
+This matches the truth-function of the \mention{$\VEE$} connective in \GSL{}.
 
+\begin{description}[itemsep=0em]
+	\item[Translation Key:] \hfill{} 
 	\begin{description}[itemsep=0em]
-		\item[Translation Key:] \hfill{} 
-		\begin{description}[itemsep=0em]
-			\item $\Il$: The tigers will get us.
-			\item $\Ll$: The lions will get us.
-		\end{description} 
-	\end{description}
+		\item $\Il$: The tigers will get us.
+		\item $\Ll$: The lions will get us.
+	\end{description} 
+\end{description}
 
-\noindent{}The resulting translation: $\pardisjunction{\Il}{\Ll}$.  We again use context to fill out the sentence \mention{the lions will [get us]}.  
+\noindent{}The resulting translation: $\pardisjunction{\Il}{\Ll}$.
+We again use context to fill out the sentence \mention{the lions will [get us]}.  
 
 It might not seem quite right to translate \mention{or} as \mention{$\VEE$}. 
- The potential problem is that in \GSL{} $\pardisjunction{\CAPPHI}{\CAPTHETA}$ is true (on a model) when both $\CAPPHI$ and $\CAPTHETA$ are true (on that model). 
- But sometimes in English when we say \mention{$\PHI$ or $\THETA$} we mean that one or the other of $\PHI$ and $\THETA$ is true---but not both. 
- We say that a disjunction which allows for both disjuncts to be true is \niidf{inclusive}\index{inclusive disjunction}, while one that doesn't allow for both disjuncts to be true is \niidf{exclusive}.\index{exclusive disjunction}
- Does this mean that \mention{$\PHI$ or $\THETA$} is exclusive, and hence shouldn't be translated by the inclusive $\pardisjunction{\CAPPHI}{\CAPTHETA}$? 
+In \GSL{} $\pardisjunction{\CAPPHI}{\CAPTHETA}$ is true when both $\CAPPHI$ and $\CAPTHETA$ are true on some model. 
+But sometimes in English when we say \mention{$\PHI$ or $\THETA$} we mean that one or the other of $\PHI$ and $\THETA$ is true---but not both. 
+A disjunction in which both disjuncts can be true is \niidf{inclusive}\index{inclusive disjunction}, while a disjunction in which only one disjunct can be true is \niidf{exclusive}.\index{exclusive disjunction}
+Should \mention{$\PHI$ or $\THETA$} be considered exclusive?
+Is it incorrect to translate it as $\pardisjunction{\CAPPHI}{\CAPTHETA}$?
  
-This is a complicated question that we cannot fully answer here. 
-We believe, however, that \mention{or} is inclusive in English, and that it is best translated as \mention{$\VEE$}.  Only in certain conversational contexts is the exclusive disjunction clearly intended.  We will motivate our stance with a few brief considerations.\footnote{This discussion borrows from Smith \citeyear[117--22]{Smith2012}.}
+These are complicated questions that we cannot fully answer here. 
+We believe, however, that \mention{or} is typically inclusive in English and so best translated as \mention{$\VEE$}.
+Only in certain conversational contexts is the exclusive disjunction clearly intended.
+We motivate our stance with a few examples.\footnote{This discussion borrows from Smith \citeyear[117--22]{Smith2012}.}
  	
 One case in which \mention{or} sounds exclusive involves disjuncts that cannot possibly both be true. 
- 	For example, I might say \q{Mia took the highway or a plane}. 
- 	If I'm referring to two possible routes for the same journey, clearly it's just not physically possible for Mia to have taken both the highway and a plane. 
- 	But it doesn't follow from the fact that it's impossible for both disjuncts to be true that the utterance of the sentence itself says, or has the meaning that, both disjuncts cannot be true. 
- 	For cases in which it's not possible for both disjuncts to be true it's tempting to assimilate that fact into the meaning itself. 
- 	But that leap is unjustified. 
- 	Someone could, after all, understand \q{Mia took the highway or a plane} and agree that it's true, but also think that both disjuncts are true.  Perhaps Mia's journey was more disjointed and involved both.  To infer that this disjunction is exclusive requires more information than the sentence itself conveys.
- 	
- 	\begin{table}
- 		\renewcommand{\arraystretch}{1.5}%
- 		\begin{center}
- 			\begin{tabular}{ l l } %p{2.2in} p{2in}
- 				\toprule
- 				\textbf{English} & \textbf{\GSL{}} \\ 
- 				\midrule
- 				$\PHI$ or $\THETA$ & $\disjunction{\CAPPHI}{\CAPTHETA}$ \\
- 				either $\PHI$ or $\THETA$ & $\disjunction{\CAPPHI}{\CAPTHETA}$ \\
- 				$\PHI$ or $\THETA$, but not both & $\conjunction{\pardisjunction{\CAPPHI}{\CAPTHETA}}{\negation{\parconjunction{\CAPPHI}{\CAPTHETA}}}$ \\
- 				\bottomrule
- 			\end{tabular} 
- 			\caption{Translations for Common English Disjunctions}
- 			\label{TransTableC} 
- 		\end{center}
- 	\end{table}
- 	
-  	There are two kinds of cases in which it's more plausible that \mention{or} is exclusive.  
- 	The first case involves commands or rules. 
- 	If you are at a fancy restaurant and a waiter says, \q{You may have the soup or a salad}, it's typically understood that you may have one or the other, but not both. The second case involves elliptical clauses. 
- 	A disjunctive phrase \mention{$\PHI$ or $\THETA$} can be elliptical for the longer \mention{$\PHI$ or $\THETA$, but not both}. 
- 	If so, then the intended message is exclusive. 
- 	But this doesn't count as a case in which \mention{or} by itself expresses exclusive disjunction. 
- 	It's a case in which \mention{or} plus the modifying phrase \mention{but not both} together express exclusive disjunction---it's just that the latter phrase \mention{but not both} is tacit. 
- 	Special cases like these, which are rare but salient, might lead you to think that disjunctions in English are sometimes exclusive.  However, in these cases contextual clues give such disjunctions their exclusive character, independently of the literal meaning of the relevant sentences.  We know as a matter of cultural familiarity that restaurants don't offer \emph{both} soup \emph{and} salad unless we pay extra.  When intergalactic visitors discover Earth and visit our restaurants, we recommend that waiters make the exclusivity of the disjunction explicit.  (Otherwise there could be an interstellar incident!)  They can even use \GSL{} to do so:
+I might say \q{Lydia either took a boat or a plane}. 
+It's not physically possible for Lydia to travel by distinct modes of travel at the same time.
+However, we must distinguish the meaning of the sentence from what we otherwise know to be possible.
+We know that it's impossible to travel by boat and by plane at the same time.
+It's tempting to assimilate that fact into the sentence's meaning, but that leap is unjustified. 
+Someone could understand \q{Lydia either took a boat or a plane} and agree that it's true, but also think that both disjuncts are true.
+Perhaps Lydia's journey was disjointed and involved both modes of travel.
+To conclude that this disjunction is exclusive requires more information than the sentence itself conveys.
+
+There are two cases in which it's more plausible that \mention{or} is exclusive.  
+The first case involves commands or rules. 
+If you are at a fancy restaurant and a waiter says, \q{You may have the soup or a salad}, it's typically understood that you may have one or the other, but not both.
+
+\begin{table}
+	\renewcommand{\arraystretch}{1.5}%
+	\begin{center}
+		\begin{tabular}{ l l } %p{2.2in} p{2in}
+			\toprule
+			\textbf{English} & \textbf{\GSL{}} \\ 
+			\midrule
+			$\PHI$ or $\THETA$ & $\disjunction{\CAPPHI}{\CAPTHETA}$ \\
+			either $\PHI$ or $\THETA$ & $\disjunction{\CAPPHI}{\CAPTHETA}$ \\
+			$\PHI$ or $\THETA$, but not both & $\conjunction{\pardisjunction{\CAPPHI}{\CAPTHETA}}{\negation{\parconjunction{\CAPPHI}{\CAPTHETA}}}$ \\
+			\bottomrule
+		\end{tabular} 
+		\caption{Translations for Common English Disjunctions}
+		\label{TransTableC} 
+	\end{center}
+\end{table}
+
+The second case involves elliptical clauses. 
+The phrase \mention{$\PHI$ or $\THETA$} can be short for \mention{$\PHI$ or $\THETA$, but not both}. 
+If so, then the intended message is exclusive. 
+But this isn't a case in which the \mention{or} itself expresses exclusive disjunction. 
+The \mention{or} plus the tacit phrase \mention{but not both} together express exclusive disjunction.
+
+Special cases like these, which are rare but salient, might lead you to think that disjunctions in English are sometimes exclusive.
+However, in these cases there are context clues indicating their exclusive character, separate from the meaning of the relevant sentences.
+We know as a matter of cultural familiarity that restaurants don't offer \emph{both} soup \emph{and} salad unless we pay extra.  
+When intergalactic visitors discover Earth and visit our restaurants, we recommend that waiters make the exclusivity of the disjunction explicit.
+Otherwise there could be an interstellar diplomatic incident!
+They can even use \GSL{} to do so:
  	
  \begin{menumerate}
- 	\item The visiting intergalactic visitor may have the soup \emph{or} a salad, \emph{but} \emph{not} both.
+ 	\item The intergalactic visitor may have the soup \emph{or} a salad, \emph{but} \emph{not} both.
  \end{menumerate}
  	
-\noindent{}This sentence has several truth-functional connectives, so we must be careful to understand which connectives govern which.  We recognize \mention{or}, \mention{but}, and \mention{not}.  In this case the \mention{but} governs everything else, so the whole sentence is a conjunction.  The visitor may have the soup or a salad, \emph{and} he may not have both the soup and a salad.  (As we fill out the rest of the compressed meaning of the sentence we find another connective.)  On to the translation:
+\noindent{}This sentence has several truth-functional connectives, so we must be careful to understand which connectives govern which.
+The \mention{but} governs everything else, so the whole sentence is a conjunction.
+The visitor may have the soup or a salad, \emph{and} he may not have both the soup and a salad.
+The translation key:
 
+\begin{description}[itemsep=0em]
+	\item[Translation Key:] \hfill{} 
 	\begin{description}[itemsep=0em]
-		\item[Translation Key:] \hfill{} 
-		\begin{description}[itemsep=0em]
-			\item $\Pl$: The visiting intergalactic visitor may have the soup.
-			\item $\Dl$: The visiting intergalactic visitor may have a salad.
-		\end{description} 
-	\end{description}
+		\item $\Pl$: The visiting intergalactic visitor may have the soup.
+		\item $\Dl$: The visiting intergalactic visitor may have a salad.
+	\end{description} 
+\end{description}
 
-\noindent{}First we translate the \CAPS{lhs} of the \mention{but}: $\pardisjunction{\Pl}{\Dl}$.  If we translate the \CAPS{rhs} without the \mention{not}---i.e., \mention{the intergalactic visitor may have both soup and a salad}---we get: $\parconjunction{\Pl}{\Dl}$.  We negate the result to account for the \mention{not}: $\negation{\parconjunction{\Pl}{\Dl}}$.  Putting it all together, the resulting translation is: $\parconjunction{\pardisjunction{\Pl}{\Dl}}{\negation{\parconjunction{\Pl}{\Dl}}}$.
+\noindent{}First we translate the \CAPS{lhs} of the \mention{but}: $\pardisjunction{\Pl}{\Dl}$.
+If we translate the \CAPS{rhs} without the \mention{not}---i.e., \mention{the intergalactic visitor may have both soup and a salad}---we get: $\parconjunction{\Pl}{\Dl}$.
+We negate the result to account for the \mention{not}: $\negation{\parconjunction{\Pl}{\Dl}}$.
+Putting it all together, the resulting translation is: $\parconjunction{\pardisjunction{\Pl}{\Dl}}{\negation{\parconjunction{\Pl}{\Dl}}}$.
 
-Another connective of English is the \emph{conditional}.  Conditionals are expressible in many ways, but perhaps the most distinctive way is \mention{if $\ldots$ then $\ldots$.}  For example,
+\subsection{Conditionals and Biconditionals}\label{Translating GSLConditionals}
+
+Another connective of English is the \emph{conditional}.
+Conditionals are expressible in many ways, but perhaps the most distinctive way is \mention{if $\ldots$ then $\ldots$.}
 
 \begin{menumerate}
 	\item If George Washington crosses the Delaware River then the Hessians will be defeated.
 \end{menumerate}
 
-\noindent{}Is the conditional of English a truth-functional connective?  This is a hotly debated topic that has yet to be resolved.  SL has only truth-functional connectives, so if the conditional is not truth-functional then we cannot fully capture the meaning in SL.  For our purposes, we can show that $\HORSESHOE$ is the best model of the conditional and as we discuss translations we can see how well the model fits English.
+\noindent{}Is the conditional of English a truth-functional connective?
+This is a disputed topic that has yet to be resolved.
+SL has only truth-functional connectives, so if the conditional is not truth-functional then \mention{$\HORSESHOE$} cannot fully capture its meaning.
+We can show, however, that \mention{$\HORSESHOE$} is the best truth-functional representation of the conditional.
+As we discuss translations the reader will get a sense of how well the model fits English.
+
+Let's consider a few examples.
+An \GSL{} sentence of the form $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ is false on a model $\IntA$ \Iff $\IntA$ makes $\CAPPHI$ true and $\CAPTHETA$ false.
+That gives us the correct assessment of the English sentence:
+
+\begin{menumerate}
+	\item If $2+2=4$ then $4+4=6$.
+\end{menumerate}
+
+\noindent{}On all other combinations of truth values for $\CAPPHI$ and $\CAPTHETA$, \GSL{} sentences of the form $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ are true.
+Consider a case in which both the \CAPS{lhs} and the \CAPS{rhs} of a conditional are false.
+Some such conditionals are true:
+
+\begin{menumerate}
+	\item\label{GSLTransGW1} If George Washington landed on the moon then George Washington landed on the moon.
+\end{menumerate}
+
+\noindent{}This sentence is not merely true. It's a logical truth.
+Other instances are more dubious: 
+
+\begin{menumerate}
+	\item\label{GSLTransGW2} If Soviet cosmonauts landed on the moon in 1968, then George Washington was never elected President.
+\end{menumerate}
+
+\noindent{}No truth-functional connective allows us to distinguish the last two examples.
+In both cases we can only refer to the truth values of each side: the \CAPS{lhs} and the \CAPS{rhs} are false.
+In order to admit \ref{GSLTransGW1} as true, we must also admit \ref{GSLTransGW2}.
+This is one price we must pay for truth-functional conditionals.
+
+Here is a sentence in which both the \CAPS{lhs} and the \CAPS{rhs} are true:
+
+\begin{menumerate}
+	\item\label{GSLTransGW3} If George Washington crossed the Delaware River then George Washington crossed the Delaware River.
+\end{menumerate}
+
+\noindent{}As with \ref{GSLTransGW1} this is not merely true, it's a logical truth.
+Consider an \GSL{} model that makes $\CAPPHI$ false and $\CAPTHETA$ true, and hence makes $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ true.
+We can replace the \CAPS{lhs} of \ref{GSLTransGW3} with a false conjunction and the result is still true:
+
+\begin{menumerate}
+	\item If George Washington crossed the Delaware River and Thomas Jefferson invented bifocals, then George Washington crossed the Delaware River.
+\end{menumerate}
+
+\noindent{}The true inventor of bifocals was probably Benjamin Franklin.
+Even though the conjunction on the \CAPS{lhs} is false, the sentence is still a logical truth.
+The corresponding \GSL{} translation is \CAPS{tft}: $\parhorseshoe{\parconjunction{\Gl}{\Bl}}{\Gl}$.
+So, while the \mention{$\HORSESHOE$} is not a perfect match for the English language conditional, it is the best truth-functional translation.
 
 \begin{table}
 	\renewcommand{\arraystretch}{1.5}%
@@ -244,30 +423,19 @@ Another connective of English is the \emph{conditional}.  Conditionals are expre
 			assuming $\PHI$, $\THETA$ & $\horseshoe{\CAPPHI}{\CAPTHETA}$ \\
 			for $\PHI$, it's necessary that $\THETA$ & $\horseshoe{\CAPPHI}{\CAPTHETA}$ \\
 			for $\PHI$, it's sufficient that $\THETA$ & $\horseshoe{\CAPTHETA}{\CAPPHI}$ \\
+			$\PHI$ if and only if $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
+			for $\PHI$ it's necessary and sufficient that $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
+			$\PHI$ just when $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
+			$\PHI$ just in case $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
 			\bottomrule
 		\end{tabular}% 
-		\caption{Translations for Common English Conditionals}
+		\caption{Translations for Common English Conditionals and Biconditionals}
 		\label{TransTableA}
 	\end{center}
 \end{table}
 
-How well does the \mention{$\HORSESHOE$} capture the meaning of the English language conditional?  The only way for an \GSL{} sentence of the form $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ to be false on a model $\IntA$ is for $\IntA$ to make $\CAPPHI$ true and $\CAPTHETA$ false.  Clearly such an assignment of truth values makes corresponding English language conditionals false: \q{If $2+2=4$ then the US State Department is secretly controlled by super-intelligent hamsters.}  So far, so good.  On all other combinations of truth values for $\CAPPHI$ and $\CAPTHETA$, \GSL{} sentences of the form $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ are true.  Consider cases in which both the \CAPS{lhs} and the \CAPS{rhs} of a conditional are false.  Some such conditionals are true, for example: \q{If George Washington landed on the moon then George Washington landed on the moon.}  Indeed, this sentence seems to be a logical truth.  Others are more dubious: \q{If Soviet cosmonauts landed on the moon in 1968, then a cabal of super-intelligent hamsters will seize control of the US federal government later this year.}  We cannot distinguish these connectives purely by reference to the truth values of each side; in both cases, the \CAPS{lhs} and the \CAPS{rhs} are each false.  In order to admit the former as true, we must also admit the latter.  This is one price of understanding conditionals as truth-functional.
-
-Next we address the case in which an \GSL{} model makes $\CAPPHI$ false and $\CAPTHETA$ true, and hence also makes $\parhorseshoe{\CAPPHI}{\CAPTHETA}$ true.  But first consider the following, in which each side is true:
-
-\begin{menumerate}
-	\item If George Washington crossed the Delaware River then George Washington crossed the Delaware River.
-\end{menumerate}
-
-\noindent{}This sentence is a logical truth of English.  But if we were to turn the \CAPS{lhs} into a conjunction and insert a false conjunct, we'll still think the result is true.  E.g.,
-
-\begin{menumerate}
-	\item If George Washington crossed the Delaware River and Thomas Jefferson invented bifocals, then George Washington crossed the Delaware River.
-\end{menumerate}
-
-\noindent{}(The true inventor of bifocals was probably Benjamin Franklin.)  Even though the conjunction on the \CAPS{lhs} is false, the whole conditional is still a logical truth.  And, indeed, the \GSL{} translation is \CAPS{tft}: $\parhorseshoe{\parconjunction{\Gl}{\Bl}}{\Gl}$.  So, while the \mention{$\HORSESHOE$} is not a perfect analogue of the English language conditional, it seems to be the best truth-functional translation.
-
-Biconditionals in English are closely related to conditionals, and so they're subject to some of the same worries.  Nevertheless, we can treat them as truth-functional connectives for the purpose of translating them into \GSL{}:
+Biconditionals in English are closely related to conditionals, so they're subject to some of the same worries.
+Nevertheless, we treat them as truth-functional connectives for the purpose of translating them into \GSL{}:
 
 \begin{menumerate}
 	\item Ruth may play outside if and only if she cleans her room.
@@ -281,54 +449,54 @@ Biconditionals in English are closely related to conditionals, and so they're su
 		\end{description} 
 	\end{description}
 
-\noindent{}With this key we may translate the sentence as: $\partriplebar{\Hl}{\Cl}$.  We use the \mention{$\TRIPLEBAR$} to translate English biconditionals.
+\noindent{}With this key we translate the sentence as: $\partriplebar{\Hl}{\Cl}$.
+We use \mention{$\TRIPLEBAR$} to translate English biconditionals.
 
-\begin{table}
-	\renewcommand{\arraystretch}{1.5}%
-	\begin{center}
-		\begin{tabular}{ l l } %p{2.2in} p{2in}
-			\toprule
-			\textbf{English} & \textbf{\GSL{}} \\ 
-			\midrule
-			$\PHI$ if and only if $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
-			for $\PHI$ it's necessary and sufficient that $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
-			$\PHI$ just when $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
-			$\PHI$ just in case $\THETA$ & $\triplebar{\CAPPHI}{\CAPTHETA}$ \\
-			\bottomrule
-		\end{tabular} 
-		\caption{Translations for Common English Biconditionals}
-		\label{TransTableB}
-	\end{center}
-\end{table}
+Sometimes the word \mention{if} is used to express a biconditional:
 
-We saw above that the restaurant context may add exclusivity to an \mention{or}, which by itself is inclusive.  Similarly, an \mention{if} in a particular context may be interpreted as an \mention{iff} because of background context.  As in other cases, this context adds more information but is not itself part of the sentence.  A parent who says, \mention{You can have ice cream if you finish your homework,} is relying on context to add \mention{but not otherwise}.  Otherwise, it might turn out that the child can have ice cream either way.  We know that parents often use punishments and rewards to shape child behavior, so it is appropriate to interpret them accordingly.  Nevertheless, our policy is to translate what the sentence says literally. If it is important for an argument to articulate what is being added by context, that should be specified explicitly.
+\begin{menumerate}
+	\item\label{RuthIf} Ruth may play outside if she cleans her room.
+\end{menumerate}
 
-Let's look at a few more example translations.
+\noindent{}But what if she doesn't clean her room?
+Presumably she will not be allowed to play outside.
+Yet this is not the literal meaning of the word \mention{if}.
+We use context to supply the implicit \mention{but not otherwise} to the sentence.
+It is well-known that parents use punishments and rewards to shape child behavior, so we rightly interpret \ref{RuthIf} as shorthand.
+
+In general it is our policy is to translate what each sentence says literally.
+If it is important for an argument to articulate what is being added by context, that should be specified explicitly.
+
+\subsection{Further Examples}\label{GSLTransExamples}
+
+Let's look at a few more translations.
 
 \begin{majorILnc}{\LnpEC{GSLTranslationExampleB}} %implicature
 	\begin{menumerate}
-		\item\label{GSLTransSentenceE} Either Mia flew or both Jackson and Harper took off early.
+		\item\label{GSLTransSentenceE} Either Lydia flew or both Jackson and Helen took off early.
 	\end{menumerate} 
-	The first step is to identify the main connective of the sentence. 
-	In this case it's \mention{either $\ldots$ or}. When we translate \mention{either $\ldots$ or} as $\VEE$, we get: 
+	The first step is to identify the main connective of the sentence: \mention{either $\ldots$ or}.
+	We translate \mention{either $\ldots$ or} as $\VEE$: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceF} (Mia flew) $\VEE$ (both Jackson and Harper took off early).
+		\item\label{GSLTransSentenceF} (Lydia flew) $\VEE$ (both Jackson and Helen took off early).
 	\end{menumerate}
-	Notice that the word ``both'' clarifies the logical structure of the sentence. Without it, the sentence is, ``Either Mia flew or Jackson and Harper took off early.'' This is ambiguous, and could be read as saying that either Mia or Jackson flew. 
+	Notice that the word ``both'' clarifies the logical structure of the sentence.
+	Without it, the sentence is, ``Either Lydia flew or Jackson and Helen took off early.''
+	This is ambiguous, and could be read as saying that either Lydia or Jackson flew. 
 	
-	Next we identify and translate the main connectives in the connecting clauses. 
-	There are no connectives in \mention{Mia flew}, so there is nothing to do with it. 
-	There is one connective in \mention{both Jackson and Harper took off early}, \mention{both $\ldots$ and}. 
-	So we finish by translating this connective as a conjunction ($\WEDGE$):  
+	Next we identify and translate the main connectives in the connected clauses. 
+	There are no connectives in \mention{Lydia flew}, so there is nothing to do with it. 
+	There is one connective in \mention{both Jackson and Helen took off early}, \mention{both $\ldots$ and}. 
+	We translate this as \mention{$\WEDGE$}:  
 	\begin{menumerate}
-		\item\label{GSLTransSentenceG} (Mia flew) $\VEE$ ((Jackson took off early) $\WEDGE$ (Harper took off early)).
+		\item\label{GSLTransSentenceG} (Lydia flew) $\VEE$ ((Jackson took off early) $\WEDGE$ (Helen took off early)).
 	\end{menumerate}
 	\begin{description}[itemsep=0em]
 		\item[Translation Key:] \hfill{} 
 		\begin{description}[itemsep=0em]
-			\item[] $\Nl$: Mia flew.
+			\item[] $\Nl$: Lydia flew.
 			\item[] $\Jl$: Jackson took off early. 
-			\item[] $\Hl$: Harper took off early. 
+			\item[] $\Hl$: Helen took off early. 
 		\end{description}
 	\end{description}
 	\begin{menumerate}
@@ -338,39 +506,37 @@ Let's look at a few more example translations.
 
 \begin{majorILnc}{\LnpEC{GSLTranslationExampleC}}
 	\begin{menumerate}
-		\item\label{GSLTransSentenceI} If Mia got the job and Jackson didn't, then Mia will take off tomorrow and Harper will have to come in.
+		\item\label{GSLTransSentenceI} If Lydia got the job and Jackson didn't, then Lydia will take off tomorrow and Helen will have to come in.
 	\end{menumerate}
-	As before we identify the main connective, which is \mention{if $\ldots$ then}. 
-	This is translated as a conditional ($\rightarrow$), yielding: 
+	We identify the main connective, \mention{if $\ldots$ then}. 
+	This is translated as \mention{$\rightarrow$}: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceJ} (Mia got the job and Jackson didn't) $\HORSESHOE$ (Mia will take off tomorrow and Harper will have to come in).
+		\item\label{GSLTransSentenceJ} (Lydia got the job and Jackson didn't) $\HORSESHOE$ (Lydia will take off tomorrow and Helen will have to come in).
 	\end{menumerate}
-	Next we look at the \CAPS{LHS} of the conditional, \mention{Mia got the job and Jackson didn't}. 
-	The main (and only) connective of this sentence is \mention{and}, which we translate as a conjunction ($\WEDGE$), yielding: 
+	Next we look at the \CAPS{LHS} of the conditional, \mention{Lydia got the job and Jackson didn't}. 
+	The main (and only) connective of this sentence is \mention{and}, which we translate as \mention{$\WEDGE$}: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceK} ((Mia got the job) $\WEDGE$ (Jackson didn't get the job)) $\HORSESHOE$ (Mia will take off tomorrow and Harper will have to come in).
+		\item\label{GSLTransSentenceK} ((Lydia got the job) $\WEDGE$ (Jackson didn't get the job)) $\HORSESHOE$ (Lydia will take off tomorrow and Helen will have to come in).
 	\end{menumerate}
 
-	Note that the right-hand conjunct \mention{Jackson didn't} is an elliptical clause. 
-	The sentence is saying that Mia got the job and Jackson didn't \emph{get the job}.  The word \mention{did} can function sort of like a pronoun, except instead of referring to some person or object it alludes to another clause.
-	We've made this explicit in by putting the part of the clause that was left tacit in brackets. 
-The clause \mention{Jackson didn't} has a negation in it. It combines \mention{not} with \mention{Jackson got the job}. 
-	
-	We finish the translation by working on the \CAPS{RHS} of the sentence, which is a conjunction: 
+	\noindent{}The right-hand conjunct \mention{Jackson didn't} is an elliptical clause. 
+	Lydia got the job and Jackson didn't \emph{get the job}.
+	We make this tacit phrase explicit by putting it in brackets. 
+	The clause \mention{Jackson didn't} has a negation in it. It combines \mention{not} with \mention{Jackson got the job}. 
+	We finish the translation by translating the conjunction on the \CAPS{RHS} of the sentence: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceL} ((Mia got the job) $\WEDGE$ ( $\NEGATION$ (Jackson got the job))) $\HORSESHOE$ ((Mia will take off tomorrow) $\WEDGE$ (Harper will have to come in)).
+		\item\label{GSLTransSentenceL} ((Lydia got the job) $\WEDGE$ ( $\NEGATION$ (Jackson got the job))) $\HORSESHOE$ ((Lydia will take off tomorrow) $\WEDGE$ (Helen will have to come in)).
 	\end{menumerate}
-	There are no more connectives, so from here we just need a translation key. 
+	There are no more connectives, so we are ready to construct a translation key. 
 	\begin{description}[itemsep=0em]
 		\item[Translation Key:] \hfill{} 
 		\begin{description}[itemsep=0em]
-			\item[] $\Nl$: Mia got the job.
+			\item[] $\Nl$: Lydia got the job.
 			\item[] $\Jl$: Jackson got the job. 
-			\item[] $\Il$: Mia will take off tomorrow.
-			\item[] $\Hl$: Harper will have to come in late.  
+			\item[] $\Il$: Lydia will take off tomorrow.
+			\item[] $\Hl$: Helen will have to come in late.  
 		\end{description}
 	\end{description}
-	We can then finish the translation: 
 	\begin{menumerate}
 		\item\label{GSLTransSentenceM} $\horseshoe{\parconjunction{\Nl}{\negation{\Jl}}}{\parconjunction{\Il}{\Hl}}$
 	\end{menumerate}
@@ -378,23 +544,20 @@ The clause \mention{Jackson didn't} has a negation in it. It combines \mention{n
 
 
 \begin{majorILnc}{\LnpEC{GSLTranslationExampleE}}
-	Some connectives in English are not complex, but their translations into \GSL{} are complex because we did not introduce individual
-	symbols for all possible truth-functions. Nevertheless, we can express any truth-function using some combination of the \GSL{} connectives that we \emph{do} have.
+	Some connectives in English do not correspond to any single \GSL{} connective.
+	However, we can express any truth-function using some combination of the \GSL{} connectives that we \emph{do} have.
 	For example: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceU} Neither Mia nor Harper were late.
+		\item\label{GSLTransSentenceU} Neither Lydia nor Helen were late.
 	\end{menumerate} 
-	Here the main connective is \mention{neither $\ldots$ nor}, and it joins the two sentences \mention{Mia [was late]} and \mention{Harper [was] late}. 
-	(Neither of these two sentences is made up of any other connectives.) 
-	Although \mention{neither $\ldots$ nor} is not complex, it is complex relative to \GSL{}. 
-	\GSL{} has no single connective which can correctly translate \mention{neither $\ldots$ nor}.%
-	\footnote{%
-		But recall the logical connective \CAPS{NOR}, discussed at the very end of section \mvref{Disjunctive Normal Form}. 
-		This connective would correctly translate \mention{neither $\ldots$ nor}, but isn't part of \GSL{}. 
+	The connective is \mention{neither $\ldots$ nor}, and it joins \mention{Lydia [was late]} and \mention{Helen [was] late}. 
+	There is no single \GSL{} connective that has the same truth-function as \mention{neither $\ldots$ nor}.\footnote{%
+		But recall the logical connective \CAPS{NOR}, discussed at the end of section \mvref{Disjunctive Normal Form}. 
+		\CAPS{NOR} correctly translates \mention{neither $\ldots$ nor}, but isn't part of \GSL{}. 
 	} 
 	Recall theorem \mvref{Truth-functional Expressive Completeness of GSL}, which says that any truth-functional connective can be expressed in \GSL{}. 
-	This means there must be some way to capture \mention{neither $\ldots$ nor} using a complex of connectives in \GSL{}. 
-	There are two ways to do this.  We may translate \mention{neither $\PHI$ nor $\THETA$} as either $\negation{\pardisjunction{\CAPPHI}{\CAPTHETA}}$ or $\conjunction{\negation{\CAPPHI}}{\negation{\CAPTHETA}}$.
+	It follows that there is some combination of \GSL{} connectives we can use to translate \mention{neither $\PHI$ nor $\THETA$}.
+	There are two equivalent translations: $\negation{\pardisjunction{\CAPPHI}{\CAPTHETA}}$ and $\conjunction{\negation{\CAPPHI}}{\negation{\CAPTHETA}}$.
 	\begin{table}
 		\renewcommand{\arraystretch}{1.5}%
 		\begin{center}
@@ -420,33 +583,29 @@ The clause \mention{Jackson didn't} has a negation in it. It combines \mention{n
 	\end{table}  
 	So we have: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceV} $\NEGATION$ ((Mia was late) $\VEE$ (Harper was late)).
+		\item\label{GSLTransSentenceV} $\NEGATION$ ((Lydia was late) $\VEE$ (Helen was late)).
 	\end{menumerate} 
 	With the key: 
 	\begin{description}[itemsep=0em]
 		\item[Translation Scheme:] \hfill{} 
 		\begin{description}[itemsep=0em]
-			\item $\Nl$: Mia was late.
-			\item $\Hl$: Harper was late. 
+			\item $\Nl$: Lydia was late.
+			\item $\Hl$: Helen was late. 
 		\end{description} 
 	\end{description}
-	The final translation of sentence (\ref{GSLTransSentenceU}) is: 
+	The final translation of sentence \ref{GSLTransSentenceU} is: 
 	\begin{menumerate}
 		\item\label{GSLTransSentenceW} $\negation{\pardisjunction{\Nl}{\Hl}}$
 	\end{menumerate} 
 \end{majorILnc}
 
-\noindent{}We conclude this section by emphasizing two points.
-First, the tables in this chapter should be thought of as rough-and-ready guides. 
+\noindent{}The tables in this chapter should be thought of as rough-and-ready guides. 
 Although many particular uses of \mention{and} express conjunction, not all do. 
 Sometimes \mention{and} doesn't function as a connective at all, e.g. as in \mention{it will be years and years before the trees bear fruit} \citep[107]{Smith2012}.
 Other times \mention{and} functions as a connective, but expresses a conditional instead of a conjunction, e.g. \mention{study hard, and you will pass the exam} \citep[107]{Smith2012}.
 
-Whenever deciding on how to translate a connective from English you must carefully determine what is actually being expressed. Many English sentences are ambiguous.  We usually don’t notice because the context directs our attention to one meaning rather than the other.  For example, ``Maria and Paul are married'' can convey the conjunction ``Maria is married and Paul is married'', or it can express ``Maria and Paul are married to each other'' in which case the `and' is not a conjunction but is serving a different logical purpose to be discussed in the next section.
-
-The second point concerns how to decide what \GSL{} connective (or complex of connectives) translates a given English connective. 
-The idea, again, is to make sure that the chosen \GSL{} connective expresses the same truth function as the English connective---that is, that the truth of the sentences formed by these connectives depends in the same way on the truth of the (sub)sentences that were joined. 
-  
+To translate a connective from English appropriately you must first determine what is being expressed, drawing on context as necessary to resolve ambiguities.
+For example, ``Maria and Paul are married,'' can convey the conjunction ``Maria is married and Paul is married,'' or it can express ``Maria and Paul are married to each other,'' in which case the `and' is not a conjunction, but is serving a different logical purpose to be discussed in the next section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{QL Applications}
@@ -459,7 +618,8 @@ Let's say we want to translate the following sentence into \emph{\GSL{}}:
 	\item\label{GQLTrans1} Mary is happy, smart, adorable, and a child.
 \end{smenumerate}
 
-\noindent{}The only connective we can translate is the \mention{and}.  The translation key will look something like the following:
+\noindent{}The only connective we can translate is the \mention{and}.
+The translation key:
 
 \begin{description}[itemsep=0em]
 	\item[Translation Key:] \hfill{} 
@@ -471,9 +631,13 @@ Let's say we want to translate the following sentence into \emph{\GSL{}}:
 	\end{description}
 \end{description}
 
-\noindent{}So the \GSL{} result is: $\parconjunction{\conjunction{\Hl}{\Rl}}{\conjunction{\Al}{\Cl}}$.  This translation might work for certain purposes, but the various conjuncts have nothing in common, as a matter of logical structure.  There is nothing to indicate explicitly that each conjunct is about the same person, unless we consult the translation key.
+\noindent{}The \GSL{} result is: $\parconjunction{\conjunction{\Hl}{\Rl}}{\conjunction{\Al}{\Cl}}$.
+This translation might work for certain purposes, but the conjuncts have no logical connection with each other.
+Nothing in \GQL{} indicates that each conjunct is about the same person.
 
-\GQL{} gives us more precision by providing individual constants and predicates.  Instead of picking out simple sentences of English, we may instead pick out subjects and predicates of simple sentences.  Let's use the following \GQL{} key to translate (\ref{GQLTrans1}):
+In \GQL{} we can express that shared logical connection with constants and predicates.
+Translation keys of \GQL{} connect nouns to constants and English predicates to \GQL{} predicates.
+Let's use the following \GQL{} key to translate \ref{GQLTrans1}:
 
 \begin{description}[itemsep=0em]
 	\item[Translation Key:] \hfill{} 
@@ -486,13 +650,17 @@ Let's say we want to translate the following sentence into \emph{\GSL{}}:
 	\end{description}
 \end{description}
 
-\noindent{}Now the result is: $\parconjunction{\conjunction{\Hp{\constant{m}}}{\Rp{\constant{m}}}}{\conjunction{\Ap{\constant{m}}}{\Cp{\constant{m}}}}$.  This translation is more complex than the \GSL{} translation, but we can see that we are predicating several things about the same person.  This gives \GQL{} more power and precision than \GSL{}.  Consider the following sentence:
+\noindent{}The result is: $\parconjunction{\conjunction{\Hp{\constant{m}}}{\Rp{\constant{m}}}}{\conjunction{\Ap{\constant{m}}}{\Cp{\constant{m}}}}$.
+This translation allows us to see that we are predicating several things about the same person.
+On to another example:
 
 \begin{menumerate}
 	\item\label{GQLTrans2} Ronnie and Demaryius are athletic, but Peyton isn't.
 \end{menumerate}
 
-\noindent{}We \emph{could} translate this as a conjunction with three conjuncts in \GSL{}.  However, this would not make clear that the same predicate either applies, or doesn't, to each of the three.  Instead, let's use the following \GQL{} key:
+\noindent{}We \emph{could} translate this as a conjunction with three conjuncts in \GSL{}.
+However, this would not make clear that the same predicate either applies, or doesn't, to each of the three.
+Instead, let's use the following \GQL{} key:
 
 \begin{description}[itemsep=0em]
 	\item[Translation Key:] \hfill{} 
@@ -504,19 +672,35 @@ Let's say we want to translate the following sentence into \emph{\GSL{}}:
 	\end{description}
 \end{description}
 
-\noindent{}The result: $\parconjunction{\conjunction{\Ap{\constant{r}}}{\Ap{\constant{d}}}}{\negation{\Ap{\constant{p}}}}$.  Now we can clearly see the common predicate in each conjunct.
+\noindent{}The result: $\parconjunction{\conjunction{\Ap{\constant{r}}}{\Ap{\constant{d}}}}{\negation{\Ap{\constant{p}}}}$.
+We see the common predicate in each conjunct.
 
-The translation keys here resemble the \GQL{} models we provide; for example, see table \ref{table:Example Interpretations} in Chapter \ref{quantifierlogic}.  One difference is that we don't have a domain assigned in either of the \GQL{} keys above.  However, we could add a domain to each of the above, and understand the constant and predicate lines of the key as making assignments from the domain.  Hence, we can effectively treat model assignments as also playing a translation key role.
+The translation keys here resemble the \GQL{} models we provided earlier.\footnote{
+	See table \ref{table:Example Interpretations} in Chapter \ref{quantifierlogic}.
+}
+One difference is that we don't have a domain assigned in either of the \GQL{} keys above.
+We could add a domain to each of the above, and interpret the constant and predicate lines of the key as making assignments from the domain.
+Hence, we can usually treat informal model assignments as translation keys.
 
 \subsection{Quantifiers}
 
-We mentioned in Chapter \ref{quantifierlogic1} that the quantifier \mention{$\forall$} corresponds to the English phrases \mention{all} or \mention{every}.  Let's say we want to claim that every member of some class is also a member of some other class.  For example:
+The quantifier \mention{$\forall$} corresponds to the English phrases \mention{all} or \mention{every}.
+Let's say we want to claim that every member of some set is also a member of some other set:
 
 \begin{menumerate}
 	\item\label{GQLTrans3} All dogs are furry.
 \end{menumerate}
 
-\noindent{}We can imagine that we have two sets: the set of all dogs and the set of all furry things.  Sentence (\ref{GQLTrans3}) effectively claims that the set of dogs is a subset of the set of furry things.  How do we translate this into \GQL{}?  We see the word \mention{all}, so we'll want to use a universal quantifier.  This isn't obvious from the sentence itself, but whenever we want to make claims such that one set is a subset of another, we'll nearly always want to translate it into the following form: $\universal{\ALPHA}\parhorseshoe{\CAPPHI}{\CAPTHETA}$; i.e., with a \mention{$\forall$} governing an \mention{$\HORSESHOE$}.  This makes more sense if we paraphrase (\ref{GQLTrans3}) in MathEnglish as: \mention{For all $\variable{x}$, if $\variable{x}$ is a dog then $\variable{x}$ is furry.}  For the rest of the translations in this section, let's use the following model as our translation key:
+\noindent{}There are two sets: the set of all dogs and the set of all furry things.
+Sentence \ref{GQLTrans3} effectively claims that the set of dogs is a subset of the set of furry things.
+How do we translate this into \GQL{}?
+The word \mention{all} typically calls for a universal quantifier.
+
+It isn't obvious from the sentence itself, but whenever we want to make a claim of the form \mention{All $\PHI$ are $\THETA$}, we nearly always want to translate it as: $\universal{\ALPHA}\parhorseshoe{\CAPPHI}{\CAPTHETA}$.
+That is, with a \mention{$\forall$} governing an \mention{$\HORSESHOE$}.
+This makes more sense if we paraphrase \ref{GQLTrans3} in MathEnglish as: \mention{For all $\variable{x}$, if $\variable{x}$ is a dog then $\variable{x}$ is furry.}
+
+For the rest of the translations in this section we use the following model description as our translation key:
 
 \begin{description}[itemsep=0em]
 	\item[Animals model:] \hfill{} 
@@ -532,69 +716,106 @@ We mentioned in Chapter \ref{quantifierlogic1} that the quantifier \mention{$\fo
 	\end{description}
 \end{description}
 
-\noindent{}So we may translate (\ref{GQLTrans3}) as: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Rp{\variable{x}}}$.  We may translate other English words using the universal quantifier as well.  The following uses the word \mention{no} to make a universal claim.
+\noindent{}We translate \ref{GQLTrans3} as: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\Rp{\variable{x}}}$.
+
+Other English words can be translated with the universal quantifier.
+The following uses the word \mention{no} to make a universal claim:
 
 \begin{menumerate}
 	\item\label{GQLTrans4} No dogs are furry.
 \end{menumerate}
 
-\noindent{}Again, we can think of this as a claim about two sets.  This sentence basically claims that the set of dogs and the set of furry things are disjoint, i.e., that nothing is a member of both sets.  We can usually translate such claims into the following form in \GQL{}: $\universal{\ALPHA}\parhorseshoe{\CAPPHI}{\negation{\CAPTHETA}}$.  To see this, consider the following MathEnglish paraphrase: \mention{For all $\variable{x}$, if $\variable{x}$ is a dog then $\variable{x}$ is not furry.}  The resulting translation is thus:  $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\negation{\Rp{\variable{x}}}}$.  The word \mention{only} can also be used for universal claims:
+\noindent{}Again, we can think of this as a claim about two sets: the set of dogs and the set of furry things.
+This sentence is tantamount to a claim that these sets are disjoint, i.e., that nothing is a member of both.
+We usually translate such claims into the following form in \GQL{}: $\universal{\ALPHA}\parhorseshoe{\CAPPHI}{\negation{\CAPTHETA}}$.
+To understand why, consider the following MathEnglish paraphrase: \mention{For all $\variable{x}$, if $\variable{x}$ is a dog then $\variable{x}$ is not furry.}
+The resulting translation is: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\negation{\Rp{\variable{x}}}}$.
+
+The word \mention{only} can also be used for universal claims:
 
 \begin{menumerate}
 	\item\label{GQLTrans5} Only dogs are furry.
 \end{menumerate}
 
-\noindent{}This is translated in exactly the same way as sentence (\ref{GQLTrans3}), except that we reverse the order of the LHS and the RHS of the conditional governed by the \mention{$\forall$}.  It's roughly equivalent to the claim that \mention{All furry things are dogs.}  So: $\universal{\variable{x}}\parhorseshoe{\Rp{\variable{x}}}{\Dp{\variable{x}}}$.
+\noindent{}This is translated in the same way as sentence \ref{GQLTrans3}, except that we reverse the order of the LHS and the RHS of the conditional governed by the \mention{$\forall$}.
+It's equivalent to the claim that \mention{All furry things are dogs.}
+So: $\universal{\variable{x}}\parhorseshoe{\Rp{\variable{x}}}{\Dp{\variable{x}}}$.
 
-We said in Chapter \ref{quantifierlogic} that \mention{$\exists$} corresponds to the English phrases \mention{there exists}, \mention{there is}, or \mention{some}.  Consider the following existential sentences.
+The \GQL{} symbol \mention{$\exists$} corresponds to the English phrases \mention{there exists}, \mention{there is}, or \mention{some}.
+Consider the following existential sentences.
 
 \begin{menumerate}
 	\item\label{GQLTrans6} Some dogs are furry.
 	\item\label{GQLTrans7} Some dogs are not furry.
 \end{menumerate}
 
-\noindent{}If we again think of the set of dogs and the set of furry things, (\ref{GQLTrans6}) is a claim that there is at least one thing that is a member of each set.  Notice that we are interpreting (\ref{GQLTrans6}) as a claim about at least one object.  In English we typically think that (\ref{GQLTrans6}) is a claim about at least two dogs.  For now we will ignore certain plural/singular distinctions in the way we interpret existential claims.  For our purposes, \mention{some} will mean \mention{at least one}.  We will be able to handle \mention{some} in a more satisfactory way when we add to \GQL{} in Chapter \ref{furtherdirections}.
+\noindent{}If we again think of the set of dogs and the set of furry things, \ref{GQLTrans6} is a claim that there is at least one element that is a member of each set.
+Notice that we are interpreting \ref{GQLTrans6} as a claim about at least one object.
+In English we typically think that \ref{GQLTrans6} is a claim about at least two dogs.
+For now we ignore certain plural/singular distinctions in the way we interpret existential claims.
+For our purposes, \mention{some} means \mention{at least one}.
+We handle \mention{some} in a more satisfactory way when we add to \GQL{} in Chapter \ref{furtherdirections}.
 
-For now, we will translate sentences like (\ref{GQLTrans6}) into the form: $\existential{\ALPHA}\parconjunction{\CAPPHI}{\CAPTHETA}$.  So, for (\ref{GQLTrans6}) itself: $\existential{\variable{x}}\parconjunction{\Dp{\variable{x}}}{\Rp{\variable{x}}}$.  And we can account for the \mention{not} in sentence (\ref{GQLTrans7}) as follows: $\existential{\variable{x}}\parconjunction{\Dp{\variable{x}}}{\negation{\Rp{\variable{x}}}}$.
+For now, we translate sentences like \ref{GQLTrans6} into the form: $\existential{\ALPHA}\parconjunction{\CAPPHI}{\CAPTHETA}$.
+So, for \ref{GQLTrans6} itself: $\existential{\variable{x}}\parconjunction{\Dp{\variable{x}}}{\Rp{\variable{x}}}$.
+And we account for the \mention{not} in sentence \ref{GQLTrans7} as follows: $\existential{\variable{x}}\parconjunction{\Dp{\variable{x}}}{\negation{\Rp{\variable{x}}}}$.
 
-We can also translate sentence (\ref{GQLTrans4}), \mention{No dogs are furry}, as an existential governed by a negation.  We could translate \mention{There is a furry dog} as: $\existential{\variable{x}}\parconjunction{\Rp{\variable{x}}}{\Dp{\variable{x}}}$.  Now we may negate the result to capture the meaning of (\ref{GQLTrans4}): $\negation{\existential{\variable{x}}\parconjunction{\Rp{\variable{x}}}{\Dp{\variable{x}}}}$.  In fact, this latter translation is logically equivalent to the one we gave earlier: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\negation{\Rp{\variable{x}}}}$.  To see this, join these two sentences together with a biconditional, \mention{$\TRIPLEBAR$}, and prove that the result is \CAPS{qt}.
+We can also translate sentence \ref{GQLTrans4}, \mention{No dogs are furry}, as an existential governed by a negation.
+We could translate \mention{There is a furry dog} as: $\existential{\variable{x}}\parconjunction{\Rp{\variable{x}}}{\Dp{\variable{x}}}$.
+We can negate the result to capture the meaning of \ref{GQLTrans4}: $\negation{\existential{\variable{x}}\parconjunction{\Rp{\variable{x}}}{\Dp{\variable{x}}}}$.
+In fact, this latter translation is logically equivalent to the one we gave earlier: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\negation{\Rp{\variable{x}}}}$.
+To see this, join these two sentences together with a biconditional, \mention{$\TRIPLEBAR$}, and prove that the result is \CAPS{qt}.
 
-Let's translate some more complicated sentences into \GQL{}:
+Let's translate more complicated sentences into \GQL{}:
 
 \begin{menumerate}
 	\item\label{GQLTrans8} All happy dogs are furry and energetic.
 \end{menumerate}
 
-\noindent{}We'll want to translate this as a universal quantifier governing a conditional, but we must be careful to translate each side of the conditional correctly.  We can paraphrase (\ref{GQLTrans8}) in MathEnglish as: For all $\variable{x}$, if ($\variable{x}$ is happy and $\variable{x}$ is a dog) then ($\variable{x}$ is furry and $\variable{x}$ is energetic).  So we can consider each side of the conditional as a conjunction: $\universal{\variable{x}}\parhorseshoe{\parconjunction{\Hp{\variable{x}}}{\Dp{\variable{x}}}}{\parconjunction{\Rp{\variable{x}}}{\Ep{\variable{x}}}}$.
+\noindent{}We want to translate this as a universal quantifier governing a conditional, but we must be careful to translate each side of the conditional correctly.
+We paraphrase \ref{GQLTrans8} in MathEnglish as: For all $\variable{x}$, if ($\variable{x}$ is happy and $\variable{x}$ is a dog) then ($\variable{x}$ is furry and $\variable{x}$ is energetic).
+So we can consider each side of the conditional as a conjunction: $\universal{\variable{x}}\parhorseshoe{\parconjunction{\Hp{\variable{x}}}{\Dp{\variable{x}}}}{\parconjunction{\Rp{\variable{x}}}{\Ep{\variable{x}}}}$.
 
 \begin{menumerate}
 	\item\label{GQLTrans9} All cats and dogs are mammals.
 \end{menumerate}
 
-\noindent{}This sentence is also going to be translated as a universal quantifier governing a conditional, but the word \mention{and} can be tricky.  Here `and' seems to conjoin predicates, not sentences.  We may be tempted to translate (\ref{GQLTrans9}) as: $\universal{\variable{x}}\parhorseshoe{\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}}{\Ap{\variable{x}}}$.  But this \GQL{} sentence can be translated into MathEnglish as: \mention{For every $\variable{x}$, if ($\variable{x}$ is a cat and $\variable{x}$ is a dog) then $\variable{x}$ is a mammal.}  But that's silly.  Unless mad scientists are involved, nothing is both a cat and a dog.  Instead, we should translate the \mention{and} in (\ref{GQLTrans9}) as a \mention{$\VEE$}:  $\universal{\variable{x}}\parhorseshoe{\pardisjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}}{\Ap{\variable{x}}}$.  Let's translate this \GQL{} sentence into MathEnglish: \mention{For all $\variable{x}$, if ($\variable{x}$ is a cat or $\variable{x}$ is a dog), then $\variable{x}$ is a mammal.}  Take a moment to see how this better expresses the meaning of (\ref{GQLTrans9}).
+\noindent{}This sentence is also going to be translated as a universal quantifier governing a conditional, but the word \mention{and} can be tricky.  Here `and' seems to conjoin predicates, not sentences.  We may be tempted to translate \ref{GQLTrans9} as: $\universal{\variable{x}}\parhorseshoe{\parconjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}}{\Ap{\variable{x}}}$.  But this \GQL{} sentence can be translated into MathEnglish as: \mention{For every $\variable{x}$, if ($\variable{x}$ is a cat and $\variable{x}$ is a dog) then $\variable{x}$ is a mammal.}  But that's silly.  Unless mad scientists are involved, nothing is both a cat and a dog.  Instead, we should translate the \mention{and} in \ref{GQLTrans9} as a \mention{$\VEE$}:  $\universal{\variable{x}}\parhorseshoe{\pardisjunction{\Cp{\variable{x}}}{\Dp{\variable{x}}}}{\Ap{\variable{x}}}$.  Let's translate this \GQL{} sentence into MathEnglish: \mention{For all $\variable{x}$, if ($\variable{x}$ is a cat or $\variable{x}$ is a dog), then $\variable{x}$ is a mammal.}  Take a moment to see how this better expresses the meaning of \ref{GQLTrans9}.
 
-Now let's look at a sentence with multiple quantifiers:
+Consider a sentence with multiple quantifiers:
 
 \begin{menumerate}
 	\item\label{GQLTrans10} All dogs are smarter than all cats.
 \end{menumerate}
 
-\noindent{}We see the words \mention{all} twice in this sentence, so we'll want to include two universal quantifiers in the translation.  Now consider a paraphrase into MathEnglish: \mention{For every $\variable{x}$, if $\variable{x}$ is a dog then (for all $\variable{y}$, if $\variable{y}$ is a cat then $\variable{x}$ is smarter than $\variable{y}$).}  So we may translate (\ref{GQLTrans10}) as: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\universal{\variable{y}}\parhorseshoe{\Cp{\variable{y}}}{\App{\variable{x}}{\variable{y}}}}$.
+\noindent{}There are two instances of the word \mention{all}, so we use two universal quantifiers in the translation.
+Consider a paraphrase into MathEnglish: \mention{For every $\variable{x}$, if $\variable{x}$ is a dog then (for all $\variable{y}$, if $\variable{y}$ is a cat then $\variable{x}$ is smarter than $\variable{y}$).}
+So we translate \ref{GQLTrans10} as: $\universal{\variable{x}}\parhorseshoe{\Dp{\variable{x}}}{\universal{\variable{y}}\parhorseshoe{\Cp{\variable{y}}}{\App{\variable{x}}{\variable{y}}}}$.
 
-We have not said much about the role of domains in translations.  Because the main point of translations, other than the sheer joy of doing it, is to evaluate arguments, it is appropriate to choose a domain suitable for the arguments in question.  Often a suitable choice of domain simplifies the translations.  If we are translating arguments that involve essential mention of dogs and natural numbers, we need to include both in the domain and to have a predicate for each.  If the arguments deal only with dogs, then we can take the domain to be dogs and we don’t need a predicate for `dog'.
+We have not said much about the role of domains in translations.
+Because the point of translations, other than the sheer joy of doing it, is to evaluate arguments, it is appropriate to choose a domain suitable for the arguments in question.
+Often a suitable choice of domain simplifies the translations.
+If we are translating arguments that mention both dogs and natural numbers, we need to include both in the domain and to have a predicate for each.
+If the arguments deal only with dogs then we can take the domain to be dogs.
+You may be able to do without a predicate for `dog', depending on the nature of the argument.
 
-As we observed earlier many English sentences are ambiguous.  One systematic ambiguity is in sentences of the form ``All As are not Bs'', which can either mean that it is not true that All As are Bs, or that all As are not-Bs.  Context or content (inclusively) usually indicate what is meant:  ``All sheep are not good pets'' would usually have the first meaning: $\negation{\universal{\variable{x}}\parhorseshoe{\Sl\variable{x}}{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$; while ``All sharks are not good pets'' would have the second: $\universal{\variable{x}}\parhorseshoe{\Sl\variable{x}}{\negation{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$.  One of the values of formalization is that we can clearly and unambiguously express the structure of both.
+As we observed before many English sentences are ambiguous.
+One systematic ambiguity is in sentences of the form \mention{All As are not Bs}, which can either mean that it is not true that \mention{All As are Bs}, or that all \mention{As are not-Bs}.
+Context or content usually indicate what is meant:  \mention{All sheep are not good pets} likely has the first meaning: $\negation{\universal{\variable{x}}\parhorseshoe{\Sl\variable{x}}{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$.
+But \mention{All sharks are not good pets} has the second: $\universal{\variable{x}}\parhorseshoe{\Sl\variable{x}}{\negation{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$.
+One of the values of formalization is that we can clearly and unambiguously express the structure of both.
 
-It is important to distinguish cases of ambiguity---English sentences that  have more than one meaning---from sentences for which there is more than one good translation, but which are equivalent.  We see this with ``No sharks are good pets'': $\universal{\variable{x}}\parhorseshoe{\Sl\variable{x}}{\negation{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$ and $\negation{\existential{\variable{x}}\parconjunction{\Sl\variable{x}}{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$ are equally good (and equivalent) translations.
+It is important to distinguish ambiguous sentences---English sentences that have more than one meaning---from sentences for which there is more than one good translation, but which are equivalent.
+We see this with \mention{No sharks are good pets}: $\universal{\variable{x}}\parhorseshoe{\Sl\variable{x}}{\negation{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$ and $\negation{\existential{\variable{x}}\parconjunction{\Sl\variable{x}}{\parconjunction{\Gp{\variable{x}}}{\Pp{\variable{x}}}}}$ are equally good (and equivalent) translations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \notocsubsection{\GSL{} to English Translations}{ex:GSL to English Translations}
-Given the following glossary, translate the following \GSL{} sentences into English. 
+Given the following translation key, translate the following \GSL{} sentences into English. 
 \begin{description}[itemsep=0em]
-	\item[Glossary:] \hfill{} 
+	\item[Translation Key:] \hfill{} 
 	\begin{description}[itemsep=0em]
 		\item $\Cl$: Cindy the Capybara is a picky eater.
 		\item $\Ol$: Oscar the Ocelot sleeps all day.
@@ -615,68 +836,10 @@ Given the following glossary, translate the following \GSL{} sentences into Engl
 	\end{enumerate}
 \end{multicols}
 
-\notocsubsection{English to \GSL{} Translations \#1}{ex:English to GSL Translations 1}
-Using some sensible translation key translate the following English sentences into \GSL{}. 
-\begin{enumerate}
-	\item If the sprockets come in on time, then we can fill the order.
-	\item Only if the sprockets come in on time can we fill the order. 
-	\item Either the order gets filled, or the cogs come in late and the sprockets never show up. 
-	\item It's not the case that the sprockets need to come in for the order to be filled. 
-	\item While filling the order is important, getting the sprockets in is more so. 
-	\item The sprockets and cogs are late, but it's still not the case that we can't fill the order on time. 
-	\item Assuming the order gets out on time, the sprockets will fail to arrive only if the cogs are either late or defective. 
-	\item The spork is the least appreciated utensil. 
-	\item They dined on mince, and slices of quince, [which] they ate with a runcible spoon. (1871, Edward Lear, “Owl \& Pussy-Cat” in \emph{Nonsense Songs})
-	\item You eat with a spork if and only if you eat with a foon. 
-	\item Although Jan will be amused, if you eat with a spork Jill will leave or at least not laugh.
-	\item If you have a runcible spoon, then you don't need a fork, knife, or spoon. 
-\end{enumerate}
-
-\notocsubsection{English to \GSL{} Translations \#2}{ex:English to GSL Translations 2}
-Using some sensible translation key translate the following English sentences into \GSL{}. 
-\begin{enumerate}
-	\item If 14-year-olds had the vote, I'd be president. (Evel Knievel)
-	\item If Miami beats Cornell today and Penn State defeats Michigan State Miami will win the tournament.
-	\item Should senator Ervin run again, he would be a formidable opponent. 
-	\item If Congress does not find a way to force the banking industry to lower interest rates, and if the Securities and Exchange Commission does not stop authorizing unjustified new financing by corporations, we will face an unbearable depression. 
-	\item Provided, but only provided, that the French Fleet is sailed forthwith for British harbors, His Majesty's Government give their full consent to an armistice for France. (Churchill, June 1940)
-	\item For the tenability of the thesis that mathematics is logic it is not only sufficient but also necessary that all mathematical expressions be capable of definition on the basis solely of logical ones. (W.V.O. Quine)
-\end{enumerate}
-
-
-\notocsubsection{Translations}{Translation Problems} Translate each of the following English sentences into \GQL{} sentences about the model $\IntA$ given in table \mvref{Trans Int Table}.
-\begin{multicols}{2}
-	\begin{enumerate}
-		\item {All Pacific states that border a mountainous state are coastal.}
-		\item {Some Atlantic state and some mountainous state both share a border with a state that is neither.}
-		\item {All states are coastal and mountainous if and only if they are Pacific.}
-		\item {All Atlantic states smaller than Montana share a border with Rhode Island.}
-		\item {Only mountainous Pacific states are coastal.}
-		\item {A Pacific state is mountainous.}
-		\item {No state is larger than itself.}
-		\item {Every non-mountainous state borders a state that is larger.}
-		\item {Some Pacific states are mountainous.}
-		\item {All Pacific states are mountainous.}
-		\item {All Pacific states are larger than all Atlantic states.}
-		\item {No Gulf state is mountainous.}
-		\item {All Atlantic states are not mountainous.}
-		\item {Some Gulf state is larger than all states that border it.}
-		\item {Some Gulf state is an Atlantic state.}
-		\item {All states that border a Pacific state are mountainous.}
-		\item {Any state that is mountainous is larger than Rhode Island.}
-		\item {Any state that is mountainous is larger than all Atlantic
-			states.}
-		\item {If any state is mountainous, California is.}
-		\item {If any state is mountainous, it is larger than Rhode Island.}
-		\item {Any state that has no bordering states is mountainous.}
-		\item {All states that are bigger than all mountainous states are
-			coastal.}
-		\item {No state is bigger than Montana unless it is coastal.}
-	\end{enumerate}
-\end{multicols}
 %\begin{table}[!ht]
 %\renewcommand{\arraystretch}{1.5}
 %\begin{center}
+\begin{figure}
 \begin{longtable}[c]{ l l l } %p{2.2in} p{2in}
 	\toprule
 	&\textbf{Symbol} & \textbf{Model Assignment} \\
@@ -708,6 +871,68 @@ Using some sensible translation key translate the following English sentences in
 	2 place predicates:&$\Lp{''}$& is larger than (area)\\
 	&$\Bp{''}$& borders\\
 \end{longtable}
+\caption{Model for Translations in Section \ref{Translation Problems}}
+\end{figure}
+
+\notocsubsection{English to \GSL{} Translations \#1}{ex:English to GSL Translations 1}
+Using some sensible translation key translate the following English sentences into \GSL{}. 
+\begin{enumerate}
+	\item If the sprockets come in on time, then we can fill the order.
+	\item Only if the sprockets come in on time can we fill the order. 
+	\item Either the order gets filled, or the cogs come in late and the sprockets never show up. 
+	\item It's not the case that the sprockets need to come in for the order to be filled. 
+	\item While filling the order is important, getting the sprockets in is more so. 
+	\item The sprockets and cogs are late, but it's still not the case that we can't fill the order on time. 
+	\item Assuming the order gets out on time, the sprockets will fail to arrive only if the cogs are either late or defective. 
+	\item The spork is the least appreciated utensil. 
+	\item They dined on mince, and slices of quince, [which] they ate with a runcible spoon. (1871, Edward Lear, “Owl \& Pussy-Cat” in \emph{Nonsense Songs})
+	\item You eat with a spork if and only if you eat with a foon. 
+	\item Although Jan will be amused, if you eat with a spork Jill will leave or at least not laugh.
+	\item If you have a runcible spoon, then you don't need a fork, knife, or spoon. 
+\end{enumerate}
+
+\notocsubsection{English to \GSL{} Translations \#2}{ex:English to GSL Translations 2}
+Using some sensible translation key translate the following English sentences into \GSL{}. 
+\begin{enumerate}
+	\item If 14-year-olds had the vote, I'd be president. (Evel Knievel)
+	\item If Miami beats Cornell today and Penn State defeats Michigan State Miami will win the tournament.
+	\item Should senator Ervin run again, he would be a formidable opponent. 
+	\item If Congress does not find a way to force the banking industry to lower interest rates, and if the Securities and Exchange Commission does not stop authorizing unjustified new financing by corporations, we will face an unbearable depression. 
+	\item Provided, but only provided, that the French Fleet is sailed forthwith for British harbors, His Majesty's Government give their full consent to an armistice for France. (Churchill, June 1940)
+	\item For the tenability of the thesis that mathematics is logic it is not only sufficient but also necessary that all mathematical expressions be capable of definition on the basis solely of logical ones. (W.V.O. Quine)
+\end{enumerate}
+
+
+\notocsubsection{Translations}{Translation Problems} Translate each of the following English sentences into \GQL{} sentences about the model $\IntA$ given in figure \mvref{Trans Int Table}.
+\begin{multicols}{2}
+	\begin{enumerate}
+		\item {All Pacific states that border a mountainous state are coastal.}
+		\item {Some Atlantic state and some mountainous state both share a border with a state that is neither.}
+		\item {All states are coastal and mountainous if and only if they are Pacific.}
+		\item {All Atlantic states smaller than Montana share a border with Rhode Island.}
+		\item {Only mountainous Pacific states are coastal.}
+		\item {A Pacific state is mountainous.}
+		\item {No state is larger than itself.}
+		\item {Every non-mountainous state borders a state that is larger.}
+		\item {Some Pacific states are mountainous.}
+		\item {All Pacific states are mountainous.}
+		\item {All Pacific states are larger than all Atlantic states.}
+		\item {No Gulf state is mountainous.}
+		\item {All Atlantic states are not mountainous.}
+		\item {Some Gulf state is larger than all states that border it.}
+		\item {Some Gulf state is an Atlantic state.}
+		\item {All states that border a Pacific state are mountainous.}
+		\item {Any state that is mountainous is larger than Rhode Island.}
+		\item {Any state that is mountainous is larger than all Atlantic
+			states.}
+		\item {If any state is mountainous, California is.}
+		\item {If any state is mountainous, it is larger than Rhode Island.}
+		\item {Any state that has no bordering states is mountainous.}
+		\item {All states that are bigger than all mountainous states are
+			coastal.}
+		\item {No state is bigger than Montana unless it is coastal.}
+	\end{enumerate}
+\end{multicols}
 
 \notocsubsection{More Translations}{ex:More Translations}
 Translate each of the following English sentences into \GQL{} sentences.
