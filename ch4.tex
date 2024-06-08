@@ -223,6 +223,22 @@ The assignment to $\Ap{''}$ is the following set of ordered pairs:
 \noindent{}$\IntA_2(\Ap{''})=\{\langle$Jack, Jill$\rangle, \langle$Jill, Bill$\rangle, \langle$Jack, Bill$\rangle\}$ 
 \bigskip
 
+As with \GSL{} and \GQL{}1, there are \GQL{} models for sets of sentences, models of \GQL{}, and \GQL{} minimal models:
+
+\begin{majorILnc}{\LnpDC{Definition of Model for QL Set}}
+	$\IntA$ is a \df{model for a set of \GQL{} sentences $\Delta$} \Iff $\IntA$ is a model for each sentence in $\Delta$.
+\end{majorILnc}
+
+\begin{majorILnc}{\LnpDC{Definition of Model for QL}}
+	$\IntA$ is a \df{model for \GQL{}} \Iff $\IntA$ is a model for every sentence of \GQL{}.
+\end{majorILnc}
+
+\begin{majorILnc}{\LnpDC{Definition of Minimal QL Model}}
+	$\IntA$ is a \df{minimal model for $\CAPPHI$} \Iff $\IntA$ makes the minimum assignments necessary for $\IntA$ to be a model for $\CAPPHI$.
+\end{majorILnc}
+
+\noindent{}The proof of the minimal model theorem for \GQL{} is almost precisely the same as \GQL{}1 proof (\ref{Two Models}) and is left as an exercise for the reader.
+
 \subsection{Truth in a Model}\label{GQL Truth in an Interpretation}
 
 The definition of truth in a model for \GQL{} is exactly the same as in \GQL{}1 except with an additional clause for many-place predicates.
@@ -469,7 +485,8 @@ Although the claim behind Dragnet is fairly straightforward, its proof is long a
 \begin{commentary}
 	The name ``Dragnet'' comes from the Dragnet radio and TV show.
     The theorem bears a close resemblance to the show's opening narration:
-	``The story you are about to see is true. Only the names have been changed to protect the innocent.'' -- Sergeant Joe Friday, LAPD.
+	``The story you are about to see is true. Only the names have been changed to protect the innocent.''
+	-- Sergeant Joe Friday, LAPD.
 \end{commentary}
 
 \begin{THEOREM}{\LnpTC{The Dragnet Theorem} The Dragnet Theorem:} If
@@ -804,7 +821,10 @@ Then:
 \end{description}
 \end{PROOF}
 
-Dragnet is particularly useful when making arguments about sentences with unknown structures.
+Dragnet is particularly useful when proving theorems about sentence schemas, i.e., sentences of a general form but with inessential details left unspecified.
+Most logic texts do not prove Dragnet but prove results using specific cases of Dragnet as needed.
+In effect, we have done that work once and for all by proving Dragnet in fully general form.
+We prefer to state the full proof to make its pattern evident.
 
 \begin{majorILnc}{\LnpEC{DragnetExampleTwo}}
 Let $\CAPPHI$ be a formula whose only free variable is $\variable{x}$.
@@ -829,7 +849,7 @@ Pay attention to the two Dragnet conditions.
 When you can show that those hold there is a decent chance Dragnet can help.
 In some cases you will need to be strategic in your selection of a model variant.
 
-While the Dragnet theorem is helpful it can be a bit unwieldy.
+While the Dragnet theorem is helpful and illustrates an important general pattern it can be a bit unwieldy.
 So we prove another, the \mention{Free Choice} theorem, which builds on Dragnet and saves us some hassle.
 
 \begin{THEOREM}{\LnpTC{The Free Choice Theorem} The Free Choice Theorem:}
