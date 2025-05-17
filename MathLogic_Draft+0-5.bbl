@@ -1,15 +1,10 @@
-\begin{thebibliography}{99}
+\begin{thebibliography}{91}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
   \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
-
-\bibitem[{Anderson and Johnstone(1962)}]{Anderson1962}
-Anderson, J.~M. and Johnstone, H.~W. 1962.
-\newblock \emph{Natural Deduction: The Logical Basis of Axiom Systems}.
-\newblock Wadsworth.
 
 \bibitem[{Arl\'{o}-Costa and Pacuit(2006)}]{ArloCosta2006}
 Arl\'{o}-Costa, Horacio and Pacuit, Eric. 2006.
@@ -187,11 +182,6 @@ Gentzen, Gerhard. 1934.
 \newblock \enquote{Untersuchungen \"uber das Logishe Schliessen}.
 \newblock \emph{Math Zeitschrift} 39:176--210 and 405--431.
 
-\bibitem[{Gleitman(1965)}]{Gleitman1965}
-Gleitman, Lila~R. 1965.
-\newblock \enquote{Coordinating Conjunction in English}.
-\newblock \emph{Language} 41:260--293.
-
 \bibitem[{G\"odel(1929)}]{Godel1929}
 G\"odel, Kurt. 1929.
 \newblock \emph{\"Uber die Vollst\"andigkeit des Logikkalk\"uls}.
@@ -330,11 +320,6 @@ Leblanc, Hugues. 2001.
 \newblock In Dov~M. Gabbay and Franz Guenthner (eds.), \emph{Handbook of
   Philosophical Logic}, volume~2. Kluwer Academic Publishers, 53--132.
 
-\bibitem[{Lemmon(1965)}]{Lemmon1965}
-Lemmon, E.~J. 1965.
-\newblock \emph{Beginning Logic}.
-\newblock Nelson.
-
 \bibitem[{Lewis and Langford(1932)}]{Lewis1932}
 Lewis, C.~I. and Langford, Cooper~H. 1932.
 \newblock \emph{Symbolic Logic}.
@@ -414,11 +399,6 @@ Post, Emil. 1921.
 \newblock \enquote{Introduction to a General Theory of Elementary
   Propositions}.
 \newblock \emph{American Journal of Mathematics} 43:163--185.
-
-\bibitem[{Prawitz(1965)}]{Prawitz1965}
-Prawitz, Dag. 1965.
-\newblock \emph{Natural Deduction: a Proof-theoretical Study}.
-\newblock Almqvist and Wiksell.
 
 \bibitem[{Prior(1957)}]{Prior1957}
 Prior, A.N. 1957.
@@ -510,11 +490,6 @@ Stevenson, L. 1973.
 \newblock \enquote{Frege's Two Definitions of Quantification}.
 \newblock \emph{Philosophical Quarterly} 23:207--223.
 
-\bibitem[{Suppes(1957)}]{Suppes1957}
-Suppes, Patrick. 1957.
-\newblock \emph{Introduction to Logic}.
-\newblock Van Nostrand.
-
 \bibitem[{Tarski(1944)}]{Tarski1944}
 Tarski, Alfred. 1944.
 \newblock \enquote{The Semantic Conception of Truth and the Foundations of
@@ -533,21 +508,6 @@ Tarski, Alfred. 1944.
 Tarski, Alfred and Vaught, R.~L. 1956.
 \newblock \enquote{Arithmetical Extensions of Relational Systems}.
 \newblock \emph{Compositio Math} 13:81--102.
-
-\bibitem[{Tennant(1978)}]{Tennant1978}
-Tennant, Neil. 1978.
-\newblock \emph{Natural Logic}.
-\newblock Edinburgh University Press.
-
-\bibitem[{Thomason(1970)}]{Thomason1970}
-Thomason, R.~H. 1970.
-\newblock \emph{Symbolic Logic, An Introduction}.
-\newblock Macmillan.
-
-\bibitem[{van Dalen(1980)}]{Dalen1980}
-van Dalen, Dirk. 1980.
-\newblock \emph{Logic and Structure}.
-\newblock Springer.
 
 \bibitem[{Vaught(1974)}]{Vaught1974}
 Vaught, R.~L. 1974.

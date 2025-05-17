@@ -13,21 +13,7 @@ In the previous chapter, we stipulated restrictions for the rule applications of
 	A rule is \df{truth-preserving}\index{derivation!rule!truth-preserving}\index{truth-preserving} \Iff the sentence or sentences to which the rule is applied entail any sentence which the rule  sanctions you to write as the next step. 
 \end{majorILnc}
 
-
-\begin{majorILnc}{\LnpDC{RuleSchemas}}
-	A \nidf{formal derivation rule}\index{derivation!rule|textbf} is a sequence of sentence schemas, the first through the second last of which is called the \df{given schemas} and the last is called the \df{may-add schema}. 
-\end{majorILnc}
-\noindent{}As the names suggest, table \mvref{GSD} lists rules by putting the first through second to last schemas in the left column, labeled ``Given'', and the last schema in the right column, labeled ``May Add''. 
-We only bring out that we can think of rules as sequences of sentence schemas, and call them the given schemas and the may-add schema so the next definition is easier to state.
-\begin{majorILnc}{\LnpDC{RuleSanctioning}}
-	A rule \Rule{R}, applied to unboxed lines $\integer{m}_1,\ldots,\integer{m}_{\integer{j}}$ with, respectively, sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{j}}$, \df{sanctions} writing the sentence $\CAPPHI$ \Iff there's some substitution of \GSL{} sentences that, for the given schemas of \Rule{R}, results in $\CAPPSI_1,\ldots,\CAPPSI_{\integer{j}}$ and, for the may-add schema, results in $\CAPPHI$. 
-\end{majorILnc}
-\noindent{}As an example, consider again derivation \pmvref{secondexamplefinished}. 
-The rule \Rule{$\HORSESHOE$-Elim} was applied to line 2, which had sentence $\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$, and line 3, which had sentence $\Bl$, to get line 4, which had sentence $\conjunction{\Cl}{\Dl}$. 
-Using definition \ref{RuleSanctioning} we can show that this move is sanctioned by \Rule{$\HORSESHOE$-Elim} by noting, from table \mvref{GSD}, that \Rule{$\HORSESHOE$-Elim} has two given schemas, $\horseshoe{\CAPTHETA}{\CAPPSI}$ and $\CAPTHETA$, and the may-add scheme $\CAPPSI$. 
-Substituting $\CAPTHETA=\Bl$ and $\CAPPSI=\conjunction{\Cl}{\Dl}$ in the given schemas gets us lines 2 and 3, while making this same substitution in the may-add schema gets us line 4. 
-
-Lastly, we end with the following theorem:
+We start with the following theorem:
 \begin{THEOREM}{\LnpTC{Soundess of Basic GSD Rules}}
 	Every application of every basic rule of \GSD{} is truth-preserving.
 \end{THEOREM}
@@ -64,7 +50,7 @@ We begin by proving the soundness of \GSD{}.\index{soundness!of \GSD{}}
 \end{THEOREM}
 \noindent{}We will first prove the following result about derivations:
 \begin{THEOREM}{\LnpTC{Main GSL Soundness Lemma} Soundness Lemma:}
-For any sequence of derivation lines that is a derivation (see definition \pmvref{Recursive definition of Derivation}), the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assumption}. 
+For any sequence of derivation lines that is a derivation (see definition \pmvref{Recursive definition of Derivation}), the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assume}. 
 \end{THEOREM}
 \noindent{}Since the definition of a derivation (def. \pmvref{Recursive definition of Derivation}) is a recursive definition, the most natural way to prove theorem \ref{Main GSL Soundness Lemma} is through a recursive proof. 
 The recursive proof we give will use three easily proved lemmas (proofs are left to the reader; the first lemma, on monotonicity, is also used to prove thm. \ref{Soundness of Sentential Logic}). 
@@ -95,10 +81,10 @@ If $\Delta_1$ is the set of assumptions of an unboxed line and $\Delta_2$ is the
 \begin{description}
 
 \item[Base Step:] 
-The base case is a single-line derivation $\Derivation{D}$ sanctioned by the rule \Rule{Assumption}. 
+The base case is a single-line derivation $\Derivation{D}$ sanctioned by the rule \Rule{Assume}. 
 Say the sentence on that line is $\CAPPHI$.
-We have to show that the sentence on the last line is entailed by all the sentences, on unboxed lines, that are sanctioned by \Rule{Assumption}. 
-But in this case the sentence on the last line is $\CAPPHI$, and the set of unboxed sentences sanctioned by \Rule{Assumption} only contains $\CAPPHI$. 
+We have to show that the sentence on the last line is entailed by all the sentences, on unboxed lines, that are sanctioned by \Rule{Assume}. 
+But in this case the sentence on the last line is $\CAPPHI$, and the set of unboxed sentences sanctioned by \Rule{Assume} only contains $\CAPPHI$. 
 Obviously $\CAPPHI\sdtstile{}{}\CAPPHI$, so the theorem holds in the base case. 
 
 \item[Inheritance Step:] 
@@ -114,8 +100,8 @@ We need to consider each rule \Rule{R} of \GSD{} as its own case.
 \item[Recursive Assumption:]  
 The recursive assumption is that for all lines $\Derivation{L}_\integer{i}$ in the derivation $\Derivation{D}$, if $\CAPPHI$ is the sentence on the line, then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI$. 
 
-\item[\Rule{Assumption}:] 
-Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{Assumption}. 
+\item[\Rule{Assume}:] 
+Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{Assume}. 
 Note that the set $\Delta^*$ of unboxed assumptions for this new line are those in $\Delta$ plus $\CAPPHI$. 
 We know $\CAPPHI\sdtstile{}{}\CAPPHI$, and $\Delta,\CAPPHI\sdtstile{}{}\CAPPHI$ follows from this by monotonicity.
 
@@ -198,7 +184,7 @@ We now observe that $\horseshoe{\CAPTHETA_1}{\CAPPHI},\ldots,\horseshoe{\CAPTHET
 So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\HORSESHOE$-Intro}:]
-Like \Rule{Assumption}, the assumptions change in \Rule{$\HORSESHOE$-Intro}. 
+Like \Rule{Assume}, the assumptions change in \Rule{$\HORSESHOE$-Intro}. 
 If the new line sanctioned by \Rule{$\HORSESHOE$-Intro} has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$ and unboxed assumptions $\Delta^*$, then earlier we have an assumption line (now in a box) that starts with $\CAPPHI$ and $\Delta^*$ as its other assumptions, and we have a line (now at the bottom of the box) with $\CAPTHETA$ on it with assumptions $\CAPPHI,\Delta^*$. 
 By the recursive assumption we have that $\CAPPHI,\Delta^*\sdtstile{}{}\CAPTHETA$. 
 Consider any model $\IntA{}$ that makes $\Delta^*$ true;
@@ -786,7 +772,7 @@ We may, however, be adding new existentials.
 \item[Step 3:] For every existential sentence that appears in the derivation for which no instance has been added yet, add an instance using the first constant which \emph{does not occur in any previous assumption}. 
 Note that \mention{instance} is to be taken very strictly here. 
 The fact that we instantiated $\existential{\variable{x}}\Kpp{\variable{x}}{\constant{a}}$ with $\Kpp{\constant{b}}{\constant{a}}$ takes care of that existential, but if we later add the sentence $\existential{\variable{x}}\Kpp{\variable{x}}{\constant{b}}$ then we must add an instance of it. 
-The rule which sanctions these steps will be \Rule{Assumption}. 
+The rule which sanctions these steps will be \Rule{Assume}. 
 We will eventually discharge these premises by \Rule{$\HORSESHOE$-Elim} and \Rule{$\exists$-Elim} if we get to a contradiction.
 It is in anticipation of this eventuality that we carefully chose a constant which does not occur in any previous assumption.
 Note that with this step we are adding new instances with new constants in new assumptions. 

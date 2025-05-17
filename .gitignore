@@ -5,3 +5,6 @@
 **.bak
 **.idx
 **.toc
+**.xdv
+**.fdb_latexmk
+**.fls

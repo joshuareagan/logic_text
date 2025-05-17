@@ -9,78 +9,95 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We were able to make sense of semantic notions like truth, logical truth, and entailment by introducing models for \GSL{} and \GQL{}.
-But proving that a sentence of \GSL{} or \GQL{} is a logical truth, or proving that an entailment holds, is difficult and involves informal reasoning in MathEnglish. 
-We'd like a way to prove such things that's easier and which relies less on intuitive judgment. 
-Recall from section \ref{Formal Languages} that \GSL{} and \GQL{} are formal in the sense that which strings of basic symbols are sentences of each is given by explicit definitions that make reference only to the shapes and arrangement of those basic symbols. 
-Can we find a \emph{formal} method for establishing logical truth and entailments?
+We made sense of semantic notions like truth, logical truth, and entailment in previous chapters by the use of \GSL{} and \GQL{} models.
+But proving that a sentence of \GSL{} or \GQL{} is a logical truth, or proving that an entailment holds, is often difficult and involves informal reasoning in MathEnglish. 
+We would like to prove such things more easily and with less reliance on intuitive judgment. 
+Recall from section \ref{Formal Languages} that \GSL{} and \GQL{} are \emph{formal}.
+As a result, one can determine whether a strings of symbols is a sentence in a purely mechanical way.
+Are there similarly formal methods for establishing logical truths and entailments?
 
-For this purpose we'll introduce formal rules for manipulating \GSL{} and \GQL{} sentences which will allow us to write formal derivations. 
-Roughly, a \emph{derivation} is a finite sequence of sentences, with rules governing which sentences may follow which. 
-For every sentence in the derivation there is a rule which sanctions (or permits) us to write it down next, usually depending on the previous sentences in the derivation.%
+Yes.
+For this purpose we define rules for manipulating \GSL{} and \GQL{} sentences, allowing us to derive other sentences by formal steps.
+We call a finite sequence of such steps a \emph{derivation}. 
+Every sentence is justified by a rule which permits us to write it down, usually on the basis of previous sentences in the derivation.%
 \footnote{%
-Often times the terms \mention{derivation} and \mention{proof} (or \mention{formal proof}) are used interchangeably. 
+The terms \mention{derivation} and \mention{proof} (or \mention{formal proof}) are often used interchangeably in other texts. 
 The subfield of logic that studies derivations is even called proof theory.
-Here, for clarity, we'll always use \mention{derivation} to refer to the formal proofs we'll work with in this chapter and \mention{proof} to refer to the more informal mathematical proofs we write in MathEnglish.
-} 
-Our derivations are \emph{formal} because the rules they use are formal.
-That is, the rules are specified entirely in terms of the shape, or form, of the sentences.
+We always use \mention{derivation} to refer to the sequences of formal steps defined in this chapter and \mention{proof} to refer to the more informal mathematical proofs written in MathEnglish.
+} Here's an example derivation:
 
-This raises an important point: since the rules are formal, there is no prima facie connection between them (or derivations written using them) and our semantic notions of truth, logical truth, and entailment. 
-For example, the rules will not say things like: 
+\begin{gproofnn}
+\gaproof{
+\galine{1}{$\conjunction{\Bl}{\Cl}$}{\Rule{Assume}}
+\galine{2}{$\Bl$}{\Rule{$\WEDGE$-Elim}, 1}
+\galine{3}{$\Cl$}{\Rule{$\WEDGE$-Elim}, 1}
+\galine{4}{$\conjunction{\Cl}{\Bl}$}{\Rule{$\WEDGE\!$-Intro}, 2,3}
+}
+\gline{5}{$\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$}{\Rule{$\HORSESHOE$-Intro}, 1--4\footnote{This kind of introduction and elimination rule-based derivation system is called a \idf{natural deduction} system.
+Natural deduction systems were invented by Stanislaw Jaskowski in 1926, though he did not publish until Jaskowski \citeyearpar{Jaskowski1934}.
+Other important developments are due to Gerhard Gentzen \citeyearpar{Gentzen1934}.
+Unlike many systems, ours uses boxes to discharge assumptions.
+Jaskowski mentions in the 1934 article that he used boxes in 1926, but they aren't part of his 1934 system.}}
+\end{gproofnn}
+
+Each step contains three parts: a line number, a sentence, and a rule.
+Derivations are formal because the rules they are constructed with are formal.
+That is, the rules are specified entirely in terms of the shape, or form, of the sentences in the derivation.
+So there are no rules like: 
 \begin{RESTARTmenumerate}
-\item If $\CAPPHI\sdtstile{}{}\CAPPSI$ and you have $\CAPPHI$ on a previous line, then you can write down $\CAPPSI$. 
+\item If $\CAPPHI\sdtstile{}{}\CAPPSI$ and you have $\CAPPHI$ on a previous line then you may write down $\CAPPSI$. 
 \end{RESTARTmenumerate}
-Instead, they'll say things like: 
+It can be arbitrarily difficult to determine whether $\CAPPHI\sdtstile{}{}\CAPPSI$, so it isn't always obvious whether a given application of this rule is correct.
+By contrast, formal rules are transparent and easy to check for correctness: 
 \begin{menumerate}
-\item If you have $\conjunction{\CAPPHI}{\CAPPSI}$ on a previous line, then you can write down $\CAPPSI$.
+\item If you have $\conjunction{\CAPPHI}{\CAPPSI}$ on a previous line then you may write down $\CAPPSI$.
 \end{menumerate} 
-Despite this lack of a transparent connection, we want our rules to match up with the semantics we defined in previous chapters. 
-For example, an important constraint is that the rules are truth-preserving. 
+
+There is no explicit connection between the derivation rules and the semantic notions of truth, logical truth, and entailment. 
+Even so, the rules are intended to give us the same results that were established about these notions in previous chapters.
+For example, the rules are carefully defined to be truth-preserving. 
 \begin{description}
-\item[Truth-preservation:] If a rule allows us to write down $\CAPPHI$ when applied to sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$, then $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\sdtstile{}{}\CAPPHI$.\index{truth-preserving}\index{derivation!rule!truth-preserving} 
+\item[Truth-preservation:] If a rule allows the derivation of sentence $\CAPPHI$ from sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$, then $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\sdtstile{}{}\CAPPHI$.\index{truth-preserving}\index{derivation!rule!truth-preserving} 
 \end{description} 
-More generally, because we want to use the derivations as a means of showing that a sentence is a logical truth or of showing that some set of sentences entails some other sentence, we want at least:
+Derivations should be correct.
+That is, any sentence that can be derived without assumptions should be a logical truth, and any sentence derived from other sentences should be a logical consequence of them:
 \begin{description}
 \item[Soundness:] If $\CAPPHI$ can be derived from $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$, then $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\sdtstile{}{}\CAPPHI$.\index{soundness}
 \end{description} 
-\noindent{}And ideally we'd like to be able to get:
+\noindent{}We want derivations to work in the other direction too.
+If a sentence is a logical truth, or if some sentence is a logical consequence of some other sentences, there should be a derivation showing as much:
 \begin{description}
 \item[Completeness:] If $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\sdtstile{}{}\CAPPHI$, then $\CAPPHI$ can be derived from $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$.\index{completeness}
 \end{description}
 
-We will discuss and prove these two results (and variations of them) for both \GSL{} and \GQL{} in the next chapter.
+We prove these two results (and variations of them) for both \GSL{} and \GQL{} in the next chapter.
+For now it is enough to remember that derivations are intended to mirror many of the properties of the proofs of earlier chapters.
 
-While our derivation systems (our sets of rules with which we write derivations) are definitionally independent of our semantics (our models and definitions for truth, logical truth, and entailment), there are in fact deep and important connections between them. 
-We'll prove the most important of these connections---including soundness and completeness---in the next chapter. 
-For now though it will probably be beneficial not to worry about them and to approach derivations on their own terms. 
-It can be useful to think of writing a derivation as solving a puzzle, or trying to win a game. 
-Like any game there are rules for the moves you can make, or like a puzzle there's a way the inferences made in the derivation can fit together. 
-(Although, unlike a puzzle there are always many ways they can fit together.) 
+It's useful to think of writing a derivation as playing a game or solving a puzzle.
+Like a game there are rules determining what moves you can make next, or like a puzzle there's a sequence of steps you can discover to make the derivation fit together. 
+Unlike ordinarily puzzles, however, there are many ways they can fit together.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Basic System \GSD{}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Introduction and Elimination Rules} 
-We will work with two kinds of rules: basic rules and shortcut rules. 
-The shortcut rules are, as the name suggests, not necessary.\index{derivation!rule!shortcut} 
-Their purpose will be to make derivations easier and shorter. 
-Anything we can derive with the shortcut rules can be derived from the basic rules alone (see thm. \pmvref{GSD Shortcut Theorem3}). 
-The basic rules\index{derivation!rule!basic}\index{basic rule} make up what we call \idf{Sentential Derivation System}, or \GSD{}. 
-\GSD{} consists of two special rules, \Rule{Assumption} and \Rule{Repetition}, and a pair of basic rules for each of the logical connectives in \GSL{}. 
-When we move on to \GQL{} we'll add more basic rules for the logical connectives unique to \GQL{}, i.e. the quantifiers. 
-One of the pair will be an \emph{introduction} rule,\index{derivation!rule!introduction}\index{introduction rule} the other will be an \emph{elimination} rule.\index{derivation!rule!elimination}\index{elimination rule} 
+There are two kinds of rules: basic and shortcut.
+The basic rules\index{derivation!rule!basic}\index{basic rule} are the minimum rules needed to define derivations.
+The shortcut rules are not necessary but they make derivations easier and shorter.\index{derivation!rule!shortcut} 
+Anything we can derive with the shortcut rules can be derived from the basic ones alone (see thm. \pmvref{GSD Shortcut Theorem3}). 
 
-For example, consider the conjunction, $\WEDGE$. If we earlier derived the sentences $\CAPPHI$ and $\CAPPSI$, we may introduce their conjunction $\conjunction{\CAPPHI}{\CAPPSI}$ with the $\WEDGE$ introduction rule. 
-Alternatively, if we have derived $\conjunction{\CAPPHI}{\CAPPSI}$, the $\WEDGE$ elimination rule lets us take out a part of the conjunction and write either $\CAPPHI$ or $\CAPPSI$.
-Elimination rules typically give us a choice for the next step, and learning to use the system effectively partly involves learning strategies for choosing the next step.
-Table \mvref{GSD} gives all the basic SD rules.\footnote{As mentioned in the preface, this kind of introduction and elimination rule-based derivation system is called a \idf{natural deduction} system.
-Natural deduction systems were first invented by Stanislaw Jaskowski in 1926, though he did not publish until 1934.  Other important developments are due to Gerhard Gentzen \citeyearpar{Gentzen1934}; other influential natural deduction systems are given by J. M. Anderson and H. W. Johnstone \citeyearpar{Anderson1962}, Frederic Fitch \citeyearpar{Fitch1952}, Donald Kalish and Richard Montague \citeyearpar{Kalish1964}, Lemmon E. J. \citeyearpar{Lemmon1965}, Dag Prawitz \citeyearpar{Prawitz1965}, Willard Quine \citeyearpar{Quine1950}, Patrick Suppes \citeyearpar{Suppes1957}, Neil Tennant \citeyearpar{Tennant1978}, R. H. Thomason \citeyearpar{Thomason1970}, and Dirk van Dalen \citeyearpar{Dalen1980} \citep[28]{Hodges2001}.  Unlike many systems, ours uses boxes to discharge assumptions; Jaskowski mentions in the 1934 article that he used boxes in 1926, but they aren't part of his official system in 1934.}
-%\begin{table}[!ht]
+The rules for sentences of \GSL{} make up \idf{Sentential Derivation System}, or \GSD{}. 
+\GSD{} consists of the following rules: \Rule{Assume}, \Rule{Repetition}, and an introduction rule\index{derivation!rule!introduction}\index{introduction rule} and elimination rule\index{derivation!rule!elimination}\index{elimination rule} for each of the \GSL{} connectives.
+Derivations for the sentences of \GQL{} also have introduction and elimination rules for the logical connectives unique to \GQL{}, i.e. the quantifiers.
+
+We begin by considering the introduction and elimination rules for the conjunction, $\WEDGE$.
+If we have the sentences $\CAPPHI$ and $\CAPPSI$ in a derivation, then we may write $\conjunction{\CAPPHI}{\CAPPSI}$ on a new line, by the $\WEDGE$ introduction rule. 
+On the other hand, if we have the sentence $\conjunction{\CAPPHI}{\CAPPSI}$, then the $\WEDGE$ elimination rule permits us to write either $\CAPPHI$ or $\CAPPSI$ on a new line.
+Table \ref{GSD} gives all the basic \GSD{} rules.
+
 \renewcommand{\arraystretch}{1.5}
-%\begin{center}
-\begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
+\begin{longtable}[c]{ p{1in} l l }
 \toprule
 \textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
 \midrule
@@ -121,36 +138,55 @@ Natural deduction systems were first invented by Stanislaw Jaskowski in 1926, th
 \Rule{$\TRIPLEBAR$-Elim} & $\triplebar{\CAPTHETA}{\CAPPSI}$, $\CAPPSI$ & $\CAPTHETA$ \\
 \nopagebreak
 \Rule{$\TRIPLEBAR$-Elim} & $\triplebar{\CAPTHETA}{\CAPPSI}$, $\CAPTHETA$ & $\CAPPSI$ \\
-%\bottomrule
 \end{longtable}
 \index{derivation!rule!basic}\index{basic rule}
 \index{derivation!rule!introduction}\index{introduction rule}
 \index{derivation!rule!elimination}\index{elimination rule}
-%\end{center}
-%\caption{Basic Rules of \GSD{}}
-%\label{GSD}
-%\end{table}
 
-Before doing some examples, two notes about the rules are in order. 
-First, to use the \Rule{Assumption} rule, you must draw a new vertical line to the left of your assumption (and to the right of any other vertical lines from previous steps). 
-The vertical lines are assumption lines; assumption lines are an accounting device to keep track of what you have assumed as opposed to what you have derived (see example \pmvref{secondexample}). You may assume any sentence you like, but generally these assumptions (usually all of them) will need to be discharged.\footnote{Leaving an assumption undischarged is tantamount to treating it as a premise in an argument.}  Vertical assumption lines are like your credit card balance.  As with a credit card, managing assumptions wisely is a skill to be acquired.
+Let's look again at the first example:
 
-How do you get rid of an assumption? And how do you keep track of them when you are adding some and eliminating others? We have a second accounting device: boxes. When an assumption is discharged, the relevant assumption line is turned into a box containing everything derived from the originating assumption. Writing boxes can sometimes seem tedious, but we have found that using them significantly reduces student error.
+\begin{gproofnn}
+\gaproof{
+\galine{1}{$\conjunction{\Bl}{\Cl}$}{\Rule{Assume}}
+\galine{2}{$\Bl$}{\Rule{$\WEDGE$-Elim}, 1}
+\galine{3}{$\Cl$}{\Rule{$\WEDGE$-Elim}, 1}
+\galine{4}{$\conjunction{\Cl}{\Bl}$}{\Rule{$\WEDGE\!$-Intro}, 2,3}
+}
+\gline{5}{$\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$}{\Rule{$\HORSESHOE$-Intro}, 1--4}
+\end{gproofnn}
 
-Assumptions are discharged using the \Rule{$\HORSESHOE$-Intro} rule.  For \Rule{$\HORSESHOE$-Intro} you need a (part of a) derivation that begins with an unboxed assumption \mbox{| $\CAPTHETA$} and ends with \mbox{| $\CAPPSI$}. 
-After you've added $\horseshoe{\CAPTHETA}{\CAPPSI}$ to your derivation, you \emph{must} box off the part of the derivation that began with assumption | $\CAPTHETA$ and ended with | $\CAPPSI$.  That is, if we have the following:
+You will notice a box around the sentences of the first four steps.
+That box is the product of two rules: \Rule{Assume} and \Rule{$\HORSESHOE$-intro}.
+The \Rule{Assume} rule allows you to write any sentence you like, under one condition.
+You must draw a vertical line to the left of the sentence you assume, and that line must be extended to the left of all sentences of each step below until you the \Rule{$\HORSESHOE$-intro} rule is applied.
+When \Rule{$\HORSESHOE$-intro} is applied three more lines must be drawn, forming a box around all the sentences from the assumption to the step just before the \Rule{$\HORSESHOE$-intro}.
 
-\begin{gproof}[\label{conditionalintro}]
+Every use of the \Rule{Assume} rule starts a box, and every use of \Rule{$\HORSESHOE$-intro} closes a box.
+The vertical line to the left represents an assumption.
+Every sentence that is derived on that line represents a conclusion reached using that assumption.
+Closing the box with \Rule{$\HORSESHOE$-intro} represents a \emph{discharge} of that assumption.
+In other words that assumption is no longer being made.
+Neither the assumption nor the lines derived from that assumption may be used in the rest of the derivation.
+A closed the box is a visual reminder that those lines cannot be used any longer.
+
+To understand better how assumptions work in derivations we state their use in more general terms.
+At any step you may assume any sentence you like, so long as you write a vertical line to the left of it: \mbox{| $\CAPTHETA$}.
+Assumptions are discharged using the \Rule{$\HORSESHOE$-Intro} rule.
+To apply \Rule{$\HORSESHOE$-Intro} you need a vertical line from an unboxed assumption \mbox{| $\CAPTHETA$} that extends down to an unboxed \mbox{| $\CAPPSI$}. 
+After you've added $\horseshoe{\CAPTHETA}{\CAPPSI}$ to your derivation, you \emph{must} box off the part of the derivation that begins with | $\CAPTHETA$ and ends with | $\CAPPSI$.
+That is, if you have the following:
+
+\begin{gproofnn}[\label{conditionalintro}]
 	\galineNC{1}{$\CAPTHETA$}{\Rule{Assume}}
 	\galineNC{2}{}{}
 	\galineNC{3}{$\qquad\vdots$}{}
 	\galineNC{4}{}{}
 	\galineNC{5}{$\CAPPSI$}{}
-\end{gproof}
+\end{gproofnn}
 
-\noindent{}we may then use the rule \Rule{$\HORSESHOE$-Intro} to get:
+\noindent{}you may then use the rule \Rule{$\HORSESHOE$-Intro} to get:
 
-\begin{gproof}[\label{conditionalintroclosed}]
+\begin{gproofnn}[\label{conditionalintroclosed}]
 	\gaproof{
 		\galine{1}{$\CAPTHETA$}{\Rule{Assume}}
 		\galine{2}{}{}
@@ -159,20 +195,21 @@ After you've added $\horseshoe{\CAPTHETA}{\CAPPSI}$ to your derivation, you \emp
 		\galine{5}{$\CAPPSI$}{}
 	}
 	\gline{6}{$\horseshoe{\CAPTHETA}{\CAPPSI}$}{\Rule{$\HORSESHOE$-Intro}, 1--5}
-\end{gproof}
+\end{gproofnn}
 
-\noindent{}The point in boxing off that part of the proof is to indicate visually that those sentences in the box can't be used anymore. 
+\noindent{}You may even assume more than one sentence at a time, in which case you may have several vertical lines to the left.
+Just remember that these assumptions will typically need to be discharged.\footnote{Leaving an assumption undischarged is tantamount to treating it as a premise in an argument.}
+Vertical assumption lines are like your credit card balance.
+It can be convenient to run a high balance for a time, as long as you can pay it down eventually.
 
 \subsection{Writing Derivations}
 
-We've said, in rough terms, that a derivation is a finite series of sentences each of which is either an assumption, or there is a rule which, given the previous sentences in the derivation, sanctions (or permits) us to write down that sentence. 
-We'll add more structure to derivations for the sake of visual clarity and organization. 
-First, we'll write the sentences vertically with earlier sentences above later ones so that each sentence sits on its own row in the derivation. 
-Each row is to be numbered with consecutive positive integers, starting with $1$.
-In a column to the right on each row we'll put either \Rule{Assume}, if the sentence is an assumption, or the name of the rule plus the numbers of the previous rows to which the rule was applied in order to get the sentence on the current row. 
-Lastly, in a column between the row numbers and the sentences we'll keep track of the assumptions by running vertical lines in the column.
+We have seen that a \GSD{} derivation is a numbered sequence of steps, starting with $1$, where each step contains a sentence of \GSL{} followed by a \GSD{} rule.
+The column between the line number and the sentence contains a finite number of vertical lines, possibly zero, standing for the number of open assumptions.
+Each step justified by the rule \Rule{Assume} initiates such a vertical line, and each step justified by \Rule{$\HORSESHOE$-Intro} closes a box extending to the previous \Rule{Assume} step, marking the downward boundary of its line.
+For each step either the \Rule{Assume} rule is applied with no line number cited, or another rule is given with the numbers of the previous rows to which the rule was applied to derive that step. 
 
-As an example, consider how we'd derive $\conjunction{\Cl}{\Bl}$ from $\conjunction{\Bl}{\Cl}$. This derivation would begin:
+Consider the previous derivation of $\conjunction{\Cl}{\Bl}$ from $\conjunction{\Bl}{\Cl}$:
 \begin{gproof}[\label{onelinederivation}]
 \galineNC{1}{$\conjunction{\Bl}{\Cl}$}{\Rule{Assume}}
 \end{gproof}
@@ -192,24 +229,17 @@ We continue:
 \galineNC{3}{$\Cl$}{\Rule{$\WEDGE$-Elim}, 1}
 \galineNC{4}{$\conjunction{\Cl}{\Bl}$}{\Rule{$\WEDGE\!$-Intro}, 2,3}
 \end{gproof}
-\noindent{}This is a four-line derivation of $\conjunction{\Cl}{\Bl}$ from $\conjunction{\Bl}{\Cl}$. Notice that steps 2 and 3 could have been done in opposite order. In many cases the order of sentences in a derivation doesn’t matter, but in other cases it is crucial. Learning the difference is an important skill.
+\noindent{}This is a four-line derivation of $\conjunction{\Cl}{\Bl}$ from $\conjunction{\Bl}{\Cl}$.
+Notice that steps 2 and 3 could have been done in opposite order.
+In many cases the order of sentences in a derivation doesn't matter, but in other cases it is crucial.
+Learning the difference is an important skill.
 
 Just as we used the double turnstile to represent when one sentence (or a set of sentences) entailed another, we use what's called the \emph{single turnstile}, \mention{\:$\sststile{}{}\:$}, to represent when one sentence is derivable from another, or from another (finite) set of sentences. 
 The four-line derivation shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\conjunction{\Cl}{\Bl}$. 
 It's also worth noting that each of the two partially completed pieces of the derivation just given are derivations themselves. 
 The first (\ref{onelinederivation}) is a one-line derivation that shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\conjunction{\Bl}{\Cl}$, while the second (\ref{threelinederivation}) is a three-line derivation that shows that $\conjunction{\Bl}{\Cl}\sststile{}{}\Cl$.
 
-Next, as an example of how assumption lines stack up in a derivation, consider the following derivation of $\Dl$ from $\conjunction{\Al}{\Bl}$ and $\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$.
-\begin{gproof}[\label{secondexample}]
-\galineNC{1}{$\conjunction{\Al}{\Bl}$}{\Rule{Assume}}
-\gaalineNC{2}{$\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$}{\Rule{Assume}}
-\gaalineNC{3}{$\Bl$}{\Rule{$\WEDGE$-Elim}, 1}
-\gaalineNC{4}{$\conjunction{\Cl}{\Dl}$}{\Rule{$\HORSESHOE$-Elim}, 2,3}
-\gaalineNC{5}{$\Dl$}{\Rule{$\WEDGE$-Elim}, 4}
-\end{gproof}
-\noindent{}As is shown, any time a new assumption line is added it must be placed to the right of the previous (unboxed) assumption lines. (We discuss this example a little more in the next section, while discussing the basic top-down and bottom-up strategies for $\HORSESHOE$.)
-
-The last major point about the mechanics of writing a derivation is how the assumptions are closed, or discharged, when \Rule{$\HORSESHOE$-Intro} is used. This rule says that if you have a sentence $\CAPPSI$ as an assumption on the first row of vertical line L, and you've worked your way down to a sentence $\CAPTHETA$, also on L, then you can ``close off'' the assumption by drawing a box around that part of the proof and writing $\horseshoe{\CAPPSI}{\CAPTHETA}$ on the next line. We can demonstrate this by applying the rule to close off the assumptions in the previous two proofs:
+We can now ``close off'' the initial assumption by drawing a box around that part of the proof and writing a conditional on the next line:
 \begin{gproof}[\label{simpleconjunctionclosed}]
 \gaproof{
 \galine{1}{$\conjunction{\Bl}{\Cl}$}{\Rule{Assume}}
@@ -219,6 +249,37 @@ The last major point about the mechanics of writing a derivation is how the assu
 }
 \gline{5}{$\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$}{\Rule{$\HORSESHOE$-Intro}, 1--4}
 \end{gproof}
+\noindent{}So we have derived $\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$ without any assumptions remaining.
+When we have a derivation from no assumptions (or, rather, with all assumptions boxed), we represent that with a single turnstile with no formulas on the left.
+This derivation shows that $\sststile{}{}\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$.\footnote{If $\sststile{}{}\CAPPHI$, it's often said that $\CAPPHI$ is a theorem of the derivation system.
+``Theorem'' is used ambiguously between the derivation of an \GSL (or \GQL) sentence from the empty set of assumptions and things we prove in MathEnglish.
+We follow that standard practice.}
+
+Next, as an example of how assumption lines stack up in a derivation, consider the following derivation of $\Dl$ from $\conjunction{\Al}{\Bl}$ and $\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$.
+\begin{gproof}[\label{secondexample}]
+\galineNC{1}{$\conjunction{\Al}{\Bl}$}{\Rule{Assume}}
+\gaalineNC{2}{$\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$}{\Rule{Assume}}
+\gaalineNC{3}{$\Bl$}{\Rule{$\WEDGE$-Elim}, 1}
+\gaalineNC{4}{$\conjunction{\Cl}{\Dl}$}{\Rule{$\HORSESHOE$-Elim}, 2,3}
+\gaalineNC{5}{$\Dl$}{\Rule{$\WEDGE$-Elim}, 4}
+\end{gproof}
+\noindent{}As is shown, any time a new assumption line is added it must be placed to the right of the previous (unboxed) assumption lines.
+
+We can only discharge one assumption at a time, the most recent unboxed assumption.
+So we get:
+
+\begin{gproof}
+\galineNC{1}{$\conjunction{\Al}{\Bl}$}{\Rule{Assume}}
+	\gaaproof{
+		\gaalineNCndS{2}{$\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$}{\Rule{Assume}}
+		\gaalineNCndS{3}{$\Bl$}{\Rule{$\WEDGE$-Elim}, 1}
+		\gaalineNCndS{4}{$\conjunction{\Cl}{\Dl}$}{\Rule{$\HORSESHOE$-Elim}, 2,3}
+		\gaalineNCndS{5}{$\Dl$}{\Rule{$\WEDGE$-Elim}, 4}
+	}
+\galineNC{6}{$\horseshoe{\parhorseshoe{\Bl}{\bparconjunction{\Cl}{\Dl}}}{\Dl}$}{\Rule{$\HORSESHOE$-Intro}, 2--5}
+\end{gproof}
+\noindent{}Now that the second assumption is boxed, we are free to discharge the first:
+
 \begin{gproof}[\label{secondexamplefinished}]
 \gaproof{
 \galine{1}{$\conjunction{\Al}{\Bl}$}{\Rule{Assume}}
@@ -232,13 +293,15 @@ The last major point about the mechanics of writing a derivation is how the assu
 }
 \gline{7}{$\horseshoe{\parconjunction{\Al}{\Bl}}{\cparhorseshoe{\parhorseshoe{\Bl}{\bparconjunction{\Cl}{\Dl}}}{\Dl}}$}{\Rule{$\HORSESHOE$-Intro}, 1--6}
 \end{gproof}
-\noindent{}In these two cases, since we've boxed off the assumptions they are no longer derivations of some sentence from another (or others). The first is a derivation of  $\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$, while the second is a derivation of $\horseshoe{\parconjunction{\Al}{\Bl}}{\cparhorseshoe{\parhorseshoe{\Bl}{\bparconjunction{\Cl}{\Dl}}}{\Dl}}$. When we have a derivation from no assumptions (or, rather, with all assumptions boxed), we represent that with a single turnstile with no formulas on the left. So these two derivations show, respectively, that $\sststile{}{}\horseshoe{\parconjunction{\Bl}{\Cl}}{\parconjunction{\Cl}{\Bl}}$ and $\sststile{}{}\horseshoe{\parconjunction{\Al}{\Bl}}{\cparhorseshoe{\parhorseshoe{\Bl}{\bparconjunction{\Cl}{\Dl}}}{\Dl}}$.\footnote{If  $\sststile{}{}\CAPPHI$, it's often said that $\CAPPHI$ is a theorem of the derivation system. ``Theorem'' is used ambiguously between the derivation of an \GSL  (or \GQL) sentence from the empty set of assumptions and things we prove in MathEnglish.  We will follow that standard practice.}
+\noindent{}We have derived $\horseshoe{\parconjunction{\Al}{\Bl}}{\cparhorseshoe{\parhorseshoe{\Bl}{\bparconjunction{\Cl}{\Dl}}}{\Dl}}$ without any outstanding assumptions.
+So we have $\sststile{}{}\horseshoe{\parconjunction{\Al}{\Bl}}{\cparhorseshoe{\parhorseshoe{\Bl}{\bparconjunction{\Cl}{\Dl}}}{\Dl}}$.
 
-It is important to note that once we have closed off an assumption we can no longer use the sentences that we've boxed off. 
-We can't apply rules to them anymore; they are no longer \mention{Given}, to use the term in the Basic Rules chart.
-The reason we can't use sentences inside boxes is because if we could, then \GSD{} would not be sound.
-That is, we would be able to derive a sentence $\CAPPHI$ from others $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ but $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\sdtstile{}{}\CAPPHI$ would not hold.
-To see this, consider the following example.
+It's worth reiterating that once sentences have been boxed they can't be used for the rest of the derivation.
+These sentences are no longer \mention{Given}, to use the term in the Basic Rules chart.
+If their use were allowed then \GSD{} would not be sound.
+That is, there would be some sentences $\CAPPHI$ and $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ such that $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\text{ }\cancel{\sdtstile{}{}}\text{ }\CAPPHI$ but $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}\sststile{}{}\CAPPHI$.
+So $\sststile{}{}$ and $\sdtstile{}{}$ wouldn't agree with each other---an unfortunate result!
+To see the problem, consider:
 \begin{gproof}
 \galineNC{1}{$\horseshoe{\Al}{\Bl}$}{\Rule{Assume}}
 \gaaproof{
@@ -248,31 +311,33 @@ To see this, consider the following example.
 \galineNC{4}{$\horseshoe{\Al}{\Bl}$}{\Rule{$\HORSESHOE$-Intro}, 2--3}
 \galineNC{5}{$\Bl$}{\Rule{$\HORSESHOE$-Elim}, 2,4}
 \end{gproof}
-\noindent{}In line 5 we go back into the box to use $\Al$ from line 2 to get $\Bl$ from line 4 using \Rule{$\HORSESHOE$-Intro}. 
-But it should be easy to see that $\horseshoe{\Al}{\Bl}\sdtstile{}{}\Bl$ does not hold. 
-(Consider a model $\IntA$ such that $\IntA(\Al)=\FalseB$ and $\IntA(\Bl)=\FalseB$.) 
-%Sometimes there are sentences inside a closed box that we could use without running into this problem, but that doesn't mean we can use that sentence. 
-%The rule is simply that if a sentence appears inside a closed box, then you cannot use it anymore in the proof. 
+\noindent{}Line 5 cites line 2 to use $\Al$ to get $\Bl$ from line 4 using \Rule{$\HORSESHOE$-Intro}. 
+But clearly $\horseshoe{\Al}{\Bl}\sdtstile{}{}\Bl$ does not hold. 
+Consider a model $\IntA$ such that $\IntA(\Al)=\FalseB$ and $\IntA(\Bl)=\FalseB$.
 
-\subsection{*The Recursive Definition of a Derivation}\label{RecDefOfDerv}
-Now that we've done some examples, we give an explicit definition of a derivation. 
-The definition of a derivation is recursive. 
-The explicit definition we give here is mainly for the sake of proving soundness in the next chapter. 
+\subsection{The Recursive Definition of a Derivation}\label{RecDefOfDerv}
+We start with some preliminary definitions.
+
+\begin{majorILnc}{\LnpDC{RuleSchemas}}
+	A \nidf{formal derivation rule}\index{derivation!rule|textbf} is a sequence of sentence schemas divided into two parts, the first part being the \df{given schemas} and the second part being the \df{may-add schema}. 
+\end{majorILnc}
+\noindent{}Table \mvref{GSD} lists rules by putting the ``Given'' schemas in the left column, and the ``May Add'' schema in the right. 
+We spell out these schemas so the next definition is easier to state.
+\begin{majorILnc}{\LnpDC{RuleSanctioning}}
+	Let there be unboxed lines $\integer{m}_1,\ldots,\integer{m}_{\integer{j}}$ with sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{j}}$, respectively.
+	A rule \Rule{R}, applied to lines $\integer{m}_1,\ldots,\integer{m}_{\integer{j}}$ \df{sanctions} writing the sentence $\CAPPHI$ \Iff there's some substitution of \GSL{} sentences that, for the given schemas of \Rule{R}, results in $\CAPPSI_1,\ldots,\CAPPSI_{\integer{j}}$ and, for the may-add schema, results in $\CAPPHI$. 
+\end{majorILnc}
+\noindent{}As an example, consider again derivation \pmvref{secondexamplefinished}. 
+The rule \Rule{$\HORSESHOE$-Elim} was applied to line 2, which had sentence $\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$, and line 3, which had sentence $\Bl$, to get line 4, which had sentence $\conjunction{\Cl}{\Dl}$. 
+Using definition \ref{RuleSanctioning} we can show that this move is sanctioned by \Rule{$\HORSESHOE$-Elim} by noting, from table \mvref{GSD}, that \Rule{$\HORSESHOE$-Elim} has two given schemas, $\horseshoe{\CAPTHETA}{\CAPPSI}$ and $\CAPTHETA$, and the may-add scheme $\CAPPSI$. 
+Substituting $\CAPTHETA=\Bl$ and $\CAPPSI=\conjunction{\Cl}{\Dl}$ in the given schemas gets us lines 2 and 3, while making this same substitution in the may-add schema gets us line 4. 
+
+We now give a precise definition of a derivation. 
+The explicit definition will be especially useful for proving soundness in the next chapter.
 Although the actual definition is complicated, the basic idea is straightforward: 
-A single \GSL{} sentence that's an assumption is a derivation (e.g., derivation \ref{onelinederivation}), and any finite sequence of \GSL{} sentences every one of which (after the first) is either an assumption or sanctioned by some rule of \GSD{} is a derivation. 
-We have to complicate this to handle the rule \Rule{$\HORSESHOE$-Intro} and \Rule{Assumption}, neither of which quite work like the other rules.
+A single \GSL{} sentence that's an assumption is a derivation (e.g., derivation \ref{onelinederivation}), and any finite sequence of \GSL{} sentences every one of which is either an assumption or sanctioned by some rule of \GSD{} is a derivation. 
+This idea must be revised to handle the rules \Rule{$\HORSESHOE$-Intro} and \Rule{Assume}, neither of which quite work like the other rules.
 To understand these rules we must first define what an \emph{open assumption} is. An assumption is open \Iff it appears on an assumption line and is not in a box.
-% the extra features of derivations: 
-%the numbers we write on the left to keep track of the sentences, the vertical lines we use to track the scope of the assumptions, and the rules we note on the right along with the numbers of the lines they were applied to. 
-%\begin{majorILnc}{\LnpDC{Derivation Line}}
-%A \nidf{derivation} \underdf{line}{derivation} consists of:
-%\begin{cenumerate}
-%\item An integer $\integer{n}$, called the line number.
-%\item Some number of vertical lines \mention{|} indicating the number of assumptions the line falls in the scope of.
-%\item A sentence of \GSL{}.
-%\item The name of a rule and line numbers to which the rule was applied.
-%\end{cenumerate}
-%\end{majorILnc}
 \begin{majorILnc}{\LnpDC{Recursive definition of Derivation}} The following recursive clauses fix which finite sequences of derivation lines are \nidf{derivations}\index{derivation|textbf} in \GSD{}:
 \begin{description}
 \item[Base Clause:] For any \GSL{} sentence $\CAPPHI$, the following single derivation line (i.e., sequence of derivation lines of length 1) is a derivation: 
@@ -308,7 +373,7 @@ so long as $\CAPTHETA$ is sanctioned by some rule \Rule{R$'$} (other than \Rule{
 \glinend{}{}{}
 \galineNC{$\integer{n}$}{$\CAPPSI$\hfill{}}{\Rule{R}, $\integer{j}_1,\ldots,\integer{j}_k$}
 \end{gproofnn}
-then, for any sentence $\CAPTHETA$, the sequence of derivation lines you get by adding a new line $\integer{n}+1$ with $\integer{k}+1$ open assumptions and $\CAPTHETA$ sanctioned by \Rule{Assumption} is a derivation,
+then, for any sentence $\CAPTHETA$, the sequence of derivation lines you get by adding a new line $\integer{n}+1$ with $\integer{k}+1$ open assumptions and $\CAPTHETA$ sanctioned by \Rule{Assume} is a derivation,
 \begin{gproofnn}
 \gline{1}{}{}
 \glinend{}{}{}
@@ -351,20 +416,17 @@ so long as you close the assumption opened on line $\integer{m}$ by drawing a bo
 \item[Closure Clause:] Nothing else is a derivation of \GSL{}.
 \end{description}
 \end{majorILnc}
-\noindent{}Note that this definition of a derivation makes use of something, sanctioning, which we haven't yet defined explicitly. 
-Definition \ref{RuleSanctioning} will make this explicit too. 
-Also note that in the generating clauses we specify that we start with a derivation with $\integer{k}$ open assumptions on the last line. 
+\noindent{}Note that in the generating clauses we specify that we start with a derivation with $\integer{k}$ open assumptions on the last line. 
 In cases 1 and 2 the schematic drawings given don't explicitly depict the $\integer{k}$ vertical lines that should be running between the line numbers and the sentences, but the drawings are not intended to suggest that you can write derivations without the running vertical lines which track open assumptions. 
-The schematic drawing in case 3 similarly only depicts the last vertical assumption line (the one for the assumption opened on line $\integer{m}$), but that's not to suggest the others aren't there or can be left off.   
+The schematic drawing in case 3 similarly only depicts the last vertical assumption line (the one for the assumption opened on line $\integer{m}$), but that's not to suggest the others aren't there, or that they can be left off.   
 
 \subsection{Restrictions on Applying Rules}\label{Restrictions on Applying Rules}
-Above we noted that every line of a derivation must either be an assumption, or there must be a rule which, applied to some previous unboxed sentences in the derivation, \emph{sanctions} us to write down that sentence.
-(Extending a derivation with the introduction rule for $\HORSESHOE$, \Rule{$\HORSESHOE$-Intro}, as in case 3 of definition \ref{Recursive definition of Derivation} is a special case, but still we say that the rule sanctions writing down the new sentence.) 
-It's very important to be clear on just when a rule sanctions\index{derivation!rule}\index{sanctions} (or we might say \niidf{licenses}\index{licenses|see{sanctions}}) writing down a sentence. 
-The restriction, which we tacitly followed in the examples given above, is that a rule can be applied only if the connectives mentioned in the rule are the main connectives of the sentences to which that rule is being applied. That is, a rule can only be applied to whole sentences on a line---it can't be applied to subsentences on a line.
+It's important to be clear on precisely when a rule sanctions\index{derivation!rule}\index{sanctions} writing down a sentence. 
+The restriction, which we quietly followed in previous examples, is that a rule can be applied only if the connectives mentioned in the rule are the main connectives of the sentences to which that rule is being applied.
+That is, a rule can only be applied to whole sentences on a line---it can't be applied to proper subsentences of a line.
 
 For example, we can only apply \Rule{$\HORSESHOE$-Elim} on two lines of a derivation if the sentence on one of the lines is a conditional $\horseshoe{\CAPPHI}{\CAPTHETA}$ and the sentence on the other line is $\CAPPHI$. 
-If $\horseshoe{\CAPPHI}{\CAPTHETA}$ is the sentence on one line and $\CAPPHI$ is merely contained as a subsentence in the sentence on the other (say the sentence has the form $\conjunction{\CAPPHI}{\CAPPSI}$), then we cannot apply \Rule{$\HORSESHOE$-Elim} to those lines. 
+If $\horseshoe{\CAPPHI}{\CAPTHETA}$ is the sentence on one line and $\CAPPHI$ is merely contained as a subsentence in the sentence on the other (say the sentence has the form $\disjunction{\CAPPHI}{\CAPPSI}$ or $\conjunction{\CAPPHI}{\CAPPSI}$), then we cannot apply \Rule{$\HORSESHOE$-Elim} to those lines. 
 Likewise, if a line has a sentence $\CAPPHI$ and the conditional $\horseshoe{\CAPPHI}{\CAPTHETA}$ is merely contained as a subsentence in the sentence on another line (say the sentence has the form $\disjunction{\bparhorseshoe{\CAPPHI}{\CAPTHETA}}{\CAPPSI}$), then we cannot apply \Rule{$\HORSESHOE$-Elim} to those lines.
 
 For a more concrete example, consider derivation \pmvref{secondexamplefinished}. 
@@ -375,15 +437,9 @@ In just the same way we cannot apply \Rule{$\WEDGE$-Elim} to line 2 of derivatio
 Instead, it's the main connective of the \CAPS{rhs} subsentence of $\horseshoe{\Bl}{\parconjunction{\Cl}{\Dl}}$. 
 Again it doesn't matter that we can get the conjunct by itself using \Rule{$\HORSESHOE$-Elim} (after using \Rule{$\WEDGE$-Elim} on line 1), the rule \Rule{$\WEDGE$-Elim} cannot be applied to a line unless the sentence on that line is a conjunction. 
 
-One reason for this restriction is because without it many applications of the rules would not be \emph{truth-preserving}.  One of the goals of \GSD{} is that our derivation system ``mirrors'' the results we could prove in \GSL{}.  In other words, we want something to be derivable in \GSD{} \Iff we can prove the same result semantically in \GSL{}.
-
-However, we are not yet ready to show that our derivation system has this property.  We will not establish this result until next chapter.  For now, we note merely that a new line is derivable solely in virtue of the \emph{form} of previous lines, or in virtue of the rules for introducing a new line.  Our derivation system is nothing more than a formal model, with \emph{stipulated} restrictions regarding how to apply the rules we define.  It does not, in and of itself, say anything about what is true or false in \GSL{}.
-
-\subsection{*Decidability}\label{Section:Intro to Decidability}
+\subsection{Decidability}\label{Section:Intro to Decidability}
 There are multiple algorithms to follow for applying the rules which, if there does exist a derivation, will halt when the last line written down is the sentence to be derived. 
-For \GSD{} the algorithms are intuitive and straightforward (see Sec. \pmvref{Section:Completeness for GSD}), while for \GQD{} (the basic derivation system for \GQL{} we'll introduce in Sec. \pmvref{Section GQD}) they need to become much more complicated. 
-In the next chapter (Sec. \pmvref{The Method Section}) we will give one such algorithm for \GQD{}, which we call The Method.\index{method, the} 
-It will be crucial for showing some of the important connections between derivations and entailment mentioned in section \ref{Derivation Preliminaries}, including completeness. 
+For \GSD{} the algorithms are intuitive and straightforward (see Sec. \pmvref{Section:Completeness for GSD}), while for \GQD{} (the basic derivation system for \GQL{} we define in Sec. \pmvref{Section GQD}) they are much more complicated.
 
 But although these algorithms are guaranteed to end in a derivation if the sentence can be derived, there are at least two reasons why you don't want to do most of your derivations using them. 
 First, the derivations produced by them tend to be much longer and more complicated than is necessary. 
@@ -391,23 +447,20 @@ You will almost always be able to come up with a much shorter and more direct pr
 Second, at least for \GQD{} (but not \GSD{}), although \emph{if} there is a derivation the algorithms will ``find it'', if there is \emph{not} a derivation then the algorithms may never ``find out''. 
 That is, if there is not a derivation then the algorithms (any one you pick) do essentially one of two things: either they halt in a way that indicates there is no derivation, or they never halt. 
 If you happen to be working on a problem in the latter case and you're only following the algorithm, then you'll never find out whether there is a derivation. 
-(If a derivation system, like \GQD{}, has this feature, then it's said to be \idf{undecidable}. 
+If a derivation system, like \GQD{}, has this feature, then it's said to be \idf{undecidable}. 
 If there is an algorithm that always halts either in a derivation or with an indication that there's no derivation (as in the case of \GSD{}), then the system is said to be \idf{decidable} and the algorithm is said to be a \niidf{decision procedure}\index{decision procedure}.
-%So, \GQD{} is undecidable, while \GSD{} is decidable.
+\GQD{} is undecidable, while \GSD{} is decidable.\footnote{Enderton \citeyearpar{Enderton2010} provides a general, contemporary introduction to computability and decision procedures. Kleene \citeyearpar[ch.~5]{Kleene1967} provides a lucid and concise discussion within roughly the framework devolved here.}
 Note that if we restrict \GQL{} to just 1-place predicates, then \GQD{} is decidable.
-See section \pmvref{Decidability and Churchs Theorem} for more details and discussion.)
-At any point in applying the algorithm you'll have neither produced a derivation or reached any indication that there is no derivation.
-
-Enderton \citeyearpar{Enderton2010} provides a general, contemporary introduction to computability and decision procedures. Kleene \citeyearpar[ch.~5]{Kleene1967} provides a lucid and concise discussion within roughly the framework devolved here.
+See section \pmvref{Decidability and Churchs Theorem} for more details and discussion.
 
 \subsection{Some Strategies}\label{Sec:Some Strategies}
 We don't want to use these sorts of algorithms to find derivations, if we can avoid it. 
-But there are general strategies we will use. 
+But there are general strategies we do use. 
 For each logical connective there are two types of strategies: those for what to do if you already have sentences with that as their main connective, and those for what to do if you want to get a sentence with that as its main connective. 
-We'll call the first top-down strategies and the second bottom-up strategies.
+We call the first top-down strategies and the second bottom-up strategies.
 In many cases, doing a derivation is like planning a plane trip. The top-down method is like figuring out the nearest convenient airport from your current location, and the bottom-up method is like figuring out which airport is convenient for getting to your destination. In derivations, sometimes you have to go through intermediate sentences (as with intermediate cities in travel).
 
-We will begin with some basic top-down and bottom-up strategies for each connective, adding more later in section \ref{Sec:Shortcut Rule Strategies} when we add shortcut rules.
+We begin with some basic top-down and bottom-up strategies for each connective, adding more later in section \ref{Sec:Shortcut Rule Strategies} when we add shortcut rules.
 
 \subsubsection*{Conjunction} 
 We start with the basic top-down and bottom-up strategies for conjunction. They are the most straightforward.
@@ -535,12 +588,12 @@ The basic bottom-up strategy isn't always the right tool for deriving disjunctio
 This is an important point: it might be that a disjunction is derivable even if neither disjunct is. 
 It's important that we can derive disjunctions without first deriving one or the other disjunct, since $\disjunction{\Bl}{\negation{\Bl}}$ is a logical truth. We would like to be able to derive it, though neither $\Bl$ nor $\negation{\Bl}$ is a logical truth.
 
-Later on we'll get more useful bottom-up strategies for disjunctions. For now we'll focus on the top-down strategy. 
+Later on we get more useful bottom-up strategies for disjunctions. For now we focus on the top-down strategy. 
 
 As an example, say we want to derive $\negation{\parconjunction{\bpardisjunction{\negation{\Al}}{\negation{\Bl}}}{\bparconjunction{\Al}{\Bl}}}$. 
 The whole sentence itself is a negation, so we start just as in the last example. 
 So we need some contradiction to aim for. 
-We'll try to derive $\conjunction{\Bl}{\negation{\Bl}}$.
+We try to derive $\conjunction{\Bl}{\negation{\Bl}}$.
 \begin{gproof}
 \galineNC{1}{$\parconjunction{\bpardisjunction{\negation{\Al}}{\negation{\Bl}}}{\bparconjunction{\Al}{\Bl}}$}{\Rule{Assume}}
 \galineNCnd{}{}{}
@@ -614,7 +667,7 @@ So we follow the top-down strategy for $\VEE$ which tells us how to get a senten
 \galineNC{$\integer{n}-1$}{$\negation{\Bl}$}{\Rule{$\NEGATION$-Intro}, $\integer{n}-2$}
 \galineNC{$\integer{n}$}{$\conjunction{\Bl}{\negation{\Bl}}$}{\Rule{$\WEDGE$-Intro}, $\integer{n}-2$,$\integer{n}-1$}
 \end{gproof}
-To get the conditionals on lines $\integer{n}-5$ and $\integer{n}-4$, we'll have to use \Rule{$\HORSESHOE$-Into}. So the setup is:
+To get the conditionals on lines $\integer{n}-5$ and $\integer{n}-4$, we have to use \Rule{$\HORSESHOE$-Into}. So the setup is:
 \begin{gproof}
 \galineNC{1}{$\parconjunction{\bpardisjunction{\negation{\Al}}{\negation{\Bl}}}{\bparconjunction{\Al}{\Bl}}$}{\Rule{Assume}}
 \galineNC{2}{$\bpardisjunction{\negation{\Al}}{\negation{\Bl}}$}{\Rule{$\WEDGE$-Elim}, 1}
@@ -849,7 +902,7 @@ All we'd have to do is insert the appropriate instance of \ref{anycontradictionS
 % \label{GSDplus1}
 %\end{table}
  
-The idea will be the same for all the shortcut rules we'll introduce here. These come in two types, standard and exchange, and are listed in table \pmvref{GSDplus1} and \pmvref{GSDplus2}. The idea is, (i) for each shortcut rule \Rule{R}, for given any application of \Rule{R} we can derive, using only the basic rules, the sentence $\CAPPHI$ (which \Rule{R} allows us to write down) from the sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ to which we applied \Rule{R}. 
+The idea will be the same for all the shortcut rules we introduce here. These come in two types, standard and exchange, and are listed in table \pmvref{GSDplus1} and \pmvref{GSDplus2}. The idea is, (i) for each shortcut rule \Rule{R}, for given any application of \Rule{R} we can derive, using only the basic rules, the sentence $\CAPPHI$ (which \Rule{R} allows us to write down) from the sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ to which we applied \Rule{R}. 
 And, (ii) in general, anything we can derive using a rule, any application of which can be derived using only basic rules, can itself be derived using only basic rules.  
 So, (iii) anything we can derive using the basic rules of \GSD{} and any of the shortcut rules can be derived from just the basic rules alone.
 We have restated (ii) more precisely below as theorem \mvref{GSD Shortcut Theorem}, (i) as theorem \mvref{GSD Shortcut Theorem2}, and (iii) as theorem \mvref{GSD Shortcut Theorem3}. 
@@ -982,7 +1035,7 @@ The strings of symbols on each line of \ref{anycontradictionSC} are not \GSL{} s
 Instead, they are sentence schemas.\index{sentence schema}
 But, as we've done in \ref{anycontradictionSC}, nothing stops us from treating sentence schemas like the ones in \ref{anycontradictionSC} as \GSL{} sentences and applying rules to them. 
 The key fact---why this is useful---is that what we get when we do this becomes a derivation whenever we substitute \GSL{} sentences in for the MathEnglish variables. 
-For this reason we'll call these \niidf{derivation} \underidf{schemas}{derivation} instead of derivations. 
+For this reason we call these \niidf{derivation} \underidf{schemas}{derivation} instead of derivations. 
 
 Returning to theorem \mvref{GSD Shortcut Theorem2}, we can handle the other rules in just the same way we handled \Rule{Any Contradiction}. 
 For example, if we write a derivation schema of $\negation{\CAPPHI}$ from $\horseshoe{\CAPPHI}{\CAPTHETA}$ and $\negation{\CAPTHETA}$ using only basic rules of \GSD{}, then this will be sufficient to show that any application of the rule \Rule{M.T.} (\Rule{Modus Tollens}) can be derived using only basic rules of \GSD{}.\footnote{For
@@ -1277,7 +1330,7 @@ If it's not a subsentence of $\CAPPSI$ or it's the same as $\CAPPSI$, then just 
 So assume that $\CAPPHI$ is a subsentence of $\CAPPSI$ but not the same as it. 
 Then $\CAPPHI$ is a subsentence of $\CAPTHETA$ and $\CAPPSI^*$ is the negation $\negation{\CAPTHETA^*}$.
 
-We want to show that $\CAPPSI\sststile{}{}\CAPPSI^*$, i.e. that $\negation{\CAPTHETA}\sststile{}{}\;\negation{\CAPTHETA^*}$. Using our usual basic bottom-up strategy for negation, we set up this proof by putting $\negation{\CAPTHETA}$ on the first line and assuming $\CAPTHETA^*$ with the goal of deriving a contradiction. But, by the recursive hypothesis, $\CAPTHETA^*\sststile{}{}\CAPTHETA$. So we know that from assumption $\CAPTHETA^*$ we can derive $\CAPTHETA$, and at that point we'll have $\negation{\CAPTHETA}$ on one line and $\CAPTHETA$ on another. Using \Rule{$\WEDGE$-Intro} we can get $\conjunction{\CAPTHETA}{\negation{\CAPTHETA}}$. Then with \Rule{$\HORSESHOE$-Intro} we'll get $\horseshoe{\CAPTHETA^*}{\parconjunction{\CAPTHETA}{\negation{\CAPTHETA}}}$, and applying \Rule{$\NEGATION$-Intro} to this sentence will get us $\negation{\CAPTHETA^*}$. 
+We want to show that $\CAPPSI\sststile{}{}\CAPPSI^*$, i.e. that $\negation{\CAPTHETA}\sststile{}{}\;\negation{\CAPTHETA^*}$. Using our usual basic bottom-up strategy for negation, we set up this proof by putting $\negation{\CAPTHETA}$ on the first line and assuming $\CAPTHETA^*$ with the goal of deriving a contradiction. But, by the recursive hypothesis, $\CAPTHETA^*\sststile{}{}\CAPTHETA$. So we know that from assumption $\CAPTHETA^*$ we can derive $\CAPTHETA$, and at that point we have $\negation{\CAPTHETA}$ on one line and $\CAPTHETA$ on another. Using \Rule{$\WEDGE$-Intro} we can get $\conjunction{\CAPTHETA}{\negation{\CAPTHETA}}$. Then with \Rule{$\HORSESHOE$-Intro} we get $\horseshoe{\CAPTHETA^*}{\parconjunction{\CAPTHETA}{\negation{\CAPTHETA}}}$, and applying \Rule{$\NEGATION$-Intro} to this sentence will get us $\negation{\CAPTHETA^*}$. 
 
 \item[Conditional:] Left to the reader as an exercise.
 
@@ -1542,7 +1595,7 @@ It should be clear that this \Rule{$\forall$-Elim}/\Rule{D.S.} strategy won't wo
 But that constant is the constant we substitute in for \Rule{$\exists$-Elim}, and we would then violate the restriction for the rule. 
 
 So we need to go back to $\CAPTHETA$ and consider another strategy. 
-This time we'll try letting $\CAPTHETA=\existential{\variable{x}}\Gp{\variable{x}}$.
+This time we try letting $\CAPTHETA=\existential{\variable{x}}\Gp{\variable{x}}$.
 \begin{gproof}[\label{GQDExampleL}]
 \galineNC{1}{$\universal{\variable{x}}\negation{\Qpp{\variable{x}}{\constant{b}}}$}{\Rule{Assume}}
 \gaalineNC{2}{$\existential{\variable{z}}\pardisjunction{\Qpp{\variable{z}}{\constant{b}}}{\Gp{\variable{z}}}$}{\Rule{Assume}}
@@ -1816,7 +1869,7 @@ The basic idea will be to extend this derivation to a derivation of $\forall\par
 
 \end{gproofnn}
 \noindent{}It is important to note that all the constants introduced on lines $\integer{n}+1$ through $\integer{n}+\integer{m}$ need to be new constants that do not appear in any previous lines. 
-If not, then there's no guarantee that we'll be able to do \Rule{$\forall$-Intro} on the end lines. 
+If not, then there's no guarantee that we be able to do \Rule{$\forall$-Intro} on the end lines. 
 \end{PROOFOF}
 
 \begin{PROOFOF}{Thm. \ref{GQD Replacement Theorem}}
