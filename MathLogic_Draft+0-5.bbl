@@ -1,4 +1,4 @@
-\begin{thebibliography}{91}
+\begin{thebibliography}{92}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -257,6 +257,11 @@ Hughes, G. and Cresswell, M.J. 1996.
 Jacquette, Dale (ed.). 2002.
 \newblock \emph{Philosophy of Logic: an anthology}.
 \newblock Blackwell Philosophy Anthologies. Malden, Mass: Blackwell Publishers.
+
+\bibitem[{Jaśkowski(1934)}]{Jaskowski1934}
+Jaśkowski, Stanisław. 1934.
+\newblock \enquote{On the Rules of Suppositions in Formal Logic}.
+\newblock \emph{Studia Logica} 1:5--32.
 
 \bibitem[{Kalish and Montague(1964)}]{Kalish1964}
 Kalish, Donald and Montague, Richard. 1964.

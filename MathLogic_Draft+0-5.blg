@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: MathLogic_Draft+0-5.aux
+A level-1 auxiliary file: ch1.aux
+A level-1 auxiliary file: ch2.aux
+A level-1 auxiliary file: ch3.aux
+A level-1 auxiliary file: ch4.aux
+A level-1 auxiliary file: ch5.aux
+A level-1 auxiliary file: ch6.aux
+A level-1 auxiliary file: ch7.aux
+A level-1 auxiliary file: ch8.aux
+A level-1 auxiliary file: ch9.aux
+A level-1 auxiliary file: AppA.aux
+A level-1 auxiliary file: AppB.aux
+The style file: philreview-m.bst
+Database file #1: Bibliography.bib
+Warning--missing publisher in Ballarin2010
+You've used 92 entries,
+            2949 wiz_defined-function locations,
+            1201 strings with 15901 characters,
+and the built_in function-call counts, 50662 in all, are:
+= -- 4254
+> -- 1236
+< -- 99
++ -- 500
+- -- 365
+* -- 2838
+:= -- 7839
+add.period$ -- 407
+call.type$ -- 92
+change.case$ -- 549
+chr.to.int$ -- 89
+cite$ -- 93
+duplicate$ -- 4182
+empty$ -- 4504
+format.name$ -- 525
+if$ -- 10491
+int.to.chr$ -- 4
+int.to.str$ -- 1
+missing$ -- 930
+newline$ -- 477
+num.names$ -- 421
+pop$ -- 1967
+preamble$ -- 1
+purify$ -- 478
+quote$ -- 0
+skip$ -- 1745
+stack$ -- 0
+substring$ -- 2320
+swap$ -- 1876
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 720
+warning$ -- 1
+while$ -- 424
+width$ -- 0
+write$ -- 1225
+(There was 1 warning)
