@@ -28,9 +28,10 @@ To prove this we start with the following theorem:
 	By definition \mvref{RuleSanctioning}, there's some substitution of \GSL{} sentences that, for the given schemas of \Rule{R}, results in $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{m}}$ and, for the may-add schema, results in $\DELTA$. 
 	By the truth preservation lemma, $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{m}}\sdtstile{}{}\DELTA$.
 	By definition \mvref{Derivation Rule Soundness}, this application is truth-preserving. 
-	
-	This proof doesn't cover \Rule{$\HORSESHOE$-Intro} or \Rule{Assume}.  These rules require special treatment.  The former is the only rule that eliminates an assumption, and the latter is the only rule that adds an assumption, so they each have a unique role.
 \end{PROOF}
+\begin{commentary}
+	This proof doesn't cover \Rule{$\HORSESHOE$-Intro} or \Rule{Assume}.  These rules require special treatment.  The former is the only rule that eliminates an assumption, and the latter is the only rule that adds an assumption, so they each have a unique role.
+\end{commentary}
 
 Recall from section \mvref{Derivation Preliminaries} that we want to use derivations as a way of showing that a sentence is a logical truth, or of showing that some set of sentences entails some other sentence.
 Specifically, we want to use derivations in \GSD{} and \GQD{} to show that sentences of \GSL{} and \GQL{} are \CAPS{tft} and \CAPS{qt}, or to show entailments between sentences of \GSL{} or between sentences of \GQL{}.  
@@ -46,15 +47,14 @@ A derivation system \DerivationSystem{D} for \Language{L} is \nidf{sound}\index{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Soundness of \GSD{}}
-We begin by proving the soundness of \GSD{}.\index{soundness!of \GSD{}}
+We prove the soundness of \GSD{} by way of a lemma.\index{soundness!of \GSD{}}
 \begin{THEOREM}{\LnpTC{Soundness of Sentential Logic} \GSD{} Soundness Theorem:}
 \GSD{} is sound; i.e., for every set $\Delta$ of sentences of \GSL{} and every sentence $\CAPPHI$ of \GSL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
 \end{THEOREM}
-\noindent{}We will first prove the following result about derivations:
 \begin{THEOREM}{\LnpTC{Main GSL Soundness Lemma} Soundness Lemma:}
-For any sequence of derivation lines that is a derivation, the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assume}.\footnote{See definition \pmvref{Recursive definition of Derivation}.} 
+For any sequence of derivation lines that is a derivation, the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assume}.
 \end{THEOREM}
-\noindent{}Since the definition of a derivation is a recursive definition\footnote{See def. \pmvref{Recursive definition of Derivation}.}, the most natural way to prove theorem \ref{Main GSL Soundness Lemma} is through a recursive proof. 
+\noindent{}Since the definition of a derivation is a recursive definition\footnote{See definition \pmvref{Recursive definition of Derivation}.}, the most natural way to prove theorem \ref{Main GSL Soundness Lemma} is through a recursive proof. 
 The recursive proof uses three easily proved lemmas (proofs are left to the reader; the first lemma, on monotonicity, is also used to prove thm. \ref{Soundness of Sentential Logic}). 
 Two are facts about entailment and one is about derivation.
 \begin{THEOREM}{\LnpTC{Monotonicity of Entailment} Monotonicity of Entailment:}
@@ -83,118 +83,119 @@ If $\Delta_1$ is the set of assumptions of an unboxed line and $\Delta_2$ is the
 \begin{description}
 
 \item[Base Step:] 
-The base case is a single-line derivation $\Derivation{D}$ sanctioned by the rule \Rule{Assume}. 
-Say the sentence on that line is $\CAPPHI$.
-We have to show that the sentence on the last line is entailed by all the sentences, on unboxed lines, that are sanctioned by \Rule{Assume}. 
-But in this case the sentence on the last line is $\CAPPHI$, and the set of unboxed sentences sanctioned by \Rule{Assume} only contains $\CAPPHI$. 
-Obviously $\CAPPHI\sdtstile{}{}\CAPPHI$, so the theorem holds in the base case. 
+Consider a single-line derivation $\Derivation{D}$ of the sentence $\CAPPHI$ sanctioned by the rule \Rule{Assume}. 
+Since the sentence on the last line is $\CAPPHI$, sanctioned by \Rule{Assume}, and $\CAPPHI\sdtstile{}{}\CAPPHI$, it follows that the set of all unboxed sentences sanctioned by \Rule{Assume} entails $\CAPPHI$. 
 
-\item[Inheritance Step:] 
-In the inheritance step we start with a derivation $\Derivation{D}$.
-Say $\Delta$ is the set of unboxed assumptions occurring in $\Derivation{D}$, and $\Delta_\integer{i}$ is the set of unboxed assumptions occurring in $\Derivation{D}$ up to (and including) line number $\integer{i}$. 
-%We then want to show that if some rule \Rule{R} of \GSD{} applied to unboxed lines of $\Derivation{D}$ sanctions writing down sentence $\CAPPHI$, then $Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line with $\CAPPHI$.\footnote{Note 
-We then want to show that if we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by rule \Rule{R}, then $\Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line. 
-(Notice that this requires more than the fact that the rules are truth preserving; we also have to attend to how we define a derivation. The fact that the rules are truth preserving is essential of course.) 
-We need to consider each rule \Rule{R} of \GSD{} as its own case.
+\item[Inheritance Step:]
+Let $\Derivation{D}$ be an arbitrary derivation consisting of $k$ lines, where $k>1$.
+Let $\Delta_\integer{i}$ be the set of unboxed assumptions occurring in a derivation $\Derivation{D}$ up to (and including) line number $\integer{i}$.
+Consider the case in which a new line with sentence $\CAPPHI$ is added to derivation $\Derivation{D}$, sanctioned by rule \Rule{R}.
+
+\begin{commentary}
+	The resulting derivation has $k+1$ lines.
+	We want to show, for each rule \Rule{R} of \GSD{}, that $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
+	Each rule is considered separately in the following.
+\end{commentary}
 
 \begin{description}
 
-\item[Recursive Assumption:]  
-The recursive assumption is that for all lines $\Derivation{L}_\integer{i}$ in the derivation $\Derivation{D}$, if $\CAPPHI$ is the sentence on the line, then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI$. 
+\item[Recursive Assumption:]
+Assume for each line $i$ of derivation $\Derivation{D}$, where $i\leq k$ and $\CAPPHI_{i}$ is the sentence on line $i$, that $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI_{i}$.
 
 \item[\Rule{Assume}:] 
-Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{Assume}. 
-Note that the set $\Delta^*$ of unboxed assumptions for this new line are those in $\Delta$ plus $\CAPPHI$. 
-We know $\CAPPHI\sdtstile{}{}\CAPPHI$, and $\Delta,\CAPPHI\sdtstile{}{}\CAPPHI$ follows from this by monotonicity.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{Assume}.
+Note that the set $\Delta_{k+1}$ of unboxed assumptions are those in $\Delta_{k}$ plus $\CAPPHI$. 
+Clearly $\CAPPHI\sdtstile{}{}\CAPPHI$.
+Then $\Delta,\CAPPHI\sdtstile{}{}\CAPPHI$ follows by monotonicity.
 
 \item[\Rule{Repetition}:] 
-Say $\CAPPHI$ already occurs somewhere in $\Derivation{D}$, say on line number $\integer{i}$. 
-Then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI$ by the recursive assumption. 
-Suppose we add another line to $\Derivation{D}$ with $\CAPPHI$ sanctioned by \Rule{Repetition}. 
-By NDAP, $\Delta_{\integer{i}}\subseteq\Delta^*$. 
-So by monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{Repetition}.
+Since $\CAPPHI$ is sanctioned at line $k+1$, then it must already occur on some line $i$, where $i<k+1$.
+By the recursive assumption $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI$.
+By NDAP, $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$. 
+So by monotonicity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\VEE$-Intro}:]
-Assume we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\VEE$-Intro}. 
-Then there's some earlier line $\integer{i}$ with the sentence $\CAPTHETA$ and $\CAPPHI$ is a disjunction with $\CAPTHETA$ as one disjunct. 
-We have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{$\VEE$-Intro}.
+Then $\CAPPHI$ must be a disjunction with some disjunct, $\CAPTHETA$, that is already present on some line $i$, where $i<k+1$.
+$\Delta_{\integer{i}}$ is the set of unboxed assumptions at that line, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\CAPTHETA$.
-So by monotonicity, $\Delta^*\sdtstile{}{}\CAPTHETA$.
-Because the rule is truth preserving we know that $\CAPPHI$ is a disjunction with $\CAPTHETA$ as one disjunct, $\CAPTHETA\sdtstile{}{}\CAPPHI$. 
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$. 
+So by monotonicity, $\Delta_{k+1}\sdtstile{}{}\CAPTHETA$.
+Since \Rule{$\VEE$-Intro} is truth preserving, $\CAPTHETA\sdtstile{}{}\CAPPHI$. 
+So by transitivity of entailment, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$. 
 
 \item[\Rule{$\WEDGE\!$-Elim}:]
-Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\WEDGE\!$-Elim}.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{$\WEDGE\!$-Elim}.
 Then there's some earlier line $\integer{i}$ with the sentence $\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$ and $\CAPPHI$ is one of the conjuncts. 
-As before, by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+As before, by NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$. 
-So by monotonicity, $\Delta^*\sdtstile{}{}\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
+So by monotonicity, $\Delta_{k+1}\sdtstile{}{}\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
 And $\CAPPHI$ is one of the conjuncts of $\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$, so it follows that $\conjunction{\CAPTHETA_\integer{1}}{\conjunction{\ldots}{\CAPTHETA_{\integer{m}}}}\sdtstile{}{}\CAPPHI$. 
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\NEGATION$-Elim}:] 
-Suppose we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\NEGATION$-Elim}.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{$\NEGATION$-Elim}.
 Then there's some earlier line $\integer{i}$ with the sentence $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
-As before, by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+As before, by NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
-So by monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
+So by monotonicity, $\Delta_{k+1}\sdtstile{}{}\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$.
 Since the \CAPS{rhs} of $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$ is false in all models (it's \CAPS{tff}), the conditional is true in a model $\IntA{}$ only if the \CAPS{lhs} is false in $\IntA{}$.
 So if the conditional is true in a model $\IntA{}$, $\CAPPHI$ is true in $\IntA{}$.
 In other words, $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}\sdtstile{}{}\CAPPHI$. 
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\NEGATION$-Intro}:] 
-This case is very similar to the last and is left to the reader. 
+This case is similar to the previous one and is left as an exercise for the reader. 
 
 \item[\Rule{$\HORSESHOE$-Elim}:]
-Assume we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\HORSESHOE$-Elim}.
-Then there's two earlier lines $\integer{i}$ and $\integer{j}$, and (say) line $\integer{i}$ has a sentence $\horseshoe{\CAPTHETA}{\CAPPHI}$ and line $\integer{j}$ has sentence $\CAPTHETA$. 
-By NDAP we have that $\Delta_{\integer{i}}\subseteq\Delta^*$ and $\Delta_{\integer{j}}\subseteq\Delta^*$.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{$\HORSESHOE$-Elim}.
+Then there are two earlier lines $\integer{i}$ and $\integer{j}$, and (say) line $\integer{i}$ has a sentence $\horseshoe{\CAPTHETA}{\CAPPHI}$ and line $\integer{j}$ has sentence $\CAPTHETA$. 
+By NDAP we have that $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$ and $\Delta_{\integer{j}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta_{\integer{j}}\sdtstile{}{}\CAPTHETA$.
 By monotonicity, 
-$\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta^*\sdtstile{}{}\CAPTHETA$.
-Because the rule is truth preserving we know that $\CAPTHETA,\horseshoe{\CAPTHETA}{\CAPPHI}\sdtstile{}{}\CAPPHI$.
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+$\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta_{k+1}\sdtstile{}{}\CAPTHETA$.
+Since the rule is truth preserving, $\CAPTHETA,\horseshoe{\CAPTHETA}{\CAPPHI}\sdtstile{}{}\CAPPHI$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\TRIPLEBAR$-Elim}:] The argument for each of the two versions of \Rule{$\TRIPLEBAR$-Elim} is the same as that for \Rule{$\HORSESHOE$-Elim}.
 
 \item[\Rule{$\TRIPLEBAR$-Intro}:]
-Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI=\triplebar{\CAPPHI}{\CAPTHETA}$ sanctioned by \Rule{$\TRIPLEBAR$-Intro}.
-Then there's two earlier lines $\integer{i}$ and $\integer{j}$, and (say) line $\integer{i}$ has a sentence $\horseshoe{\CAPTHETA}{\CAPPHI}$ and line $\integer{j}$ has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$. 
-By NDAP we have that $\Delta_{\integer{i}}\subseteq\Delta^*$ and $\Delta_{\integer{j}}\subseteq\Delta^*$.
+Let line $k+1$ of $\Derivation{D}$ with sentence $\CAPPHI=\triplebar{\CAPPHI}{\CAPTHETA}$ be sanctioned by \Rule{$\TRIPLEBAR$-Intro}.
+Then there are two earlier lines $\integer{i}$ and $\integer{j}$, and (say) line $\integer{i}$ has a sentence $\horseshoe{\CAPTHETA}{\CAPPHI}$ and line $\integer{j}$ has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$. 
+By NDAP we have that $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$ and $\Delta_{\integer{j}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta_{\integer{j}}\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
-By monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
-Because the rule is truth preserving we know that $\horseshoe{\CAPPHI}{\CAPTHETA},\horseshoe{\CAPTHETA}{\CAPPHI}\sdtstile{}{}\triplebar{\CAPPHI}{\CAPTHETA}$.
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+By monotonicity, $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPTHETA}{\CAPPHI}$ and $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
+Since the rule is truth preserving, $\horseshoe{\CAPPHI}{\CAPTHETA},\horseshoe{\CAPTHETA}{\CAPPHI}\sdtstile{}{}\triplebar{\CAPPHI}{\CAPTHETA}$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\WEDGE\!$-Intro}:]
-Suppose we add another line to $\Derivation{D}$ with sentence $\CAPPHI=\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$ sanctioned by \Rule{$\WEDGE\!$-Intro}.
+Let line $k+1$ of $\Derivation{D}$ with sentence $\CAPPHI=\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$ be sanctioned by \Rule{$\WEDGE\!$-Intro}.
 Then there are $\integer{m}$ earlier lines numbered $\integer{i}_{1},\ldots,\integer{i}_{\integer{m}}$ with, respectively, sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$. 
-By NDAP we have that $\Delta_{\integer{i}_1}\subseteq\Delta^*,\ldots,\Delta_{\integer{i}_\integer{m}}\subseteq\Delta^*$.
+By NDAP we have that $\Delta_{\integer{i}_1}\subseteq\Delta_{k+1},\ldots,\Delta_{\integer{i}_\integer{m}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}_1}\sdtstile{}{}\CAPPHI_1,\ldots,\Delta_{\integer{i}_\integer{m}}\sdtstile{}{}\CAPPHI_{\integer{m}}$.
-So by monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI_1,\ldots,\Delta^*\sdtstile{}{}\CAPPHI_{\integer{m}}$.
-We now observe that $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}\sdtstile{}{}\conjunction{\CAPPHI}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$.
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+So by monotonicity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI_1,\ldots,\Delta_{k+1}\sdtstile{}{}\CAPPHI_{\integer{m}}$.
+Observe that $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}\sdtstile{}{}\conjunction{\CAPPHI}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\VEE$-Elim}:]
-Assume we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by \Rule{$\VEE$-Elim}.
+Let line $k+1$ of $\Derivation{D}$ be sanctioned by \Rule{$\VEE$-Elim}.
 Then there are $\integer{m}+1$ earlier lines numbered $\integer{i}_{1},\ldots,\integer{i}_{\integer{m}},\integer{i}_{\integer{m}+1}$ with, respectively, sentences $\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$, and  $\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
-By NDAP we have that $\Delta_{\integer{i}_1}\subseteq\Delta^*,\ldots,\Delta_{\integer{i}_\integer{m}}\subseteq\Delta^*$ and $\Delta_{\integer{i}_{\integer{m}+1}}\subseteq\Delta^*$.
+By NDAP we have that $\Delta_{\integer{i}_1}\subseteq\Delta_{k+1},\ldots,\Delta_{\integer{i}_\integer{m}}\subseteq\Delta_{k+1}$ and $\Delta_{\integer{i}_{\integer{m}+1}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}_1}\sdtstile{}{}\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\Delta_{\integer{i}_\integer{m}}\sdtstile{}{}\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$ and $\Delta_{\integer{i}_{\integer{m}+1}}\sdtstile{}{}\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
-By monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\Delta^*\sdtstile{}{}\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$ and $\Delta^*\sdtstile{}{}\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
-We now observe that $\horseshoe{\CAPTHETA_1}{\CAPPHI},\ldots,\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI},\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}\sdtstile{}{}\CAPPHI$.
-So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI$.
+By monotonicity, $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPTHETA_1}{\CAPPHI}$, $\ldots$, $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI}$ and $\Delta_{k+1}\sdtstile{}{}\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}$.
+Observe that $\horseshoe{\CAPTHETA_1}{\CAPPHI},\ldots,\horseshoe{\CAPTHETA_{\integer{m}}}{\CAPPHI},\disjunction{\CAPTHETA_1}{\disjunction{\ldots}{\CAPTHETA_{\integer{m}}}}\sdtstile{}{}\CAPPHI$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
 
 \item[\Rule{$\HORSESHOE$-Intro}:]
-Like \Rule{Assume}, the assumptions change in \Rule{$\HORSESHOE$-Intro}. 
-If the new line sanctioned by \Rule{$\HORSESHOE$-Intro} has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$ and unboxed assumptions $\Delta^*$, then earlier we have an assumption line (now in a box) that starts with $\CAPPHI$ and $\Delta^*$ as its other assumptions, and we have a line (now at the bottom of the box) with $\CAPTHETA$ on it with assumptions $\CAPPHI,\Delta^*$. 
-By the recursive assumption we have that $\CAPPHI,\Delta^*\sdtstile{}{}\CAPTHETA$. 
-Consider any model $\IntA{}$ that makes $\Delta^*$ true;
+The rule \Rule{$\HORSESHOE$-Intro} changes the number of unboxed assumptions.
+If line $k+1$ sanctioned by \Rule{$\HORSESHOE$-Intro} has sentence $\horseshoe{\CAPPHI}{\CAPTHETA}$ and unboxed assumptions $\Delta_{k+1}$, then there must be an assumption line (now in a box) that starts with $\CAPPHI$ and $\Delta_{k+1}$ as its other assumptions, and we have a line (now at the bottom of the box) with $\CAPTHETA$ on it with assumptions $\CAPPHI,\Delta_{k+1}$. 
+By the recursive assumption we have that $\CAPPHI,\Delta_{k+1}\sdtstile{}{}\CAPTHETA$. 
+Consider any model $\IntA{}$ that makes $\Delta_{k+1}$ true;
 if it also makes $\CAPPHI$ true, then $\CAPTHETA$ is true in $\IntA{}$ as well and so is $\horseshoe{\CAPPHI}{\CAPTHETA}$. 
 If $\IntA{}$ makes $\CAPPHI$ false, then $\horseshoe{\CAPPHI}{\CAPTHETA}$ is true. 
 (Notice that this step only works because we defined the conditional to be true when the \CAPS{lhs} is false.)
-So if $\IntA{}$ makes $\Delta^*$ true, it makes $\horseshoe{\CAPPHI}{\CAPTHETA}$ true too. 
-So, $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.  
+So if $\IntA{}$ makes $\Delta_{k+1}$ true, it makes $\horseshoe{\CAPPHI}{\CAPTHETA}$ true too. 
+So, $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.  
 
 \end{description}
 \item[Closure Step:] We have now covered all the generating cases for derivations. By the closure clause of the definition, we have proved soundness for all derivations. 
@@ -205,7 +206,7 @@ So, $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI}{\CAPTHETA}$.
 Assume that $\Delta$ is a set of \GSL{} sentences. 
 Assume $\Delta\sststile{}{}\CAPPHI$ and consider some derivation $\Derivation{D}$ of $\CAPPHI$ from $\Delta$. 
 Let $\Delta'$ be the set of sentences in $\Delta$ that appear as unboxed assumptions in $\Derivation{D}$. 
-By the soundness lemma (Thm. \pmvref{Main GSL Soundness Lemma}), $\Delta'\sdtstile{}{}\CAPPHI$. 
+By the soundness lemma (Thm. \ref{Main GSL Soundness Lemma}), $\Delta'\sdtstile{}{}\CAPPHI$. 
 It follows immediately by monotonicity that $\Delta\sdtstile{}{}\CAPPHI$.  
 \end{PROOFOF} 
 
@@ -214,97 +215,134 @@ In this section we prove that \GQD{} is also sound.\index{soundness!of \GQD{}}
 \begin{THEOREM}{\LnpTC{Soundness of Quantifier Logic} \GQD{} Soundness Theorem:}
 \GQD{} is sound; i.e., for every set $\Delta$ of sentences of \GQL{} and every sentence $\CAPPHI$ of \GQL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
 \end{THEOREM}
-\noindent{}The proof given in the last section of the \GSL{} Soundness Theorem (Thm. \pmvref{Soundness of Sentential Logic}) can be carried over to the \GQL{} Soundness Theorem. 
-That proof relied on the monotonicity of entailment and the soundness lemma (Them. \pmvref{Main GSL Soundness Lemma}). 
+\noindent{}The proof given in the last section of the \GSL{} Soundness Theorem \ref{Soundness of Sentential Logic} can be carried over to the \GQL{} Soundness Theorem. 
+That proof relied on the monotonicity of entailment and the soundness lemma (Thm. \ref{Main GSL Soundness Lemma}). 
 It should be clear that entailment is also monotonic in the case of \GQL{}. 
-Since \GQD{} is just an extension of \GSD{} (it's just \GSD{} plus the rules for the quantifiers in table \pncmvref{GQD}), all we need to do to show that the soundness lemma holds for \GQD{} is add a case, for each new rule of \GQD{}, to the inheritance step of the proof of the soundness lemma for \GSD{}.
+Since \GQD{} is an extension of \GSD{} (it's just \GSD{} plus the rules for the quantifiers in table \pncmvref{GQD}), all we need to do to show that the soundness lemma holds for \GQD{} is add a case, for each new rule of \GQD{}, to the inheritance step of the proof of the soundness lemma for \GSD{}.
 \begin{PROOFOF}{Thm. \ref{Main GSL Soundness Lemma} for GQD}
 \begin{description}
 
 \item[Base Step:] 
-The base case has been covered in the proof for \GSD{}. 
+The base case is covered in Thm. \ref{Main GSL Soundness Lemma}.
 
-\item[Inheritance Step:] 
-Just as in the proof for \GSD{}, in the inheritance step we start with a derivation $\Derivation{D}$.
-Say $\Delta$ is the set of unboxed assumptions occurring in $\Derivation{D}$, and $\Delta_\integer{i}$ is the set of unboxed assumptions occurring in $\Derivation{D}$ up to (and including) line number $\integer{i}$. 
-%We then want to show that if some rule \Rule{R} of \GSD{} applied to unboxed lines of $\Derivation{D}$ sanctions writing down sentence $\CAPPHI$, then $Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line with $\CAPPHI$.\footnote{Note 
-We then want to show that if we add another line to $\Derivation{D}$ with sentence $\CAPPHI$ sanctioned by rule \Rule{R}, then $\Delta^*\sdtstile{}{}\CAPPHI$, where $\Delta^*$ is the set of unboxed assumptions for the new line. %\footnote{Note 
-%that this is not the same as showing that the rule \Rule{R} is truth-preserving (see def. \pncmvref{Derivation Rule Soundness}).
-%} 
-Again we need to consider each rule \Rule{R} of \GQD{} as its own case.
-Most of the rules have already been covered in the proof of \GSD{}, so we only need to cover the introduction and elimination rules for the quantifiers. 
+\item[Inheritance Step:]
+Let $\Derivation{D}$ be an arbitrary derivation consisting of $k$ lines, where $k>1$.
+Let $\Delta_\integer{i}$ be the set of unboxed assumptions occurring in a derivation $\Derivation{D}$ up to (and including) line number $\integer{i}$.
+Consider the case in which a new line with sentence $\CAPPHI$ is added to derivation $\Derivation{D}$, sanctioned by rule \Rule{R}.
+
+\begin{commentary}
+	The resulting derivation has $k+1$ lines.
+	We want to show, for each rule \Rule{R} of \GQD{}, that $\Delta_{k+1}\sdtstile{}{}\CAPPHI$.
+	It was shown already that the property holds of each \GSD{} rule, so we only need to consider the quantifier introduction and elimination rules.
+\end{commentary}
 
 \begin{description}
 
 \item[Recursive Assumption:]  
-The recursive assumption, as in the proof for \GSD{}, is that for all lines $\Derivation{L}_\integer{i}$ in the derivation $\Derivation{D}$, if $\CAPPHI$ is the sentence on the line, then $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI$. 
+Assume for each line $i$ of derivation $\Derivation{D}$, where $i\leq k$ and $\CAPPHI_{i}$ is the sentence on line $i$, that $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI_{i}$.
 
 \item[\Rule{$\forall$-Elim}:]
-Say we add another line to $\Derivation{D}$ with sentence $\CAPPHI\variable{s}/\BETA$ sanctioned by \Rule{$\forall$-Elim}.
+Let line $k+1$ of $\Derivation{D}$ with sentence $\CAPPHI\variable{s}/\BETA$ be sanctioned by \Rule{$\forall$-Elim}.
 Then there's some earlier line $\integer{i}$ with the sentence $\universal{\BETA}\CAPPHI$. 
-We have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+$\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\universal{\BETA}\CAPPHI$.
-So by monotonicity, $\Delta^*\sdtstile{}{}\universal{\BETA}\CAPPHI$.
+So by monotonicity, $\Delta_{k+1}\sdtstile{}{}\universal{\BETA}\CAPPHI$.
 
-Assume some model $\IntA$ such that $\universal{\BETA}\CAPPHI$ is true.  By the def. of truth for $\forall$, $\CAPPHI{\variable{t}/\BETA}$ is true on all $\variable{t}$-variants of $\IntA$.  Notice that $\CAPPHI{\variable{t}/\BETA}$ and $\CAPPHI{\variable{s}/\BETA}$ are exactly the same, except that the latter has $\variable{s}$ substituted for $\variable{t}$.  These sentences satisfy condition (1) of Dragnet.
+Assume some model $\IntA$ such that $\universal{\BETA}\CAPPHI$ is true.
+By the def. of truth of $\forall$, $\CAPPHI{\variable{t}/\BETA}$ is true on all $\variable{t}$-variants of $\IntA$.
+Notice that $\CAPPHI{\variable{t}/\BETA}$ and $\CAPPHI{\variable{s}/\BETA}$ are exactly the same, except that the latter has $\variable{s}$ substituted for $\variable{t}$.
+These sentences satisfy condition (1) of Dragnet.
 
-Now let's consider, in particular, the $\variable{t}$-variant that assigns to $\variable{t}$ what $\IntA$ assigns to $\variable{s}$.  Name that $\variable{t}$-variant $\As{\variable{t}}{}$.  The models $\IntA$ and $\As{\variable{t}}{}$ meet Dragnet condition (2).  Thus, by Dragnet, $\CAPPHI{\variable{t}/\BETA}$ is true on $\As{\variable{t}}{}$ iff $\CAPPHI{\variable{s}/\BETA}$ is true on $\IntA$.  Therefore, $\CAPPHI{\variable{s}/\BETA}$ is true on $\IntA$.
+Consider the $\variable{t}$-variant that assigns to $\variable{t}$ what $\IntA$ assigns to $\variable{s}$.
+Name that $\variable{t}$-variant $\As{\variable{t}}{}$.
+The models $\IntA$ and $\As{\variable{t}}{}$ meet Dragnet condition (2).
+Thus, by Dragnet, $\CAPPHI{\variable{t}/\BETA}$ is true on $\As{\variable{t}}{}$ iff $\CAPPHI{\variable{s}/\BETA}$ is true on $\IntA$.
+Therefore, $\CAPPHI{\variable{s}/\BETA}$ is true on $\IntA$.
 
-Any model such that $\universal{\BETA}\CAPPHI$ is true also makes $\CAPPHI{\variable{s}/\BETA}$ true.  Thus, $\universal{\BETA}\CAPPHI\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.  So by transitivity, $\Delta^*\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.   
+Any model such that $\universal{\BETA}\CAPPHI$ is true also makes $\CAPPHI{\variable{s}/\BETA}$ true.
+Thus, $\universal{\BETA}\CAPPHI\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.   
 
 \item[\Rule{$\exists$-Intro}:]
-Say we add another line to $\Derivation{D}$ with sentence $\existential{\BETA}\CAPPHI$ sanctioned by \Rule{$\exists$-Intro}.
+Let line $k+1$ of $\Derivation{D}$ with sentence $\existential{\BETA}\CAPPHI$ be sanctioned by \Rule{$\exists$-Intro}.
 Then there's some earlier line $\integer{i}$ with the sentence $\CAPPHI\variable{s}/\BETA$.
-Again we have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+$\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.
-By monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.
+By monotonicity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.
 
-Assume some model $\IntA$ such that $\existential{\BETA}\CAPPHI$ is false.  By the def. of truth for $\exists$, there is no $\variable{t}$-variant of $\IntA$ that makes $\CAPPHI{\variable{t}/\BETA}$ true.  Notice that $\CAPPHI{\variable{t}/\BETA}$ and $\CAPPHI{\variable{s}/\BETA}$ are exactly the same, except that the latter has $\variable{s}$ substituted for $\variable{t}$.  These sentences satisfy condition (1) of Dragnet.
+Assume some model $\IntA$ such that $\existential{\BETA}\CAPPHI$ is false.
+By the def. of truth of $\exists$, there is no $\variable{t}$-variant of $\IntA$ that makes $\CAPPHI{\variable{t}/\BETA}$ true.
+Notice that $\CAPPHI{\variable{t}/\BETA}$ and $\CAPPHI{\variable{s}/\BETA}$ are exactly the same, except that the latter has $\variable{s}$ substituted for $\variable{t}$.
+These sentences satisfy condition (1) of Dragnet.
 
-Now let's consider, in particular, the $\variable{t}$-variant that assigns to $\variable{t}$ what $\IntA$ assigns to $\variable{s}$.  Name that $\variable{t}$-variant $\As{\variable{t}}{}$.  The models $\IntA$ and $\As{\variable{t}}{}$ meet Dragnet condition (2).  Thus, by Dragnet, $\CAPPHI{\variable{t}/\BETA}$ is true on $\As{\variable{t}}{}$ iff $\CAPPHI{\variable{s}/\BETA}$ is true on $\IntA$.  Therefore, $\CAPPHI{\variable{s}/\BETA}$ is false on $\IntA$.
+Consider the $\variable{t}$-variant that assigns to $\variable{t}$ what $\IntA$ assigns to $\variable{s}$.
+Name that $\variable{t}$-variant $\As{\variable{t}}{}$.
+The models $\IntA$ and $\As{\variable{t}}{}$ meet Dragnet condition (2).
+Thus, by Dragnet, $\CAPPHI{\variable{t}/\BETA}$ is true on $\As{\variable{t}}{}$ iff $\CAPPHI{\variable{s}/\BETA}$ is true on $\IntA$.
+Therefore, $\CAPPHI{\variable{s}/\BETA}$ is false on $\IntA$.
 
-Any model that makes $\existential{\BETA}\CAPPHI$ false also makes $\CAPPHI{\variable{s}/\BETA}$ false.  Thus,  $\CAPPHI\variable{s}/\BETA\sdtstile{}{}\existential{\BETA}\CAPPHI$. So by transitivity, $\Delta^*\sdtstile{}{}\existential{\BETA}\CAPPHI$.
+Any model that makes $\existential{\BETA}\CAPPHI$ false also makes $\CAPPHI{\variable{s}/\BETA}$ false.
+Thus, $\CAPPHI\variable{s}/\BETA\sdtstile{}{}\existential{\BETA}\CAPPHI$.
+So by transitivity, $\Delta_{k+1}\sdtstile{}{}\existential{\BETA}\CAPPHI$.
 
 \item[\Rule{$\forall$-Intro}:]
-Say we add another line to $\Derivation{D}$ with sentence $\universal{\BETA}\CAPPHI$ sanctioned by \Rule{$\forall$-Intro}.
+Let line $k+1$ of $\Derivation{D}$ with sentence $\universal{\BETA}\CAPPHI$ be sanctioned by \Rule{$\forall$-Intro}.
 Then there's some earlier line $\integer{i}$ with the sentence $\CAPPHI\variable{s}/\BETA$. 
-Again we have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$.
+$\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$, and by NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\CAPPHI\variable{s}/\BETA$. 
-By monotonicity, $\Delta^*\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.
-However we know that $\CAPPHI\variable{s}/\BETA$ does not entail $\universal{\BETA}\CAPPHI$, so we have to do some extra work and make use of the restrictions on the rule \Rule{$\forall$-Intro}. 
+By monotonicity, $\Delta_{k+1}\sdtstile{}{}\CAPPHI\variable{s}/\BETA$.
+However $\CAPPHI\variable{s}/\BETA$ does not entail $\universal{\BETA}\CAPPHI$, so we have to do some extra work and make use of the restrictions on the rule \Rule{$\forall$-Intro}. 
 
-Let $\IntA$ be some model that makes all of $\Delta^*$ true; and let's assume for \emph{reductio} that $\IntA$ that makes $\universal{\BETA}\CAPPHI$ false.  One of the restrictions for \Rule{$\forall$-Intro} is that $\variable{s}$ must not occur in $\universal{\BETA}\CAPPHI$.  Hence, by the Free Choice Theorem, $\CAPPHI\variable{s}/\BETA$ is false on some $\variable{s}$-variant of $\IntA$.  Let's name that $\variable{s}$-variant $\As{\variable{s}}{}$.
+Let $\IntA$ be some model that makes all of $\Delta_{k+1}$ true; and let's assume for \emph{reductio} that $\IntA$ that makes $\universal{\BETA}\CAPPHI$ false.
+One of the restrictions for \Rule{$\forall$-Intro} is that $\variable{s}$ must not occur in $\universal{\BETA}\CAPPHI$.
+Hence, by the Free Choice Theorem, $\CAPPHI\variable{s}/\BETA$ is false on some $\variable{s}$-variant of $\IntA$.
+Let's name that $\variable{s}$-variant $\As{\variable{s}}{}$.
 
-The other rule restriction for \Rule{$\forall$-Intro} is that $\variable{s}$ must not occur in $\Delta^*$.  The variant $\As{\variable{s}}{}$ differs from $\IntA$ only on the assignment to $\variable{s}$; otherwise, they make all the same assignments.  Because $\variable{s}$ doesn't occur in $\Delta^*$ and $\IntA$ makes all of $\Delta^*$ true, $\As{\variable{s}}{}$ also makes all of $\Delta^*$ true.  The assignment $\As{\variable{s}}{}$ makes to $\variable{s}$ doesn't matter for this result.
+The other rule restriction for \Rule{$\forall$-Intro} is that $\variable{s}$ must not occur in $\Delta_{k+1}$.
+The variant $\As{\variable{s}}{}$ differs from $\IntA$ only on the assignment to $\variable{s}$; otherwise, they make all the same assignments.
+Since $\variable{s}$ doesn't occur in $\Delta_{k+1}$ and $\IntA$ makes all of $\Delta_{k+1}$ true, $\As{\variable{s}}{}$ also makes all of $\Delta_{k+1}$ true.
+The assignment $\As{\variable{s}}{}$ makes to $\variable{s}$ doesn't matter for this result.
 
-Because $\Delta^*\sdtstile{}{}\CAPPHI\variable{s}/\BETA$, $\As{\variable{s}}{}$ makes $\CAPPHI\variable{s}/\BETA$ true.  But we had concluded that $\CAPPHI\variable{s}/\BETA$ is false on $\As{\variable{s}}{}$.  We've inferred a contradiction.  Our assumption that $\IntA$ makes $\universal{\BETA}\CAPPHI$ false must be wrong.
+Since $\Delta_{k+1}\sdtstile{}{}\CAPPHI\variable{s}/\BETA$, $\As{\variable{s}}{}$ makes $\CAPPHI\variable{s}/\BETA$ true.
+But we already showed that $\CAPPHI\variable{s}/\BETA$ is false on $\As{\variable{s}}{}$.
+From the assumption that $\IntA$ makes $\universal{\BETA}\CAPPHI$ is false we have proven a contradiction.
+So $\IntA$ makes $\universal{\BETA}\CAPPHI$ true.
 
-Therefore, if $\IntA$ is a model that makes all of $\Delta^*$ true, then $\IntA$ makes $\universal{\BETA}\CAPPHI$ true as well. 
-So, $\Delta^*\sdtstile{}{}\universal{\BETA}\CAPPHI$.
+Therefore, if $\IntA$ is a model that makes all of $\Delta_{k+1}$ true, then $\IntA$ makes $\universal{\BETA}\CAPPHI$ true as well. 
+So, $\Delta_{k+1}\sdtstile{}{}\universal{\BETA}\CAPPHI$.
 
 \item[\Rule{$\exists$-Elim}:]
-Say we add another line to $\Derivation{D}$ with sentence $\CAPTHETA$ sanctioned by \Rule{$\exists$-Elim}.
+Let line $k+1$ of $\Derivation{D}$ with sentence $\CAPTHETA$ be sanctioned by \Rule{$\exists$-Elim}.
 Then there's some earlier line $\integer{i}$ with the sentence $\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$ and an earlier line $\integer{j}$ with the sentence $\existential{\BETA}\CAPPHI$. 
-Again we have that $\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$ and $\Delta_{\integer{j}}$ the unboxed assumptions of line $\integer{j}$.
-By NDAP $\Delta_{\integer{i}}\subseteq\Delta^*$ and $\Delta_{\integer{j}}\subseteq\Delta^*$.
+$\Delta_{\integer{i}}$ is the set of unboxed assumptions of line $\integer{i}$ and $\Delta_{\integer{j}}$ the unboxed assumptions of line $\integer{j}$.
+By NDAP $\Delta_{\integer{i}}\subseteq\Delta_{k+1}$ and $\Delta_{\integer{j}}\subseteq\Delta_{k+1}$.
 By the recursive assumption, $\Delta_{\integer{i}}\sdtstile{}{}\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$ and $\Delta_{\integer{j}}\sdtstile{}{}\existential{\BETA}\CAPPHI$.
-By monotonicity, $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$ and $\Delta^*\sdtstile{}{}\existential{\BETA}\CAPPHI$.
-Again we have to do some extra work and make use of the restrictions on the rule \Rule{$\exists$-Elim} to show that $\Delta^*\sdtstile{}{}\CAPTHETA$. 
+By monotonicity, $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$ and $\Delta_{k+1}\sdtstile{}{}\existential{\BETA}\CAPPHI$.
+We have make use of the restrictions on the rule \Rule{$\exists$-Elim} to show that $\Delta_{k+1}\sdtstile{}{}\CAPTHETA$. 
 
-Let $\IntA$ be some model that makes all of $\Delta^*$ true. 
-Because $\Delta^*\sdtstile{}{}\existential{\BETA}\CAPPHI$, $\IntA$ also makes $\existential{\BETA}\CAPPHI$ true.  One of the rule restrictions for \Rule{$\exists$-Elim} is that $\variable{s}$ must not occur in $\existential{\BETA}\CAPPHI$.  Hence, by the Free Choice theorem, $\CAPPHI{\variable{s}/\BETA}$ is true on some $\variable{s}$-variant of $\IntA$.  Name that $\variable{s}$-variant $\As{\variable{s}}{}$.  
+Let $\IntA$ be some model that makes all of $\Delta_{k+1}$ true. 
+Since $\Delta_{k+1}\sdtstile{}{}\existential{\BETA}\CAPPHI$, $\IntA$ also makes $\existential{\BETA}\CAPPHI$ true.
+One of the rule restrictions for \Rule{$\exists$-Elim} is that $\variable{s}$ must not occur in $\existential{\BETA}\CAPPHI$.
+Hence, by the Free Choice theorem, $\CAPPHI{\variable{s}/\BETA}$ is true on some $\variable{s}$-variant of $\IntA$.
+Name that $\variable{s}$-variant $\As{\variable{s}}{}$.  
 
-Another of the rule restrictions for \Rule{$\exists$-Elim} is that $\variable{s}$ must not occur in $\Delta^*$.  The variant $\As{\variable{s}}{}$ makes all the same assignments as $\IntA$ except in what it assigns to $\variable{s}$.  Because $\IntA$ makes $\Delta^*$ true and $\Delta^*$ doesn't contain $\variable{s}$, $\As{\variable{s}}{}$ also makes $\Delta^*$ true.  The assignment $\As{\variable{s}}{}$ makes to $\variable{s}$ doesn't make any difference.
+Another of the rule restrictions for \Rule{$\exists$-Elim} is that $\variable{s}$ must not occur in $\Delta_{k+1}$.
+The variant $\As{\variable{s}}{}$ makes all the same assignments as $\IntA$ except in what it assigns to $\variable{s}$.
+Since $\IntA$ makes $\Delta_{k+1}$ true and $\Delta_{k+1}$ doesn't contain $\variable{s}$, $\As{\variable{s}}{}$ also makes $\Delta_{k+1}$ true.
+The assignment $\As{\variable{s}}{}$ makes to $\variable{s}$ doesn't make any difference.
 
-Thus, because $\Delta^*\sdtstile{}{}\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$, $\As{\variable{s}}{}$ makes $\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$ true.  We saw earlier that $\As{\variable{s}}{}$ makes $\CAPPHI\variable{s}/\BETA$ true, so $\As{\variable{s}}{}$ makes $\CAPTHETA$ true as well (def. of truth, $\HORSESHOE$).  
+Thus, because $\Delta_{k+1}\sdtstile{}{}\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$, $\As{\variable{s}}{}$ makes $\horseshoe{\CAPPHI\variable{s}/\BETA}{\CAPTHETA}$ true.
+We saw earlier that $\As{\variable{s}}{}$ makes $\CAPPHI\variable{s}/\BETA$ true, so $\As{\variable{s}}{}$ makes $\CAPTHETA$ true as well (def. of truth, $\HORSESHOE$).  
 
-According to the third rule restriction for \Rule{$\exists$-Elim}, $\variable{s}$ must not occur in $\CAPTHETA$.  Because $\As{\variable{s}}{}$ makes $\CAPTHETA$ true and $\variable{s}$ isn't in $\CAPTHETA$, $\IntA$ also makes $\CAPTHETA$ true.  The assignment that $\As{\variable{s}}{}$ makes to $\variable{s}$ is irrelevant.
+According to the third rule restriction for \Rule{$\exists$-Elim}, $\variable{s}$ must not occur in $\CAPTHETA$.
+Because $\As{\variable{s}}{}$ makes $\CAPTHETA$ true and $\variable{s}$ isn't in $\CAPTHETA$, $\IntA$ also makes $\CAPTHETA$ true.
+The assignment that $\As{\variable{s}}{}$ makes to $\variable{s}$ is irrelevant.
 
-So, we have shown that $\Delta^*\sdtstile{}{}\CAPTHETA$.
+So, we have shown that $\Delta_{k+1}\sdtstile{}{}\CAPTHETA$.
 
 \end{description}
 
-\item[Closure Step:] We have now covered all the generating cases for derivations. By the closure clause of the definition, we have proved soundness for all derivations in \GQD{}. 
+\item[Closure Step:] We have covered all the generating cases for derivations. By the closure clause of the definition, we have proved soundness for all derivations in \GQD{}. 
 
 \end{description}
 \end{PROOFOF} 
@@ -744,9 +782,9 @@ The sentence has been highly standardized;
 there are no biconditionals or conditionals (these have been eliminated in early steps of the transformation), negations govern only atomic sentences, and conjunctions govern only atomic sentences or their negations. 
 These last, atomic sentence and their negations, are called \idf{ions}. 
 We say an ion occurs \niidf{positively} \Iff it's an atomic sentence without a negation, and it occurs \niidf{negatively} \Iff it's a negated atomic sentence. 
-We will call the quantifier free part of the original sentence the \idf{matrix}. 
+We call the quantifier free part of the original sentence the \idf{matrix}. 
 It is usually not a sentence since it may have free variables.
-We will call the sentences that are obtained from the matrix by substitution in the process of constructing the derivation \niidf{matrix instances}\index{matrix!instances|textbf}. 
+We call the sentences that are obtained from the matrix by substitution in the process of constructing the derivation \niidf{matrix instances}\index{matrix!instances|textbf}. 
 To put some of our jargon together, the matrix of the sentence will consist of disjunctions of conjunctions of ions. 
 
 \subsection{The Method and Completeness Lemmas}\label{The Method Section}
@@ -775,7 +813,7 @@ We may, however, be adding new existentials.
 Note that \mention{instance} is to be taken very strictly here. 
 The fact that we instantiated $\existential{\variable{x}}\Kpp{\variable{x}}{\constant{a}}$ with $\Kpp{\constant{b}}{\constant{a}}$ takes care of that existential, but if we later add the sentence $\existential{\variable{x}}\Kpp{\variable{x}}{\constant{b}}$ then we must add an instance of it. 
 The rule which sanctions these steps will be \Rule{Assume}. 
-We will eventually discharge these premises by \Rule{$\HORSESHOE$-Elim} and \Rule{$\exists$-Elim} if we get to a contradiction.
+We eventually discharge these premises by \Rule{$\HORSESHOE$-Elim} and \Rule{$\exists$-Elim} if we get to a contradiction.
 It is in anticipation of this eventuality that we carefully chose a constant which does not occur in any previous assumption.
 Note that with this step we are adding new instances with new constants in new assumptions. 
 
@@ -783,7 +821,7 @@ Note that with this step we are adding new instances with new constants in new a
 Officially, the way to do this is to take the conjunction of them all by \Rule{$\WEDGE\!$-Intro}, use \Rule{Distribution} to get the conjunction into \CAPS{dnf} and check whether every disjunct contains a contradiction. 
 If so, then by a process of \Rule{$\VEE$-Elim} and \Rule{Any Contradiction} we can eventually produce the line $\conjunction{\Al}{\negation{\Al}}$. 
 
-This step can be cumbersome in practice. We will give some unofficial short cuts to make this more manageable soon.
+This step can be cumbersome in practice. We give some unofficial short cuts to make this more manageable soon.
 
 \item[Step 5:] \hfill
 \begin{cenumerate}
@@ -798,7 +836,7 @@ There are three possible outcomes of applying this method to a sentence:
 \item The method might stop without a contradiction.
 \item The method might generate new sentences perpetually without contradiction.
 \end{cenumerate}
-We will show first that if a contradiction is reached we can construct a derivation of $\CAPTHETA$. 
+We show first that if a contradiction is reached we can construct a derivation of $\CAPTHETA$. 
 
 \begin{THEOREM}{\LnpTC{Derivational Lemma} Derivational Lemma:}
 If the Method starts with $\negation{\CAPTHETA}$ and produces a contradiction, then there is a derivation of $\CAPTHETA$.
@@ -839,7 +877,7 @@ This is relevant to the task at hand because we know that all of the non-quantif
 We are calling the quantifier free part of the original sentence the matrix.
 It is usually not a sentence since it may have free variables. 
 The sentences that are obtained from the matrix by substitution in the process of constructing the derivation are the matrix instances. 
-We will use the notation $M_{i,j}$ for the disjuncts of the matrix instances, specifically the disjuncts of the first matrix instance will be $M_{1,1},M_{1,2},\ldots,M_{1,m}$.
+We use the notation $M_{i,j}$ for the disjuncts of the matrix instances, specifically the disjuncts of the first matrix instance will be $M_{1,1},M_{1,2},\ldots,M_{1,m}$.
 Thus the first matrix instance is $\disjunction{M_{1,1}}{\disjunction{M_{1,2}}{\disjunction{\ldots}{M_{1,m}}}}$.
 The matrix instances that appear in the derivation can be listed in an array:
 \begin{center}
@@ -859,7 +897,7 @@ In one direction this is easy to see: if there is no way of choosing a disjunct 
 
 To show that all instances are satisfiable when such a selection can be made without choosing a sentence and its negation will take some proving.
 In order to do this we will need to define the \idf{master matrix list} $M$.\index{matrix!master list} 
-We will first choose (if there is more than one) a set of disjuncts $M_{i,j}$ (including one from each matrix instance $M_i$) that does not contain any atomic sentence and its negation.
+We first choose (if there is more than one) a set of disjuncts $M_{i,j}$ (including one from each matrix instance $M_i$) that does not contain any atomic sentence and its negation.
 This will be a set of conjunctions of atomic sentences and negations of atomic sentences.
 Our master matrix list $M$ simply consists of all these atomic sentences and negated atomic sentences.
 Note that since the $M_{i,j}$ selections must be consistent no atomic sentence that appears unnegated also appears negated.
@@ -997,7 +1035,7 @@ In addition to citing the justification, if the sentence is at all complex you s
 
 Finally,\index{One Bad Apple} given the opposite of even one conjunct in a conjunction, we can derive the negation of the conjunction.
 E.g., from $\Gp{\constant{a}}$ we can derive $\negation{\parconjunction{\Kp{\constant{a}}}{\conjunction{\Gp{\constant{b}}}{\conjunction{\Kp{\constant{c}}}{\negation{\Gp{\constant{a}}}}}}}$.
-We will call this rule \Rule{One Bad Apple}, or \Rule{OBA}.
+We call this rule \Rule{One Bad Apple}, or \Rule{OBA}.
 %\begin{table}[!ht]
 %\renewcommand{\arraystretch}{1.5}
 %\begin{center}
