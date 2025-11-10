@@ -606,7 +606,7 @@ that is, they used exchange shortcut rules.
 Thus, we can also construct a derivation by \mention{turning this proof upside down}, so to speak.
 In other words, we can construct a new derivation, with the last step of the original derivation as the initial assumption step, then use the exchange rules to work back to original $\CAPPHI$.
 
-Thus, by soundness, we know that if the first sentence of the \mention{upside-down derivation} (the sentence in \CAPS{dnf} that was at the bottom) is true in a model, then so is everything that can be derived from it, including our original sentence $\CAPPHI$ that is now at the end of the inverted derivation. 
+Thus, by soundness, if the first sentence of the \mention{upside-down derivation} (the sentence in \CAPS{dnf} that was at the bottom) is true in a model, then so is everything that can be derived from it, including our original sentence $\CAPPHI$ that is now at the end of the inverted derivation. 
 Therefore, $\CAPPHI$ is true in some model. 
 \end{PROOFOF}
 \begin{THEOREM}{\LnpTC{GSDWCompleteness} Weak \GSD{} Completeness Theorem:}
@@ -628,11 +628,13 @@ This follows immediately from the Weak \GSD{} Completeness Theorem and theorem \
 \section{Completeness of \GQD{}}\label{Sec:Completeness of GQD}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section we shall prove that \GQD{} is complete.  We would like to use the same kind of strategy for \GQD{} we did for \GSD{}, so we have deal with the quantifiers.
-Unfortunately, the quantifiers prevent us from proving the analogue of DNF for \GQL{}. For example:  $\universal{\variable{x}}\pardisjunction{\Hp{\variable{x}}}{\Gp{\variable{x}}}$ is not equivalent to $\disjunction{\universal{\variable{x}}\Hp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$.
+Next we prove the completeness of \GQD{}.  We want to use a similar strategy for \GQD{} we did for \GSD{}, but we have to deal with the quantifiers somehow.
+Unfortunately, the quantifiers prevent us from proving the analogue of DNF for \GQL{}.
+Given an arbitrary sentence, there is no guarantee that we can reorder the quantifiers so that each has its scope contained in a single disjunct.
+For example:  $\universal{\variable{x}}\pardisjunction{\Hp{\variable{x}}}{\Gp{\variable{x}}}$ is not equivalent to $\disjunction{\universal{\variable{x}}\Hp{\variable{x}}}{\universal{\variable{x}}\Gp{\variable{x}}}$.
 
-To get around problems like this, we must show we can move all of the quantifiers to the front of the sentence.  This has the advantage of separating the quantifier parts of the logical structure from the SL parts.
-
+To get around problems like this, we instead show we can move all the quantifiers to the front of the sentence.
+This has the advantage of separating the quantifier parts of the logical structure from the SL parts.
 
 \subsection{Prenex Definition and Steps}\label{Prenex Definition and Steps}
 \begin{majorILnc}{\LnpDC{PrenexNF}}
@@ -642,9 +644,9 @@ A sentence $\CAPPHI$ of \GQL{} is in \df{prenex normal form} \Iff every quantifi
 For all sentence $\CAPTHETA$ of \GQL{}, there is a provably equivalent sentence $\CAPTHETA^*$ in prenex normal form; that is, $\CAPTHETA^*$ is in prenex normal form and $\sststile{}{}\triplebar{\CAPTHETA}{\CAPTHETA^*}$ in \GQD{}.
 \end{THEOREM}
 \begin{PROOF}
-As with \CAPS{dnf} we have a set of steps for turning sentence $\CAPTHETA$ into a sentence $\CAPTHETA^*$ in prenex normal form. 
+As with \CAPS{dnf} there are a set of steps for turning sentence $\CAPTHETA$ into a sentence $\CAPTHETA^*$ in prenex normal form. 
 First we give the steps, and then show that each step can be sanctioned either by \Rule{QN}, \Rule{$\TRIPLEBAR$-Exchange}, or an exchange rule that can be introduced.
-(We'll call these new exchange rules the \niidf{Prenex Exchange Rules}.\index{Exchange Rules!Prenex}) 
+(We call these new exchange rules the \niidf{Prenex Exchange Rules}.\index{Exchange Rules!Prenex}) 
 Because all the steps in the process are justified by exchange rules, we can either read the resulting series of steps top-down as a derivation of $\CAPTHETA^*$ from $\CAPTHETA$, or bottom-up as a derivation of $\CAPTHETA$ from $\CAPTHETA^*$. 
 So, we'll have shown that $\sststile{}{}\triplebar{\CAPTHETA}{\CAPTHETA^*}$ in the derivation system consisting of \Rule{$\TRIPLEBAR$-Exchange} and the Prenex Exchange Rules.
 But, as with all the other exchange rules anything that can be derived using the Prenex Exchange Rules can be derived in \GQD{} alone;
@@ -676,7 +678,7 @@ Note that $(\#\variable{x})$ is just a dummy quantifier standing for either;
 replacement is the same for both quantifiers.  Also, we use \mention{$\variable{x}$} in the chart above, but the same principles hold for quantifiers with any other variable.
 \end{cenumerate}
 After applying these steps to a sentence $\CAPTHETA$ we get a sentence $\CAPTHETA^*$ that is in prenex normal form.\footnote{For more discussion of Prenex Form, see \citealt[132]{Kleene1967}, \citealt[54]{Hodges2001}, \citeyear[30]{Hodges2001b}.} 
-We now have to show that each step can be sanctioned by an exchange rule.
+We have to show that each step can be sanctioned by an exchange rule.
 Step (1) is straightforward, since it is sanctioned by \Rule{$\TRIPLEBAR$-Exchange}.
 But steps (2) and (3) we need new rules (although the replacements involving negations in (3) can be handled with \Rule{QN}).
 The most straightforward strategy is to read the needed exchange rules right off the steps. 
@@ -724,7 +726,7 @@ Thus, the Prenex Exchange Rules are given in the following chart.
 %\caption{Exchange Short-Cut Rules for \GSD{} (\GSD{})}
 %\label{GSDplus2}
 %\end{table}
-\noindent{}Now all that's left to show is that anything that can be derived using the Prenex Exchange Rules can be derived using the basic rules of \GQD{} alone.
+\noindent{}Finally we show that anything that can be derived using the Prenex Exchange Rules can be derived using the basic rules of \GQD{} alone.
 Recall from section \ref{Shortcut Rule Elimination Theorem Section} that all we need to do to show this is to prove the following:
 \begin{THEOREM}{\LnpTC{GQD NDF Rule2}}
 For all Prenex Exchange Rules \Rule{R}, any two \GQL{} formulas got by substituting other \GQL{} formulas into the may-add and given schemas of \Rule{R} are provably equivalent.
@@ -733,11 +735,10 @@ For all Prenex Exchange Rules \Rule{R}, any two \GQL{} formulas got by substitut
 \end{PROOF}
 
 \subsection{The Strategy for Proving \GQD{} Completeness}
-Our goal is to prove the strong completeness of \GQD{}; 
-that is, we want to prove that for any set $\Delta$ of \GQL{} sentences and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$. 
-Our strategy is to first prove the completeness of \GQD{} and then show how to modify the method to prove the strong completeness.
-Our strategy for proving completeness is to show that for any sentence we can either (1) find a derivation of it or (2) prove that there is a model that makes it false. 
-(This part of the strategy is more or less the same as what we did to show that \GSD{} is  complete.)
+Our goal is to prove the strong completeness of \GQD{}: for any set $\Delta$ of \GQL{} sentences and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$. 
+First we prove the completeness of \GQD{} and then show how to modify the method to prove strong completeness.
+To prove completeness we show that for any sentence we can either (1) find a derivation of it or (2) prove that there is a model that makes it false. 
+(This part of the strategy is more or less the same as what we did to show that \GSD{} is complete.)
 In other words, $\CAPPHI$ is either derivable or not quantificationally true, from which it immediately follows that if $\CAPPHI$ is quantificationally true, then it is derivable. 
 
 The method,\index{method, the} in brief, is to negate the sentence $\CAPPHI$ and begin a derivation.
@@ -747,7 +748,7 @@ This does not introduce any new assumptions.
 We then systematically take instances of the bound variables and try to derive a contradiction.
 If we can derive a contradiction we can then (assuming all goes well) use \Rule{$\NEGATION$-Elim} to obtain a derivation of $\CAPPHI$.
 
-We must be very systematic since we have to be sure that if we get a contradiction we can derive it from the initial sentence $\CAPPHI$, and that if we do not get a contradiction we have not overlooked anything and that we can show the existence of a model making the sentence on the first line, $\CAPPHI$, true. 
+We must be very systematic since we have to be sure that if we get a contradiction we can derive it from the initial sentence $\CAPPHI$; and that if we do not get a contradiction we have not overlooked anything and that we can show the existence of a model making the sentence on the first line, $\CAPPHI$, true. 
 
 It is important that we know the form of the sentence we have reached and are able to prescribe a uniform systematic method.
 The sentence has been highly standardized; 
@@ -1103,11 +1104,13 @@ Thus the \Rule{$\exists$-Elim} step is legitimate. If (c) is the case then we do
 
 Now we must continue to discharge the rest of the assumptions.  For any assumption of an instance of an existentially quantified sentence, we may do the same thing we did in (b) above---first use \Rule{$\HORSESHOE$-Intro} to derive a conditional, and then use \Rule{$\exists$-Elim} to derive the RHS of that conditional.  For any assumption that is a sentence of $\Delta'$ (i.e., $\CAPTHETA_{\integer{i}}$), we use \Rule{$\HORSESHOE$-Intro} to derive a conditional, as in (a) above.  So, after discharging the assumption with the second to last sentence from $\Delta'$ we get $\horseshoe{\CAPTHETA_{\integer{n-1}}}{\parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}$.  After the third instance, we derive $\horseshoe{\CAPTHETA_{\integer{n-2}}}{\parhorseshoe{\CAPTHETA_{\integer{n-1}}}{\parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}$.  And so on, so that we eventually get a sentence of the form $\horseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$.
 
-After discharging all such assumptions, the only open assumption left is $\negation{\CAPPHI}$.  Apply \Rule{$\HORSESHOE$-Intro} once more to get something like the following: $\horseshoe{\negation{\CAPPHI}}{\parhorseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\ldots \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$.  Now we have no open assumptions remaining.  (Note that we have effectively covered case (c) above, since applying \Rule{$\HORSESHOE$-Intro} in this case would give us $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$ and no open assumptions.  In this case, we didn't have to assume any of the sentences of $\Delta$ to get a contradiction, so $\Delta'$ is the empty set.)
+After discharging all such assumptions, the only open assumption left is $\negation{\CAPPHI}$.  Apply \Rule{$\HORSESHOE$-Intro} once more to get something like the following: \\
+$\horseshoe{\negation{\CAPPHI}}{\parhorseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\ldots \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$.  Now we have no open assumptions remaining.  (Note that we have effectively covered case (c) above, since applying \Rule{$\HORSESHOE$-Intro} in this case would give us $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$ and no open assumptions.  In this case, we didn't have to assume any of the sentences of $\Delta$ to get a contradiction, so $\Delta'$ is the empty set.)
 
 At this point we have a conditional, possibly a very long one.  The RHS of the last conditional (possibly embedded in several conditionals) is our contradiction, $\parconjunction{\Al}{\negation{\Al}}$.  We want to show that $\Delta'\sststile{}{}\CAPPHI$, so let us make a series of assumptions from the sentences of $\Delta'$.  That is, let us assume each of $\CAPTHETA_1, \CAPTHETA_2, \CAPTHETA_3, \ldots, \CAPTHETA_{\integer{n}}$.  Now that we've assumed all the sentences of $\Delta'$, let us assume $\negation{\CAPPHI}$.
 
-Given our earlier conditional of the form $\horseshoe{\negation{\CAPPHI}}{\parhorseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$ and the assumption $\negation{\CAPPHI}$, we may now apply \Rule{$\HORSESHOE$-Elim} to get $\horseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$.  Because we also have all the sentences of $\Delta'$ as assumptions (i.e., all of $\CAPTHETA_1, \CAPTHETA_2, \CAPTHETA_3, \ldots, \CAPTHETA_{\integer{n}}$), we may apply a series of \Rule{$\HORSESHOE$-Elim} steps until we eventually derive $\conjunction{\Al}{\negation{\Al}}$.  That is, given our earlier assumption $\CAPTHETA_1$ and the conditional $\horseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$, we may apply \Rule{$\HORSESHOE$-Elim} to derive $\horseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}$.  And then because we have $\CAPTHETA_2$ as an assumption we may again apply \Rule{$\HORSESHOE$-Elim} to get $\horseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}$.  And so on, until we derive $\conjunction{\Al}{\negation{\Al}}$.
+Given our earlier conditional of the form $\horseshoe{\negation{\CAPPHI}}{\parhorseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$ and the assumption $\negation{\CAPPHI}$, we may now apply \Rule{$\HORSESHOE$-Elim} to get \\
+$\horseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$.  Because we also have all the sentences of $\Delta'$ as assumptions (i.e., all of $\CAPTHETA_1, \CAPTHETA_2, \CAPTHETA_3, \ldots, \CAPTHETA_{\integer{n}}$), we may apply a series of \Rule{$\HORSESHOE$-Elim} steps until we eventually derive $\conjunction{\Al}{\negation{\Al}}$.  That is, given our earlier assumption $\CAPTHETA_1$ and the conditional $\horseshoe{\CAPTHETA_1}{\parhorseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}}$, we may apply \Rule{$\HORSESHOE$-Elim} to derive $\horseshoe{\CAPTHETA_2}{\parhorseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}}$.  And then because we have $\CAPTHETA_2$ as an assumption we may again apply \Rule{$\HORSESHOE$-Elim} to get $\horseshoe{\CAPTHETA_3}{\ldots, \parhorseshoe{\CAPTHETA_{\integer{n}}}{\parconjunction{\Al}{\negation{\Al}}}}$.  And so on, until we derive $\conjunction{\Al}{\negation{\Al}}$.
 
 Remember that our last open assumption is $\negation{\CAPPHI}$.  We may now discharge that assumption and apply \Rule{$\HORSESHOE$-Intro} to get $\horseshoe{\negation{\CAPPHI}}{\parconjunction{\Al}{\negation{\Al}}}$.  Then we apply \Rule{$\NEGATION$-Elim} to derive $\CAPPHI$.
 
