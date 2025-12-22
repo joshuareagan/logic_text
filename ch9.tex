@@ -8,18 +8,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In previous chapters we assumed that there are only two truth values. We now set aside that assumption. This allows us to explore many-valued logics. 
-We explore the possibility that there are varying degrees of truth and falsity, such that there are sentences that are neither wholly true nor wholly false.
-(Actually it turns out that there are many possibilities because there are many many-valued logics; in fact, there are infinitely many!) 
+In previous chapters we assumed that there are only two truth values. We now set aside that assumption to explore many-valued logics. 
+We consider the possibility that there are varying degrees of truth and falsity, such that there are sentences that are neither wholly true nor wholly false.
 Among the reasons that have been given historically for rejecting the two-valuedness assumption are the beliefs that statements about the future, statements involving vague predicates, or statements about quantum-mechanical properties are not always either true or false. 
 Most many-valued logics begin by rejecting the law of excluded middle $\disjunction{\Al}{\negation{\Al}}$, though there are exceptions.\footnote{For example, the most generally accepted logic for quantum mechanics keeps	$\disjunction{\Al}{\negation{\Al}}$ but rejects one of the distribution principles.} 
-The number of values ranges from three to various infinite sets. 
-The interpretations of the further values vary widely from author to author, as do the motivations for introducing the additional values. 
+The number of values ranges from three to infinity. 
+The interpretations of the further values vary widely from one author to another, as do the motivations for introducing the additional values. 
 
 Emil Post was one of the first to study many-valued logics, but his motivation seems to have been entirely formal. 
 The other major founder of many-valued logic was \L{}ukasiewicz. 
-He sketched the idea of a many-valued logic in 1920 and published a systematic account in 1930. 
-(Both are reprinted in \citealp{Borkowski1970}.) 
+He sketched the idea of a many-valued logic in 1920 and published a systematic account in 1930.\footnote{Both are reprinted in \citealp{Borkowski1970}.}
 Unlike Post, \L{}ukasiewicz introduced three-valued logic for a philosophical reason: to provide a more appropriate representation for the indeterminacy of the future. 
 He apparently was led to this both by a historical concern---studying Aristotle's discussion of necessity, particularly
 his sea battle example---and by a quite contemporary concern about how to accommodate the indeterminism of modern physics within logic. 
@@ -36,7 +34,7 @@ Thus the motivation, if not the details, of many-valued logic is as ancient as t
 
 In all of his later work, \L{}ukasiewicz used 1 for truth, 0 for falsity, and intermediate values for other truth values. 
 Most but not all writers use this convention. 
-Of course it is one thing to decide that $\rfrac{1}{2}$ is your third truth value and another thing to give a philosophical explanation of it. 
+However, it is one thing to decide that $\rfrac{1}{2}$ is your third truth value and another thing to give a philosophical explanation of it. 
 For \L{}ukasiewicz the intermediate value is ``indeterminate''. 
 Given this understanding, the most natural three-valued generalization of the two-valued truth tables is the following, in which negation reverses the truth value.
 \begin{center}
@@ -67,12 +65,13 @@ Conjunction takes the minimum value of the conjuncts, while disjunction takes th
 		0 & 1 & \textonehalf{} & 0 \\ \hline
 	\end{tabular}		
 \end{center}
-For example, the conjunction of a true sentence and an indeterminate sentence would seem to be indeterminate. 
-It could become true if the indeterminacy were resolved in favor of truth or false if the indeterminacy were resolved in favor of falsity. 
+For example, the conjunction of a true sentence and an indeterminate sentence is indeterminate. 
+It is instead true if the indeterminacy is resolved in favor of truth and false if the indeterminacy is resolved in favor of falsity. 
 
 Note that when all the components of a sentence formed from these connectives are assigned value $\rfrac{1}{2}$ the entire sentence has value $\rfrac{1}{2}$. 
-If we introduce the conditional as $\disjunction{\negation{\Al}}{\Bl}$, as is often done in two-valued logic, then the conditionals would also have this property and there would be no sentences which are logical truths. 
-More specifically, since the identification of the conditional with $\disjunction{\negation{\Al}}{\Bl}$ makes $\horseshoe{\Al}{\Al}$ equivalent to the law of excluded middle, $\horseshoe{\Al}{\Al}$ would not be a logical truth. 
+If the conditional $\horseshoe{\Al}{\Bl}$ is defined as equivalent to as $\disjunction{\negation{\Al}}{\Bl}$, as is often done in two-valued logic, then it too is indeterminate when $\Al$ and $\Bl$ are.
+As a consequence $\horseshoe{\Al}{\Al}$ is equivalent to the law of excluded middle, $\disjunction{\negation{\Al}}{\Al}$, and $\horseshoe{\Al}{\Al}$ is not a logical truth.
+This outcome is generally thought undesirable.
 
 Instead of using that traditional, oft questioned equivalence, \L{}ukasiewicz defined the conditional thus:
 \begin{center}
@@ -93,22 +92,26 @@ The truth table for the biconditional is specified by this definition above.
 We leave it to the reader to give a simpler, more direct explanation of the truth table.
 In \L{}ukasiewicz' presentation of his system, he used only negation and the conditional, having noted that $\disjunction{\Al}{\Bl}$ can be defined as $\horseshoe{\parhorseshoe{\Al}{\Bl}}{\Bl}$ and then $\conjunction{\Al}{\Bl}$ can be defined by using the usual DeMorgan's principle.
 
-In two-valued logic we define a sentence to be logically true iff it is true in all models. 
-When we have more than two truth values, we must indicate which subset of the values are the designated values, i.e., those that are truth-like. 
-Our definition now becomes: $\Al$ is a \idf{logical truth} iff it has a designated value in all models. 
+In two-valued logic a sentence is logically true iff it is true in all models. 
+When there are more than two truth values, we must indicate which subset of the values are the designated values, i.e., those that are truth-like. 
+The definition is revised: $\Al$ is a \idf{logical truth} iff it has a designated value in all models. 
 
-Since \L{}ukasiewicz' motivation was to deny excluded middle, he chose only 1 as a designated value. 
+Since \L{}ukasiewicz' motivation was to deny excluded middle he chose only 1 as a designated value.
 This achieves the purpose of rendering excluded middle not a logical truth. 
 It has one somewhat counterintuitive consequence though, which is that under a model in which both constituents are assigned value $\rfrac{1}{2}$, $\conjunction{\Al}{\negation{\Al}}$ has the same truth value as $\disjunction{\Al}{\negation{\Al}}$. 
 Issues of the indeterminacy of the future are now generally studied within the framework of tense logic. 
-Aristotle's argument is generally regarded as fallacious, but \L{}ukasiewicz' innovations have opened the possibilities for a variety of other systems and ideas. 
+\L{}ukasiewicz' innovations have opened the possibilities for a variety of other systems and ideas. 
 
 \subsection{Finite-valued systems with more than three values}
 
 The \L{}ukasiewicz three-valued generalization can be systematically carried further. 
 The $\integer{n}$-valued generalization consists of taking the values $\rfrac{i}{n-1}$ for $0 \leq i \leq n-1$. 
-For example, four-valued logic would have the values 0, $\rfrac{1}{3}$, $\rfrac{2}{3}$, and 1. 
-Conjunction will take the minimum value of the conjuncts, and disjunction the maximum value of the disjuncts. 
+For example, four-valued \L{}ukasiewicz logic has the values 0, $\rfrac{1}{3}$, $\rfrac{2}{3}$, and 1.\footnote{
+	Four-valued logic was proposed for modal logic, the values being ``necessarily true'', ``contingently true'', ``contingently false'', and ``necessarily false''.
+    The \L{}ukasiewicz definitions of the usual connectives can be used and a modal operator added. 
+    While these truth tables have some uses, they have been superseded by the possible worlds approach to modal logic. We discuss possible world semantics later in this chapter.
+}
+Conjunction takes the minimum value of the conjuncts, and disjunction the maximum value of the disjuncts. 
 The value of a negation is 1 minus the value of the sentence being negated. 
 For the conditional $\horseshoe{\Al}{\Bl}$ we have two cases, using $V(\Al)$ for the value of $\Al$:
 \[V(\horseshoe{\Al}{\Bl}) = 
@@ -117,19 +120,14 @@ For the conditional $\horseshoe{\Al}{\Bl}$ we have two cases, using $V(\Al)$ for
 [1 – V(\Al)]  + V($\Bl$) & \text{ otherwise}
 \end{cases}\]
 In all of the \L{}ukasiewicz systems the only designated value is 1. 
-Excluded middle will not be logically true in any of these systems, though in the even-valued systems excluded middle is always truer than the contradiction $\conjunction{\Al}{\negation{\Al}}$. 
-Systems with more than one designated value were mentioned by Post, and this variation on \L{}ukasiewicz systems was studied by Slupecki and others. 
-
-Four-valued logic was proposed for modal logic, the values being ``necessarily true'', ``contingently true'', ``contingently false'', and ``necessarily false''.
-The \L{}ukasiewicz definitions of the usual connectives can be used and a modal operator added. 
-While these truth tables have some uses, they have been superseded by the possible worlds approach to modal logic. We discuss possible world semantics later in this chapter.
+Excluded middle is not logically true in any of these systems, though in the even-valued systems excluded middle is always truer than the contradiction $\conjunction{\Al}{\negation{\Al}}$.\footnote{Systems with more than one designated value were mentioned by Post, and this variation on \L{}ukasiewicz systems was studied by Slupecki and others.}
 
 \subsection{Infinite-valued systems}
 
 The \L{}ukasiewicz $\integer{n}$-valued generalization can be systematically carried further still.
-\L{}ukasiewicz also studied the cases where the set of truth values consists of all rational numbers (fractions) in the interval $[0,1]$ and also where the values consist of all real numbers (infinite decimal expansions) in the same interval. 
+\L{}ukasiewicz also studied the cases where the set of truth values consists of all rational numbers, or all the real numbers, in the interval $[0,1]$. 
 Conjunction, disjunction, negation, and the conditional (with the two cases) are the same as for finite-valued systems with more than three values. 
-The set of logical truths in the three-valued logic is a subset of those in our traditional logic; if a sentence can be shown to be false in a two-valued model, then that model also works in the three-valued system. 
+The set of logical truths in the three-valued logic is a subset of those in our traditional logic; if a sentence can be shown to be false in a two-valued model, then that model also falsifies the sentence in the three-valued system. 
 
 One question to ask is whether all these values make a difference. 
 We already know part of the answer. 
@@ -148,7 +146,7 @@ the sentence a value of $\rfrac{1}{2}$.
 Generalizing, sentences of the form
 \begin{center} $\disjunction{\parhorseshoe{\Al_1}{\Al_2}}{\disjunction{\parhorseshoe{\Al_2}{\Al_3}}{\disjunction{\parhorseshoe{\Al_3}{\Al_4}}{\disjunction{\ldots}{\parhorseshoe{\Al _{n}}{\Al _{n+1}}}}}}$ 
 \end{center}	
-\noindent{}will be logical truths in an n-valued system but not in a system with at least $n+1$ values. 
+\noindent{}are logical truths in an n-valued system but not in a system with at least $n+1$ values. 
 
 %\noindent \textbf{Example.} 
 %	Show whether the following sentences are three-valued truths. 
@@ -159,37 +157,37 @@ Is the sentence  $\horseshoe{\parconjunction{\Al}{\negation{\Bl}}}{\negation{\pa
 If so, are they $\integer{n}$-valued truths for all finite $\integer{n}$? 
 
 \noindent{}\emph{Solution.} This is not a logical truth in any system with more than two values. 
-If we assign both $\Al$ and $\Bl$ the same intermediate value, then $\negation{\Bl}$ will have an intermediate value and so $\conjunction{\Al}{\negation{\Bl}}$ will have an intermediate value. 
-But since $\Al$ and $\Bl$ have the same value, $\horseshoe{\Al}{\Bl}$ will have the value 1 and $\negation{\parhorseshoe{\Al}{\Bl}}$ will have the value 0. 
-So, the whole conditional will have an intermediate value, not 1.
+If we assign both $\Al$ and $\Bl$ the same intermediate value, then $\negation{\Bl}$ has an intermediate value and so $\conjunction{\Al}{\negation{\Bl}}$ has an intermediate value. 
+But since $\Al$ and $\Bl$ have the same value, $\horseshoe{\Al}{\Bl}$ has the value 1 and $\negation{\parhorseshoe{\Al}{\Bl}}$ has the value 0. 
+So, the whole conditional has an intermediate value, not 1.
 \end{majorILnc}
 \begin{majorILnc}{\LnpEC{MVLTruthFunctionallyTrueB}}
 Is the sentence  $\horseshoe{\parconjunction{\parhorseshoe{\Al}{\Cl}}{\parhorseshoe{\Bl}{\Cl}}}{\parhorseshoe{\pardisjunction{\Al}{\Bl}}{\Cl}}$ a three-valued truth? 
 If so, are they $\integer{n}$-valued truths for all finite $\integer{n}$? 
 
-\noindent{}\emph{Solution.} We will give an argument that this sentence is true for all finite-valued logics. 
+\noindent{}\emph{Solution.} We give an argument that this sentence is true for all finite-valued logics. 
 If the values of $\Al$ and $\Bl$ are both less than or equal to that of $\Cl$, then the right conditional has value 1 and consequently the whole sentence does too. 
 Thus it can only be less than 1 if $\Al$ or $\Bl$ has value greater than $\Cl$. 
 Suppose $\Al$ is greater than $\Cl$ and greater than or equal to $\Bl$. 
 Then Max($\Al$, $\Bl$) = $\Al$ and the right conditional has the same value as $\horseshoe{\Al}{\Cl}$.  
-But since $\Al > \Bl$, $1-\Al < 1-\Bl$, and so the value of the left conditional will also be the value of $\horseshoe{\Al}{\Cl}$ because that is the minimum value on that side.
+But since $\Al > \Bl$, $1-\Al < 1-\Bl$, and so the value of the left conditional is also the value of $\horseshoe{\Al}{\Cl}$ because that is the minimum value on that side.
 \end{majorILnc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Modal Sentential Logic}\label{modal sentential logic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We can think of sentential logic as the logic of truth functional operators and quantificational logic (at least, that part which extends sentential logic) as the logic of quantifiers and predicates. 
-But there is a lot that's left out by this: possibility and necessity, deontic concepts like permissibility and obligation, doxastic concepts like belief and knowledge, and temporal concepts like past and future, just to name a few. 
+We can think of sentential logic as the logic of truth functional operators, and quantificational logic as the logic of quantifiers and predicates. 
+But there is a lot left out by this: possibility and necessity, deontic concepts like permissibility and obligation, doxastic concepts like belief and knowledge, and temporal concepts like past and future, just to name a few. 
 Logics which attempt to capture these concepts are called modal logics. 
-Sometimes the term \mention{modal logic} is just meant to pick out the logic of possibility and necessity, other times it's meant to pick out the broader class of modal logics just mentioned.
-In this section we give a very brief introduction to the logic of possibility and necessity. 
+Sometimes the term \mention{modal logic} refers just to the logic of possibility and necessity, and at other times it refers to the broader class of modal logics just mentioned.
+In this section we give a brief introduction to the logic of possibility and necessity. 
 
 \subsection{The Language \MGSL{}}
 The language of modal sentential logic, \MGSL{}, is an extension of \GSL{}. 
 We add to \GSL{} two 1-place logical connectives: $\BOX$ and $\DIAMOND$.  
-Intuitively, $\BOX\CAPPHI$ says that $\CAPPHI$ is necessarily true, while $\DIAMOND\CAPPHI$ says that $\CAPPHI$ is possibly true. 
-\begin{majorILnc}{\LnpDC{Recursive definition of Sentences of MGSL}} The \nidf{sentences} \underdf{of \MGSL{}}{sentence} are given by the following recursive definition:
+Intuitively, $\BOX\CAPPHI$ means that $\CAPPHI$ is necessarily true, while $\DIAMOND\CAPPHI$ means that $\CAPPHI$ is possibly true. 
+\begin{majorILnc}{\LnpDC{Recursive definition of Sentences of MGSL}} The \nidf{sentences} \underdf{of \MGSL{}}{sentence} are defined recursively:
 \begin{description}
 \item[Base Clause:] Every sentence letter (def. \ref{Basic Symbols of GSL}) is a sentence.
 \item[Generating Clauses:] \hfill
@@ -203,9 +201,6 @@ Intuitively, $\BOX\CAPPHI$ says that $\CAPPHI$ is necessarily true, while $\DIAM
 \end{majorILnc}
 \noindent{}Of course, as with \GSL{}, sentences of \MGSL{} only count as either true or false relative to a model.
 
-%There are various deduction systems of modal logic (i.e., of \MGSL{}) and various distinct concepts of interpretations (for \MGSL{}). 
-%The deductive system we will study is called \SF{}, and we'll use interpretations so that \SF{} is complete. (To be clear: S5 is a derivation system for MGSL, just like \GSD{} is a derivation system for GSL.) Strictly speaking what we are going to define are (a) interpretations for MGSL (just like we defined interpretations for \GSL{} and \GQL{}) and (b) a definition of truth for when a sentence of MGSL is true in one of these interpretations, and (c) we want to make sure that a sentence of MGSL is derivable in S5 iff it's true in all such interpretations. For brevity we will just speak of ``interpretations'' and ``truth'' with it understood that we mean interpretations for MGSL and truth in such interpretations. 
-
 \subsection{Truth, Logical Truth, and Entailment in \MGSL{}}
 
 Like the models for \GQL{} (and unlike the many-valued models for \GSL{}), models for \MGSL{} can be thought of as extensions of the (2-valued) models of \GSL{} (recall definition \pmvref{Definition of GSL interpretation}).
@@ -217,9 +212,9 @@ A model $\IntA$ for \MGSL{} is an ordered triple $\langle\world{w}_0,\integer{W}
 \item $\integer{V}$ is a function that assigns a subset of $\integer{W}$ to each sentence letter of \MGSL{}.
 \end{cenumerate}
 \end{majorILnc}
-\noindent{}Elements of $\integer{W}$, ``possible worlds'', will be denoted by $\world{w},\world{w}_0,\world{w}_1,\world{w}_2$ and so on. 
+\noindent{}Elements of $\integer{W}$, ``possible worlds'', are denoted by $\world{w},\world{w}_0,\world{w}_1,\world{w}_2$ and so on. 
 The subset $\integer{V}(\CAPPHI)$ of $\integer{W}$ assigned to a sentence letter $\CAPPHI$ can be the empty set $\emptyset$, a non-empty proper subset of $\integer{W}$, or all of $\integer{W}$ itself. 
-Intuitively, the set $\integer{V}(\CAPPHI)$ is the set of possible worlds in which $\CAPPHI$ is true.  And $\integer{W}-\integer{V}(\CAPPHI)$, those worlds not in $\integer{V}(\CAPPHI)$, are worlds in which $\CAPPHI$ is false.  (We use the \mention{$-$} symbol to indicate the \mention{complement} of a set.)\footnote{For example, relative to some domain, $\{ 1, 2, 3, 4\}$, the complement of the set $\{1, 2\}$ is $\{3, 4\}$.  We can indicate the latter with the following notation: $\{ 1, 2, 3, 4\}-\{1, 2\}$.}
+Intuitively, the set $\integer{V}(\CAPPHI)$ is the set of possible worlds in which $\CAPPHI$ is true.  And $\integer{W}-\integer{V}(\CAPPHI)$, those worlds not in $\integer{V}(\CAPPHI)$, are worlds in which $\CAPPHI$ is false.  We use the \mention{$-$} symbol to indicate the complement of a set.\footnote{For example, relative to some domain, $\{ 1, 2, 3, 4\}$, the complement of the set $\{1, 2\}$ is $\{3, 4\}$.  We indicate the latter with the following notation: $\{ 1, 2, 3, 4\}-\{1, 2\}$.}
 Thus the function $\integer{V}$ in a \MGSL{} model is like a \GSL{} model, except that it assigns truth values to sentence letters in a possible world. 
 Just as before, we can extend the notion of truth in a possible world $\world{w}$ on a model $\IntA$.
 \begin{majorILnc}{\LnpDC{MGSLTruth}}
@@ -238,7 +233,7 @@ The following clauses define a function $\integer{V}^*$ which extends $\integer{
 \noindent{}For a given model $\IntA$, we call this function $\integer{V}^*$ the \idf{valuation function} of $\IntA$. 
 From here there is a straightforward way to define truth in a world in a model:
 \begin{majorILnc}{\LnpDC{MGSLTruthB}}
-A sentence $\CAPPHI$ of \MGSL{} is \nidf{true in world $\world{w}$} in model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ (where $\world{w}\in\integer{W}$) \Iff $\world{w}\in\integer{V}^*(\CAPPHI)$.
+A sentence $\CAPPHI$ of \MGSL{} is \nidf{true in world $\world{w}$} in model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ where $\world{w}\in\integer{W}$ \Iff $\world{w}\in\integer{V}^*(\CAPPHI)$.
 \end{majorILnc}
 \noindent{}Although there isn't as much intuitive significance to it, we can define truth in a model:
 \begin{majorILnc}{\LnpDC{MGSLTruthC}}
@@ -257,7 +252,7 @@ $\CAPPHI$ is a \nidf{modal falsehood}\index{falsehood!modal|textbf} \Iff for all
 \begin{majorILnc}{\LnpDC{MGSLLogicalIndeterminant}}
 $\CAPPHI$ is \nidf{modally contingent}\index{indeterminate!modal|textbf} \Iff there's a model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ such that $\integer{V}^*(\CAPPHI)\neq\emptyset$ and there's a model $\IntA=\langle\world{w}_0,\integer{W},\integer{V}\rangle$ such that $\integer{V}^*(\CAPPHI)\neq\integer{W}$.  (Note: It can be the same model for both.)
 \end{majorILnc}
-\noindent{}Alternatively (but equivalently) put, a sentence $\CAPPHI$ is a modal truth \Iff it's true everywhere on all models $\IntA$; i.e. \Iff for every world $\world{w}$ in every model $\IntA$, $\CAPPHI$ is true in $\world{w}$ in $\IntA$. 
+\noindent{}Equivalently put, a sentence $\CAPPHI$ is a modal truth \Iff it's true everywhere on all models $\IntA$; i.e. \Iff for every world $\world{w}$ in every model $\IntA$, $\CAPPHI$ is true in $\world{w}$ in $\IntA$. 
 Similarly, we can alternatively say that a sentence $\CAPPHI$ is a modal falsity \Iff for every world $\world{w}$ in every model $\IntA$, $\CAPPHI$ is false in $\world{w}$ in $\IntA$.
 
 Finally, we also can define when a set $\Delta$ of \MGSL{} sentences entails a sentence $\CAPPHI$.
@@ -433,7 +428,7 @@ It's worth discussing some historical background.
 Just as with sentential and quantificational logic, work on modal logic started as work on deduction systems without any semantics, and started with sentential logic without quantification.
 C.I. Lewis is well known for his early work in the 1910's on derivation systems for sentential modal logic. 
 In his \citeyearpar{Lewis1932}, coauthored with Cooper Langford, Lewis lays out his famous systems \SO{}--\SF{}.
-(\SF{}, still of much interest today, is the system we will focus on here.)
+(\SF{}, still of much interest today, is the system we focus on here.)
 It wasn't until Ruth Barcan Marcus \citeyearpar{Marcus1946,Marcus1946b,Marcus1947} and to a lesser extent Rudolf Carnap \citeyearpar{Carnap1946,Carnap1947} that systems were developed for quantificational modal logic (see also Marcus's \citeyearpar{Marcus1993}).
 
 While Marcus and Carnap did work on semantics for quantified modal logic (with Carnap drawing on Leibniz's conception of a ``possible world''), it wasn't until the work of Stig Kanger \citeyearpar{Kanger1957}, Richard Montague \citeyearpar{Montague1960}, Jaakko Hintikka \citeyearpar{Hintikka1961}, A.N. Prior \citeyearpar{Prior1957}, and (especially) Saul Kripke \citeyearpar{Kripke1959,Kripke1963,Kripke1963b,Kripke1965} that modern looking semantics (for both sentential and quantificational modal logic) were devised.\footnote{This 
@@ -441,7 +436,7 @@ While Marcus and Carnap did work on semantics for quantified modal logic (with C
 These are often called relational, or Kripke, semantics\index{Kripke semantics|see{relational semantics}}\index{relational semantics} and are what we'll look at here (at first in simplified form), although only for sentential modal logic.
 Like quantificational logic, there are alternative semantics. 
 Richard Montague \citeyearpar{Montague1970} and Dana Scott \citeyearpar{Scott1970} independently developed what's typically called neighborhood semantics\index{neighborhood semantics} \citep{ArloCosta2006}, while matrix (or algebraic) semantics\index{matrix semantics}\index{algebraic semantics|see{matrix semantics}} have a long history that goes back before the development of relational semantics (see \citealp[ch.~3]{Cocchiarella2008modal} for a textbook treatment).
-We will not bring these up at all, instead focusing on the basics of relational semantics.
+We do not bring these up at all, instead focusing on the basics of relational semantics.
 
 For those readers looking to pursue modal logic further, we recommend the following three textbooks (listed from most basic to most advanced): \citep{Beall2003}, \citep{Hughes1996}, and \citep{Cocchiarella2008modal}. 
 For handbook-style treatments, see \citep{Cresswell2001}, \citep{Bull2001}, \citep{Zakharyaschev2001}, and \citep{Garson2001}.
@@ -491,7 +486,7 @@ If we translate English names as constants in \GQL{}, then translations of the f
 \item\label{Superman} Clark Kent is Superman.
 \item\label{MTSC} Mark Twain is Samuel Clemens.
 \end{menumerate} 
-will allow for models where (say) Cicero is not Tully, or Clark Kent is not Superman.
+allow for models where (say) Cicero is not Tully, or Clark Kent is not Superman.
 Perhaps more importantly, this means that there's no such translation of \ref{MTSC}, along with a translation of 
 \begin{menumerate}
 \item Mark Twain wrote \emph{The Adventures of Tom Sawyer}.
@@ -500,13 +495,13 @@ which entails a translation of
 \begin{menumerate}
 \item Samuel Clemens wrote \emph{The Adventures of Tom Sawyer}.
 \end{menumerate}
-(We can get around this difficulty if we instead translate names in English as predicates of \GQL{} that have only one member.  This is a somewhat unintuitive work-around, however.)
+We can get around this difficulty if we instead translate names in English as predicates of \GQL{} that have only one member.  This is a somewhat unintuitive work-around, however.
 
 Next, say we want a sentence $\CAPPHI$ (or set of sentences $\Delta$) which contains a predicate $\PP$ and which is satisfied by all and only models $\IntA$ such that $\IntA(\PP)$ contains only a single element. 
 We leave it to readers to convince themselves that there are no sentences like this in \GQL{}.
 The point generalizes to any size set: for any number $\integer{n}$, there is no sentence (or set of sentences) of \GQL{} which is satisfied by all and only models $\IntA$ such that $\IntA(\PP)$ contains exactly $\integer{n}$ elements. 
 (This holds when $\integer{n}$ is infinite too.)
-But, if we extend \GQL{} to capture identity claims, then we will be able to find such sentences. 
+But, if we extend \GQL{} to capture identity claims, then we are able to find such sentences. 
 
 Thinking about translations of English sentences again, this inability to capture cardinality claims suggests that \GQL{} can't provide satisfactory translations for English sentences like:
 \begin{menumerate}
