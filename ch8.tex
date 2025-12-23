@@ -1203,33 +1203,106 @@ If\index{Church's Theorem}\index{decision procedure!for \CAPS{qt} in \GQL{}|see{
 Church's Theorem also says that if we also consider languages with function symbols, then if \Language{L} has at least two 1-place function symbols there is no decision procedure for the set of logical truths of \Language{L}.}
 \end{THEOREM}
 Church's Theorem at once tells us that there is no decision procedure for quantificational truth in \GQL{}, but we can show that with some modifications our method from section \ref{The Method Section} can be turned into a decision procedure for certain sublanguages of \GQL{}. 
-As the thesis suggests, one such sublanguage \Language{L} of \GQL{} is the language that consists of just 1-place predicate symbols. 
+As the theorem suggests, one such sublanguage of \GQL{} consists of just 1-place predicate symbols. 
 We've been calling this language \GQL{}1.\index{decision procedure!for \CAPS{qt} in monadic \GQL{}}\index{GQL!monadic}
 
-The basic insight for modifying the method is that infinite loops are created by having an existential quantifier inside a universal quantifier; 
-the existential requires a new constant to be instantiated, and that creates a new potential instance for the universal, which then creates a new existential, and so on. 
+Let's modify the method to prove that \GQL{}1 has a decision procedure.
+The problem with the existing method is that infinite loops are created by having an existential quantifier inside a universal quantifier.
+The existential requires a new constant to be instantiated, and that creates a new potential instance for the universal, which then creates a new existential, and so on.
+We want a procedure that is guaranteed to halt.
 
-Put more positively, if the method produces a sentence in standardized form which has only existential, or only universal quantifiers, then the method stops. 
+If the method produces a sentence in standardized form which has only existential, or only universal quantifiers, then the method stops. 
 Moreover, if in the standardized form the existentials all precede the universals the method also stops, for we first take instances of all the existentials using $\integer{n}$ constants if there are $\integer{n}$ existentials, and afterwards we instantiate the $\integer{n}$ new constants in the $\integer{m}$ universals giving $\integer{n}^\integer{m}$ instances.
-But, we are done then since no more new constants are added. 
+We are done then, since no additional constants are added.
 
-The general principle is that if one quantifier occurs within the scope of another then it cannot be moved in front of the other quantifier. 
-You may remember that the scope of a quantifier, say $\forall$ in $\universal{\variable{x}}\CAPPHI$, is the subformula $\CAPPHI$ of which it is the main connective. 
-We can say two quantifiers are \niidf{independent}\index{quantifier!s, independent} if neither is in the scope of the other.
-Let's say we have a sentence all of whose universal quantifiers are independent of each other.
-Notice that these quantifiers can be brought forward in any order, and thus that we have a decision procedure for such sentences. 
+But what about sentences with an existential quantifier within the scope of a universal quantifier, e.g. $\universal{\variable{x}}\existential{\variable{y}}\pardisjunction{\parconjunction{\Bp{\variable{x}}}{\Cp{\variable{y}}}}{\parconjunction{\Dp{\variable{x}}}{\Gp{\variable{y}}}}$?
+Since \GQL{} has many-place predicates, if one quantifier occurs within the scope of another then it cannot be moved in front of the other quantifier. 
+But since all the predicates of \GQL{}1 are 1-place there is a procedure to switch the order of these quantifiers.
 
-The critical result to prove is that every sentence of \GQL{}1 is equivalent to a sentence whose quantifiers are independent. 
-We can show this by appeal to the reverse of our procedure for putting sentences into prenex form, i.e. by moving quantifiers inward, but we use most of the same rules as for standard prenex (remember they are exchange rules).
-\begin{THEOREM}{\LnpTC{MonadicGQLEquivTheorem}  \GQL{}1 Equivalence Theorem:}
+We say two quantifiers are \niidf{independent}\index{quantifier!s, independent} if neither is in the scope of the other.
+Let's say we have a sentence all of whose quantifiers are independent of each other.
+Then these quantifiers can be brought forward in any order, and so we have a decision procedure for such sentences. 
+We claim that each \GQL{}1 sentence is equivalent to one whose quantifiers are all independent.
+To prove this we introduce a new normal form.
+
+\subsection{Conjunctive Normal Form}\label{Conjunctive Normal Form}
+
+Back in section \ref{Disjunctive Normal Form} you were introduced to sentences in disjunctive normal form (DNF).
+Now we consider a closely related form.
+
+\begin{majorILnc}{\LnpDC{CNF Definition}}
+A \GQL{} formula without quantifiers is in \df{conjunctive normal form} (\CAPS{cnf})\index{CNF|see{conjunctive normal form}} \Iff
+\begin{cenumerate}
+\item it contains no conditional ($\HORSESHOE$) or biconditional ($\TRIPLEBAR$),
+\item negations ($\NEGATION$) only govern atomic formulas, and
+\item no disjunction ($\VEE$) contains a conjunction ($\WEDGE$) as a subformula.
+\end{cenumerate}
+\end{majorILnc}
+\noindent{}This differs from DNF only in the third part of the definition.
+An example of a sentence in \CAPS{cnf} is $\conjunction{\pardisjunction{\Ql}{\negation{\Rl}}}{\pardisjunction{\negation{\Pl}}{\Rl}}$.
+
+A \GQL{} sentence is in \idf{prenex conjunctive normal form}\index{conjunctive normal form!prenex} (\CAPS{pcnf}) \Iff is it's in prenex normal form (i.e. all the quantifiers are in the initial position) and the remainder is in CNF.
+
+\begin{THEOREM}{\LnpTC{Prenex Conjunctive Normal Form Theorem} The Prenex Conjunctive Normal Form Theorem:}
+Every sentence of \GQL{} is equivalent to an \GQL{} sentence in \CAPS{pcnf}.
+\end{THEOREM}
+\begin{PROOF}
+The proof relies on four lemmas (left to the reader) corresponding to the last four steps of the procedure below.
+We provide a five stage process showing how to turn any given sentence into one that's in \CAPS{pcnf}.
+Let $\CAPPHI$ be a sentence of \GQL{}.
+\begin{description}
+\item[Step A:] There is a prenex normal form equivalent of $\CAPPHI$, $\CAPPHI^*$. Let $\CAPPHI'$ be the subformula of $\CAPPHI^*$ containing everything except the quantifiers in the initial position.
+\item[Step B:] If a subformula of $\CAPPHI'$ has a conditional or biconditional as its main connective, i.e., is of the form $\parhorseshoe{\CAPPSI}{\CAPTHETA}$ or $\partriplebar{\CAPTHETA}{\CAPPSI}$, replace the subformula by $\pardisjunction{\negation{\CAPPSI}}{\CAPTHETA}$ or $\disjunction{\parconjunction{\CAPPSI}{\CAPTHETA}}{\parconjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}}$ respectively. 
+Repeat as necessary to obtain a formula $\CAPPHI''$ without conditionals or biconditionals.
+\item[Step C:] \hfill{}
+\begin{cenumerate}
+\item Replace any subformula of the form $\negation{\negation{\CAPPSI}}$ in $\CAPPHI''$ with $\CAPPSI$.
+\item Replace any subformula of the form $\negation{\parconjunction{\CAPPSI}{\CAPTHETA}}$ in $\CAPPHI''$ with $\pardisjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$. 
+\item Replace $\negation{\pardisjunction{\CAPPSI}{\CAPTHETA}}$ in $\CAPPHI''$ with $\parconjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$. 
+\end{cenumerate} 
+Repeat as necessary to obtain $\CAPPHI'''$ in which negations govern nothing but atomic formulas.
+\item[Step D:] The only thing that could prevent $\CAPPHI'''$ from being in \CAPS{cnf} is that some disjunctions govern some conjunctions, i.e., there is a subformula $\disjunction{\CAPTHETA}{\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$, or the reverse $\disjunction{\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}{\CAPTHETA}$. 
+Those subformulas can be replaced by the equivalent $\conjunction{\pardisjunction{\CAPPSI_1}{\CAPTHETA}}{\conjunction{\pardisjunction{\CAPPSI_2}{\CAPTHETA}}{\conjunction{\ldots}{\pardisjunction{\CAPPSI_{\integer{n}}}{\CAPTHETA}}}}$. 
+Repeat as necessary to obtain a formula $\CAPPHI''''$.
+\item[Step E:] Replace $\CAPPHI'$ in $\CAPPHI^*$ with $\CAPPHI''''$ to get $\CAPPHI^{**}$. $\CAPPHI^{**}$ is equivalent to $\CAPPHI$ and in prenex conjunctive normal form.
+\end{description}
+\end{PROOF}
+
+\subsection{The QL1 Decision Procedure}\label{The QL1 Decision Procedure}
+
+\begin{THEOREM}{\LnpTC{MonadicGQLEquivTheorem} \GQL{}1 Equivalence Theorem:}
 Every sentence of \GQL{}1 is quantificationally equivalent to a sentence whose quantifiers are independent.
 \end{THEOREM}
 \begin{PROOF}
-Proof here.
+\begin{commentary}
+	The basic strategy to prove this theorem is straightforward.
+	First, we start with a \GQL{}1 and get its PCNF equivalent. 
+	All the quantifiers are in the initial position of the latter sentence.
+	Then we push each quantifier inward, using the prenex exchange rules, to shrink its scope.
+	We show that after the quantifiers are pushed in they are all independent.
+\end{commentary}
+Let $\CAPPHI$ be a sentence of \GQL{}1.
+Then by theorem \ref{Prenex Conjunctive Normal Form Theorem} there is an equivalent sentence, $\CAPPHI^*$, that is in prenex conjunctive normal form.
+So $\CAPPHI^*$ is of the form $\#_1\#_2\ldots\#_n\CAPPHI'$, where for all $i\in\{1,\ldots,n\}$ each $\#_i$ is a quantifier, and $\CAPPHI'$ is in CNF.
+Then $\CAPPHI'$ is of the form $\parconjunction{\conjunction{\CAPPSI_1}{\CAPPSI_2}}{\conjunction{\ldots}{\CAPPSI_k}}$, where for each $j\in\{1,\ldots,k\}$, $\CAPPSI_j$ is a disjunction of ions.
+To make the quantifiers all independent, the following steps are applied to push in each quantifier, starting with $\#_n$ and working back to $\#_1$.
+Let $\#_i$ be the right-most quantifier remaining to the left of $\CAPPHI'$.
+\begin{description}
+\item[Step A:] By the Q shuffle prenex exchange rule, $\#_i$ can be moved to each conjunct in $\CAPPHI'$ containing the variable bound by $\#_i$, resulting in: $\parconjunction{\conjunction{\#_i\CAPPSI_1}{\#_i\CAPPSI_2}}{\conjunction{\ldots}{\#_i\CAPPSI_k}}$. For any $\CAPPSI_j$ not containing that variable, the quantifier may be removed.
+\item[Step B:] Each conjunct with a quantifier $\#_i\CAPPSI_j$ is of the form $\#_i\pardisjunction{\disjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$ where each $\CAPTHETA$ is an ion (or a quantifier subsentence governing a disjunction, as will be made clear shortly). An equivalent disjunction is obtained by reordering so that the disjuncts with a variable matching that of the quantifier are leftmost. By the Q shuffle exchange rule, the $\#_i$ can be moved in to govern just those disjuncts, resulting in $\#_i\CAPPSI_j$ becoming: $\disjunction{\#_i\pardisjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$. With this transformation $\#_i$ binds all variables within its scope, and no other variables are in its scope.
+\end{description}
+
+When all quantifiers are pushed in in this manner, the result is a \GQL{}1 sentence whose quantifiers are all independent.
 \end{PROOF}
+
 \begin{THEOREM}{\LnpTC{MonadicDecisionTheorem} The \GQL{}1 Decision Theorem:}
-The\index{Monadic Decision Theorem, The} modified method just described provides a decision procedure for quantificational truth in \GQL{}1.
 \end{THEOREM}
+\begin{PROOF}
+Let\index{Monadic Decision Theorem, The} $\CAPPHI$ be a \GQL{}1 sentence.
+Then by theorem \ref{MonadicGQLEquivTheorem} there is an equivalent sentence $\CAPPHI^*$ such that all its quantifiers are independent.
+For the reasons described previously, the method is guaranteed to halt on $\CAPPHI^*$.
+Therefore there is a decision procedure for $\CAPPHI^*$, and hence $\CAPPHI$.
+\end{PROOF}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{L\"owenheim-Skolem and Compactness}
