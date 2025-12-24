@@ -574,7 +574,7 @@ unicode,pdfencoding=auto,
 \noindent{}{\LARGE\sffamily\selectfont{}Joshua Reagan}
 
 \vfill
-\noindent{\LARGE{}\sffamily\selectfont{}{Draft 0.9}} % could use \textls[30] for effect
+\noindent{\LARGE{}\sffamily\selectfont{}{Edition 1.0.0}} % could use \textls[30] for effect
 
 \newpage
 \pagestyle{empty}
@@ -582,7 +582,7 @@ unicode,pdfencoding=auto,
 \vspace*{.25in}
 %\begin{center} % We can center this material, but my preference is to keep it ragged-right (mb)
 {\small 
-\noindent{}Copyright \textcopyright{} 2024 Richard Grandy, Michael Barkasi, and Joshua Reagan
+\noindent{}Copyright \textcopyright{} 2025 Richard Grandy, Michael Barkasi, and Joshua Reagan
 
 \bigskip
 \noindent{}This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License. 
@@ -604,7 +604,7 @@ unicode,pdfencoding=auto,
 \noindent{}This book is set in Latin Modern (for text and math fonts, released under the GUST Font License) and Adobe Source Sans Pro (for headings, released by Adobe under the OFL). 
 
 \bigskip
-\noindent{}Edition 0.9 (draft), 2024
+\noindent{}Edition 1.0.0, Dec 23, 2025
 }
 %\end{center}
 
@@ -622,24 +622,20 @@ unicode,pdfencoding=auto,
 
 \section*{What is mathematical logic?}
 
-Logic is the study of logical consequence and, by extension, logical truth.
-Logical consequence is a relation between a sentence $\PHI$ and a set of sentences $\Delta$. 
-A common way to define logical consequence, modeled on Aristotle's discussion of syllogisms, is:
-\begin{quote}
-$\PHI$ is a \df{logical consequence} of $\Delta$ if and only if it is not possible for the members of $\Delta$ to be true and $\PHI$ to be false.
-\end{quote}
-Likewise, a sentence $\PHI$ is a logical truth if and only if it cannot possibly be false.
-We can think of logical truth\index{logical!truth} as a special case: a sentence $\PHI$ is a \niidf{logical truth} if and only if it is a logical consequence of the empty set; so, i.e., $\Delta=\emptyset$.
-However, the sense of \mention{possible} at work in this definition needs clarification.  Usually it's thought that a logical consequence holds in virtue of the meaning of \sq{logical} terms and the overall form of the sentences. 
-For example, \mention{Fran is a Wallaby} is a logical consequence of \mention{If Fran was born last year, then Fran is a Wallaby} and \mention{Fran was born last year}.  That's because, in virtue of the meaning of \mention{If $\ldots$ then}, any sentence $\PSI$ must be true whenever both of the sentences \mention{If $\PHI$ then $\PSI$,} and $\PHI$ are true.  Because \mention{meaning} is a notoriously difficult concept to define precisely, we use a formal semantics, giving an exact specification for logical terms. 
+Logic is the study of logical consequence and logical truth.
+Logical consequence is a relation between a set of sentences $\Delta$ (sometimes called \mention{premises}) and a sentence $\PHI$ (sometimes called a \mention{conclusion}) such that $\PHI$ \mention{follows from} $\Delta$.
+For example, \mention{Fran is a Wallaby} is a logical consequence of \mention{If Fran was born last year, then Fran is a Wallaby} and \mention{Fran was born last year}.
+A sentence $\PHI$ is a logical truth if its truth can be known solely in virtue of logic.
+For example, \mention{If Fran was born last year, then Fran was born last year} seems true solely as a matter of logic.
 
+These definitions are insufficiently precise for the needs of the scrupulous philosopher or mathematician.
 In \emph{mathematical} logic\index{mathematical logic} we use mathematical methods to study logical consequence and logical truth. 
-In this textbook in particular, we define abstract, formal languages which have as sentences strings of basic symbols.
-For sentences of these formal languages, we define (i) the relation of entailment and (ii) formal derivation systems. 
-Put roughly, both entailment and formal derivations provide a mathematical approximation of logical consequence.
-The goal of this textbook is to give the reader an introduction to those mathematical methods.  
-Questions about how logical consequence relates to entailment and derivation are largely set aside. 
-
+In this textbook we define abstract, formal languages which have as sentences strings of basic symbols.
+For sentences of these formal languages, we rigorously define (i) the relation of entailment and (ii) formal derivation systems. 
+Both entailment and formal derivations provide a mathematical approximation of logical consequence.
+We also show how logical truth can be defined in terms of logical consequence.
+In rough terms, a logical truth can be understood as a sentence that follows from the empty set of sentences.
+The goal of this textbook is to give the reader an introduction to these mathematical definitions and methods.  
 
 
 \section*{What material is covered here?}
@@ -699,10 +695,10 @@ However, the Aristotelian tradition is beyond the expertise the authors, and so 
 \addcontentsline{toc}{chapter}{Acknowledgments}
 
 \noindent{}This book began as a series of a lecture handouts written for the yearly mathematical logic class in the philosophy department at Rice University. 
-The handouts were primarily written by Prof. Richard Grandy from 2007 to 2011, with both Stan Husi and Jacob Mills (TAs for the class during that time) contributing. 
+The handouts were primarily written by Richard Grandy from 2007 to 2011, with both Stan Husi and Jacob Mills (TAs for the class during that time) contributing. 
 Michael Barkasi began the process of typesetting these handouts in \LaTeX{} for the fall of 2012 (at which time he was the TA).
 By next summer he finished this process, and over the next year he compiled and reorganized the handouts into a draft textbook, adding in material as needed. 
-Joshua Reagan (TA from 2014-17) has been collaborating with Prof. Grandy since that time, significantly revising and adding new material to the text.
+Since then Joshua Reagan (TA from 2014-17) and Richard Grandy have revised the text and added new material.
 
 As with most other textbooks, no theorems are original and their presentation is, for the most part, what you'll find elsewhere. 
 The proofs for all the theorems---along with the actual writing and presentation---have been done from scratch by one or more of the authors; 
@@ -752,7 +748,6 @@ The problems in exercise \mvref{ex:English to GSL Translations 2} comes from How
 \include{ch8}
 \include{ch9}
 \include{AppA}
-\include{AppB}
 
 \clearemptydoublepage
 \addcontentsline{toc}{chapter}{Works Cited}

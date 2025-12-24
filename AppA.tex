@@ -1,381 +1,199 @@
 
-\clearemptydoublepage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter*{Appendix A: List of Theorems}
-\addcontentsline{toc}{chapter}{Appendix A: List of Theorems}
+\chapter*{Appendix A: List of Derivation Rules}
+\addcontentsline{toc}{chapter}{Appendix A: List of Derivation Rules}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\fancyhead[RE,LO]{\textsf{Appendix A: List of Theorems}}
-\chead{\textsf{Appendix A: List of Theorems}}
+%\fancyhead[RE,LO]{\textsf{Appendix A: List of Derivation Rules}}
+\chead{\textsf{Appendix A: List of Derivation Rules}}
 \fancyhead[LE,RO]{\textsf{\thepage}}
 \setcounter{section}{0}
 
-\section*{Sentences}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Number of sentences}.}}
-The number of \GSL{} sentences is equal to the number of natural numbers.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Recur Main Connective}.} Main Connective Theorem:} 
-For\index{main connective!theorem} any non-atomic official \GSL{} sentence $\CAPPHI$ (any sentence with order 2 or greater), either $\CAPPHI$ has no token logical connectives other than negation, or there is one and only one token truth connective (or string of tokens) that's not a negation in $\CAPPHI$ that has one more token of `(' than `)' to the left of it.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Disjunctivie Normal Form Theorem}.} The Disjunctive Normal Form Theorem:}
-Every sentence of \GSL{} is truth functionally equivalent to a \GSL{} sentence which is in \CAPS{dnf}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Truth-functional Expressive Completeness of GSL}.} The Truth-functional Expressive Completeness Theorem:}
-Any truth-functional connective of any fixed number of arguments (ternary, quadernary, etc) is already expressible in \GSL{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{PrenexNFTheorem}.} Prenex Normal Form Theorem:}
-For all sentence $\CAPTHETA$ of \GQL{}, there is a provably equivalent sentence $\CAPTHETA^*$ in prenex normal form; that is, $\CAPTHETA^*$ is in prenex normal form and $\sststile{}{}\triplebar{\CAPTHETA}{\CAPTHETA^*}$ in \GQD{}.
-\end{majorILnc}
-
-\section*{Theorems about Truth, Logical Truth, and Entailment}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GSL compositionality}.}}
-For every interpretation $\IntA$, definition \mvref{True on a GSL interpretation} fixes a unique truth value on $\IntA$ for every sentence $\CAPPHI$ of \GSL{}. %; i.e. whether a sentence is $\True$ on some interpretation $\IntA$ depends only on what $\IntA$ assigns to the atomic sentences in that sentence.
-\end{majorILnc}
-
-%\begin{majorILnc}{\textbf{Theorem \ref{GSL compositionality}$^*$ (on page \pageref{GSL compositionality Star}).}}
-%For any interpretation $\IntA$, the clauses in definition \mvref{True on a GSL interpretation} fix a unique truth value ($\True$ or $\False$), on $\IntA$, for every official \GSL{} sentence.
-%\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{thm:localityoftruth}.}}
-If two interpretations $\IntA$ and $\IntA'$ agree on all of the sentence letters of $\CAPPHI$, then $\CAPPHI$ is $\True$ in $\IntA$ \Iff $\CAPPHI$ is $\True$ in $\IntA'$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{entailmentTFT theorem}.}}
-For all \GSL{} sentences $\CAPTHETA$, $\:\sdtstile{}{}\CAPTHETA$ \Iff $\CAPTHETA$ is \CAPS{tft}.
-\end{majorILnc} 
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Exponentiation of Entailment}.} \GSL{} Exportation Theorem:} 
-For all \GSL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$ \Iff $\:\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Exponentiation of Entailment GQL}.} \GQL{} Exportation Theorem:} 
-For all \GQL{} sentences $\CAPPHI$ and $\CAPTHETA$, $\CAPPHI\sdtstile{}{}\CAPTHETA$ \Iff $\:\sdtstile{}{}\parhorseshoe{\CAPPHI}{\CAPTHETA}$.
-\end{majorILnc}
-
-\noindent{}See also theorem \mvref{expo generalizations}.
-
-\begin{majorILnc}{\textbf{Theorem \mvref{TFE Replacement}.} Truth Functional Equivalence Replacement:}
-If $\CAPPHI$ and $\CAPPHI^*$ are truth functionally equivalent, and $\CAPTHETA^*$ is the result of replacing one occurrence of $\CAPPHI$ by $\CAPPHI^*$ in $\CAPTHETA$, then $\CAPTHETA$ and $\CAPTHETA^*$ are truth functionally equivalent.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{The Assignment Theorem}.}}
-For all sentences $\CAPPHI$ of \GQL{} and interpretations $\IntA$, $\CAPPHI$ is true on $\IntA$ relative to at least one assignment $\As{}{}$ \Iff it's true on $\IntA$ relative to all assignments $\As{}{}$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{The Generalized Assignment Theorem}.}}
-\begin{cenumerate}
-\item For all formulas $\CAPPHI$ of \GQL{} with at most variable $\ALPHA$ free and for all interpretations $\IntA$ and assignments $\As{}{}$, $\CAPPHI$ is true on $\IntA$ relative to the assignment $\As{}{}$ \Iff it's true on $\IntA$ relative to every interpretation $\As{}{}\'$ that matches $\As{}{}$ on $\ALPHA$.
-\item For all formulas $\CAPPHI$ of \GQL{} that have at most variables $\ALPHA_1,\ldots,\ALPHA_{\integer{n}}$ free and for all interpretations $\IntA$ and assignments $\As{}{}$, $\CAPPHI$ is true on $\IntA$ relative to the assignment $\As{}{}$ \Iff it's true on $\IntA$ relative to all assignments $\As{}{}\'$ that match $\As{}{}$ on all of $\ALPHA_1,\ldots,\ALPHA_{\integer{n}}$.
-\end{cenumerate}
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Partial Assignment Corollary}.}}
-If $\ALPHA$ is the only free variable of a formula $\CAPPHI$, then a partial $\ALPHA$-assignment on an interpretation $\IntA$ is sufficient, given definition \mvref{Truth for GQL Formula}, to fix a truth value for $\CAPPHI$ on $\IntA$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQL Truth Corollary}.}} For all \GQL{} sentences $\CAPPHI,\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}},\CAPPSI$ and for all interpretations $\IntA$,
-\begin{cenumerate}
-\item $\parhorseshoe{\CAPPHI}{\CAPPSI}$ is true in $\IntA$ iff: if $\CAPPHI$ is true in $\IntA$, then $\CAPPSI$ is true in $\IntA$.
-\item $\partriplebar{\CAPPHI}{\CAPPSI}$ is true in $\IntA$ iff: $\CAPPHI$ is true in $\IntA$ \Iff $\CAPPSI$ is true in $\IntA$.
-\item $\parconjunction{\CAPPHI_1}{\conjunction{\CAPPHI_2}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ is true in $\IntA$ \Iff all of the conjuncts $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}$ are true in $\IntA$.
-\item $\pardisjunction{\CAPPHI_1}{\disjunction{\CAPPHI_2}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ is true in $\IntA$ \Iff at least one disjunct $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}$ is true in $\IntA$.
-\item $\negation{\CAPPHI}$ is true in $\IntA$ \Iff $\CAPPHI$ is not true in $\IntA$.
-\end{cenumerate}
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Quantifier Corollary}.}} For all \GQL{} formulas $\CAPPHI$ that at most have $\ALPHA$ free and for all interpretations $\IntA$,
-\begin{cenumerate}
-\item $\universal{\ALPHA}\CAPPHI$ is true in $\IntA$ \Iff one of the following two equivalent conditions holds:
-\begin{enumerate}
-\item $\CAPPHI$ is true in $\IntA$ on every partial $\ALPHA$-assignment $\As{}{}$.
-\item there is no partial $\ALPHA$-assignment $\As{}{}$ on which $\CAPPHI$ is false in $\IntA$.
-\end{enumerate} 
-\item $\existential{\ALPHA}\CAPPHI$ is true in $\IntA$ \Iff there is at least one partial $\ALPHA$-assignment $\As{}{}$ on which $\CAPPHI$ is true.
-\end{cenumerate}
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Quantifier Corollary B}.}}
-For all \GQL{} formulas $\CAPPHI$ that at most have $\ALPHA_1,\ldots,\ALPHA_{\integer{n}}$ free and for all interpretations $\IntA$, 
-\begin{cenumerate}
-\item $\universal{\ALPHA_1}\ldots\universal{\ALPHA_{\integer{n}}}\CAPPHI$ is true in $\IntA$ \Iff one of the following two equivalent conditions holds:
-\begin{enumerate}
-\item $\CAPPHI$ is true in $\IntA$ on every partial $(\ALPHA_1,\ldots,\ALPHA_{\integer{n}})$-assignment $\As{}{}$.
-\item there is no partial $(\ALPHA_1,\ldots,\ALPHA_{\integer{n}})$-assignment $\As{}{}$ on which $\CAPPHI$ is false in $\IntA$.
-\end{enumerate}
-\item $\existential{\ALPHA_1}\ldots\existential{\ALPHA_{\integer{n}}}\CAPPHI$ is true in $\IntA$ \Iff there's at least one partial $(\ALPHA_1,\ldots,\ALPHA_{\integer{n}})$-assignment $\As{}{}$ on which $\CAPPHI$ is true.
-\end{cenumerate}
-\end{majorILnc}
-
-
-\begin{majorILnc}{\textbf{Theorem \mvref{The Dragnet Theorem}.} The Dragnet Theorem:}
-If 
-\begin{cenumerate}
-\item $\CAPPHI$ contains no occurrences, whether bound or unbound, of term $\variable{s}$, and $\CAPPHI^*=\CAPPHI\variable{s}/\variable{t}$, and
-\item $\As{}{}$ and $\As{*}{}$ are variable assignments with respect to interpretation $\IntA$ and $\IntA^*$ that differ only in that what $\As{}{}$ assigns to $\variable{t}$, $\As{*}{}$ assigns to $\variable{s}$,
-\end{cenumerate} 
-then: $\As{}{}$ makes $\CAPPHI$ true on $\IntA$ iff $\As{*}{}$ makes $\CAPPHI^*$ true on $\IntA^*$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Monotonicity of Entailment}.} Monotonicity of Entailment:}
-For all \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}},\CAPTHETA,\CAPPSI$:
-\begin{center}
-If $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI$, then $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}},\CAPTHETA\sdtstile{}{}\CAPPSI$
-\end{center}
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Transitivity of Entailment}.} Transitivity of Entailment:}
-For all \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{n}}$, $\CAPTHETA$, and $\CAPPSI_1,\ldots,\CAPPSI_{\integer{k}}$:
-\begin{center}
-\begin{tabular}{ l@{\hspace{.25em}}l@{\hspace{.25em}}l }
-If & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI_1$ & and \\
-   & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI_2$ & and \\
-   & \hspace{.5in} $\vdots$ &  \\
-   & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPPSI_{\integer{k}}$ & and \\
-   & $\CAPPSI_1,\CAPPSI_2,\ldots,\CAPPSI_{\integer{k}}\sdtstile{}{}\CAPTHETA$ & then: \\
-   & & $\CAPPHI_1,\CAPPHI_2,\ldots,\CAPPHI_{\integer{n}}\sdtstile{}{}\CAPTHETA$   \\
+\begin{tabular}{ l l }
+\multicolumn{2}{l}{\textbf{Derivation Systems:}}\\
+\GSD{}& Set 1\\
+\GSDP{}& Sets 1,2,3\\
+\GQD{}& Sets 1,4\\
+\GQDP{}& Sets 1,2,3,4,5\\
+\GQDPP{}& Sets 1,2,3,4,5,6,7,8\\
+\SF{}& Sets 1,9\\
+\SFP{}& Sets 1,2,3,9,10\\
+\GQDI{}& Sets 1,4,11\\
+\GQDIP{}& Sets 1,2,3,4,5,11\\
 \end{tabular}
-\end{center}
-\end{majorILnc}
 
-\section*{Derivations}
+%\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.5}
+%\begin{center}
+\begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\endfirsthead
+%\multicolumn{3}{c}{\emph{Continued from Previous Page}}\\
+\toprule
+\textbf{Name} & \textbf{Given} & \textbf{May Add} \\ 
+\midrule
+\endhead
+%\bottomrule
+%\caption{Basic Rules of \GSD{}}\\[-.15in]
+%\multicolumn{3}{c}{\emph{Continued next Page}}\\
+\endfoot
+\bottomrule
+%\caption{Basic Rules of \GSD{}}\\%
+\endlastfoot%
+%\label{GSD}%
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 1: Basic Rules of GSD, table \mvref{GSD}}}\\
+%\midrule
+\Rule{Ass.} & & | $\CAPPHI$ \\
+\Rule{Rep.} & $\CAPPHI$ & $\CAPPHI$ \\
+\Rule{$\HORSESHOE$-Elim} & $\horseshoe{\CAPTHETA}{\CAPPSI}$, $\CAPTHETA$ & $\CAPPSI$ \\
+\Rule{$\HORSESHOE$-Intro} &  | $\CAPTHETA\Rightarrow\CAPPSI$ & $\horseshoe{\CAPTHETA}{\CAPPSI}$, Box $|\CAPTHETA\Rightarrow\CAPPSI$ \\
+\Rule{$\!\WEDGE\!$-Elim} &{}$\conjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$&{}Conjunction of any proper\\[-.25cm]
+ & &{}subset of the conjuncts\\
+\Rule{$\!\WEDGE\!$-Intro} & $\CAPTHETA_1$, $\CAPTHETA_2$, $\ldots$ $\CAPTHETA_{\integer{n}}$ & $\conjunction{\CAPTHETA_1}{\conjunction{\CAPTHETA_2}{\conjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$ \\
+\Rule{$\VEE$-Elim} & $\disjunction{\CAPTHETA_1}{\disjunction{\CAPTHETA_2}{\disjunction{\ldots}{\CAPTHETA_{\integer{n}}}}}$, &  \\
+ &  $\horseshoe{\CAPTHETA_1}{\CAPPSI}$,  &  \\
+ &  $\horseshoe{\CAPTHETA_2}{\CAPPSI}$,  &  \\
+ &  $\vdots$  &  \\
+ &  $\horseshoe{\CAPTHETA_{\integer{n}}}{\CAPPSI}$ & $\CAPPSI$ \\
+\Rule{$\VEE$-Intro} & $\CAPTHETA$ & $\disjunction{\CAPPSI_1}{\disjunction{\CAPPSI_2}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}$, \\[-.25cm]
+\nopagebreak
+ &  & where $\CAPTHETA=\CAPPSI_i$ for some $i$. \\
+\Rule{$\NEGATION$-Intro} & $\horseshoe{\CAPTHETA}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$ & $\negation{\CAPTHETA}$ \\
+\Rule{$\NEGATION$-Elim} & $\horseshoe{\negation{\CAPTHETA}}{\parconjunction{\CAPPSI}{\negation{\CAPPSI}}}$ & $\CAPTHETA$ \\
+\Rule{$\TRIPLEBAR$-Intro} & $\horseshoe{\CAPTHETA}{\CAPPSI}$, $\horseshoe{\CAPPSI}{\CAPTHETA}$ & $\triplebar{\CAPTHETA}{\CAPPSI}$ \\
+\Rule{$\TRIPLEBAR$-Elim} & $\triplebar{\CAPTHETA}{\CAPPSI}$, $\CAPPSI$ & $\CAPTHETA$ \\
+\Rule{$\TRIPLEBAR$-Elim} & $\triplebar{\CAPTHETA}{\CAPPSI}$, $\CAPTHETA$ & $\CAPPSI$ \\
+%\bottomrule
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 2: Standard Shortcut Rules of GSD, table \mvref{GSDplus1}}}\\
+\nopagebreak
+%\midrule
+\Rule{M.T.} & $\horseshoe{\CAPPHI}{\CAPTHETA}$, $\negation{\CAPTHETA}$ & $\negation{\CAPPHI}$ \\
+\Rule{D.S.} & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_i}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, $\negation{\CAPPHI_i}$ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{i-1}}{\disjunction{\CAPPHI_{i+1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+\nopagebreak
+ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\negation{\CAPPHI_i}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{i-1}}{\disjunction{\CAPPHI_{i+1}}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+\Rule{A.C.} & ${\CAPPHI},{\negation{\CAPPHI}}$ & $\CAPPSI$ \\
+\Rule{$\NEGATION$/$\TRIPLEBAR$-Intro} & $\triplebar{\CAPPHI}{\CAPPSI}$ & $\triplebar{\negation{\CAPPHI}}{\negation{\CAPPSI}}$ \\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 3: Exchange Shortcut Rules of GSD, table \mvref{GSDplus2}}}\\
+\nopagebreak
+%\midrule
+\Rule{DeM} & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ & $\disjunction{\negation{\CAPPHI_1}}{\disjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$\\
+ & $\disjunction{\negation{\CAPPHI_1}}{\disjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$\\
+ & $\negation{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ & $\conjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$ \\
+ & $\conjunction{\negation{\CAPPHI_1}}{\conjunction{\ldots}{\negation{\CAPPHI_{\integer{n}}}}}$ & $\negation{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ \\
+\Rule{$\NEGATION\NEGATION$-Elim} & $\negation{\negation{\CAPPHI}}$ & $\CAPPHI$ \\
+\Rule{$\NEGATION\NEGATION$-Intro} & $\CAPPHI$ & $\negation{\negation{\CAPPHI}}$ \\
+\Rule{$\HORSESHOE$/$\VEE$-Exchange} & $\horseshoe{\CAPPHI}{\CAPTHETA}$ & $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ \\
+\nopagebreak
+ & $\disjunction{\negation{\CAPPHI}}{\CAPTHETA}$ & $\horseshoe{\CAPPHI}{\CAPTHETA}$  \\
+\Rule{Contraposition} & $\horseshoe{\CAPPHI}{\CAPTHETA}$ & $\horseshoe{\negation{\CAPTHETA}}{\negation{\CAPPHI}}$ \\
+ & $\horseshoe{\negation{\CAPTHETA}}{\negation{\CAPPHI}}$ & $\horseshoe{\CAPPHI}{\CAPTHETA}$ \\
+\Rule{$\NEGATION$/$\HORSESHOE$-Exchange} & $\negation{\parhorseshoe{\CAPPHI}{\CAPTHETA}}$ & $\conjunction{\CAPPHI}{\negation{\CAPTHETA}}$ \\
+\nopagebreak
+ & $\conjunction{\CAPPHI}{\negation{\CAPTHETA}}$ & $\negation{\parhorseshoe{\CAPPHI}{\CAPTHETA}}$ \\
+\Rule{Distribution} & $\conjunction{\CAPTHETA}{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ & $\disjunction{\parconjunction{\CAPTHETA}{\CAPPHI_1}}{\disjunction{\ldots}{\parconjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$\\
+\nopagebreak
+ & $\disjunction{\parconjunction{\CAPTHETA}{\CAPPHI_1}}{\disjunction{\ldots}{\parconjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$ & $\conjunction{\CAPTHETA}{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$\\
+\nopagebreak 
+ & $\conjunction{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$ & $\disjunction{\parconjunction{\CAPPHI_1}{\CAPTHETA}}{\disjunction{\ldots}{\parconjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$\\
+\nopagebreak 
+ & $\disjunction{\parconjunction{\CAPPHI_1}{\CAPTHETA}}{\disjunction{\ldots}{\parconjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$  & $\conjunction{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$\\
+\nopagebreak 
+ & $\disjunction{\CAPTHETA}{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$ & $\conjunction{\pardisjunction{\CAPTHETA}{\CAPPHI_1}}{\conjunction{\ldots}{\pardisjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$\\
+\nopagebreak 
+ & $\conjunction{\pardisjunction{\CAPTHETA}{\CAPPHI_1}}{\conjunction{\ldots}{\pardisjunction{\CAPTHETA}{\CAPPHI_{\integer{n}}}}}$ & $\disjunction{\CAPTHETA}{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}$\\
+\nopagebreak 
+ & $\disjunction{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$ & $\conjunction{\pardisjunction{\CAPPHI_1}{\CAPTHETA}}{\conjunction{\ldots}{\pardisjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$\\
+\nopagebreak
+ & $\conjunction{\pardisjunction{\CAPPHI_1}{\CAPTHETA}}{\conjunction{\ldots}{\pardisjunction{\CAPPHI_{\integer{n}}}{\CAPTHETA}}}$ & $\disjunction{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}{\CAPTHETA}$\\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 4: Basic Rules of GQD, table \mvref{GQD}}}\\
+\nopagebreak
+%\midrule
+\Rule{$\forall$-Elim} & $\universal{\BETA}\CAPPHI$ & $\CAPPHI\constant{a}/\BETA$, for \mention{a} any  \\[-.25cm]
+\nopagebreak
+ &   &   individual constant \\
+\Rule{$\forall$-Intro} & $\CAPPHI\constant{a}/\BETA$ & $\universal{\BETA}\CAPPHI$, iff \mention{a} does  \\[-.25cm]
+ &  &  not occur in $\CAPPHI$  \\[-.25cm]
+ &  & nor in any unboxed assumption \\
+\Rule{$\exists$-Intro} & $\CAPPHI\constant{a}/\BETA$ & $\existential{\BETA}\CAPPHI$ \\
+\Rule{$\exists$-Elim} & $\existential{\BETA}\CAPPHI$, $\horseshoe{\CAPPHI{\constant{a}/\BETA}}{\CAPTHETA}$ & $\CAPTHETA$, \Iff \mention{a} does \\[-.25cm]
+\nopagebreak
+ &  &  not occur in $\CAPPHI$ or $\CAPTHETA$, \\[-.25cm]
+\nopagebreak
+ & &  nor in any unboxed assumption\\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 5: Exchange Shortcut Rules of GQD, table \mvref{GQDplus}}}\\
+\nopagebreak
+%\midrule
+\Rule{QN} & $\negation{\universal{\BETA}{\CAPPHI}}$ & $\existential{\BETA}\negation{{\CAPPHI}}$ \\
+ & $\existential{\BETA}\negation{{\CAPPHI}}$ & $\negation{\universal{\BETA}{\CAPPHI}}$  \\
+ & $\negation{\existential{\BETA}{\CAPPHI}}$ & $\universal{\BETA}\negation{{\CAPPHI}}$ \\
+ &  $\universal{\BETA}\negation{{\CAPPHI}}$ & $\negation{\existential{\BETA}{\CAPPHI}}$ \\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 6: DNF Exchange Shortcut Rules for GSD, table \mvref{GSDplusDNF}}}\\
+\nopagebreak
+%\midrule
+\Rule{$\TRIPLEBAR$-Exchange} &  $\triplebar{\CAPTHETA}{\CAPPSI}$ & $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}$ \\
+\nopagebreak
+ & $\disjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}$ &  $\triplebar{\CAPTHETA}{\CAPPSI}$ \\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 7: Prenex Exchange Shortcut Rules for GQD, table \mvref{GSDplusPrenex}}}\\
+\nopagebreak
+%\midrule
+\Rule{$\ALPHA$/$\BETA$-Exch} & $(\#\ALPHA)\CAPPHI$ & $(\#\BETA)\CAPPHI\BETA/\ALPHA$ \\
+\Rule{Q Shuffling} & $\parconjunction{(\#\variable{x})\CAPTHETA}{\CAPPSI}$ & $(\#\variable{x})\parconjunction{\CAPTHETA}{\CAPPSI}$ \\
+& $\parconjunction{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\parconjunction{\CAPTHETA}{\CAPPSI}$ \\
 
-\begin{majorILnc}{\textbf{Theorem \mvref{Soundess of Basic GSD Rules}.}}
-Every application of every basic rule of GSD is truth-preserving, or sound.
-\end{majorILnc}
+& $\pardisjunction{(\#\variable{x})\CAPTHETA}{\CAPPSI}$ & $(\#\variable{x})\pardisjunction{\CAPTHETA}{\CAPPSI}$ \\
+& $\pardisjunction{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\pardisjunction{\CAPTHETA}{\CAPPSI}$ \\
 
-\begin{majorILnc}{\textbf{Theorem \mvref{Soundness of Std Shortcut Applications}.}}
-Every application of every shortcut rule from \GSDP{}, including both standard and exchange shortcut rules, is truth-preserving.
-\end{majorILnc}
+& $\parhorseshoe{\CAPTHETA}{(\#\variable{x})\CAPPSI}$ & $(\#\variable{x})\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
 
-\begin{majorILnc}{\textbf{Theorem \mvref{ExchangeRuleGSDSoundness}.}}
-Every application of every exchange shortcut rule from \GSDP{} is truth-preserving, even if we extend the notion of sanctioning for them with definition \ref{ExchangeRuleSanctioning}. 
-\end{majorILnc} 
+& $\parhorseshoe{\existential{\variable{x}}\CAPTHETA}{\CAPPSI}$ & $\universal{\variable{x}}\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+& $\parhorseshoe{\universal{\variable{x}}\CAPTHETA}{\CAPPSI}$ & $\existential{\variable{x}}\parhorseshoe{\CAPTHETA}{\CAPPSI}$ \\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 8: The Method Shortcut Rules for GQD, table \mvref{GSDplusMethod}}}\\
+\nopagebreak
+%\midrule
+\Rule{Greg's Rule} & $\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$, where some & $\disjunction{\CAPPSI_1}{\disjunction{\ldots}{\disjunction{\CAPPSI_{\integer{i}-1}}{\disjunction{\CAPPSI_{\integer{i}+1}}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}}$ \\[-.25cm]
+ & $\CAPPSI_{\integer{i}}=\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_{\integer{j}}}{\ldots}}}$ & \\[-.25cm]
+ & $\WEDGE\conjunction{\negation{\CAPPHI_{\integer{j}}}}{\conjunction{\ldots}{\CAPPHI_{\integer{m}}}}$ & \\
+ 
+\Rule{$\VEE$/$\WEDGE\!$-Elim} & $\disjunction{\CAPPSI_{1}}{\disjunction{\ldots}{\CAPPSI_{\integer{n}}}}$, where & $\CAPPHI$ \\[-.25cm]
+ & each $\CAPPSI_{\integer{i}}$ contains $\CAPPHI$ & \\
+ 
+\Rule{OBA} &  $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_i}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, $\negation{\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_i}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+\nopagebreak
+ & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 9: Basic Rules for S5, table \mvref{SF}}}\\
+\nopagebreak
+%\midrule
+\Rule{$\BOX\!$-Elim} & $\BOX\CAPPHI$ & $\CAPPHI$ \\
+\Rule{$\BOX\!$-Intro} & $\CAPPHI$ (*) & $\BOX\CAPPHI$ \\
+\Rule{$\DIAMOND\!$-Elim} & $\DIAMOND\CAPPHI$, $\horseshoe{\CAPPHI}{\CAPPSI}$ (*), (**) & $\CAPPSI$ \\
+\Rule{$\DIAMOND\!$-Intro} &  $\CAPPHI$ & $\DIAMOND\CAPPHI$ \\
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 10: Modal Negation Exchange Shortcut Rules for S5, table \mvref{SFMN}}}\\
+\nopagebreak
+%\midrule
+\Rule{MN} & $\negation{\BOX\CAPPHI}$ & $\DIAMOND\negation{\CAPPHI}$ \\
+ & $\negation{\DIAMOND\CAPPHI}$ & $\BOX\negation{\CAPPHI}$ \\
+ & $\negation{\DIAMOND\negation{\CAPPHI}}$ & $\BOX\CAPPHI$ \\
+ &  $\negation{\BOX\negation{\CAPPHI}}$ & $\DIAMOND\CAPPHI$ \\ 
+%\midrule
+\multicolumn{3}{l}{\textbf{Set 11: Basic Rules for GQDI, \mvref{GQDI}}}\\
+\nopagebreak
+%\midrule
+\Rule{$=$-Intro} &  & $\variable{t}=\variable{t}$ \\
+\Rule{$=$-Elim} & $\CAPPHI$, $\variable{t}=\variable{s}$ & $\CAPPHI\variable{t}/\variable{s}$ \\
+\end{longtable}
+\noindent{}(*) in \Rule{$\BOX\!$-Intro} and \Rule{$\DIAMOND\!$-Elim}, the rule can only be applied if all the open assumptions have modal prefixes.
 
-\begin{majorILnc}{\textbf{Theorem \mvref{GSD Shortcut Theorem}.}}
-For all \GSL{} sentences $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{n}},\DELTA$ and rules \Rule{R$_1$}$,\ldots,$\Rule{R$_\integer{p}$}, if
-\begin{cenumerate}
-\item $\DELTA$ can be derived from $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{n}}$ using rules \Rule{R$_1$}$,\ldots,$\Rule{R$_\integer{p}$} and the basic rules of \GSD{}, and
-\item every application of a rule \Rule{R$_1$} is derivable using the rules \Rule{R$_2$}, $\ldots$, \Rule{R$_\integer{p}$} and the basic rules of \GSD{},
-\end{cenumerate}
-then $\DELTA$ can be derived from $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{n}}$ using only rules \Rule{R$_2$}$,\ldots,$\Rule{R$_\integer{p}$} and the basic rules of \GSD{}.
-%Any sentence $\CAPPHI$ that can be derived from the sentences $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ using the basic rules plus some of the shortcut rules in tables \ref{GSDplus1} and \ref{GSDplus2} can be derived from $\CAPPSI_1,\ldots,\CAPPSI_{\integer{n}}$ using the basic rules alone. 
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQD Shortcut Theorem}.}}
-For all \GQL{} sentences $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{n}},\DELTA$ and rules \Rule{R$_1$}$,\ldots,$\Rule{R$_\integer{p}$}, if
-\begin{cenumerate}
-\item $\DELTA$ can be derived from $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{n}}$ using rules \Rule{R$_1$}$,\ldots,$\Rule{R$_\integer{p}$} and the basic rules of \GSD{}, and
-\item every application of a rule \Rule{R$_1$} is derivable using the rules \Rule{R$_2$}, $\ldots$, \Rule{R$_\integer{p}$} and the basic rules of \GQD{},
-\end{cenumerate}
-then $\DELTA$ can be derived from $\CAPTHETA_1,\ldots,\CAPTHETA_{\integer{n}}$ using only rules \Rule{R$_2$}$,\ldots,$\Rule{R$_\integer{p}$} and the basic rules of \GQD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GSD Shortcut Theorem2}.}}
-For all standard and exchange shortcut rules \Rule{R} (see tables \ref{GSDplus1} and \ref{GSDplus2}), every application of \Rule{R} is derivable using the basic rules of \GSD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQD Shortcut Theorem2}.}}
-For all standard and exchange shortcut rules \Rule{R} (see tables \ref{GSDplus1}, \ref{GSDplus2}, and \ref{GQDplus}), every application of \Rule{R} is derivable using the basic rules of \GQD{} (see tables \ref{GSD} and \ref{GQD}).
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GSD Shortcut Theorem3}.} Shortcut Rule Elimination Theorem:}
-For all \GSL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ and $\CAPPSI$, if $\CAPPSI$ can be derived from $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ in \GSDP{} (that is, using the basic rules of \GSD{} and any of the standard and exchange shortcut rules), then $\CAPPSI$ can be derived from $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ in \GSD{} (that is, using only the basic rules).
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQD Shortcut Theorem3}.} Shortcut Rule Elimination Theorem for \GQDP{}:}
-For all \GQL{} sentences $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ and $\CAPPSI$, if $\CAPPSI$ can be derived from $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ in \GQDP{}, then $\CAPPSI$ can be derived from $\CAPPHI_1,\ldots,\CAPPHI_{\integer{m}}$ in \GQD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{ExchangeRuleGSDSoundnessLemma}.}}
-For all exchange shortcut rules \Rule{R} from \GSDP{}, if $\CAPPHI$ and $\CAPPHI^*$ are the sentences you get after substituting \GSL{} sentences into the given and may-add schemas of \Rule{R}, respectively, then $\CAPPHI$ and $\CAPPHI^*$ are truth functionally equivalent. 
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{ExchangeRuleTheorem}.} Restricted Replacement Theorem for \GSD{}:}
-For all sentences $\CAPPSI$ of \GSL{}: if
-\begin{cenumerate}
-\item $\CAPPHI$ and $\CAPPHI^*$ are \GSL{} sentences such that $\CAPPHI\sststile{}{}\CAPPHI^*$ and $\CAPPHI^*\sststile{}{}\CAPPHI$, and
-\item if $\CAPPHI$ is a subsentence of $\CAPPSI$, then $\CAPPSI^*$ is the \GSL{} sentence you get when you replace one instance (token) of $\CAPPHI$ with an instance (token) of $\CAPPHI^*$, and $\CAPPSI^*$ is $\CAPPSI$ if not, 
-\end{cenumerate}
-then $\CAPPSI^*$ can be derived from $\CAPPSI$ using only the basic rules of \GSD{}, i.e. $\CAPPSI\sststile{}{}\CAPPSI^*$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQD Replacement Theorem}.} The Replacement Theorem for \GQD{}:}
-If $\CAPPHI$ and $\CAPPHI^*$ are provably equivalent formulas of \GQL{}, and $\CAPTHETA$ and $\CAPTHETA^*$ differ only in that $\CAPTHETA$ contains the subformula $\CAPPHI$ in one place where $\CAPTHETA^*$ contains the subformula $\CAPPHI^*$, then $\CAPTHETA$ and $\CAPTHETA^*$ are provably equivalent.
-\end{majorILnc}
-
-\noindent{}Recall that we used the One-step Replacement Lemmas (theorem \ref{OneStepReplacementLemmas}) to prove this.
-
-%\begin{majorILnc}{\textbf{Theorem \ref{OneStepReplacementLemmas}.} One-step Replacement Lemmas:}
-%If $\sststile{}{}\forall\partriplebar{\CAPPHI}{\CAPPHI^*}$, then:
-%\begin{cenumerate}
-%\item $\sststile{}{}\forall\partriplebar{\negation{\CAPPHI}}{\negation{\CAPPHI^*}}$
-%\item\label{exampleonesteplemma}
-%$\sststile{}{}\forall\partriplebar{\parconjunction{\CAPPHI}{\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{p}}}}}}{\parconjunction{\CAPPHI^*}{\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_{\integer{p}}}}}}$
-%\item[] \hspace{1in} $\vdots$
-%\item $\sststile{}{}\forall\partriplebar{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_{\integer{p}}}{\CAPPHI}}}}{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_{\integer{p}}}{\CAPPHI^*}}}}$
-%\item 
-%$\sststile{}{}\forall\partriplebar{\pardisjunction{\CAPPHI}{\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{p}}}}}}{\pardisjunction{\CAPPHI^*}{\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_{\integer{p}}}}}}$
-%\item[] \hspace{1in} $\vdots$
-%\item $\sststile{}{}\forall\partriplebar{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{\integer{p}}}{\CAPPHI}}}}{\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_{\integer{p}}}{\CAPPHI^*}}}}$
-%\item $\sststile{}{}\forall\bpartriplebar{\parhorseshoe{\CAPPHI}{\CAPPSI}}{\parhorseshoe{\CAPPHI^*}{\CAPPSI}}$
-%\item $\sststile{}{}\forall\bpartriplebar{\parhorseshoe{\CAPPSI}{\CAPPHI}}{\parhorseshoe{\CAPPSI}{\CAPPHI^*}}$
-%\item $\sststile{}{}\forall\bpartriplebar{\partriplebar{\CAPPHI}{\CAPPSI}}{\partriplebar{\CAPPHI^*}{\CAPPSI}}$
-%\item $\sststile{}{}\forall\bpartriplebar{\partriplebar{\CAPPSI}{\CAPPHI}}{\partriplebar{\CAPPSI}{\CAPPHI^*}}$
-%\end{cenumerate}
-%And, if $\sststile{}{}\forall\universal{\BETA}\bpartriplebar{\CAPPHI}{\CAPPHI^*}$, then:
-%\begin{enumerate}[label=(\arabic*), leftmargin=1.85\parindent,
-%labelindent=.35\parindent, labelsep=*, itemsep=0pt, start=10]%
-%\item $\sststile{}{}\forall\bpartriplebar{\universal{\BETA}\CAPPHI}{\universal{\BETA}\CAPPHI^*}$
-%\item $\sststile{}{}\forall\bpartriplebar{\existential{\BETA}\CAPPHI}{\existential{\BETA}\CAPPHI^*}$
-%\end{enumerate}
-%\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Non-decreasing Assumption Principle}.} Non-decreasing Assumption Principle (NDAP):}
-If $\Delta_1$ is the set of assumptions of an unboxed line and $\Delta_2$ is the set of assumptions of a later unboxed line, then $\Delta_1$ is a subset of $\Delta_2$, i.e., $\Delta_1\subseteq\Delta_2$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQD NDF Rule}.}}
-Any two \GQL{} formulas got by substituting other \GQL{} formulas into the may-add and given schemas of \Rule{$\TRIPLEBAR$-Exchange} are provably equivalent; that is, $\sststile{}{}\forall\bpartriplebar{\partriplebar{\CAPTHETA}{\CAPPSI}}{\pardisjunction{\parconjunction{\CAPTHETA}{\CAPPSI}}{\parconjunction{\negation{\CAPTHETA}}{\negation{\CAPPSI}}}}$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQD NDF Rule2}.}}
-For all Prenex Exchange Rules \Rule{R}, any two \GQL{} formulas got by substituting other \GQL{} formulas into the may-add and given schemas of \Rule{R} are provably equivalent.
-\end{majorILnc}
-
-\section*{Soundness and Completeness}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{RegWeakCompletenessEquiv}.}}
-\GSD{} is weakly complete \Iff it's complete; and likewise for \GQD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Soundness of Sentential Logic}.} \GSD{} Soundness Theorem:}
-\GSD{} is sound; i.e., for every set $\Delta$ of sentences of \GSL{} and every sentence $\CAPPHI$ of \GSL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Main GSL Soundness Lemma}.} Soundness Lemma:}
-For any sequence of derivation lines that is a derivation, the sentence $\CAPPHI$ on the last line is entailed by the set $\Delta$ of sentences that are on unboxed lines and are sanctioned by \Rule{Assume}. 
-\end{majorILnc}
-
-\noindent{}Recall that we used theorems \ref{Monotonicity of Entailment}, \ref{Transitivity of Entailment}, and \ref{Non-decreasing Assumption Principle} to prove the Soundness Lemma.
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Soundness of Quantifier Logic}.} \GQD{} Soundness Theorem:}
-\GQD{} is sound; i.e., for every set $\Delta$ of sentences of \GQL{} and every sentence $\CAPPHI$ of \GQL{}, if $\Delta\sststile{}{}\CAPPHI$ in \GSD{}, then $\Delta\sdtstile{}{}\CAPPHI$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GSDCompletenessLemma}.} The \GSD{} Weak Completeness Lemma:}
-For\index{completeness!weak \GSD{}} any sentence $\CAPPHI$ of \GSD{}, either $\CAPPHI\sststile{}{}\conjunction{\Al}{\negation{\Al}}$, or $\CAPPHI$ is true in some interpretation $\IntA$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GSDWCompleteness}.} Weak \GSD{} Completeness Theorem:}
-For all \GSL{} sentences $\CAPPHI$: if $\sdtstile{}{}\CAPPHI$, then $\sststile{}{}\CAPPHI$ in \GSD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GSDCompleteness}.} \GSD{} Completeness Theorem:}
-For every finite set $\Delta$ of sentences of \GSL{} and every sentence $\CAPPHI$ of \GSL{}, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$ in \GSD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Derivational Lemma}.} Derivational Lemma:}
-If the Method starts with $\negation{\CAPTHETA}$ and produces a contradiction, then there is a derivation of $\CAPTHETA$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{DerivationalLemmaS}.} Strong Derivational Lemma:}
-If the strong method halts in a contradiction, then $\Delta\sststile{}{}\CAPPHI$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MethodLemmaA}.} The Method Lemma 1:}
-The matrix model $\IntA_M$ makes true all sentences on the master matrix list $M$ generated by the method when it doesn't halt in contradiction.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MethodSLemmaA}.} The Strong Method Lemma 1:}
-The matrix model $\IntA_M$ makes true all sentences on the master matrix list $M$ generated by the strong method when it doesn't halt in contradiction.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MethodLemmaB}.} The Method Lemma 2:}
-All matrix instances in the derivation generated by the method are true in the matrix model $\IntA_M$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MethodSLemmaB}.} The Strong Method Lemma 2:}
-All matrix instances in the derivation generated by the strong method are true in the matrix model $\IntA_M$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MethodLemmaC}.} The Method Lemma 3:}
-All quantified sentences in the derivation generated by the method are true in the matrix model $\IntA_M$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MethodSLemmaC}.} The Strong Method Lemma 3:}
-All quantified sentences in the derivation generated by the strong method are true in the matrix model $\IntA_M$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MainGQDWCompletenessLemma}.} Main Weak \GQD{} Completeness Lemma:}
-For all sentences $\CAPTHETA$ of \GQL{}, if the method is applied to $\negation{\CAPTHETA}$ then either: (a) the method produces a derivation of $\CAPTHETA$ in \GQDP{}, or (b) an interpretation $\IntA$ can be read off which makes $\CAPTHETA$ false.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MainGQDSCompletenessLemma}.} Main Strong \GQD{} Completeness Lemma:}
-For all sets of sentences $\Delta$ of sentences of \GQL{} and \GQL{} sentences $\CAPPHI$, if the strong method is applied to $\Delta^*=\Delta\cup\{\negation{\CAPPHI}\}$ then either: (a) the strong method produces a derivation of $\CAPPHI$ from $\Delta$ in \GQDP{}, or (b) an interpretation $\IntA$ can be read off which makes every sentence in $\Delta$ true and $\CAPPHI$ false.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQDWeakCompletenessTheorem}.} Weak \GQD{} Completeness Theorem:}
-For all sentences $\CAPTHETA$ of \GQL{}, if $\sdtstile{}{}\CAPTHETA$, then $\sststile{}{}\CAPTHETA$ in \GQD{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQDCompletenessTheorem}.} \GQD{} Completeness Theorem:}
-For all finite sets $\Delta$ of \GQL{} sentences and \GQL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQDStrongCompletenessTheorem}.} Strong \GQD{} Completeness Theorem:}
-For any set $\Delta$ of \GSL{} sentences and any \GSL{} sentence $\CAPPHI$, if $\Delta\sdtstile{}{}\CAPPHI$, then $\Delta\sststile{}{}\CAPPHI$.
-\end{majorILnc}
-
-\section*{Decidability, Compactness, and L\"owenheim-Skolem}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{ChurchsTheorem}.} Church's Theorem:}
-If \Language{L} is a sublanguage of \GQL{} with at least one 2-place predicate symbol, then there is no decision procedure for the set of logical truths of \Language{L}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MonadicGQLEquivTheorem}.} Monadic \GQL{} Equivalence Theorem:}
-Every sentence of monadic \GQL{} is quantificationally equivalent to a sentence whose quantifiers are independent.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MonadicDecisionTheorem}.} The Monadic Decision Theorem:}
-The\index{Monadic Decision Theorem, The} modified method just described provides a decision procedure for quantificational truth in monadic \GQL{}.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{LowenheimSkolemTheorem}.} The Downward L\"owenheim-Skolem Theorem:}
-If a sentence of \GQL{} is true in any interpretation, then it is true in one whose domain consists of all of some of the natural numbers.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{MonadicIntSizeTheorem}.}}
-If $\CAPPHI$ is a sentence of monadic \GQL{} and has an interpretation, then it has a finite interpretation.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{Thm:CompactnessTheorem}.} The Compactness Theorem for \GQL{}:}
-For all sets of sentences $\Delta$ of \GQL{}, if for every finite subset $\Delta'$ of $\Delta$ there exists an interpretation $\IntA'$ that makes all the sentences in $\Delta'$ true, then there's some interpretation $\IntA$ that makes all the sentences in $\Delta$ true. 
-\end{majorILnc}
-
-\section*{Many-valued, Modal, and Quantifier Logic with Identity}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQLIdentityTheorem}.}}
-There exists no (possibly countably infinite) set of formulas $\Delta$ of \GQL{} each of which at most has the variables $\ALPHA$ and $\BETA$ free such that:
-\begin{quote}
-For any two constants $\variable{t}$ and $\variable{s}$, if $\Delta^*$ is the set of sentences got by substituting $\variable{t}$ for all occurrences of $\ALPHA$ and $\variable{s}$ for all occurrences of $\BETA$ in every sentence of $\Delta$, then: for all interpretations $\IntA$, $\IntA$ makes every sentence of $\Delta^*$ true iff $\IntA(\variable{t})=\IntA(\variable{s})$.
-\end{quote}
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{IdentityLemma}.}}
-If $\Delta$ is (at most) a countably infinite set of \GQL{} sentences that's consistent (i.e., there's at least one interpretation $\IntA$ that makes every sentence in $\Delta$ true) and the constants $\variable{t}$ and $\variable{s}$ each appear at least once in one of the sentences of $\Delta$, then there's an interpretation $\IntA$ which makes every sentence in $\Delta$ true such that $\IntA(\variable{t})\neq\IntA(\variable{s})$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQDISoundness}.} \GQDI{} Soundness Theorem:}
-For\index{soundness!of \GQDI{}} all sentences $\CAPPHI$ in \GQLI{} and sets of sentences $\Delta$, if $\Delta\sststile{}{}\CAPPHI$ in \GQDI{}, then $\Delta\sdtstile{}{}\CAPPHI$.
-\end{majorILnc}
-
-\begin{majorILnc}{\textbf{Theorem \mvref{GQDIStrongCompleteness}.} \GQDI{} Strong Completeness Theorem:}
-For\index{completeness!of \GQDI{}} all sentences $\CAPPHI$ in \GQLI{} and sets of sentences $\Delta$, if $\Delta\sdtstile{}{}\CAPPHI$ in \GQDI{}, then $\Delta\sststile{}{}\CAPPHI$.
-\end{majorILnc}
+\noindent{}(**) In \Rule{$\DIAMOND\!$-Elim}, the rule can only be applied if $\CAPPSI$ has a modal prefix.
 
 %\theendnotes
