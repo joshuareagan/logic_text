@@ -169,8 +169,17 @@
 \Rule{OBA} &  $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_i}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, $\negation{\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_i}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
 \nopagebreak
  & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
+
+\multicolumn{3}{l}{\textbf{Set 9: Additonal Quantifier Exchange Rules for \GQD{}, table \mvref{AdditionalQuantifierExRules}}}\\
+\nopagebreak
+\Rule{$\universal$-Shuffle} & $\universal\variable{\alpha}\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}$ & $\conjunction{\universal\variable{\alpha}\CAPPHI_1}{\conjunction{\ldots}{\universal\variable{\alpha}\CAPPHI_n}}$ \\
+\Rule{$\existential$-Shuffle} & $\existential\variable{\alpha}\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}$ & $\par\disjunction{\existential\variable{\alpha}\CAPPHI_1}{\disjunction{\ldots}{\existential\variable{\alpha}\CAPPHI_n}}$ \\
+\Rule{Q-Deletion} & $\#\variable{\alpha}\CAPPHI$ & $\CAPPHI$, iff $\alpha$ does  \\[-.25cm]
+\nopagebreak
+ &  &  not occur in $\CAPPHI$  \\
+
 %\midrule
-\multicolumn{3}{l}{\textbf{Set 9: Basic Rules for S5, table \mvref{SF}}}\\
+\multicolumn{3}{l}{\textbf{Set 10: Basic Rules for S5, table \mvref{SF}}}\\
 \nopagebreak
 %\midrule
 \Rule{$\BOX\!$-Elim} & $\BOX\CAPPHI$ & $\CAPPHI$ \\
@@ -178,7 +187,7 @@
 \Rule{$\DIAMOND\!$-Elim} & $\DIAMOND\CAPPHI$, $\horseshoe{\CAPPHI}{\CAPPSI}$ (*), (**) & $\CAPPSI$ \\
 \Rule{$\DIAMOND\!$-Intro} &  $\CAPPHI$ & $\DIAMOND\CAPPHI$ \\
 %\midrule
-\multicolumn{3}{l}{\textbf{Set 10: Modal Negation Exchange Shortcut Rules for S5, table \mvref{SFMN}}}\\
+\multicolumn{3}{l}{\textbf{Set 11: Modal Negation Exchange Shortcut Rules for S5, table \mvref{SFMN}}}\\
 \nopagebreak
 %\midrule
 \Rule{MN} & $\negation{\BOX\CAPPHI}$ & $\DIAMOND\negation{\CAPPHI}$ \\
@@ -186,7 +195,7 @@
  & $\negation{\DIAMOND\negation{\CAPPHI}}$ & $\BOX\CAPPHI$ \\
  &  $\negation{\BOX\negation{\CAPPHI}}$ & $\DIAMOND\CAPPHI$ \\ 
 %\midrule
-\multicolumn{3}{l}{\textbf{Set 11: Basic Rules for GQDI, \mvref{GQDI}}}\\
+\multicolumn{3}{l}{\textbf{Set 12: Basic Rules for GQDI, \mvref{GQDI}}}\\
 \nopagebreak
 %\midrule
 \Rule{$=$-Intro} &  & $\variable{t}=\variable{t}$ \\
