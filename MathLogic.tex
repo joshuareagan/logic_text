@@ -76,6 +76,8 @@ Mapping=tex-text
 \usepackage[usenames,dvipsnames]{xcolor}
 \definecolor{DarkBlue}{HTML}{000090} % Some of these defined colors may not actually be used below
 \definecolor{DDarkBlue}{HTML}{003399}
+\definecolor{DarkGray}{HTML}{878787}
+\definecolor{DDarkGray}{HTML}{626262}
 \definecolor{RRed}{HTML}{812811}
 \definecolor{LightGray}{HTML}{444444}               
 \usepackage{tcolorbox}
@@ -558,24 +560,27 @@ unicode,pdfencoding=auto,
 \pagestyle{empty}
 %\restoregeometry
 
-\vspace*{.8in}
+% \vspace*{.8in}
 %\noindent{\makebox[4.75in][s]{\Huge\sffamily{}M a t h e m a t i c a l L o g i c}}
-\noindent{\sffamily\fontsize{35}{35}\selectfont{}\color{DDarkBlue}{\color{Gray}Mathematical}Logic} %\textls[30]
+\begin{center}
+\noindent{\sffamily\fontsize{50}{50}\selectfont{}\color{DDarkBlue}{\color{DarkGray}Mathematical}Logic} %\textls[30]
 
-%\medskip
-%\noindent{\LARGE{}\fontencoding{T1}\sffamily\fontseries{b}\fontshape{it}\selectfont{}\textls[30]{***A subtitle would go here, if we had one***}}
-
-\vspace{1.25in}
-\noindent{}{\LARGE\sffamily\selectfont{}Richard Grandy}
-
-\vspace*{12pt}
-\noindent{}{\LARGE\sffamily\selectfont{}Michael Barkasi}
-
-\vspace*{12pt}
-\noindent{}{\LARGE\sffamily\selectfont{}Joshua Reagan}
+\vspace{1.15in}
+\hspace*{-20pt}\noindent{\sffamily\fontsize{375}{375}\selectfont{}\color{DDarkBlue}{\rotatebox[origin=c]{180}{$\mathcal{A}$}\!}} %\textls[30]
 
 \vfill
-\noindent{\LARGE{}\sffamily\selectfont{}{\edition}} % could use \textls[30] for effect
+
+\noindent{\sffamily\fontsize{25}{25}\selectfont{}\color{DDarkGray}{Richard Grandy}}
+
+\vspace*{9pt}
+\noindent{\sffamily\fontsize{25}{25}\selectfont{}\color{DDarkGray}{Michael Barkasi}}
+
+\vspace*{12pt}
+\noindent{\sffamily\fontsize{25}{25}\selectfont{}\color{DDarkGray}{Joshua Reagan}}
+\end{center}
+
+% \vspace*{25pt}
+% \noindent{\LARGE{}\sffamily\selectfont{}{\edition}}
 
 \newpage
 \pagestyle{empty}
@@ -671,11 +676,13 @@ Many of the examples have been worked through in detail.
 Our hope is that the examples show clearly all the ``moving parts''---that they show how the answers to problems follow directly from the definitions and theorems. 
 You probably won't learn much logic by reading the text once or twice, so work through the examples and theorems. 
 
+\begin{samepage}
 \section*{Issues in the Philosophy of Logic}\label{issuesinphillogic}
- 
+
 In mathematical logic, one begins with rigorous mathematical definitions of ``sentence'', truth, logical truth, entailment, and derivation and then proves theorems about them.
 A primary concern in logic is how to make sense of reasoning in natural languages and the notion of logical consequence. 
 How the two---the rigorously defined mathematical concepts like entailment and ``pretheoretic'' concepts like logical consequence---relate is a natural question, and one that's received a great deal of attention by philosophers.\footnote{See Blanchette's \citeyearpar{Blanchette2001} and Shapiro's \citeyearpar{Shapiro2005c} for an introduction.}
+\end{samepage}
 
 Because the aim of this text is to introduce mathematical logic and not philosophical logic, we largely set these questions aside. 
 In some places, usually for the sake of exposition or motivation, we make claims that raise issues squarely in the domain of philosophy of logic.\footnote{For example, we say in section \ref{Formal Languages} that formal languages can be thought of as models of natural languages; and much of the discussion on identity in section \ref{Sec:Quantifier Logic with Identity} raises issues as well.} 
