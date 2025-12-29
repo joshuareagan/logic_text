@@ -1,6 +1,6 @@
 % *******                   Logic Textbook                         *******
 % *******  by Richard Grandy & Michael Barkasi & Joshua Reagan       *******
-\newcommand{\edition}{Edition 1.0.1}
+\newcommand{\edition}{Edition 1.0.0}
 %Note: \raggedbottom is set right before ch 1
 \documentclass[11pt,fleqn,twoside,openright]{report}%leqno   
 %\includeonly{ch1,ch4}  
@@ -77,7 +77,7 @@ Mapping=tex-text
 \definecolor{DarkBlue}{HTML}{000090} % Some of these defined colors may not actually be used below
 \definecolor{DDarkBlue}{HTML}{003399}
 \definecolor{DarkGray}{HTML}{878787}
-\definecolor{DDarkGray}{HTML}{727272}
+\definecolor{DDarkGray}{HTML}{6c6c6c}
 \definecolor{RRed}{HTML}{812811}
 \definecolor{LightGray}{HTML}{444444}               
 \usepackage{tcolorbox}
@@ -560,27 +560,16 @@ unicode,pdfencoding=auto,
 \pagestyle{empty}
 %\restoregeometry
 
-% \vspace*{.8in}
-%\noindent{\makebox[4.75in][s]{\Huge\sffamily{}M a t h e m a t i c a l L o g i c}}
-\begin{center}
-\noindent{\sffamily\fontsize{50}{50}\selectfont{}\color{DDarkBlue}{\color{DarkGray}Mathematical}Logic} %\textls[30]
+\begin{picture}(400,450)
+    \put(-15,150){\noindent{\sffamily\fontsize{400}{400}\selectfont{}\color{DDarkBlue}{\rotatebox[origin=c]{180}{$\mathcal{A}$}\!}}}
+    \put(160,30){\noindent{\sffamily\fontsize{400}{400}\selectfont{}\color{DarkGray}{\rotatebox[origin=c]{180}{$\mathcal{E}$}\!}}}
+\end{picture}
 
-\vspace{1.15in}
-\hspace*{-20pt}\noindent{\sffamily\fontsize{375}{375}\selectfont{}\color{DDarkBlue}{\rotatebox[origin=c]{180}{$\mathcal{A}$}\!}} %\textls[30]
+\vspace{0.25in}
+\noindent{\sffamily\fontsize{58}{58}\selectfont{}\hspace*{-4pt}\color{DDarkBlue}{\color{DarkGray}Mathematical}Logic}
 
-\vfill
-
-\noindent{\sffamily\fontsize{25}{25}\selectfont{}\color{DDarkGray}{Richard Grandy}}
-
-\vspace*{9pt}
-\noindent{\sffamily\fontsize{25}{25}\selectfont{}\color{DDarkGray}{Michael Barkasi}}
-
-\vspace*{12pt}
-\noindent{\sffamily\fontsize{25}{25}\selectfont{}\color{DDarkGray}{Joshua Reagan}}
-\end{center}
-
-% \vspace*{25pt}
-% \noindent{\LARGE{}\sffamily\selectfont{}{\edition}}
+\vspace{0.15in}
+\noindent{\sffamily\fontsize{21.5}{21.5}\selectfont{}\color{DDarkGray}{Richard Grandy} \color{DDarkBlue}{$\bullet$} \color{DDarkGray}{Michael Barkasi} \color{DDarkBlue}{$\bullet$} \color{DDarkGray}{Joshua Reagan}}
 
 \newpage
 \pagestyle{empty}
