@@ -281,7 +281,7 @@ The various formal languages in this text are to be object languages.  However, 
 \subsection{Metavariables}\label{metavariables}
 One important tool for MathEnglish is the \emph{metavariable}, which we define as a variable for strings of the object language.\index{variables!MathEnglish}  
 We use lowercase Greek letters as our metavariables, as we did in the schemas given at the beginning of the chapter.
-The three we use most commonly are \mention{$\CAPPHI$} (phi), pronounced \q{fie}, \mention{$\CAPTHETA$} (theta), pronounced \q{theta}, and \mention{$\CAPPSI$} (psi), pronounced \q{sigh}.
+The three we use most commonly are \mention{$\CAPPHI$} (phi), \mention{$\CAPTHETA$} (theta), and \mention{$\CAPPSI$} (psi).
 These Greek letters are not in the object language, but instead are used in the metalanguage for talking about the object language. 
 
 An example will make their role more clear.  Let's say that MathEnglish is our metalanguage and (regular) English is our object language.\footnote{As discussed earlier, in later chapters we use a formal language and not English as our object language, but for the purpose of illustration we temporarily ignore the problems of natural language.}  Recall the logically true sentence from the beginning of the chapter:
@@ -333,7 +333,9 @@ MathEnglish makes use of set theory.  A \emph{set} is just a collection of items
 
 There is one set that doesn't have any elements, and it's called either the \emph{null set} or the \emph{empty set}.  Symbolically the empty set is denoted by either $\{ \}$ or $\emptyset$.
 
-Set membership is expressed with the `$\in$' symbol.  Let the Greek letters $\Delta$ and $\Gamma$ stand for arbitrary sets. (They are pronounced \mention{delta} and \mention{gamma}, respectively.)  We assert that $7$ is an element of set $\Delta$ and $3$ is an element of $\Gamma$ as follows: $7 \in \Delta$, $3 \in \Gamma$. On this notation,
+Set membership is expressed with the `$\in$' symbol.
+Let the Greek letters $\Delta$ (delta) and $\Gamma$ (gamma) stand for arbitrary sets.
+We assert that $7$ is an element of set $\Delta$ and $3$ is an element of $\Gamma$ as follows: $7 \in \Delta$, $3 \in \Gamma$. On this notation,
 
 \begin{center}
 	\noindent{}$2\in\{1, 2, 3\}$
@@ -347,7 +349,7 @@ Set membership is expressed with the `$\in$' symbol.  Let the Greek letters $\De
 
 \noindent{}is false.
 
-We use lowercase Greek letters $\alpha$ and $\beta$ (pronounced \mention{alpha} and \mention{beta}, respectively) as metavariables for elements. For example, if $\alpha$ and $\beta$ are odd numbers and $\Delta$ is the set of even numbers, then $\alpha + \beta \in \Delta$.
+We use lowercase Greek letters $\alpha$ (alpha) and $\beta$ (beta) as metavariables for elements. For example, if $\alpha$ and $\beta$ are odd numbers and $\Delta$ is the set of even numbers, then $\alpha + \beta \in \Delta$.
 
 \begin{majorILnc}{\LnpDC{Subset}} For any two sets $\Delta$ and $\Gamma$, $\Delta$ is a \df{subset} of $\Gamma$ \Iff for each $\alpha$ such that $\alpha \in \Delta$, $\alpha \in \Gamma$.
 \end{majorILnc} 
@@ -361,7 +363,7 @@ We use lowercase Greek letters $\alpha$ and $\beta$ (pronounced \mention{alpha} 
 	\end{cenumerate}
 \end{majorILnc}
 
-\noindent{}As you can probably guess, the \mention{$\notin$} symbol means \mention{is not an element of}. The symbolic notation for \mention{$\Delta$ is a proper subset of $\Gamma$} is $\Delta \subset \Gamma$. No set is a proper subset of itself.
+\noindent{}As you can probably guess, the \mention{$\notin$} symbol means \emph{is not an element of}. The symbolic notation for \mention{$\Delta$ is a proper subset of $\Gamma$} is $\Delta \subset \Gamma$. No set is a proper subset of itself.
 
 Take care to avoid confusing the membership, subset, and proper subset relations.
 
@@ -386,7 +388,7 @@ Sometimes a set is defined by reference to other sets. Say that there is a set $
 	\end{cenumerate}	
 \end{majorILnc} 
 
-\noindent{}The symbol \mention{$\cup$} means \mention{union}. Some examples:
+\noindent{}The symbol \mention{$\cup$} means \emph{union}. Some examples:
 
 \begin{center}
 	\noindent{}$\{$Mercury, Jupiter, Mars, Saturn$\}=\{$Mercury, Jupiter$\}\cup\{$Mars, Saturn$\}$.
@@ -405,7 +407,7 @@ Another useful concept is \emph{intersection}.  The set $\Delta$ is the intersec
 	\end{cenumerate}	
 \end{majorILnc} 
 
-The symbol \mention{$\cap$} means \mention{intersection}.
+The symbol \mention{$\cap$} means \emph{intersection}.
 The intersection of $\{$Mercury, Jupiter$\}$ and $\{$Mars, Saturn$\}$ is the empty set, $\{ \}$, because the former two sets have no members in common.
 
 \begin{center}
