@@ -5,18 +5,11 @@
 %\AddToShipoutPicture*{\BackgroundPicC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\GQD{}}\label{Section GQD}
+\section{The Basic System \GQD{}}\label{Section GQD}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Now our goal is to extend \GSD{} to a natural deduction system for \GQL{}.
 This system, which we call \idf{Quantificational Derivation System}, or \GQD{}, consists of all the rules of \GSD{}, plus an introduction and elimination rule for each quantifier (given in table \ref{GQD}).
-
-\subsection{Introduction and Elimination Rules}
-
-Like \GSD{}, we extend \GQD{} by adding shortcut rules. 
-First, we can extend \GQD{} by adding all the shortcut rules we gave for \GSD{}. 
-Second, we can extend \GQD{} by adding shortcut rules specifically for the quantifiers (see table \ref{GQDplus}).
-The system with all the shortcut rules from \GSD{} (tables \ref{GSDplus1} and \ref{GSDplus1}) and the new shortcut rules for the quantifiers (table \ref{GQDplus}) is called \GQDP{}.
 Note that some of the rules for \GQD{} have special restrictions.
 We explain these in the examples below. 
 %Since there are only two new connectives, introduce rules, strategies and do examples all at once.
@@ -320,11 +313,14 @@ If there is an algorithm that always halts either in a derivation or with an ind
 \GQD{} is undecidable, while \GSD{} and \GQD{}1 are decidable.\footnote{Enderton \citeyearpar{Enderton2010} provides a general, contemporary introduction to computability and decision procedures. Kleene \citeyearpar[ch.~5]{Kleene1967} provides a lucid and concise discussion within roughly the framework devolved here.}
 We will prove \GQD{}1 decidability in section \pmvref{Decidability and Churchs Theorem}.
 
-\subsection{Shortcut Rules for \GQD{}}
+\section{Shortcut Rules for \GQD{}}
 
-All of the shortcut rules for \GSD{}, both the standard and exchange rules, can be carried over as shortcut rules for \GQD{}. 
-In addition, there are four new shortcut rules for \GQD{}, the quantifier negation rules. 
-These are found in table \ref{GQDplus}.
+Like \GSD{}, we extend \GQD{} by adding shortcut rules. 
+First, we include all the shortcut rules we gave for \GSD{}, both the standard and exchange rules. 
+Second, we include shortcut rules specifically for the quantifiers (see table \ref{GQDplus}).
+These new \emph{quantifier negation} rules are found in table \ref{GQDplus}.
+The system with all the shortcut rules from \GSD{} (tables \ref{GSDplus1} and \ref{GSDplus1}) and the new shortcut rules for the quantifiers (table \ref{GQDplus}) is called \GQDP{}.
+
 %\begin{table}[!ht]
 %\renewcommand{\arraystretch}{1.5}
 %\begin{center}
