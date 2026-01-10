@@ -170,13 +170,15 @@
 \nopagebreak
  & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}$, ${\CAPPHI_i}$ & $\negation{\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\negation{\CAPPHI_i}}{\conjunction{\ldots}{\CAPPHI_{\integer{n}}}}}}}$ \\
 
-\multicolumn{3}{l}{\textbf{Set 9: Additonal Quantifier Exchange Rules for \GQD{}, table \mvref{AdditionalQuantifierExRules}}}\\
+\multicolumn{3}{l}{\textbf{Set 9: Additonal Exchange Rules for \GQD{}, table \mvref{AdditionalQuantifierExRules}}}\\
 \nopagebreak
 \Rule{$\universal$-Shuffle} & $\universal\variable{\alpha}\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}$ & $\conjunction{\universal\variable{\alpha}\CAPPHI_1}{\conjunction{\ldots}{\universal\variable{\alpha}\CAPPHI_n}}$ \\
 \Rule{$\existential$-Shuffle} & $\existential\variable{\alpha}\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}$ & $\par\disjunction{\existential\variable{\alpha}\CAPPHI_1}{\disjunction{\ldots}{\existential\variable{\alpha}\CAPPHI_n}}$ \\
 \Rule{Q-Deletion} & $\#\variable{\alpha}\CAPPHI$ & $\CAPPHI$, iff $\alpha$ does  \\[-.25cm]
 \nopagebreak
  &  &  not occur in $\CAPPHI$  \\
+\Rule{$\wedge$-Shuffle} & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_k}{\conjunction{\ldots}{\CAPPHI_n}}}}$ & $\conjunction{\CAPPHI_k}{\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}}$ \\
+\Rule{$\vee$-Shuffle} & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_k}{\disjunction{\ldots}{\CAPPHI_n}}}}$ & $\disjunction{\CAPPHI_k}{\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}}$ \\
 
 %\midrule
 \multicolumn{3}{l}{\textbf{Set 10: Basic Rules for S5, table \mvref{SF}}}\\

@@ -1227,59 +1227,12 @@ Two quantifiers are \df{independent}\index{quantifier!s, independent} \Iff neith
 Let's say we have a sentence all of whose quantifiers are independent of each other.
 Then these quantifiers can be brought forward in any order, and so we have a decision procedure for such sentences. 
 We claim that each \GQL{}1 sentence is equivalent to one whose quantifiers are all independent.
-To prove this we introduce a new normal form and some additional exchange rules.
+To simplify the proof for this we introduce some additional exchange rules.
 
-\subsection{Conjunctive Normal Form}\label{Conjunctive Normal Form}
-
-Back in section \ref{Disjunctive Normal Form} you were introduced to sentences in disjunctive normal form (DNF).
-Now we consider a closely related form.
-
-\begin{majorILnc}{\LnpDC{CNF Definition}}
-A \GQL{} formula without quantifiers is in \df{conjunctive normal form} (\CAPS{cnf})\index{CNF|see{conjunctive normal form}} \Iff
-\begin{cenumerate}
-\item it contains no conditional ($\HORSESHOE$) or biconditional ($\TRIPLEBAR$),
-\item negations ($\NEGATION$) only govern atomic formulas, and
-\item no disjunction ($\VEE$) contains a conjunction ($\WEDGE$) as a subformula.
-\end{cenumerate}
-\end{majorILnc}
-\noindent{}An example of a sentence in \CAPS{cnf} is $\conjunction{\pardisjunction{\Ql}{\negation{\Rl}}}{\pardisjunction{\negation{\Pl}}{\Rl}}$.
-
-The definition of CNF differs from DNF only in the third part of the definition.
-To get a DNF sentence, use the distribution exchange rule to get a disjunction of conjunctions.
-To get CNF, use the same rule to get a conjunction of disjunctions.
-A formula can be converted from DNF to CNF or \emph{vice versa} by (possibly repeated) application of the distribution rule.
-
-A \GQL{} sentence is in \idf{prenex conjunctive normal form}\index{conjunctive normal form!prenex} (\CAPS{pcnf}) \Iff is it's in prenex normal form (i.e. all the quantifiers are in the initial position) and the remainder is in CNF.
-
-\begin{THEOREM}{\LnpTC{Prenex Conjunctive Normal Form Theorem} The Prenex Conjunctive Normal Form Theorem:}
-Every sentence of \GQL{} is equivalent to an \GQL{} sentence in \CAPS{pcnf}.
-\end{THEOREM}
-\begin{PROOF}
-The proof relies on four lemmas (left to the reader) corresponding to the last four steps of the procedure below.
-We provide a five stage process showing how to turn any given sentence into one that's in \CAPS{pcnf}.
-Let $\CAPPHI$ be a sentence of \GQL{}.
-\begin{description}
-\item[Step A:] There is a prenex normal form equivalent of $\CAPPHI$, $\CAPPHI^*$. Let $\CAPPHI'$ be the subformula of $\CAPPHI^*$ containing everything except the quantifiers in the initial position.
-\item[Step B:] If a subformula of $\CAPPHI'$ has a conditional or biconditional as its main connective, i.e., is of the form $\parhorseshoe{\CAPPSI}{\CAPTHETA}$ or $\partriplebar{\CAPTHETA}{\CAPPSI}$, replace the subformula by $\pardisjunction{\negation{\CAPPSI}}{\CAPTHETA}$ or $\disjunction{\parconjunction{\CAPPSI}{\CAPTHETA}}{\parconjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}}$ respectively. 
-Repeat as necessary to obtain a formula $\CAPPHI''$ without conditionals or biconditionals.
-\item[Step C:] \hfill{}
-\begin{cenumerate}
-\item Replace any subformula of the form $\negation{\negation{\CAPPSI}}$ in $\CAPPHI''$ with $\CAPPSI$.
-\item Replace any subformula of the form $\negation{\parconjunction{\CAPPSI}{\CAPTHETA}}$ in $\CAPPHI''$ with $\pardisjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$.
-\item Replace $\negation{\pardisjunction{\CAPPSI}{\CAPTHETA}}$ in $\CAPPHI''$ with $\parconjunction{\negation{\CAPPSI}}{\negation{\CAPTHETA}}$. 
-\end{cenumerate} 
-Repeat as necessary to obtain $\CAPPHI'''$ in which negations govern nothing but atomic formulas.
-\item[Step D:] The only thing that could prevent $\CAPPHI'''$ from being in \CAPS{cnf} is that some disjunctions govern some conjunctions, i.e., there is a subformula $\disjunction{\CAPTHETA}{\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}$, or the reverse $\disjunction{\parconjunction{\CAPPSI_1}{\conjunction{\CAPPSI_2}{\conjunction{\ldots}{\CAPPSI_{\integer{n}}}}}}{\CAPTHETA}$. 
-Those subformulas can be replaced by the equivalent $\conjunction{\pardisjunction{\CAPPSI_1}{\CAPTHETA}}{\conjunction{\pardisjunction{\CAPPSI_2}{\CAPTHETA}}{\conjunction{\ldots}{\pardisjunction{\CAPPSI_{\integer{n}}}{\CAPTHETA}}}}$. 
-Repeat as necessary to obtain a formula $\CAPPHI''''$.
-\item[Step E:] Replace $\CAPPHI'$ in $\CAPPHI^*$ with $\CAPPHI''''$ to get $\CAPPHI^{**}$. $\CAPPHI^{**}$ is equivalent to $\CAPPHI$ and in prenex conjunctive normal form.
-\end{description}
-\end{PROOF}
-
-\subsection{Additonal Quantifier Exchange Rules}\label{Additonal Quantifier Exchange Rules}
+\subsection{Additonal Exchange Rules}\label{Additonal Exchange Rules}
 
 Our aim is to move the quantifiers of a \GQL{}1 sentence so that all are independent.
-To simplify this task we introduce new quantifier exchange rules, specifically selected for use with DNF and CNF sentences.
+To simplify this task we introduce new quantifier exchange rules, as well as some rules that permit rearranging the order of conjunctions and disjunctions.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
@@ -1293,11 +1246,11 @@ To simplify this task we introduce new quantifier exchange rules, specifically s
 \midrule
 \endhead
 \bottomrule
-\caption{Additonal Quantifier Exchange Rules for \GQD{}}\\[-.15in]
+\caption{Additonal Exchange Rules for \GQD{}}\\[-.15in]
 \multicolumn{3}{c}{\emph{Continued next Page}}\\
 \endfoot
 \bottomrule
-\caption{Additonal Quantifier Exchange Rules for \GQD{}}\\
+\caption{Additonal Exchange Rules for \GQD{}}\\
 \endlastfoot
 \label{AdditionalQuantifierExRules}
 \Rule{$\universal$-Shuffle} & $\universal\variable{\alpha}\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}$ & $\conjunction{\universal\variable{\alpha}\CAPPHI_1}{\conjunction{\ldots}{\universal\variable{\alpha}\CAPPHI_n}}$ \\
@@ -1305,6 +1258,8 @@ To simplify this task we introduce new quantifier exchange rules, specifically s
 \Rule{Q-Deletion} & $\#\variable{\alpha}\CAPPHI$ & $\CAPPHI$, iff $\alpha$ does  \\[-.25cm]
 \nopagebreak
  &  &  not occur in $\CAPPHI$  \\
+\Rule{$\wedge$-Shuffle} & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_k}{\conjunction{\ldots}{\CAPPHI_n}}}}$ & $\conjunction{\CAPPHI_k}{\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}}$ \\
+\Rule{$\vee$-Shuffle} & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_k}{\disjunction{\ldots}{\CAPPHI_n}}}}$ & $\disjunction{\CAPPHI_k}{\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}}$ \\
 \end{longtable}
 
 It is left as an exercise for the reader to prove that these rules are sound.
@@ -1321,45 +1276,47 @@ Every sentence of \GQL{}1 is quantificationally equivalent to a sentence whose q
 \begin{commentary}
 	The basic strategy to prove this theorem is relatively straightforward even if some of the details aren't.
 	\commentaryspace
-	First, we start with a \GQL{}1 sentence and get its PCNF equivalent. 
+	First, we start with a \GQL{}1 sentence and get its PDNF equivalent. 
 	All the quantifiers are in the initial position of the latter sentence.
 	Then we push each quantifier inward, using the new quantifier exchange rules, to shrink its scope.
 	We show that after the quantifiers are pushed in they are all independent.
 	\commentaryspace
-	To push existential quantifiers in, the distribution exchange rule is first used to make the body of the sentence a disjunction.
-	After the quantifier is moved in, the distribution exchange rule is applied again to make the body of the sentence a conjunction again.
-	The universal quantifier can be pushed in without using distribution.
+	To push a universal quantifier in, the distribution exchange rule is first used to make the body of the sentence a conjunction.
+	After the quantifier is moved in, the distribution exchange rule is applied again to make the body of the sentence a disjunction again.
+	The existential quantifier can be pushed in without using distribution.
 \end{commentary}
 Let there be a sentence of \GQL{}1.
-Then by theorem \ref{Prenex Conjunctive Normal Form Theorem} there is an equivalent sentence, $\CAPPHI$, that is in prenex conjunctive normal form.
-So $\CAPPHI$ is of the form $\#_1\#_2\ldots\#_n\CAPPHI'$, where for all $i\in\{1,\ldots,n\}$ each $\#_i$ is a quantifier, and $\CAPPHI'$ is in CNF.
-Then $\CAPPHI'$ is of the form $\parconjunction{\conjunction{\CAPPSI_1}{\CAPPSI_2}}{\conjunction{\ldots}{\CAPPSI_k}}$, where for each $j\in\{1,\ldots,k\}$, $\CAPPSI_j$ is a disjunction of ions.
+Then by theorem \ref{PrenexNFTheorem} there is an equivalent sentence, $\CAPPHI$, that is in prenex disjunctive normal form.
+So $\CAPPHI$ is of the form $\#_1\#_2\ldots\#_n\CAPPHI'$, where for each $i\in\{1,\ldots,n\}$, $\#_i$ is a quantifier, and $\CAPPHI'$ is a DNF formula.
+Then $\CAPPHI'$ is of the form $\pardisjunction{\disjunction{\CAPPSI_1}{\CAPPSI_2}}{\disjunction{\ldots}{\CAPPSI_k}}$, where for each $j\in\{1,\ldots,k\}$, $\CAPPSI_j$ is a conjunction of ions.
 
 To make the quantifiers all independent, the following steps are applied to push in each quantifier, starting with $\#_n$ and working back to $\#_1$.
 Let $\#_i$ be the right-most quantifier that hasn't yet been moved in $\#_1\#_2\ldots\#_n$.
-We push in each $\#_i$, transforming the subformula $\CAPPHI'$ into a new formula $\CAPPHI_i$ when that quantifier is moved in.
-Let $\CAPPHI_{n+1}$ be $\CAPPHI'$, i.e. the original CNF body of $\CAPPHI$.
+We push in each $\#_i$, transforming the subformula $\CAPPHI'$ into a new formula $\CAPPHI_i$ with $\#_i$ moved all the way in.
+Let $\CAPPHI_{n+1}$ be $\CAPPHI'$, i.e. the original DNF body of $\CAPPHI$.
 There are two cases, handled separately:
 
 \vspace*{0.15in}
-\noindent{}\textbf{Case 1}: $\#_i$ is a universal quantifier.
+\noindent{}\textbf{Case 1}: $\#_i$ is an existential quantifier.
 
 \begin{quote}
 \begin{description}
-\item[Step A:] By $\universal$-shuffle, $\#_i$ is moved to each conjunct in $\CAPPHI_{i+1}$ containing the variable bound by $\#_i$, resulting in: $\parconjunction{\conjunction{\#_i\CAPPSI_1}{\#_i\CAPPSI_2}}{\conjunction{\ldots}{\#_i\CAPPSI_k}}$. For any $\CAPPSI_j$ not containing that variable, the quantifier may be removed, by Q-deletion.
-\item[Step B:] Each conjunct with a quantifier $\#_i\CAPPSI_j$ is of the form \\ $\#_i\pardisjunction{\disjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$ where each $\CAPTHETA$ is an ion (or a quantified subsentence governing a conjunction or disjunction, as will be made clear shortly). An equivalent disjunction is obtained by reordering so that the disjuncts with a variable matching that of the quantifier are leftmost. By the Q shuffle exchange rule, the $\#_i$ is moved in to govern just those disjuncts, resulting in $\#_i\CAPPSI_j$ becoming: $\disjunction{\#_i\pardisjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$. With this transformation $\#_i$ binds all variables within its scope, and no other variables are in its scope.
+\item[Step A:] By $\existential$-shuffle, $\#_i$ is moved to each disjunct in $\CAPPHI_{i+1}$, resulting in: $\pardisjunction{\disjunction{\#_i\CAPPSI_1}{\#_i\CAPPSI_2}}{\disjunction{\ldots}{\#_i\CAPPSI_k}}$. For any $\CAPPSI_j$ not containing the variable in $\#_i$, $\#_i$ may be removed from that disjunct, by Q-deletion.
+\item[Step B:] Each disjunct with a quantifier $\#_i\CAPPSI_j$ is of the form \\ $\#_i\parconjunction{\conjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\conjunction{\ldots}{\CAPTHETA_m}}$ where each $\CAPTHETA$ is an ion (or a quantified subsentence governing a conjunction or disjunction, as will be made clear shortly). An equivalent conjunction is obtained by applying \Rule{$\wedge$-shuffle} so that each $\CAPTHETA$ with a variable matching that of $\#_i$ is moved to the left.
+\item[Step C:] By the Q shuffle exchange rule, the $\#_i$ is moved in to govern just the leftmost conjuncts with a matching variable, resulting in each $\#_i\CAPPSI_j$ becoming: $\conjunction{\#_i\parconjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\conjunction{\ldots}{\CAPTHETA_m}}$. With this transformation $\#_i$ binds all variables within its scope, and no other variables are in its scope.
 \end{description}
 \noindent{}The result is a formula $\CAPPHI_{i}$ where $\#_i$ binds all and only its variables.
 \end{quote}
 
-\noindent{}\textbf{Case 2}: $\#_i$ is a existential quantifier.
+\noindent{}\textbf{Case 2}: $\#_i$ is a universal quantifier.
 
 \begin{quote}
 \begin{description}
-\item[Step A:] Apply the distribution rule to $\CAPPHI_{i+1}$ until no disjunction is governed by a conjunction (with the exception of any disjunction within the scope of an already moved quantifier). The resulting formula, $\CAPPHI_{i+1}^*$, is a disjunction.
-\item[Step B:] By $\existential$-shuffle, $\#_i$ is moved to each disjunct in $\CAPPHI_{i+1}^*$ containing the variable bound by $\#_i$, resulting in: $\pardisjunction{\disjunction{\#_i\CAPPSI_1}{\#_i\CAPPSI_2}}{\disjunction{\ldots}{\#_i\CAPPSI_k}}$. For any $\CAPPSI_j$ not containing that variable, the quantifier may be removed, by Q-deletion.
-\item[Step C:] Each disjunct with a quantifier $\#_i\CAPPSI_j$ is of the form \\ $\#_i\parconjunction{\conjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\conjunction{\ldots}{\CAPTHETA_m}}$ where each $\CAPTHETA$ is an ion (or a quantifier subsentence governing a disjunction or conjunction). An equivalent conjunction is obtained by reordering so that the conjuncts with a variable matching that of the quantifier are leftmost. By the Q shuffle exchange rule, the $\#_i$ can be moved in to govern just those conjuncts, resulting in $\#_i\CAPPSI_j$ becoming: $\conjunction{\#_i\parconjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$. With this transformation $\#_i$ binds all variables within its scope, and no other variables are in its scope.
-\item[Step D:] Apply the distribution rule to the resulting formula until no conjunction is governed by a disjunction (with the exception of any conjunction within the scope of an already moved quantifier).
+\item[Step A:] Apply the distribution rule to $\CAPPHI_{i+1}$ until no conjunction is governed by a disjunction (with the exception of any conjunction within the scope of an already moved quantifier). The resulting formula, $\CAPPHI_{i+1}^*$, is a conjunction.
+\item[Step B:] By $\universal$-shuffle, $\#_i$ is moved to each conjunct in $\CAPPHI_{i+1}^*$, resulting in: $\parconjunction{\conjunction{\#_i\CAPPSI_1}{\#_i\CAPPSI_2}}{\conjunction{\ldots}{\#_i\CAPPSI_k}}$. For any $\CAPPSI_j$ not containing the variable bound by $\#_i$, the quantifier may be removed, by Q-deletion.
+\item[Step C:] Each conjunct with a quantifier $\#_i\CAPPSI_j$ is of the form \\ $\#_i\pardisjunction{\disjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$ where each $\CAPTHETA$ is an ion (or a quantifier subsentence governing a disjunction or conjunction). An equivalent disjunction is obtained by by applying \Rule{$\vee$-shuffle} so that each $\CAPTHETA$ with a variable matching that of $\#_i$ is moved to the left.
+\item[Step D:] By the Q shuffle exchange rule, the $\#_i$ is moved in to govern just the leftmost disjuncts with a matching variable, resulting in $\#_i\CAPPSI_j$ becoming: $\disjunction{\#_i\pardisjunction{\CAPTHETA_1}{\CAPTHETA_2}}{\disjunction{\ldots}{\CAPTHETA_m}}$. With this transformation $\#_i$ binds all variables within its scope, and no other variables are in its scope.
+\item[Step E:] Apply the distribution rule to the resulting formula until no disjunction is governed by a conjunction (with the exception of any disjunction within the scope of an already moved quantifier).
 \end{description}
 \noindent{}The result is a formula $\CAPPHI_{i}$ where $\#_i$ binds all and only its variables.
 \end{quote}
@@ -1458,7 +1415,9 @@ Prove the soundness of the following exchange rules.
 \begin{enumerate}
 \item \Rule{$\universal$-Shuffle}
 \item \Rule{$\existential$-Shuffle}
-\item \Rule{\Rule{Q-Deletion}}
+\item \Rule{Q-Deletion}
+\item \Rule{$\wedge$-Shuffle}
+\item \Rule{$\vee$-Shuffle}
 \end{enumerate}
 
 \renewcommand{\arraystretch}{1.5}
@@ -1473,17 +1432,19 @@ Prove the soundness of the following exchange rules.
 \midrule
 \endhead
 \bottomrule
-\caption{Additonal Quantifier Exchange Rules for \GQD{}}\\[-.15in]
+\caption{Additonal Exchange Rules for \GQD{}}\\[-.15in]
 \multicolumn{3}{c}{\emph{Continued next Page}}\\
 \endfoot
 \bottomrule
-\caption{Additonal Quantifier Exchange Rules for \GQD{}}\\
+\caption{Additonal Exchange Rules for \GQD{}}\\
 \endlastfoot
 \Rule{$\universal$-Shuffle} & $\universal\variable{\alpha}\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}$ & $\conjunction{\universal\variable{\alpha}\CAPPHI_1}{\conjunction{\ldots}{\universal\variable{\alpha}\CAPPHI_n}}$ \\
 \Rule{$\existential$-Shuffle} & $\existential\variable{\alpha}\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}$ & $\par\disjunction{\existential\variable{\alpha}\CAPPHI_1}{\disjunction{\ldots}{\existential\variable{\alpha}\CAPPHI_n}}$ \\
 \Rule{Q-Deletion} & $\#\variable{\alpha}\CAPPHI$ & $\CAPPHI$, iff $\alpha$ does  \\[-.25cm]
 \nopagebreak
  &  &  not occur in $\CAPPHI$  \\
+\Rule{$\wedge$-Shuffle} & $\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\conjunction{\CAPPHI_k}{\conjunction{\ldots}{\CAPPHI_n}}}}$ & $\conjunction{\CAPPHI_k}{\conjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}}$ \\
+\Rule{$\vee$-Shuffle} & $\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\disjunction{\CAPPHI_k}{\disjunction{\ldots}{\CAPPHI_n}}}}$ & $\disjunction{\CAPPHI_k}{\disjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}}$ \\
 \end{longtable}
 
 %\theendnotes
