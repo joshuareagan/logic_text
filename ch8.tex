@@ -1216,8 +1216,8 @@ Moreover, if in the standardized form the existentials all precede the universal
 We are done then, since no additional constants are added.
 
 But what about sentences with an existential quantifier within the scope of a universal quantifier, e.g. $\universal{\variable{x}}\existential{\variable{y}}\pardisjunction{\parconjunction{\Bp{\variable{x}}}{\Cp{\variable{y}}}}{\parconjunction{\Dp{\variable{x}}}{\Gp{\variable{y}}}}$?
-Since \GQL{} has many-place predicates, if one quantifier occurs within the scope of another then it cannot be moved in front of the other quantifier. 
-But since all the predicates of \GQL{}1 are 1-place there is a procedure to switch the order of these quantifiers.
+Since \GQL{} has many-place predicates, if one quantifier occurs within the scope of another then it often cannot be moved in front of the other quantifier. 
+But since the predicates of \GQL{}1 are 1-place there is a procedure to switch quantifier order in all cases.
 It takes some work to establish this result.
 
 \begin{majorILnc}{\LnpDC{Independent}}
@@ -1233,6 +1233,7 @@ To simplify the proof for this we introduce some additional exchange rules.
 
 Our aim is to move the quantifiers of a \GQL{}1 sentence so that all are independent.
 To simplify this task we introduce new quantifier exchange rules, as well as some rules that permit rearranging the order of conjunctions and disjunctions.
+These rules allow us to provide a procedure to push each quantifier in far enough so that the scope of each covers the variables it binds and no others.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{longtable}[c]{ p{1in} l l } %p{2.2in} p{2in}
@@ -1252,8 +1253,7 @@ To simplify this task we introduce new quantifier exchange rules, as well as som
 \bottomrule
 \caption{Additonal Exchange Rules for \GQD{}}\\
 \endlastfoot
-\label{AdditionalQuantifierExRules}
-\Rule{$\universal$-Shuffle} & $\universal\variable{\alpha}\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}$ & $\conjunction{\universal\variable{\alpha}\CAPPHI_1}{\conjunction{\ldots}{\universal\variable{\alpha}\CAPPHI_n}}$ \\
+\label{AdditionalQuantifierExRules}\Rule{$\universal$-Shuffle} & $\universal\variable{\alpha}\parconjunction{\CAPPHI_1}{\conjunction{\ldots}{\CAPPHI_n}}$ & $\conjunction{\universal\variable{\alpha}\CAPPHI_1}{\conjunction{\ldots}{\universal\variable{\alpha}\CAPPHI_n}}$ \\
 \Rule{$\existential$-Shuffle} & $\existential\variable{\alpha}\pardisjunction{\CAPPHI_1}{\disjunction{\ldots}{\CAPPHI_n}}$ & $\par\disjunction{\existential\variable{\alpha}\CAPPHI_1}{\disjunction{\ldots}{\existential\variable{\alpha}\CAPPHI_n}}$ \\
 \Rule{Q-Deletion} & $\#\variable{\alpha}\CAPPHI$ & $\CAPPHI$, iff $\alpha$ does  \\[-.25cm]
 \nopagebreak
@@ -1266,6 +1266,14 @@ It is left as an exercise for the reader to prove that these rules are sound.
 Note that $\universal$-Shuffle is only sound when the universal quantifier is moved over a conjunction, and $\existential$-Shuffle is only sound when moved over a disjunction.
 For example, the sentence $\universal\variable{x}\pardisjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}$ is a logical truth but $\disjunction{\universal\variable{x}\Bp{\variable{x}}}{\universal\variable{x}\negation{\Bp{\variable{x}}}}$ isn't.
 Similarly, $\negation{\existential\variable{x}\parconjunction{\Bp{\variable{x}}}{\negation{\Bp{\variable{x}}}}}$ is a logical truth but $\negation{\parconjunction{\existential\variable{x}\Bp{\variable{x}}}{\existential\variable{x}\negation{\Bp{\variable{x}}}}}$ isn't.
+
+These rules enable us to push the quantifiers all the way into a suffiently well-behaved sentence.
+To push universal quantifiers inward over conjunctions, we use \Rule{$\universal$-Shuffle}.
+To push exstential quantifiers inward over disjunctions, we use \Rule{$\existential$-Shuffle}.
+In cases when the universal quantifer governs a disjunction we must isolate the disjuncts with a matching variable, using \Rule{$\vee$-Shuffle} to move those disjuncts to the left.
+Then we use Q shuffle to move the quantifier to just those disjuncts.
+Similarly, when an existential quantifier governs a conjunction, we isolate the conjuncts with a matching variable, using \Rule{$\wedge$-Shuffle} to move those conjuncts to the left.
+Then we use Q shuffle to move the quantifier to just those conjuncts.
 
 \subsection{The QL1 Decision Procedure}\label{The QL1 Decision Procedure}
 
@@ -1281,9 +1289,14 @@ Every sentence of \GQL{}1 is quantificationally equivalent to a sentence whose q
 	Then we push each quantifier inward, using the new quantifier exchange rules, to shrink its scope.
 	We show that after the quantifiers are pushed in they are all independent.
 	\commentaryspace
+	To push an existential quantifier in is easier, since the body of the formula is a disjunction.
+	We push it in using \Rule{$\existential$-Shuffle} so that each disjunct is governed by an existential quantifer.
+	Then we reorder the conjuncts of each disjunct using \Rule{$\wedge$-Shuffle} to isolate the conjuncts with a matching variable, and use Q shuffle to move the quantifier to govern just those.
+	\commentaryspace
 	To push a universal quantifier in, the distribution exchange rule is first used to make the body of the sentence a conjunction.
+	Then we push the universal in using \Rule{$\universal$-Shuffle} so that each conjunct is governed by a universal quantifer.
+	Then we reorder the disjuncts of each canjunct using \Rule{$\vee$-Shuffle} to isolate the disjuncts with a matching variable, and use Q shuffle to move the quantifier to govern just those.
 	After the quantifier is moved in, the distribution exchange rule is applied again to make the body of the sentence a disjunction again.
-	The existential quantifier can be pushed in without using distribution.
 \end{commentary}
 Let there be a sentence of \GQL{}1.
 Then by theorem \ref{PrenexNFTheorem} there is an equivalent sentence, $\CAPPHI$, that is in prenex disjunctive normal form.
