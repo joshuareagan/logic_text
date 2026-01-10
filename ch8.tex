@@ -1305,7 +1305,7 @@ There are two cases, handled separately:
 \begin{commentary}
 	To push an existential quantifier in is easier, since the body of the formula is a disjunction.
 	We push it in using \Rule{$\existential$-Shuffle} so that each disjunct is governed by an existential quantifer.
-	Then we reorder the conjuncts of each disjunct using \Rule{$\wedge$-Shuffle} to isolate the conjuncts with a matching variable, and use Q shuffle to move the quantifier to govern just those.
+	Then, for each disjunct, we reorder the conjuncts using \Rule{$\wedge$-Shuffle} to isolate the conjuncts with a matching variable, and use Q shuffle to move the quantifier to govern just those.
 \end{commentary}
 
 \begin{quote}
@@ -1321,7 +1321,7 @@ There are two cases, handled separately:
 \begin{commentary}
 	To push a universal quantifier in, the distribution exchange rule is first used to make the body of the sentence a conjunction.
 	Then we push the universal in using \Rule{$\universal$-Shuffle} so that each conjunct is governed by a universal quantifer.
-	Then we reorder the disjuncts of each conjunct using \Rule{$\vee$-Shuffle} to isolate the disjuncts with a matching variable, and use Q shuffle to move the quantifier to govern just those.
+	Then, for each conjunct, we reorder the disjuncts using \Rule{$\vee$-Shuffle} to isolate the disjuncts with a matching variable, and use Q shuffle to move the quantifier to govern just those.
 	After the quantifier is moved in, the distribution exchange rule is applied again to make the body of the sentence a disjunction again.
 \end{commentary}
 
