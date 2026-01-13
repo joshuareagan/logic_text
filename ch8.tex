@@ -1294,11 +1294,17 @@ Then by theorem \ref{PrenexNFTheorem} there is an equivalent sentence, $\CAPPHI$
 So $\CAPPHI$ is of the form $\#_1\#_2\ldots\#_n\CAPPHI'$, where for each $i\in\{1,\ldots,n\}$, $\#_i$ is a quantifier, and $\CAPPHI'$ is a DNF formula.
 Then $\CAPPHI'$ is of the form $\pardisjunction{\disjunction{\CAPPSI_1}{\CAPPSI_2}}{\disjunction{\ldots}{\CAPPSI_k}}$, where for each $j\in\{1,\ldots,k\}$, $\CAPPSI_j$ is a conjunction of ions.
 
-To make the quantifiers all independent, the following steps are applied to push in each quantifier, starting with $\#_n$ and working back to $\#_1$.
-Let $\#_i$ be the right-most quantifier that hasn't yet been moved in $\#_1\#_2\ldots\#_n$.
-We push in each $\#_i$, transforming the subformula $\CAPPHI'$ into a new formula $\CAPPHI_i$ with $\#_i$ moved all the way in.
-Let $\CAPPHI_{n+1}$ be $\CAPPHI'$, i.e. the original DNF body of $\CAPPHI$.
-There are two cases, handled separately:
+Let $\CAPPHI_{n+1}$ be $\CAPPHI'$, i.e., the DNF body of $\CAPPHI$.
+To make the quantifiers independent of each other, each quantifier must be pushed in to govern the variables it binds and no others.
+We start with $\#_n$, pushing the quantifier in, and work backward in sequence to $\#_1$.
+The formula we start with, $\CAPPHI_{n+1}$, is transformed $n$ times, once for each of the $n$ quantifiers.
+Let $\#_i$ be the the $i^{\text{th}}$ quantifier of the sequence in $\CAPPHI$, $\#_1\#_2\ldots\#_n$.
+Then let $\CAPPHI_i$ for each $i\in\{1,\ldots,n\}$ be the result of having pushed in the $i^{\text{th}}$ quantifier, $\#_i$, into the formula $\CAPPHI_{i+1}$.
+The final product of all these transformations is $\CAPPHI_{1}$, at which point all the quantifiers are moved in.
+Each transformation uses exchange rules only, so $\CAPPHI_{1}$ is equivalent to $\CAPPHI$.
+
+The following steps define the transformation to push in each quantifier, starting with $\#_n$ and working back to $\#_1$.
+For each quantifer $\#_i$ to move there are two cases, handled separately:
 
 \vspace*{0.15in}
 \noindent{}\textbf{Case 1}: $\#_i$ is an existential quantifier.
@@ -1336,7 +1342,8 @@ There are two cases, handled separately:
 \noindent{}The result is a formula $\CAPPHI_{i}$ where $\#_i$ binds all and only its variables.
 \end{quote}
 
-\noindent{}When all quantifiers are pushed in, the result is a \GQL{}1 sentence whose quantifiers are all independent.
+\noindent{}The result of these $n$ transformation is a \GQL{}1 sentence $\CAPPHI_{1}$ with each moved quantifier governing all and only the variables it binds.
+Therefore the quantifiers of $\CAPPHI_{1}$ are all independent.
 \end{PROOF}
 
 \begin{THEOREM}{\LnpTC{MonadicDecisionTheorem} The \GQL{}1 Decision Theorem:}
@@ -1398,6 +1405,7 @@ Hence there is no model $\IntA$ that makes all the sentences in $\Delta'$ true.
 Hence it's not the case that for every finite subset $\Delta'$ of $\Delta$ there exists a model $\IntA'$ that makes all the sentences in $\Delta'$ true. 
 \end{PROOF}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
