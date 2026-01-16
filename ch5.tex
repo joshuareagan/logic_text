@@ -473,29 +473,29 @@ Let's look at a few more translations.
 
 \begin{majorILnc}{\LnpEC{GSLTranslationExampleB}} %implicature
 	\begin{menumerate}
-		\item\label{GSLTransSentenceE} Either Lydia flew or both Jackson and Helen took off early.
+		\item\label{GSLTransSentenceE} Either Lydia flew or both Jeremiah and Helen took off early.
 	\end{menumerate} 
 	The first step is to identify the main connective of the sentence: \mention{either $\ldots$ or}.
 	We translate \mention{either $\ldots$ or} as $\VEE$: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceF} (Lydia flew) $\VEE$ (both Jackson and Helen took off early).
+		\item\label{GSLTransSentenceF} (Lydia flew) $\VEE$ (both Jeremiah and Helen took off early).
 	\end{menumerate}
 	Notice that the word ``both'' clarifies the logical structure of the sentence.
-	Without it, the sentence is, ``Either Lydia flew or Jackson and Helen took off early.''
-	This is ambiguous, and could be read as saying that either Lydia or Jackson flew. 
+	Without it, the sentence is, ``Either Lydia flew or Jeremiah and Helen took off early.''
+	This is ambiguous, and could be read as saying that either Lydia or Jeremiah flew. 
 	
 	Next we identify and translate the main connectives in the connected clauses. 
 	There are no connectives in \mention{Lydia flew}, so there is nothing to do with it. 
-	There is one connective in \mention{both Jackson and Helen took off early}, \mention{both $\ldots$ and}. 
+	There is one connective in \mention{both Jeremiah and Helen took off early}, \mention{both $\ldots$ and}. 
 	We translate this as \mention{$\WEDGE$}:  
 	\begin{menumerate}
-		\item\label{GSLTransSentenceG} (Lydia flew) $\VEE$ ((Jackson took off early) $\WEDGE$ (Helen took off early)).
+		\item\label{GSLTransSentenceG} (Lydia flew) $\VEE$ ((Jeremiah took off early) $\WEDGE$ (Helen took off early)).
 	\end{menumerate}
 	\begin{description}[itemsep=0em]
 		\item[Translation Key:] \hfill{} 
 		\begin{description}[itemsep=0em]
 			\item[] $\Nl$: Lydia flew.
-			\item[] $\Jl$: Jackson took off early. 
+			\item[] $\Jl$: Jeremiah took off early. 
 			\item[] $\Hl$: Helen took off early. 
 		\end{description}
 	\end{description}
@@ -506,33 +506,33 @@ Let's look at a few more translations.
 
 \begin{majorILnc}{\LnpEC{GSLTranslationExampleC}}
 	\begin{menumerate}
-		\item\label{GSLTransSentenceI} If Lydia got the job and Jackson didn't, then Lydia will take off tomorrow and Helen will have to come in.
+		\item\label{GSLTransSentenceI} If Lydia got the job and Jeremiah didn't, then Lydia will take off tomorrow and Helen will have to come in.
 	\end{menumerate}
 	We identify the main connective, \mention{if $\ldots$ then}. 
 	This is translated as \mention{$\rightarrow$}: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceJ} (Lydia got the job and Jackson didn't) $\HORSESHOE$ (Lydia will take off tomorrow and Helen will have to come in).
+		\item\label{GSLTransSentenceJ} (Lydia got the job and Jeremiah didn't) $\HORSESHOE$ (Lydia will take off tomorrow and Helen will have to come in).
 	\end{menumerate}
-	Next we look at the \CAPS{LHS} of the conditional, \mention{Lydia got the job and Jackson didn't}. 
+	Next we look at the \CAPS{LHS} of the conditional, \mention{Lydia got the job and Jeremiah didn't}. 
 	The main (and only) connective of this sentence is \mention{and}, which we translate as \mention{$\WEDGE$}: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceK} ((Lydia got the job) $\WEDGE$ (Jackson didn't get the job)) $\HORSESHOE$ (Lydia will take off tomorrow and Helen will have to come in).
+		\item\label{GSLTransSentenceK} ((Lydia got the job) $\WEDGE$ (Jeremiah didn't get the job)) $\HORSESHOE$ (Lydia will take off tomorrow and Helen will have to come in).
 	\end{menumerate}
 
-	\noindent{}The right-hand conjunct \mention{Jackson didn't} is an elliptical clause. 
-	Lydia got the job and Jackson didn't \emph{get the job}.
+	\noindent{}The right-hand conjunct \mention{Jeremiah didn't} is an elliptical clause. 
+	Lydia got the job and Jeremiah didn't \emph{get the job}.
 	We make this tacit phrase explicit by putting it in brackets. 
-	The clause \mention{Jackson didn't} has a negation in it. It combines \mention{not} with \mention{Jackson got the job}. 
+	The clause \mention{Jeremiah didn't} has a negation in it. It combines \mention{not} with \mention{Jeremiah got the job}. 
 	We finish the translation by translating the conjunction on the \CAPS{RHS} of the sentence: 
 	\begin{menumerate}
-		\item\label{GSLTransSentenceL} ((Lydia got the job) $\WEDGE$ ( $\NEGATION$ (Jackson got the job))) $\HORSESHOE$ ((Lydia will take off tomorrow) $\WEDGE$ (Helen will have to come in)).
+		\item\label{GSLTransSentenceL} ((Lydia got the job) $\WEDGE$ ( $\NEGATION$ (Jeremiah got the job))) $\HORSESHOE$ ((Lydia will take off tomorrow) $\WEDGE$ (Helen will have to come in)).
 	\end{menumerate}
 	There are no more connectives, so we are ready to construct a translation key. 
 	\begin{description}[itemsep=0em]
 		\item[Translation Key:] \hfill{} 
 		\begin{description}[itemsep=0em]
 			\item[] $\Nl$: Lydia got the job.
-			\item[] $\Jl$: Jackson got the job. 
+			\item[] $\Jl$: Jeremiah got the job. 
 			\item[] $\Il$: Lydia will take off tomorrow.
 			\item[] $\Hl$: Helen will have to come in late.  
 		\end{description}
@@ -655,7 +655,7 @@ This translation allows us to see that we are predicating several things about t
 On to another example:
 
 \begin{menumerate}
-	\item\label{GQLTrans2} Ronnie and Demaryius are athletic, but Peyton isn't.
+	\item\label{GQLTrans2} Robert and John are athletic, but Peyton isn't.
 \end{menumerate}
 
 \noindent{}We \emph{could} translate this as a conjunction with three conjuncts in \GSL{}.
@@ -665,14 +665,14 @@ Instead, let's use the following \GQL{} key:
 \begin{description}[itemsep=0em]
 	\item[Translation Key:] \hfill{} 
 	\begin{description}[itemsep=0em]
-		\item[] $\constant{r}$: Ronnie
-		\item[] $\constant{d}$: Demaryius
+		\item[] $\constant{r}$: Robert
+		\item[] $\constant{j}$: John
 		\item[] $\constant{p}$: Peyton
 		\item[] $\Al\variable{t}$: $\variable{t}$ is athletic.
 	\end{description}
 \end{description}
 
-\noindent{}The result: $\parconjunction{\conjunction{\Ap{\constant{r}}}{\Ap{\constant{d}}}}{\negation{\Ap{\constant{p}}}}$.
+\noindent{}The result: $\parconjunction{\conjunction{\Ap{\constant{r}}}{\Ap{\constant{j}}}}{\negation{\Ap{\constant{p}}}}$.
 We see the common predicate in each conjunct.
 
 The translation keys here resemble the \GQL{} models we provided earlier.\footnote{
